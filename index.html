@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLBB Diamond Clicker - Olmos yig'ish o'yini!</title>
+    <title>MLBB Diamond Clicker - Tekin olmos o'yini!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -38,8 +38,8 @@
         .game-title {
             font-size: 24px;
             margin-bottom: 8px;
-            color: #4FC3F7;
-            text-shadow: 0 2px 8px rgba(79, 195, 247, 0.5);
+            color: #8a2be2;
+            text-shadow: 0 2px 8px rgba(138, 43, 226, 0.4);
         }
 
         .game-subtitle {
@@ -49,7 +49,7 @@
 
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-bottom: 15px;
         }
@@ -61,17 +61,17 @@
         }
 
         .stat-box {
-            background: rgba(13, 71, 161, 0.25);
+            background: rgba(138, 43, 226, 0.15);
             padding: 15px;
             border-radius: 12px;
             text-align: center;
-            border: 1px solid rgba(66, 165, 245, 0.3);
+            border: 1px solid rgba(138, 43, 226, 0.3);
         }
 
         .stat-value {
             font-size: 22px;
             font-weight: bold;
-            color: #4FC3F7;
+            color: #8a2be2;
             margin-bottom: 3px;
         }
 
@@ -82,42 +82,35 @@
 
         .main-image-container {
             position: relative;
-            width: 220px;
-            height: 220px;
+            width: 280px;
+            height: 280px;
             margin: 20px auto;
         }
 
         @media (max-width: 480px) {
             .main-image-container {
-                width: 180px;
-                height: 180px;
+                width: 220px;
+                height: 220px;
             }
         }
 
         .click-image {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
+            border-radius: 20px;
             cursor: pointer;
             object-fit: cover;
-            border: 6px solid #2979FF;
-            box-shadow: 0 0 20px rgba(41, 121, 255, 0.5);
-            transition: transform 0.1s;
+            border: 5px solid #8a2be2;
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+            transition: transform 0.1s, box-shadow 0.3s;
+        }
+
+        .click-image:hover {
+            box-shadow: 0 0 35px rgba(138, 43, 226, 0.6);
         }
 
         .click-image:active {
-            transform: scale(0.95);
-        }
-
-        .image-instruction {
-            position: absolute;
-            bottom: -35px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: #4FC3F7;
-            font-size: 14px;
-            font-weight: bold;
+            transform: scale(0.97);
         }
 
         .buttons-container {
@@ -128,7 +121,7 @@
         }
 
         .action-btn {
-            background: linear-gradient(135deg, #2979FF, #1565C0);
+            background: linear-gradient(135deg, #8a2be2, #6a0dad);
             border: none;
             color: white;
             padding: 12px;
@@ -137,12 +130,13 @@
             font-size: 13px;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(41, 121, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
         }
 
         .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(41, 121, 255, 0.4);
+            box-shadow: 0 6px 16px rgba(138, 43, 226, 0.4);
+            background: linear-gradient(135deg, #9a4bff, #7a2dff);
         }
 
         .action-btn i {
@@ -181,18 +175,19 @@
         }
 
         .modal-content {
-            background: #1a237e;
+            background: rgba(26, 35, 126, 0.95);
             padding: 20px;
             border-radius: 15px;
             max-width: 450px;
             width: 100%;
             max-height: 80vh;
             overflow-y: auto;
-            border: 2px solid #2979FF;
+            border: 2px solid #8a2be2;
+            backdrop-filter: blur(10px);
         }
 
         .modal-title {
-            color: #4FC3F7;
+            color: #8a2be2;
             text-align: center;
             margin-bottom: 15px;
             font-size: 20px;
@@ -216,16 +211,16 @@
 
         .package-item:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: #2979FF;
+            border-color: #8a2be2;
         }
 
         .package-item.selected {
-            background: rgba(41, 121, 255, 0.2);
-            border-color: #2979FF;
+            background: rgba(138, 43, 226, 0.2);
+            border-color: #8a2be2;
         }
 
         .package-name {
-            color: #4FC3F7;
+            color: #8a2be2;
             font-weight: bold;
             font-size: 14px;
         }
@@ -245,16 +240,16 @@
         }
 
         .leaderboard {
-            background: rgba(25, 118, 210, 0.15);
+            background: rgba(138, 43, 226, 0.15);
             padding: 15px;
             border-radius: 12px;
-            border: 1px solid rgba(66, 165, 245, 0.3);
+            border: 1px solid rgba(138, 43, 226, 0.3);
             flex: 1;
             min-width: 280px;
         }
 
         .leaderboard-title {
-            color: #4FC3F7;
+            color: #8a2be2;
             text-align: center;
             margin-bottom: 12px;
             font-size: 16px;
@@ -289,7 +284,7 @@
         }
 
         .player-score {
-            color: #4FC3F7;
+            color: #8a2be2;
             font-weight: bold;
         }
 
@@ -297,7 +292,7 @@
             position: fixed;
             top: 15px;
             right: 15px;
-            background: linear-gradient(135deg, #2979FF, #1565C0);
+            background: linear-gradient(135deg, #8a2be2, #6a0dad);
             color: white;
             padding: 12px 15px;
             border-radius: 8px;
@@ -321,11 +316,12 @@
 
         .click-effect {
             position: absolute;
-            color: #4FC3F7;
+            color: #8a2be2;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 20px;
             pointer-events: none;
             animation: floatUp 1s ease-out forwards;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
         }
 
         @keyframes floatUp {
@@ -350,7 +346,7 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #2979FF, #00B0FF);
+            background: linear-gradient(90deg, #8a2be2, #6a0dad);
             width: 0%;
             transition: width 0.5s ease;
             border-radius: 4px;
@@ -381,7 +377,7 @@
         }
 
         .payment-info {
-            background: rgba(0, 150, 255, 0.1);
+            background: rgba(138, 43, 226, 0.1);
             padding: 12px;
             border-radius: 8px;
             margin: 15px 0;
@@ -416,25 +412,50 @@
             padding: 10px;
             font-size: 13px;
         }
+
+        .game-logo {
+            width: 100%;
+            max-width: 200px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .exchange-rates {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .rate-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rate-item:last-child {
+            border-bottom: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1 class="game-title"><i class="fas fa-gem"></i> MLBB DIAMOND CLICKER</h1>
-            <p class="game-subtitle">Rasmni bosing va olmos yig'ing! Haqiqiy MLBB olmoslari uchun</p>
+            <h1 class="game-title"><i class="fas fa-gem"></i> MLBB BALL COLLECTOR</h1>
+            <p class="game-subtitle">TEO TEKIN ALMAZLARI • BALL TOPLA • ALMAZ OL</p>
+            
+            <!-- MLBB Logo -->
+            <img src="https://i.imgur.com/your-image-here.jpg" alt="MLBB Logo" class="game-logo">
+            <!-- Вставьте ссылку на ваше изображение photo_2025-12-10_18-48-10.jpg вместо your-image-here.jpg -->
         </div>
 
         <!-- Stats -->
         <div class="stats-container">
             <div class="stat-box">
                 <div class="stat-value" id="totalPoints">0</div>
-                <div class="stat-label">OLMOSLAR</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-value" id="totalClicks">0</div>
-                <div class="stat-label">BOSISHLAR</div>
+                <div class="stat-label">BALL</div>
             </div>
             <div class="stat-box">
                 <div class="stat-value" id="multiplier">x1.0</div>
@@ -449,22 +470,22 @@
 
         <!-- Main Image -->
         <div class="main-image-container">
-            <img src="https://i.imgur.com/3JQZ4Yj.png" 
-                 alt="MLBB Diamond" 
+            <img src="https://i.imgur.com/your-image-here.jpg" 
+                 alt="MLBB Game" 
                  class="click-image" 
                  id="clickImage">
-            <div class="image-instruction">BOSING VA OLMOZ YIG'ING!</div>
+            <!-- Вставьте ссылку на ваше изображение photo_2025-12-10_18-48-10.jpg вместо your-image-here.jpg -->
         </div>
 
         <!-- Game Info -->
         <div class="game-info">
             <div class="info-box">
-                <div style="color: #4FC3F7; font-weight: bold;">O'yin vaqti:</div>
+                <div style="color: #8a2be2; font-weight: bold;">O'yin vaqti:</div>
                 <div id="gameTime">0 soat 0 daqiqa</div>
             </div>
             <div class="info-box">
-                <div style="color: #4FC3F7; font-weight: bold;">Keyingi bonus:</div>
-                <div id="nextBonus">100 ochko</div>
+                <div style="color: #8a2be2; font-weight: bold;">Keyingi bonus:</div>
+                <div id="nextBonus">100 ball</div>
             </div>
         </div>
 
@@ -472,12 +493,12 @@
         <div class="buttons-container">
             <button class="action-btn boost-btn" onclick="buyMultiplier()">
                 <i class="fas fa-bolt"></i> 2x Kopaytirgich
-                <br><small>50 olmos / 60 soniya</small>
+                <br><small>50 ball / 60 soniya</small>
             </button>
             
             <button class="action-btn auto-btn" onclick="activateAutoClicker()">
                 <i class="fas fa-robot"></i> Avtokliker
-                <br><small>100 olmos / 15 daqiqa</small>
+                <br><small>100 ball / 15 daqiqa</small>
             </button>
             
             <button class="action-btn donate-btn" onclick="openDonateModal()">
@@ -486,16 +507,12 @@
             </button>
             
             <button class="action-btn exchange-btn" onclick="openExchangeModal()">
-                <i class="fas fa-exchange-alt"></i> OCHKONI ALMASHTIRISH
-                <br><small>Ochko -> OLMOZ</small>
-            </button>
-            
-            <button class="action-btn" onclick="saveProgress()">
-                <i class="fas fa-save"></i> Saqlash
+                <i class="fas fa-exchange-alt"></i> BALL ALMASHTIRISH
+                <br><small>Ball → OLMOZ</small>
             </button>
             
             <button class="action-btn" onclick="shareGame()">
-                <i class="fas fa-share-alt"></i> Ulashish
+                <i class="fas fa-share-alt"></i> Do'stlarga ulashish
             </button>
         </div>
 
@@ -520,8 +537,8 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>© 2023 MLBB Diamond Clicker. Bu o'yin Mobile Legends: Bang Bang ning norasmiy loyihasidir.</p>
-            <p>Olmoslar sotib olish haqiqiy MLBB hisobiga qo'shiladi.</p>
+            <p>© 2023 MLBB Ball Collector. Bu o'yin Mobile Legends: Bang Bang ning norasmiy loyihasidir.</p>
+            <p>Ballarni haqiqiy MLBB olmoslariga almashtirish mumkin.</p>
         </div>
     </div>
 
@@ -535,7 +552,7 @@
             </div>
             
             <div class="payment-info">
-                <h3 style="color: #4FC3F7; margin-bottom: 8px; font-size: 14px;">To'lov qilish:</h3>
+                <h3 style="color: #8a2be2; margin-bottom: 8px; font-size: 14px;">To'lov qilish:</h3>
                 <p style="color: #BBDEFB; margin-bottom: 8px;">Paketni tanlang va "To'lov qilish" tugmasini bosing:</p>
                 
                 <div class="admin-contact">
@@ -560,18 +577,53 @@
     <!-- Exchange Modal -->
     <div class="modal-overlay" id="exchangeModal">
         <div class="modal-content">
-            <h2 class="modal-title"><i class="fas fa-exchange-alt"></i> OCHKONI OLMOZGA ALMASHTIRISH</h2>
+            <h2 class="modal-title"><i class="fas fa-exchange-alt"></i> BALL → OLMOZ ALMASHTIRISH</h2>
             
-            <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 60px; color: #4FC3F7; margin-bottom: 15px;">
-                    <i class="fas fa-tools"></i>
+            <div class="exchange-rates">
+                <h3 style="color: #8a2be2; margin-bottom: 10px; text-align: center;">Almashuv kurslari:</h3>
+                
+                <div class="rate-item">
+                    <span>1000 Ball</span>
+                    <span style="color: #00E676; font-weight: bold;">→ 5 Olmoz</span>
                 </div>
-                <h3 style="color: #4FC3F7; margin-bottom: 10px;">Tez orada...</h3>
-                <p style="color: #BBDEFB; margin-bottom: 15px;">
-                    Ochkolarni haqiqiy MLBB olmoslariga almashtirish funksiyasi hozirda ishlab chiqilmoqda.
-                </p>
-                <p style="color: #FFD700; font-size: 13px;">
-                    <i class="fas fa-info-circle"></i> Tez orada siz yig'gan ochkolarni haqiqiy olmoslarga almashtira olasiz!
+                <div class="rate-item">
+                    <span>2500 Ball</span>
+                    <span style="color: #00E676; font-weight: bold;">→ 11 Olmoz</span>
+                </div>
+                <div class="rate-item">
+                    <span>5000 Ball</span>
+                    <span style="color: #00E676; font-weight: bold;">→ 22 Olmoz</span>
+                </div>
+                <div class="rate-item">
+                    <span>12000 Ball</span>
+                    <span style="color: #00E676; font-weight: bold;">→ 56 Olmoz</span>
+                </div>
+                <div class="rate-item">
+                    <span>18000 Ball</span>
+                    <span style="color: #00E676; font-weight: bold;">→ 86 Olmoz</span>
+                </div>
+            </div>
+            
+            <div style="background: rgba(138, 43, 226, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <div style="font-size: 18px; color: #8a2be2; margin-bottom: 5px;">Sizning ballaringiz:</div>
+                    <div style="font-size: 36px; color: #00E676; font-weight: bold;" id="currentBalls">0</div>
+                </div>
+                
+                <div style="text-align: center; margin: 15px 0;">
+                    <label for="exchangeAmount" style="color: #BBDEFB; display: block; margin-bottom: 5px;">Almashtirish miqdori:</label>
+                    <input type="range" id="exchangeAmount" min="1000" max="18000" step="1000" value="1000" 
+                           style="width: 100%; margin: 10px 0;">
+                    <div style="color: #8a2be2; font-weight: bold; font-size: 18px;" id="exchangeValue">1000 Ball</div>
+                    <div style="color: #00E676; font-size: 16px; margin-top: 5px;" id="exchangeResult">→ 5 Olmoz</div>
+                </div>
+            </div>
+            
+            <div class="admin-contact" style="margin-top: 15px;">
+                <p style="color: #FFD700; margin-bottom: 5px;"><i class="fas fa-info-circle"></i> Almashtirish uchun:</p>
+                <p style="color: #BBDEFB; font-size: 11px;">
+                    Ballaringizni olmoslarga almashtirish uchun @laz1z0v1ch ga murojaat qiling.
+                    O'zingizning ball miqdoringiz va qancha olmos olmoqchi ekanligingizni yozing.
                 </p>
             </div>
             
@@ -579,13 +631,16 @@
                 <button class="action-btn" onclick="closeExchangeModal()" style="flex: 1;">
                     Yopish
                 </button>
+                <button class="action-btn exchange-btn" onclick="requestExchange()" style="flex: 1;">
+                    So'rov yuborish
+                </button>
             </div>
         </div>
     </div>
 
     <script>
         // ============ GAME VARIABLES ============
-        let diamonds = 0;
+        let balls = 0; // Изменили diamonds на balls
         let clicks = 0;
         let multiplier = 1.0;
         let perClick = 1;
@@ -604,7 +659,6 @@
         // ============ DOM ELEMENTS ============
         const clickImage = document.getElementById('clickImage');
         const totalPointsEl = document.getElementById('totalPoints');
-        const totalClicksEl = document.getElementById('totalClicks');
         const multiplierEl = document.getElementById('multiplier');
         const gameTimeEl = document.getElementById('gameTime');
         const progressBar = document.getElementById('progressBar');
@@ -615,6 +669,10 @@
         const pointsLeaderboard = document.getElementById('pointsLeaderboard');
         const timeLeaderboard = document.getElementById('timeLeaderboard');
         const paymentBtn = document.getElementById('paymentBtn');
+        const currentBallsEl = document.getElementById('currentBalls');
+        const exchangeAmountEl = document.getElementById('exchangeAmount');
+        const exchangeValueEl = document.getElementById('exchangeValue');
+        const exchangeResultEl = document.getElementById('exchangeResult');
         
         // ============ PACKAGES ============
         const packages = [
@@ -644,15 +702,24 @@
             }
         ];
         
+        // ============ EXCHANGE RATES ============
+        const exchangeRates = [
+            { balls: 1000, diamonds: 5 },
+            { balls: 2500, diamonds: 11 },
+            { balls: 5000, diamonds: 22 },
+            { balls: 12000, diamonds: 56 },
+            { balls: 18000, diamonds: 86 }
+        ];
+        
         // ============ INITIALIZE GAME ============
         function initGame() {
             // Load saved progress
-            const saved = localStorage.getItem('mlbbDiamondClicker');
+            const saved = localStorage.getItem('mlbbBallCollector');
             
             if (saved) {
                 try {
                     const data = JSON.parse(saved);
-                    diamonds = data.diamonds || 0;
+                    balls = data.balls || 0;
                     clicks = data.clicks || 0;
                     multiplier = data.multiplier || 1.0;
                     gameTime = data.gameTime || 0;
@@ -670,22 +737,18 @@
             // Load leaderboards
             loadLeaderboards();
             
-            // Load saved image
-            const savedImage = localStorage.getItem('mlbbGameImage');
-            if (savedImage) {
-                clickImage.src = savedImage;
-            }
+            // Setup exchange slider
+            setupExchangeSlider();
             
             // Show welcome message
             setTimeout(() => {
-                showNotification('🎮 MLBB Diamond Clicker ga xush kelibsiz!');
+                showNotification('🎮 MLBB Ball Collector ga xush kelibsiz! Ball to\'plang va olmos oling!');
             }, 500);
         }
         
         // ============ UPDATE UI ============
         function updateUI() {
-            totalPointsEl.textContent = diamonds.toLocaleString();
-            totalClicksEl.textContent = clicks.toLocaleString();
+            totalPointsEl.textContent = balls.toLocaleString();
             multiplierEl.textContent = `x${multiplier.toFixed(1)}`;
             
             // Update game time
@@ -694,30 +757,33 @@
             gameTimeEl.textContent = `${hours} soat ${minutes} daqiqa`;
             
             // Update progress bar
-            const progressPercent = (diamonds % nextBonus) / nextBonus * 100;
+            const progressPercent = (balls % nextBonus) / nextBonus * 100;
             progressBar.style.width = `${progressPercent}%`;
             
             // Update next bonus
             nextBonusEl.textContent = nextBonus;
+            
+            // Update current balls in exchange modal
+            currentBallsEl.textContent = balls.toLocaleString();
         }
         
         // ============ CLICK HANDLER ============
         clickImage.addEventListener('click', function(e) {
-            // Calculate diamonds
+            // Calculate balls
             const earned = perClick * multiplier;
-            diamonds += earned;
+            balls += earned;
             clicks++;
             
-            // Create click effect - only number without "almaz"
+            // Create click effect
             createClickEffect(e, `+${earned.toFixed(0)}`);
             
             // Check for bonus
-            if (diamonds >= nextBonus) {
+            if (balls >= nextBonus) {
                 const bonus = Math.floor(nextBonus * 0.1);
-                diamonds += bonus;
+                balls += bonus;
                 nextBonus += 100;
                 
-                showNotification(`🎉 Tabriklaymiz! ${bonus} bonus olmos!`);
+                showNotification(`🎉 Tabriklaymiz! ${bonus} bonus ball!`);
             }
             
             // Every 10 clicks auto-save
@@ -728,8 +794,8 @@
             // Every 100 clicks bonus
             if (clicks > 0 && clicks % 100 === 0) {
                 const bonus = 50;
-                diamonds += bonus;
-                showNotification(`🔥 ${clicks} ta bosish! +${bonus} bonus olmos!`);
+                balls += bonus;
+                showNotification(`🔥 ${clicks} ta bosish! +${bonus} bonus ball!`);
                 autoSave();
             }
             
@@ -763,8 +829,8 @@
         function buyMultiplier() {
             const cost = 50;
             
-            if (diamonds >= cost) {
-                diamonds -= cost;
+            if (balls >= cost) {
+                balls -= cost;
                 const oldMultiplier = multiplier;
                 multiplier = 2.0;
                 
@@ -779,7 +845,7 @@
                     showNotification('⏰ Kopaytiruvchi tugadi');
                 }, 60000);
             } else {
-                showNotification('❌ Yetarli olmos mavjud emas! 50 olmos kerak');
+                showNotification('❌ Yetarli ball mavjud emas! 50 ball kerak');
             }
         }
         
@@ -792,8 +858,8 @@
             
             const cost = 100;
             
-            if (diamonds >= cost) {
-                diamonds -= cost;
+            if (balls >= cost) {
+                balls -= cost;
                 autoClickerActive = true;
                 
                 showNotification('🤖 Avtokliker faollashtirildi! 15 daqiqa');
@@ -801,7 +867,7 @@
                 
                 // Auto click every second
                 autoClickerInterval = setInterval(() => {
-                    diamonds += perClick * multiplier;
+                    balls += perClick * multiplier;
                     clicks++;
                     updateUI();
                 }, 1000);
@@ -813,7 +879,7 @@
                 
                 autoSave();
             } else {
-                showNotification('❌ Yetarli olmos mavjud emas! 100 olmos kerak');
+                showNotification('❌ Yetarli ball mavjud emas! 100 ball kerak');
             }
         }
         
@@ -853,7 +919,7 @@
                         ${pkg.price.toLocaleString()} ${pkg.currency}
                     </div>
                     ${pkg.description ? `<div style="color:#BBDEFB; font-size:12px; margin-top:3px;">${pkg.description}</div>` : ''}
-                    <div style="color:#4FC3F7; font-size:13px; font-weight:bold; margin-top:3px;">
+                    <div style="color:#8a2be2; font-size:13px; font-weight:bold; margin-top:3px;">
                         ${pkg.diamonds} OLMOZ
                     </div>
                 </div>
@@ -885,7 +951,7 @@
             const pkg = packages.find(p => p.id === selectedPackage);
             
             // Create message for Telegram
-            const message = `Salom! Men MLBB Diamond Clicker o'yinidan ${pkg.label} paketini sotib olmoqchiman.%0A%0A` +
+            const message = `Salom! Men MLBB Ball Collector o'yinidan ${pkg.label} paketini sotib olmoqchiman.%0A%0A` +
                           `Paket: ${pkg.label}%0A` +
                           `Narxi: ${pkg.price.toLocaleString()} SO'M%0A` +
                           `Olmos: ${pkg.diamonds} ta%0A%0A` +
@@ -902,7 +968,20 @@
         }
         
         // ============ EXCHANGE MODAL ============
+        function setupExchangeSlider() {
+            exchangeAmountEl.addEventListener('input', function() {
+                const amount = parseInt(this.value);
+                const rate = exchangeRates.find(r => r.balls === amount);
+                
+                if (rate) {
+                    exchangeValueEl.textContent = `${amount.toLocaleString()} Ball`;
+                    exchangeResultEl.textContent = `→ ${rate.diamonds} Olmoz`;
+                }
+            });
+        }
+        
         function openExchangeModal() {
+            currentBallsEl.textContent = balls.toLocaleString();
             exchangeModal.style.display = 'flex';
         }
         
@@ -910,14 +989,44 @@
             exchangeModal.style.display = 'none';
         }
         
+        function requestExchange() {
+            const amount = parseInt(exchangeAmountEl.value);
+            const rate = exchangeRates.find(r => r.balls === amount);
+            
+            if (!rate) {
+                showNotification('❌ Almashuv miqdori noto\'g\'ri!');
+                return;
+            }
+            
+            if (balls < amount) {
+                showNotification(`❌ Yetarli ball mavjud emas! Sizda ${balls} ball bor, ${amount} ball kerak.`);
+                return;
+            }
+            
+            // Create message for Telegram
+            const message = `Salom! Men MLBB Ball Collector o'yinidan ballarni olmoslarga almashtirmoqchiman.%0A%0A` +
+                          `Almashtirish: ${amount.toLocaleString()} Ball → ${rate.diamonds} Olmoz%0A` +
+                          `Mening ballarim: ${balls.toLocaleString()}%0A` +
+                          `Mening MLBB ID: _________________%0A` +
+                          `Olingan olmoslar: _________________`;
+            
+            // Open Telegram with pre-filled message
+            const telegramUrl = `https://t.me/laz1z0v1ch?text=${message}`;
+            window.open(telegramUrl, '_blank');
+            
+            showNotification(`📤 Almashuv so'rovi @laz1z0v1ch ga yuborildi!`);
+            
+            closeExchangeModal();
+        }
+        
         // ============ LEADERBOARDS ============
         function loadLeaderboards() {
             // Points leaderboard (demo data)
             const pointsLeaders = [
-                { name: 'Siz', score: diamonds, rank: 1 },
+                { name: 'Siz', score: balls, rank: 1 },
                 { name: 'PRO_O\'YINCHI', score: 1850, rank: 2 },
                 { name: 'OLMOS_QIROL', score: 1620, rank: 3 },
-                { name: 'BOSISH_UZBI', score: 1340, rank: 4 },
+                { name: 'BALL_TOPLOVCHI', score: 1340, rank: 4 },
                 { name: 'MLBB_FAN', score: 1120, rank: 5 },
                 { name: 'NIGHT_WOLF', score: 980, rank: 6 },
                 { name: 'CLICK_MASTER', score: 760, rank: 7 },
@@ -974,7 +1083,7 @@
         // ============ SAVE GAME ============
         function autoSave() {
             const data = {
-                diamonds: diamonds,
+                balls: balls,
                 clicks: clicks,
                 multiplier: multiplier,
                 gameTime: gameTime,
@@ -982,21 +1091,16 @@
                 saveTime: new Date().toISOString()
             };
             
-            localStorage.setItem('mlbbDiamondClicker', JSON.stringify(data));
-        }
-        
-        function saveProgress() {
-            autoSave();
-            showNotification('💾 Progress muvaffaqiyatli saqlandi!');
+            localStorage.setItem('mlbbBallCollector', JSON.stringify(data));
         }
         
         // ============ SHARE GAME ============
         function shareGame() {
-            const shareText = `Men MLBB Diamond Clicker o'yinida ${diamonds.toLocaleString()} olmos yig'dim! Siz ham yig'ing: https://t.me/laz1z0v1ch`;
+            const shareText = `Men MLBB Ball Collector o'yinida ${balls.toLocaleString()} ball to'pladim! Siz ham to'plang va bepul olmos oling: https://t.me/laz1z0v1ch`;
             
             if (navigator.share) {
                 navigator.share({
-                    title: 'MLBB Diamond Clicker',
+                    title: 'MLBB Ball Collector',
                     text: shareText,
                     url: 'https://t.me/laz1z0v1ch'
                 });
