@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLBB Ball Collector - Tekin olmos o'yini!</title>
+    <title>MLBB Ball Collector - Tekin ball va olmos o'yini!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -13,12 +13,30 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        :root {
+            --primary: #8A2BE2;
+            --primary-light: #9D4EDD;
+            --primary-dark: #6A0DAD;
+            --secondary: #FF6B35;
+            --accent: #00C9A7;
+            --warning: #FFB800;
+            --danger: #FF4081;
+            --light: #FFFFFF;
+            --light-bg: #F8F9FF;
+            --gray: #6C757D;
+            --dark: #1A1A2E;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 15px 40px rgba(138, 43, 226, 0.15);
+        }
+
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            color: #2c3e50;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #E6E9FF 100%);
+            color: var(--dark);
             min-height: 100vh;
             padding: 15px;
             font-size: 15px;
+            line-height: 1.6;
         }
 
         .container {
@@ -26,224 +44,147 @@
             margin: 0 auto;
         }
 
-        /* Header with time in right corner */
+        /* Header */
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #eaeaea;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
 
-        .header-left {
-            flex: 1;
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
         }
 
         .game-title {
-            font-size: 26px;
-            margin-bottom: 5px;
-            background: linear-gradient(135deg, #8a2be2, #4169e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .game-subtitle {
-            color: #5d6d7e;
             font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 15px;
         }
 
         .time-display {
-            background: linear-gradient(135deg, #8a2be2, #4169e1);
-            color: white;
-            padding: 10px 20px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
             border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(138, 43, 226, 0.2);
+            backdrop-filter: blur(10px);
+            font-weight: 600;
         }
 
-        .time-label {
-            font-size: 12px;
-            opacity: 0.9;
-        }
-
-        .time-value {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        /* Main content grid */
-        .main-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 900px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Left column - Game area */
-        .game-area {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        .game-logo {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 5px solid white;
+            box-shadow: var(--shadow);
+            margin: 15px auto;
+            display: block;
         }
 
         /* Stats */
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            margin-bottom: 25px;
         }
 
         .stat-box {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            background: var(--card-bg);
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 16px;
             text-align: center;
-            border: 2px solid #e9ecef;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(138, 43, 226, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .stat-box:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .stat-value {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 800;
-            color: #8a2be2;
+            color: var(--primary);
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .stat-label {
-            font-size: 13px;
-            color: #5d6d7e;
-            font-weight: 600;
+            font-size: 14px;
+            color: var(--gray);
+            font-weight: 500;
         }
 
-        /* Click area */
-        .click-area {
+        /* Main Click Area */
+        .main-image-container {
             position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 25px auto;
+            width: 300px;
+            height: 300px;
+            margin: 30px auto;
         }
 
         .click-image {
             width: 100%;
             height: 100%;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
             object-fit: cover;
-            border: 4px solid white;
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.15);
+            border: 8px solid white;
+            box-shadow: 0 20px 50px rgba(138, 43, 226, 0.25);
             transition: all 0.2s;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .click-image:hover {
             transform: scale(1.02);
-            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.25);
+            box-shadow: 0 25px 60px rgba(138, 43, 226, 0.35);
         }
 
         .click-image:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
         }
 
-        /* Tasks Panel */
-        .tasks-panel {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
-        }
-
-        .panel-title {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-bottom: 15px;
+        .click-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .panel-title i {
-            color: #8a2be2;
-        }
-
-        .tasks-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .task-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid #8a2be2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .task-item:hover {
-            background: #f0f2f5;
-        }
-
-        .task-item.completed {
-            border-left-color: #00C853;
-            background: rgba(0, 200, 83, 0.05);
-        }
-
-        .task-info h4 {
-            color: #2c3e50;
-            font-size: 15px;
-            margin-bottom: 5px;
-        }
-
-        .task-info p {
-            color: #5d6d7e;
-            font-size: 13px;
-        }
-
-        .task-reward {
-            background: linear-gradient(135deg, #8a2be2, #4169e1);
+            justify-content: center;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
+            font-size: 18px;
             font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .task-reward:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
-        }
-
-        .task-reward.claimed {
-            background: #00C853;
-            cursor: default;
+            text-align: center;
+            padding: 20px;
         }
 
         /* Buttons */
@@ -251,20 +192,20 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
-            margin: 25px 0;
+            margin: 30px 0;
         }
 
         .action-btn {
-            background: linear-gradient(135deg, #8a2be2, #4169e1);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             border: none;
             color: white;
-            padding: 15px;
+            padding: 16px 20px;
             border-radius: 12px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(138, 43, 226, 0.2);
+            box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -274,125 +215,169 @@
 
         .action-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.3);
-            background: linear-gradient(135deg, #9a4bff, #5a7dff);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
         }
 
         .action-btn i {
-            font-size: 18px;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .action-btn small {
+            font-size: 12px;
+            opacity: 0.9;
+            font-weight: normal;
         }
 
         .donate-btn {
-            background: linear-gradient(135deg, #FF4081, #E91E63);
+            background: linear-gradient(135deg, var(--secondary) 0%, #FF8C42 100%);
         }
 
         .auto-btn {
-            background: linear-gradient(135deg, #00C853, #00E676);
+            background: linear-gradient(135deg, var(--accent) 0%, #00A88C 100%);
         }
 
         .exchange-btn {
-            background: linear-gradient(135deg, #FF9800, #F57C00);
+            background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
         }
 
-        .leaderboard-btn {
-            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+        .history-btn {
+            background: linear-gradient(135deg, var(--warning) 0%, #E6A800 100%);
         }
 
-        /* Right column - Leaderboards & Info */
-        .right-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .quests-btn {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
         }
 
-        .leaderboard-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        /* Quests Panel */
+        .quests-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: var(--shadow);
         }
 
-        .card-title {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-bottom: 15px;
+        .section-title {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .card-title i {
-            color: #8a2be2;
+        .quest-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .quest-item {
+            background: rgba(138, 43, 226, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .quest-item:hover {
+            background: rgba(138, 43, 226, 0.1);
+        }
+
+        .quest-info h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .quest-info p {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        .quest-reward {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Leaderboards */
+        .leaderboards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .leaderboard {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .leaderboard-title {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .player-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            align-items: center;
         }
 
         .player-row:last-child {
             border-bottom: none;
         }
 
-        .player-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .player-rank {
+            background: var(--primary);
+            color: white;
             width: 28px;
             height: 28px;
-            background: #f0f2f5;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 12px;
             font-weight: 600;
-            color: #5d6d7e;
         }
 
-        .player-rank.top-3 {
-            background: linear-gradient(135deg, #8a2be2, #4169e1);
-            color: white;
+        .player-info {
+            flex: 1;
+            margin-left: 15px;
         }
 
         .player-name {
-            color: #2c3e50;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .player-level {
+            font-size: 12px;
+            color: var(--gray);
         }
 
         .player-score {
-            color: #8a2be2;
+            color: var(--primary);
             font-weight: 700;
             font-size: 16px;
-        }
-
-        .player-time {
-            color: #FF9800;
-            font-weight: 700;
-            font-size: 16px;
-        }
-
-        /* Progress bar */
-        .progress-container {
-            width: 100%;
-            height: 10px;
-            background: #eaeaea;
-            border-radius: 5px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #8a2be2, #4169e1);
-            width: 0%;
-            transition: width 0.5s ease;
-            border-radius: 5px;
         }
 
         /* Modals */
@@ -407,220 +392,64 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
             backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 25px;
             max-width: 500px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-top: 5px solid #8a2be2;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(138, 43, 226, 0.1);
         }
 
         .modal-title {
-            font-size: 22px;
-            color: #2c3e50;
-            font-weight: 700;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 25px;
             font-size: 24px;
-            color: #5d6d7e;
-            cursor: pointer;
-            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .close-modal:hover {
-            color: #8a2be2;
-        }
-
-        /* History modal */
+        /* History Modal */
         .history-list {
-            max-height: 400px;
+            max-height: 300px;
             overflow-y: auto;
-            margin: 15px 0;
+            margin: 20px 0;
         }
 
         .history-item {
             padding: 15px;
-            border-bottom: 1px solid #eaeaea;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .history-item:last-child {
-            border-bottom: none;
+            background: rgba(138, 43, 226, 0.03);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--primary);
         }
 
         .history-type {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
         }
 
-        .history-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-
-        .history-icon.purchase {
-            background: linear-gradient(135deg, #FF4081, #E91E63);
-        }
-
-        .history-icon.exchange {
-            background: linear-gradient(135deg, #FF9800, #F57C00);
-        }
-
-        .history-icon.auto {
-            background: linear-gradient(135deg, #00C853, #00E676);
-        }
-
-        .history-details h4 {
-            color: #2c3e50;
+        .history-details {
+            font-size: 13px;
+            color: var(--gray);
             margin-bottom: 3px;
         }
 
-        .history-details p {
-            color: #5d6d7e;
-            font-size: 13px;
-        }
-
-        .history-amount {
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .history-amount.positive {
-            color: #00C853;
-        }
-
-        .history-amount.negative {
-            color: #FF4081;
-        }
-
-        /* Package items */
-        .package-list {
-            display: grid;
-            gap: 12px;
-            margin: 15px 0;
-        }
-
-        .package-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .package-item:hover {
-            background: #f0f2f5;
-            border-color: #8a2be2;
-        }
-
-        .package-item.selected {
-            background: rgba(138, 43, 226, 0.1);
-            border-color: #8a2be2;
-        }
-
-        .package-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .package-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: #8a2be2;
-        }
-
-        .package-diamonds {
-            background: linear-gradient(135deg, #8a2be2, #4169e1);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .package-price {
-            color: #2c3e50;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        /* Admin contact */
-        .admin-contact {
-            background: linear-gradient(135deg, #fff8e1, #ffecb3);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 4px solid #FF9800;
-        }
-
-        .admin-title {
-            color: #FF9800;
-            font-weight: 700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Exchange rates */
-        .exchange-rates {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-        }
-
-        .rate-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        .rate-item:last-child {
-            border-bottom: none;
-        }
-
-        .rate-balls {
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        .rate-diamonds {
-            color: #8a2be2;
-            font-weight: 700;
-            font-size: 16px;
+        .history-date {
+            font-size: 11px;
+            color: var(--gray);
+            opacity: 0.7;
         }
 
         /* Notification */
@@ -629,25 +458,20 @@
             top: 20px;
             right: 20px;
             background: white;
-            color: #2c3e50;
+            color: var(--dark);
             padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             z-index: 1001;
-            animation: slideIn 0.3s ease-out;
+            animation: slideInRight 0.3s ease-out;
             max-width: 300px;
-            border-left: 5px solid #8a2be2;
+            border-left: 4px solid var(--primary);
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .notification i {
-            color: #8a2be2;
-            font-size: 20px;
-        }
-
-        @keyframes slideIn {
+        @keyframes slideInRight {
             from {
                 transform: translateX(100%);
                 opacity: 0;
@@ -658,15 +482,16 @@
             }
         }
 
-        /* Click effect */
+        /* Click Effect */
         .click-effect {
             position: absolute;
-            color: #8a2be2;
+            color: var(--primary);
             font-weight: 800;
             font-size: 24px;
             pointer-events: none;
             animation: floatUp 1s ease-out forwards;
-            text-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            z-index: 10;
         }
 
         @keyframes floatUp {
@@ -685,242 +510,280 @@
             text-align: center;
             margin-top: 30px;
             padding: 20px;
-            color: #5d6d7e;
-            border-top: 1px solid #eaeaea;
+            color: var(--gray);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
             font-size: 13px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
-        /* Empty state */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #5d6d7e;
-        }
-
-        .empty-state i {
-            font-size: 48px;
-            color: #eaeaea;
-            margin-bottom: 15px;
-        }
-
-        /* Modal buttons */
-        .modal-buttons {
-            display: flex;
+        /* Package Items */
+        .package-list {
+            display: grid;
             gap: 10px;
-            margin-top: 20px;
+            margin: 20px 0;
         }
 
-        .modal-buttons .action-btn {
-            flex: 1;
-            padding: 12px;
-        }
-
-        /* Leaderboards page */
-        .leaderboard-tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eaeaea;
-        }
-
-        .leaderboard-tab {
-            padding: 12px 20px;
-            background: none;
-            border: none;
+        .package-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            color: #5d6d7e;
-            border-bottom: 2px solid transparent;
             transition: all 0.3s;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .leaderboard-tab.active {
-            color: #8a2be2;
-            border-bottom: 2px solid #8a2be2;
+        .package-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.1);
+            border-color: var(--primary);
         }
 
-        .leaderboard-tab:hover {
-            color: #8a2be2;
+        .package-item.selected {
+            background: rgba(138, 43, 226, 0.1);
+            border-color: var(--primary);
         }
 
-        .leaderboard-content {
-            display: none;
+        .package-name {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 5px;
         }
 
-        .leaderboard-content.active {
-            display: block;
+        .package-price {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 14px;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+        /* Exchange Rates */
+        .exchange-rates {
+            background: rgba(138, 43, 226, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .rate-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .rate-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-image-container {
+                width: 250px;
+                height: 250px;
             }
             
-            .stats-container {
-                grid-template-columns: 1fr;
+            .game-title {
+                font-size: 22px;
+            }
+            
+            .stat-value {
+                font-size: 24px;
+            }
+            
+            .time-display {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 15px;
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-image-container {
+                width: 200px;
+                height: 200px;
             }
             
             .buttons-container {
                 grid-template-columns: 1fr;
             }
             
-            .modal-buttons {
-                flex-direction: column;
-            }
-            
-            .leaderboard-tabs {
-                flex-direction: column;
-            }
-            
-            .leaderboard-tab {
-                width: 100%;
-                text-align: center;
+            .leaderboards-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header with time in right corner -->
+        <!-- Header -->
         <div class="header">
-            <div class="header-left">
-                <h1 class="game-title"><i class="fas fa-gem"></i> MLBB BALL COLLECTOR</h1>
-                <p class="game-subtitle">Ball to'plang - Haqiqiy olmoslarga almashtiring!</p>
-            </div>
+            <h1 class="game-title">
+                <i class="fas fa-gem"></i> MLBB BALL COLLECTOR
+            </h1>
+            <p class="game-subtitle">TEKIN BALL VA OLMOSLAR • TOPLA • ALMASHTIR • O'YNA</p>
+            
             <div class="time-display">
-                <div class="time-label">Faol o'yin vaqti:</div>
-                <div class="time-value" id="gameTime">0:00:00</div>
+                <i class="fas fa-clock"></i>
+                <span id="gameTime">0 soat 0 daqiqa</span>
+            </div>
+            
+            <img src="https://i.imgur.com/photo_2025-12-10_18-48-10.jpg" 
+                 alt="MLBB Ball Collector" 
+                 class="game-logo"
+                 onerror="this.src='https://via.placeholder.com/180x180/8A2BE2/FFFFFF?text=MLBB+BALL'">
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-value">
+                    <i class="fas fa-basketball"></i>
+                    <span id="totalPoints">0</span>
+                </div>
+                <div class="stat-label">JAMI BALL</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span id="perClick">1</span>/bosish
+                </div>
+                <div class="stat-label">BIR BOSISHDA</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">
+                    <i class="fas fa-mouse-pointer"></i>
+                    <span id="totalClicks">0</span>
+                </div>
+                <div class="stat-label">BOSISHLAR</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">
+                    <i class="fas fa-ranking-star"></i>
+                    <span id="playerRank">#1</span>
+                </div>
+                <div class="stat-label">REYTING</div>
             </div>
         </div>
 
-        <!-- Main content -->
-        <div class="main-content">
-            <!-- Left column: Game area -->
-            <div class="game-area">
-                <!-- Stats -->
-                <div class="stats-container">
-                    <div class="stat-box">
-                        <div class="stat-value" id="totalPoints">0</div>
-                        <div class="stat-label">BALL</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="multiplier">x1</div>
-                        <div class="stat-label">KOPAYTIRUVCHI</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value" id="activeTime">0:00</div>
-                        <div class="stat-label">FAOL VAQT</div>
-                    </div>
-                </div>
-
-                <!-- Progress bar removed as requested -->
-
-                <!-- Click area -->
-                <div class="click-area">
-                    <img src="https://i.imgur.com/BV3tmgP.jpeg" 
-                         alt="MLBB Game" 
-                         class="click-image" 
-                         id="clickImage">
-                </div>
-
-                <!-- Buttons -->
-                <div class="buttons-container">
-                    <button class="action-btn auto-btn" onclick="activateAutoClicker()">
-                        <i class="fas fa-robot"></i> Avtokliker
-                        <small>100 ball / 15 daqiqa</small>
-                    </button>
-                    
-                    <button class="action-btn donate-btn" onclick="openDonateModal()">
-                        <i class="fas fa-shopping-cart"></i> Olmos sotib olish
-                        <small>Haqiqiy MLBB olmoslari</small>
-                    </button>
-                    
-                    <button class="action-btn exchange-btn" onclick="openExchangeModal()">
-                        <i class="fas fa-exchange-alt"></i> BALL ALMASHTIRISH
-                        <small>Ball → OLMOZ</small>
-                    </button>
-                    
-                    <button class="action-btn leaderboard-btn" onclick="openLeaderboardModal()">
-                        <i class="fas fa-trophy"></i> REYTINGLAR
-                        <small>Top 5 o'yinchilar</small>
-                    </button>
+        <!-- Main Click Area -->
+        <div class="main-image-container">
+            <div class="click-image-placeholder" id="clickImage">
+                <div>
+                    <i class="fas fa-basketball" style="font-size: 50px; margin-bottom: 15px;"></i>
+                    <p>BOSHLANG VA BALL TOPLANG!</p>
+                    <p style="font-size: 14px; margin-top: 10px;">Har bir bosish = 1 ball</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Right column: Tasks and Leaderboards -->
-            <div class="right-column">
-                <!-- Tasks Panel -->
-                <div class="tasks-panel">
-                    <h3 class="panel-title"><i class="fas fa-tasks"></i> KUNLIK VAZIFALAR</h3>
-                    <div class="tasks-list" id="tasksList">
-                        <!-- Tasks will be loaded here -->
-                    </div>
+        <!-- Buttons -->
+        <div class="buttons-container">
+            <button class="action-btn auto-btn" onclick="activateAutoClicker()">
+                <i class="fas fa-robot"></i>
+                <span>AVTOKLIKER</span>
+                <small>100 ball • 15 daqiqa</small>
+            </button>
+            
+            <button class="action-btn donate-btn" onclick="openDonateModal()">
+                <i class="fas fa-shopping-cart"></i>
+                <span>OLMOS SOTIB OLISH</span>
+                <small>Haqiqiy MLBB olmoslari</small>
+            </button>
+            
+            <button class="action-btn exchange-btn" onclick="openExchangeModal()">
+                <i class="fas fa-exchange-alt"></i>
+                <span>BALL → OLMOS</span>
+                <small>Almashtirish</small>
+            </button>
+            
+            <button class="action-btn history-btn" onclick="openHistoryModal()">
+                <i class="fas fa-history"></i>
+                <span>ISTORIYA</span>
+                <small>Barcha amallar</small>
+            </button>
+            
+            <button class="action-btn quests-btn" onclick="openQuestsModal()">
+                <i class="fas fa-tasks"></i>
+                <span>VAZIFALAR</span>
+                <small>Topshir • Ball o'zlashtir</small>
+            </button>
+            
+            <button class="action-btn" onclick="shareGame()">
+                <i class="fas fa-share-alt"></i>
+                <span>ULASHISH</span>
+                <small>Do'stlarni taklif qil</small>
+            </button>
+        </div>
+
+        <!-- Quests Panel -->
+        <div class="quests-container">
+            <h2 class="section-title">
+                <i class="fas fa-tasks"></i> KUNLIK VAZIFALAR
+            </h2>
+            <div class="quest-list" id="questsList">
+                <!-- Quests will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Leaderboards -->
+        <div class="leaderboards-container">
+            <div class="leaderboard">
+                <h3 class="leaderboard-title">
+                    <i class="fas fa-trophy"></i> BALL REYTINGI
+                </h3>
+                <div id="pointsLeaderboard">
+                    <!-- Points leaderboard will be loaded here -->
                 </div>
-
-                <!-- Points Leaderboard -->
-                <div class="leaderboard-card">
-                    <h3 class="card-title"><i class="fas fa-trophy"></i> TOP 5 O'YINCHILAR (BALL)</h3>
-                    <div id="pointsLeaderboard">
-                        <!-- Points leaderboard will be loaded here -->
-                    </div>
-                </div>
-
-                <!-- Info card -->
-                <div class="leaderboard-card">
-                    <h3 class="card-title"><i class="fas fa-info-circle"></i> QISQACHA QO'LLANMA</h3>
-                    <div style="font-size: 14px; color: #5d6d7e; line-height: 1.6;">
-                        <p>1. Rasmni bosing va ball to'plang</p>
-                        <p>2. Vazifalarni bajaring va bonus oling</p>
-                        <p>3. Ballarni olmoslarga almashtiring</p>
-                        <p>4. Paketlar orqali to'g'ridan-to'g'ri olmos sotib oling</p>
-                        <p>5. Admin bilan bog'lanib, olmoslarni oling</p>
-                    </div>
+            </div>
+            
+            <div class="leaderboard">
+                <h3 class="leaderboard-title">
+                    <i class="fas fa-crown"></i> FAOL O'YINCHILAR
+                </h3>
+                <div id="timeLeaderboard">
+                    <!-- Time leaderboard will be loaded here -->
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p>© 2023 MLBB Ball Collector. Bu o'yin Mobile Legends: Bang Bang ning norasmiy loyihasidir.</p>
-            <p>Ballarni haqiqiy MLBB olmoslariga almashtirish mumkin.</p>
+            <p>© 2024 MLBB Ball Collector. Bu o'yin Mobile Legends: Bang Bang ning norasmiy loyihasidir.</p>
+            <p>Ballarni haqiqiy MLBB olmoslariga almashtirish mumkin. Admin: @laz1z0v1ch</p>
         </div>
     </div>
 
     <!-- Donate Modal -->
     <div class="modal-overlay" id="donateModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title"><i class="fas fa-gem"></i> OLMOS PAKETLARI</h2>
-                <button class="close-modal" onclick="closeDonateModal()">×</button>
-            </div>
+            <h2 class="modal-title">
+                <i class="fas fa-gem"></i> OLMOS PAKETLARI
+            </h2>
             
             <div class="package-list" id="packageList">
                 <!-- Packages will be loaded here -->
             </div>
             
-            <div class="admin-contact">
-                <div class="admin-title"><i class="fas fa-user-shield"></i> Admin bilan bog'lanish</div>
-                <p style="color: #5d6d7e; font-size: 14px; margin-bottom: 10px;">
-                    Paketni tanlang va "To'lov qilish" tugmasini bosing. To'lov qilgandan so'ng, 
-                    chek rasmini admin ga yuboring va MLBB ID ni yozing.
-                </p>
-                <p style="color: #FF9800; font-weight: 700; font-size: 15px;">
-                    <i class="fas fa-paper-plane"></i> Telegram: @laz1z0v1ch
-                </p>
+            <div style="background: rgba(138, 43, 226, 0.05); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 16px;">
+                    <i class="fas fa-info-circle"></i> QAYD ETILISHI KERAK:
+                </h3>
+                <div style="font-size: 13px; color: var(--gray); line-height: 1.6;">
+                    <p>1. Paketni tanlang va "Sotib olish" tugmasini bosing</p>
+                    <p>2. Admin (@laz1z0v1ch) ga to'lov chekini va MLBB ID ni yuboring</p>
+                    <p>3. Olmoslar 5-30 daqiqa ichida hisobingizga tushadi</p>
+                    <p>4. Har qanday muammo bo'lsa, admin bilan bog'laning</p>
+                </div>
             </div>
             
-            <div class="modal-buttons">
-                <button class="action-btn" onclick="closeDonateModal()" style="background: #5d6d7e;">
+            <div style="display: flex; gap: 10px; margin-top: 25px;">
+                <button class="action-btn" onclick="closeDonateModal()" style="flex: 1;">
                     Yopish
                 </button>
-                <button class="action-btn donate-btn" onclick="proceedToPayment()" id="paymentBtn" disabled>
-                    <i class="fas fa-credit-card"></i> To'lov qilish
+                <button class="action-btn donate-btn" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">
+                    <i class="fas fa-shopping-cart"></i> Sotib olish
                 </button>
             </div>
         </div>
@@ -929,195 +792,141 @@
     <!-- Exchange Modal -->
     <div class="modal-overlay" id="exchangeModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title"><i class="fas fa-exchange-alt"></i> BALL → OLMOZ ALMASHTIRISH</h2>
-                <button class="close-modal" onclick="closeExchangeModal()">×</button>
-            </div>
+            <h2 class="modal-title">
+                <i class="fas fa-exchange-alt"></i> BALL → OLMOS
+            </h2>
             
             <div class="exchange-rates">
-                <h3 style="color: #2c3e50; margin-bottom: 15px; text-align: center; font-size: 18px;">
+                <h3 style="color: var(--primary); margin-bottom: 15px; text-align: center;">
                     Almashuv kurslari:
                 </h3>
                 
                 <div class="rate-item">
-                    <span class="rate-balls">1000 Ball</span>
-                    <span class="rate-diamonds">→ 5 Olmoz</span>
+                    <span style="font-weight: 600;">1000 Ball</span>
+                    <span style="color: var(--secondary); font-weight: 700;">→ 5 Olmos</span>
                 </div>
                 <div class="rate-item">
-                    <span class="rate-balls">2500 Ball</span>
-                    <span class="rate-diamonds">→ 11 Olmoz</span>
+                    <span style="font-weight: 600;">2500 Ball</span>
+                    <span style="color: var(--secondary); font-weight: 700;">→ 11 Olmos</span>
                 </div>
                 <div class="rate-item">
-                    <span class="rate-balls">5000 Ball</span>
-                    <span class="rate-diamonds">→ 22 Olmoz</span>
+                    <span style="font-weight: 600;">5000 Ball</span>
+                    <span style="color: var(--secondary); font-weight: 700;">→ 22 Olmos</span>
                 </div>
                 <div class="rate-item">
-                    <span class="rate-balls">12000 Ball</span>
-                    <span class="rate-diamonds">→ 56 Olmoz</span>
+                    <span style="font-weight: 600;">12000 Ball</span>
+                    <span style="color: var(--secondary); font-weight: 700;">→ 56 Olmos</span>
                 </div>
                 <div class="rate-item">
-                    <span class="rate-balls">18000 Ball</span>
-                    <span class="rate-diamonds">→ 86 Olmoz</span>
+                    <span style="font-weight: 600;">18000 Ball</span>
+                    <span style="color: var(--secondary); font-weight: 700;">→ 86 Olmos</span>
                 </div>
             </div>
             
-            <div style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 25px; border-radius: 12px; margin: 20px 0;">
+            <div style="background: white; padding: 20px; border-radius: 15px; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <div style="font-size: 14px; color: #5d6d7e; margin-bottom: 8px;">Sizning ballaringiz:</div>
-                    <div style="font-size: 42px; color: #8a2be2; font-weight: 800;" id="currentBalls">0</div>
+                    <div style="font-size: 14px; color: var(--gray); margin-bottom: 5px;">
+                        Sizning ballaringiz:
+                    </div>
+                    <div style="font-size: 42px; color: var(--primary); font-weight: 800; margin: 10px 0;" id="currentBalls">
+                        0
+                    </div>
                 </div>
                 
-                <div style="text-align: center; margin: 20px 0;">
-                    <label for="exchangeAmount" style="color: #5d6d7e; display: block; margin-bottom: 10px; font-weight: 600;">
+                <div style="text-align: center;">
+                    <label for="exchangeAmount" style="color: var(--dark); display: block; margin-bottom: 10px; font-weight: 600;">
                         Almashtirish miqdori:
                     </label>
                     <input type="range" id="exchangeAmount" min="1000" max="18000" step="1000" value="1000" 
-                           style="width: 100%; margin: 15px 0; height: 10px; border-radius: 5px;">
-                    <div style="color: #2c3e50; font-weight: 700; font-size: 22px;" id="exchangeValue">1000 Ball</div>
-                    <div style="color: #8a2be2; font-size: 18px; margin-top: 10px; font-weight: 700;" id="exchangeResult">→ 5 Olmoz</div>
+                           style="width: 100%; margin: 15px 0; height: 8px; border-radius: 4px; background: rgba(138, 43, 226, 0.1);">
+                    <div style="font-size: 24px; color: var(--primary); font-weight: 700; margin: 10px 0;" id="exchangeValue">
+                        1000 Ball
+                    </div>
+                    <div style="font-size: 20px; color: var(--secondary); font-weight: 700; margin-top: 5px;" id="exchangeResult">
+                        → 5 Olmos
+                    </div>
                 </div>
             </div>
             
-            <div class="modal-buttons">
-                <button class="action-btn" onclick="closeExchangeModal()" style="background: #5d6d7e;">
+            <div style="display: flex; gap: 10px; margin-top: 25px;">
+                <button class="action-btn" onclick="closeExchangeModal()" style="flex: 1;">
                     Yopish
                 </button>
-                <button class="action-btn exchange-btn" onclick="requestExchange()">
+                <button class="action-btn exchange-btn" onclick="requestExchange()" style="flex: 1;">
                     <i class="fas fa-paper-plane"></i> So'rov yuborish
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Leaderboard Modal -->
-    <div class="modal-overlay" id="leaderboardModal">
+    <!-- History Modal -->
+    <div class="modal-overlay" id="historyModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title"><i class="fas fa-trophy"></i> TOP 5 O'YINCHILAR</h2>
-                <button class="close-modal" onclick="closeLeaderboardModal()">×</button>
+            <h2 class="modal-title">
+                <i class="fas fa-history"></i> AMALLAR ISTORIYASI
+            </h2>
+            
+            <div class="history-list" id="historyList">
+                <!-- History items will be loaded here -->
             </div>
             
-            <div class="leaderboard-tabs">
-                <button class="leaderboard-tab active" onclick="switchLeaderboard('points')">
-                    Ball bo'yicha
-                </button>
-                <button class="leaderboard-tab" onclick="switchLeaderboard('time')">
-                    Vaqt bo'yicha
-                </button>
+            <button class="action-btn" onclick="closeHistoryModal()" style="width: 100%; margin-top: 20px;">
+                Yopish
+            </button>
+        </div>
+    </div>
+
+    <!-- Quests Modal -->
+    <div class="modal-overlay" id="questsModal">
+        <div class="modal-content">
+            <h2 class="modal-title">
+                <i class="fas fa-tasks"></i> BARCHA VAZIFALAR
+            </h2>
+            
+            <div class="quest-list" id="allQuestsList">
+                <!-- All quests will be loaded here -->
             </div>
             
-            <div class="leaderboard-content active" id="pointsLeaderboardContent">
-                <h3 style="color: #8a2be2; text-align: center; margin-bottom: 20px;">Eng ko'p ball to'plaganlar</h3>
-                <div id="leaderboardPointsList">
-                    <!-- Points leaderboard will be loaded here -->
-                </div>
-            </div>
-            
-            <div class="leaderboard-content" id="timeLeaderboardContent">
-                <h3 style="color: #FF9800; text-align: center; margin-bottom: 20px;">Eng ko'p vaqt o'ynaganlar</h3>
-                <div id="leaderboardTimeList">
-                    <!-- Time leaderboard will be loaded here -->
-                </div>
-            </div>
-            
-            <div class="modal-buttons">
-                <button class="action-btn" onclick="closeLeaderboardModal()" style="flex: 1; background: #5d6d7e;">
-                    Yopish
-                </button>
-            </div>
+            <button class="action-btn" onclick="closeQuestsModal()" style="width: 100%; margin-top: 20px;">
+                Yopish
+            </button>
         </div>
     </div>
 
     <script>
         // ============ GAME VARIABLES ============
         let balls = 0;
-        let clicks = 0;
-        let multiplier = 1;
+        let totalClicks = 0;
         let perClick = 1;
         
         let autoClickerActive = false;
         let autoClickerInterval;
         const AUTO_CLICKER_DURATION = 15 * 60 * 1000;
         
-        let activeGameTime = 0; // Only counts when user is clicking
-        let lastClickTime = 0;
-        let activeTimeInterval;
+        let gameTime = 0;
+        let sessionStart = Date.now();
         
         let selectedPackage = null;
         let transactionHistory = [];
         
-        // ============ TASKS ============
-        const dailyTasks = [
-            { 
-                id: 1, 
-                title: "Kunlik kirish", 
-                description: "Har kuni tizimga kiring", 
-                reward: 50, 
-                completed: false,
-                claimed: false
-            },
-            { 
-                id: 2, 
-                title: "100 marta bosish", 
-                description: "Rasmni 100 marta bosing", 
-                reward: 100, 
-                completed: false, 
-                claimed: false,
-                progress: 0, 
-                target: 100 
-            },
-            { 
-                id: 3, 
-                title: "500 ball to'plash", 
-                description: "Umumiy 500 ball to'plash", 
-                reward: 200, 
-                completed: false, 
-                claimed: false,
-                progress: 0, 
-                target: 500 
-            },
-            { 
-                id: 4, 
-                title: "Avtoklikerni faollashtirish", 
-                description: "Avtoklikerni ishga tushiring", 
-                reward: 150, 
-                completed: false,
-                claimed: false
-            },
-            { 
-                id: 5, 
-                title: "Do'stni taklif qilish", 
-                description: "O'yinni do'stingizga ulashing", 
-                reward: 250, 
-                completed: false,
-                claimed: false
-            }
+        // ============ QUESTS ============
+        const dailyQuests = [
+            { id: 1, title: "Kun birinchi bosish", description: "Har kuni o'yin ochganingizda", reward: 50, completed: false },
+            { id: 2, title: "100 marta bosish", description: "100 marta asosiy rasmni bosing", reward: 100, completed: false, progress: 0, target: 100 },
+            { id: 3, title: "1 soat o'ynash", description: "O'yinda 1 soat vaqt o'tkazing", reward: 200, completed: false, progress: 0, target: 3600000 },
+            { id: 4, title: "Avtokliker ishlatish", description: "Avtoklikerni faollashtiring", reward: 150, completed: false },
+            { id: 5, title: "Do'stni taklif qilish", description: "O'yinni do'stingizga ulashing", reward: 300, completed: false }
         ];
-
-        // ============ LEADERBOARDS ============
-        let pointsLeaderboardData = [];
-        let timeLeaderboardData = [];
         
-        // ============ DOM ELEMENTS ============
-        const clickImage = document.getElementById('clickImage');
-        const totalPointsEl = document.getElementById('totalPoints');
-        const multiplierEl = document.getElementById('multiplier');
-        const gameTimeEl = document.getElementById('gameTime');
-        const activeTimeEl = document.getElementById('activeTime');
-        const tasksList = document.getElementById('tasksList');
-        const donateModal = document.getElementById('donateModal');
-        const exchangeModal = document.getElementById('exchangeModal');
-        const leaderboardModal = document.getElementById('leaderboardModal');
-        const packageList = document.getElementById('packageList');
-        const pointsLeaderboard = document.getElementById('pointsLeaderboard');
-        const paymentBtn = document.getElementById('paymentBtn');
-        const currentBallsEl = document.getElementById('currentBalls');
-        const exchangeAmountEl = document.getElementById('exchangeAmount');
-        const exchangeValueEl = document.getElementById('exchangeValue');
-        const exchangeResultEl = document.getElementById('exchangeResult');
-        const leaderboardPointsList = document.getElementById('leaderboardPointsList');
-        const leaderboardTimeList = document.getElementById('leaderboardTimeList');
-
+        const allQuests = [
+            ...dailyQuests,
+            { id: 6, title: "5000 ball to'plash", description: "Jami 5000 ball to'plang", reward: 500, completed: false, progress: 0, target: 5000 },
+            { id: 7, title: "Avtokliker 3 marta", description: "Avtoklikerni 3 marta ishlating", reward: 400, completed: false, progress: 0, target: 3 },
+            { id: 8, title: "Bir kunda 1000 bosish", description: "Bir kunda 1000 marta bosing", reward: 600, completed: false, progress: 0, target: 1000 },
+            { id: 9, title: "3 kun ketma-ket", description: "3 kun ketma-ket o'ynang", reward: 800, completed: false, progress: 0, target: 3 },
+            { id: 10, title: "Barcha vazifalar", description: "Barcha kunlik vazifalarni bajaring", reward: 1000, completed: false }
+        ];
+        
         // ============ PACKAGES ============
         const packages = [
             { id: 1, diamonds: 5, price: 1800, currency: 'UZS', label: '5 OLMOZ' },
@@ -1129,7 +938,13 @@
             { id: 7, diamonds: 172, price: 34500, currency: 'UZS', label: '172 OLMOZ', popular: true },
             { id: 8, diamonds: 257, price: 49000, currency: 'UZS', label: '257 OLMOZ', popular: true },
             { id: 9, diamonds: 344, price: 63500, currency: 'UZS', label: '344 OLMOZ', popular: true },
-            { id: 10, diamonds: 429, price: 79500, currency: 'UZS', label: '429 OLMOZ' }
+            { id: 10, diamonds: 429, price: 79500, currency: 'UZS', label: '429 OLMOZ' },
+            { id: 11, diamonds: 514, price: 96000, currency: 'UZS', label: '514 OLMOZ' },
+            { id: 12, diamonds: 706, price: 129000, currency: 'UZS', label: '706 OLMOZ', popular: true },
+            { id: 13, diamonds: 963, price: 179000, currency: 'UZS', label: '963 OLMOZ', popular: true },
+            { id: 14, diamonds: 2195, price: 387000, currency: 'UZS', label: '2195 OLMOZ', popular: true },
+            { id: 15, diamonds: 3688, price: 615000, currency: 'UZS', label: '3688 OLMOZ', popular: true },
+            { id: 16, diamonds: 9343, price: 1690000, currency: 'UZS', label: '9343 OLMOZ', popular: true }
         ];
         
         // ============ EXCHANGE RATES ============
@@ -1150,53 +965,36 @@
                 try {
                     const data = JSON.parse(saved);
                     balls = data.balls || 0;
-                    clicks = data.clicks || 0;
-                    multiplier = data.multiplier || 1;
-                    activeGameTime = data.activeGameTime || 0;
+                    totalClicks = data.totalClicks || 0;
+                    gameTime = data.gameTime || 0;
                     transactionHistory = data.transactionHistory || [];
                     
-                    // Load tasks
-                    if (data.dailyTasks) {
-                        dailyTasks.forEach((task, index) => {
-                            if (data.dailyTasks[index]) {
-                                dailyTasks[index].completed = data.dailyTasks[index].completed || false;
-                                dailyTasks[index].claimed = data.dailyTasks[index].claimed || false;
-                                dailyTasks[index].progress = data.dailyTasks[index].progress || 0;
+                    // Load quests progress
+                    if (data.quests) {
+                        dailyQuests.forEach((quest, index) => {
+                            if (data.quests[index]) {
+                                Object.assign(quest, data.quests[index]);
                             }
                         });
                     }
                     
-                    // Load leaderboards
-                    pointsLeaderboardData = data.pointsLeaderboardData || getDefaultLeaderboards();
-                    timeLeaderboardData = data.timeLeaderboardData || getDefaultTimeLeaderboards();
-                    
                     updateUI();
                 } catch (e) {
-                    console.log('Yangi o\'yin boshlanmoqda...', e);
-                    // Set default leaderboards
-                    pointsLeaderboardData = getDefaultLeaderboards();
-                    timeLeaderboardData = getDefaultTimeLeaderboards();
+                    console.log('Yangi o\'yin boshlanmoqda...');
                 }
-            } else {
-                // Set default leaderboards for new game
-                pointsLeaderboardData = getDefaultLeaderboards();
-                timeLeaderboardData = getDefaultTimeLeaderboards();
-                
-                // Check daily login
-                checkDailyLogin();
             }
             
-            // Start active time counter
-            startActiveTimeCounter();
-            
-            // Load tasks
-            loadTasks();
+            // Start game time
+            startGameTime();
             
             // Load leaderboards
-            loadPointsLeaderboard();
+            loadLeaderboards();
             
             // Setup exchange slider
             setupExchangeSlider();
+            
+            // Load quests
+            loadQuests();
             
             // Show welcome message
             setTimeout(() => {
@@ -1204,186 +1002,56 @@
             }, 500);
         }
         
-        function getDefaultLeaderboards() {
-            return [
-                { name: 'PRO_O\'YINCHI', score: 1850 },
-                { name: 'OLMOS_QIROL', score: 1620 },
-                { name: 'BALL_TOPLOVCHI', score: 1340 },
-                { name: 'MLBB_FAN', score: 1120 },
-                { name: 'YANGI_O\'YINCHI', score: 850 }
-            ];
-        }
-        
-        function getDefaultTimeLeaderboards() {
-            return [
-                { name: 'VAQT_USTASI', time: 4520 }, // 1 saat 15 daqiqa 20 soniya
-                { name: 'KUN_KEZAR', time: 3820 },
-                { name: 'O\'YIN_SEVAR', time: 2950 },
-                { name: 'BOSUVCHI', time: 2150 },
-                { name: 'YANGICHA', time: 1250 }
-            ];
-        }
-        
-        // ============ CHECK DAILY LOGIN ============
-        function checkDailyLogin() {
-            const lastLogin = localStorage.getItem('mlbbLastLogin');
-            const today = new Date().toDateString();
-            
-            if (lastLogin !== today) {
-                // New day - reset daily login task
-                dailyTasks[0].completed = false;
-                dailyTasks[0].claimed = false;
-                localStorage.setItem('mlbbLastLogin', today);
-            } else {
-                // Already logged in today
-                dailyTasks[0].completed = true;
-            }
-            
-            // Mark as completed if not already claimed
-            if (!dailyTasks[0].claimed) {
-                dailyTasks[0].completed = true;
-            }
-        }
-        
-        // ============ ACTIVE TIME COUNTER ============
-        function startActiveTimeCounter() {
-            // Update active time display
-            updateActiveTimeDisplay();
-            
-            // Update every second
-            activeTimeInterval = setInterval(() => {
-                // Check if user clicked in last 5 seconds
-                const now = Date.now();
-                if (now - lastClickTime < 5000) {
-                    activeGameTime += 1000; // Add 1 second
-                    updateActiveTimeDisplay();
-                    
-                    // Update leaderboards every 30 seconds
-                    if (activeGameTime % 30000 < 1000) {
-                        updateTimeLeaderboard();
-                    }
-                }
-            }, 1000);
-        }
-        
-        function updateActiveTimeDisplay() {
-            const hours = Math.floor(activeGameTime / 3600000);
-            const minutes = Math.floor((activeGameTime % 3600000) / 60000);
-            const seconds = Math.floor((activeGameTime % 60000) / 1000);
-            
-            // Format for display
-            if (hours > 0) {
-                activeTimeEl.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                gameTimeEl.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            } else {
-                activeTimeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                gameTimeEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            }
-        }
-        
         // ============ UPDATE UI ============
         function updateUI() {
-            totalPointsEl.textContent = balls.toLocaleString();
-            multiplierEl.textContent = `x${multiplier}`;
+            document.getElementById('totalPoints').textContent = balls.toLocaleString();
+            document.getElementById('perClick').textContent = perClick;
+            document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
+            
+            // Update game time
+            const hours = Math.floor(gameTime / 3600000);
+            const minutes = Math.floor((gameTime % 3600000) / 60000);
+            document.getElementById('gameTime').textContent = `${hours} soat ${minutes} daqiqa`;
+            
+            // Update player rank
+            updatePlayerRank();
             
             // Update current balls in exchange modal
-            currentBallsEl.textContent = balls.toLocaleString();
+            document.getElementById('currentBalls').textContent = balls.toLocaleString();
             
-            // Update tasks progress
-            updateTasksProgress();
-            
-            // Update leaderboards with current player
-            updatePointsLeaderboard();
-        }
-        
-        // ============ LOAD TASKS ============
-        function loadTasks() {
-            tasksList.innerHTML = dailyTasks.map(task => `
-                <div class="task-item ${task.completed ? 'completed' : ''}">
-                    <div class="task-info">
-                        <h4>${task.title}</h4>
-                        <p>${task.description}</p>
-                        ${task.progress !== undefined ? `
-                            <div style="margin-top: 5px; font-size: 12px; color: #8a2be2;">
-                                ${task.progress}/${task.target}
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div class="task-reward ${task.claimed ? 'claimed' : ''}" 
-                         onclick="claimTaskReward(${task.id})"
-                         style="${task.claimed ? 'cursor: default;' : ''}">
-                        ${task.claimed ? 'OLINGAN' : `+${task.reward} ball`}
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function updateTasksProgress() {
-            // Update task 2 progress (clicks)
-            dailyTasks[1].progress = Math.min(clicks, dailyTasks[1].target);
-            dailyTasks[1].completed = clicks >= dailyTasks[1].target;
-            
-            // Update task 3 progress (balls)
-            dailyTasks[2].progress = Math.min(balls, dailyTasks[2].target);
-            dailyTasks[2].completed = balls >= dailyTasks[2].target;
-            
-            // Task 4 is completed when auto clicker is activated
-            // Task 5 is completed when user shares the game
-            
-            // Reload tasks display
-            loadTasks();
-        }
-        
-        function claimTaskReward(taskId) {
-            const taskIndex = taskId - 1;
-            const task = dailyTasks[taskIndex];
-            
-            if (!task.completed || task.claimed) {
-                if (!task.completed) {
-                    showNotification('❌ Vazifa hali bajarilmagan!');
-                }
-                return;
-            }
-            
-            // Give reward
-            balls += task.reward;
-            task.claimed = true;
-            
-            // Show notification
-            showNotification(`✅ ${task.title} vazifasi uchun ${task.reward} ball oldingiz!`);
-            
-            // Update UI and save
-            updateUI();
-            autoSave();
+            // Update quests progress
+            updateQuestsProgress();
         }
         
         // ============ CLICK HANDLER ============
-        clickImage.addEventListener('click', function(e) {
-            // Update last click time for active time tracking
-            lastClickTime = Date.now();
-            
+        document.getElementById('clickImage').addEventListener('click', function(e) {
             // Calculate balls
-            const earned = perClick * multiplier;
-            balls += earned;
-            clicks++;
+            balls += perClick;
+            totalClicks++;
             
             // Create click effect
-            createClickEffect(e, `+${earned}`);
+            createClickEffect(e, `+${perClick}`);
             
-            // Update leaderboards
-            updatePointsLeaderboard();
+            // Update quests
+            updateQuestProgress(2, 1); // 100 bosish vazifasi
+            updateQuestProgress(8, 1); // Kunlik 1000 bosish
+            
+            // Every 50 clicks check for achievements
+            if (totalClicks % 50 === 0) {
+                showNotification(`🎯 ${totalClicks} ta bosish amalga oshirildi!`);
+            }
+            
+            // Every 100 clicks auto-save
+            if (totalClicks % 100 === 0) {
+                autoSave();
+            }
             
             // Update UI
             updateUI();
             
-            // Auto save every 50 clicks
-            if (clicks % 50 === 0) {
-                autoSave();
-            }
-            
             // Vibrate on mobile
             if (navigator.vibrate) {
-                navigator.vibrate(20);
+                navigator.vibrate(10);
             }
         });
         
@@ -1393,11 +1061,14 @@
             effect.className = 'click-effect';
             effect.textContent = text;
             
-            const rect = clickImage.getBoundingClientRect();
-            effect.style.left = `${event.clientX - rect.left}px`;
-            effect.style.top = `${event.clientY - rect.top}px`;
+            const rect = document.getElementById('clickImage').getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
             
-            clickImage.parentElement.appendChild(effect);
+            effect.style.left = `${x}px`;
+            effect.style.top = `${y}px`;
+            
+            document.getElementById('clickImage').appendChild(effect);
             
             setTimeout(() => {
                 effect.remove();
@@ -1417,19 +1088,22 @@
                 balls -= cost;
                 autoClickerActive = true;
                 
-                // Complete task 4
-                dailyTasks[3].completed = true;
+                // Add to history
+                addToHistory('avtokliker', 'Avtokliker sotib olindi', -cost);
                 
                 showNotification('🤖 Avtokliker faollashtirildi! 15 daqiqa');
-                
                 updateUI();
                 
                 // Auto click every second
                 autoClickerInterval = setInterval(() => {
-                    balls += perClick * multiplier;
-                    clicks++;
+                    balls += perClick;
+                    totalClicks++;
                     updateUI();
                 }, 1000);
+                
+                // Complete quest
+                completeQuest(4);
+                updateQuestProgress(7, 1);
                 
                 // Stop after 15 minutes
                 setTimeout(() => {
@@ -1450,41 +1124,56 @@
             showNotification('🛑 Avtokliker to\'xtatildi');
         }
         
+        // ============ GAME TIME ============
+        function startGameTime() {
+            // Update every minute
+            setInterval(() => {
+                gameTime += 60000; // Add 1 minute
+                updateUI();
+                
+                // Update time quest
+                updateQuestProgress(3, 60000);
+                
+                // Auto save every 5 minutes
+                if (Math.floor(gameTime / 300000) > Math.floor((gameTime - 60000) / 300000)) {
+                    autoSave();
+                }
+            }, 60000);
+        }
+        
         // ============ DONATE MODAL ============
         function openDonateModal() {
             // Load packages
-            packageList.innerHTML = packages.map(pkg => `
+            document.getElementById('packageList').innerHTML = packages.map(pkg => `
                 <div class="package-item ${selectedPackage === pkg.id ? 'selected' : ''}" 
                      onclick="selectPackage(${pkg.id})">
-                    <div class="package-header">
-                        <div class="package-name">💎 ${pkg.label}</div>
-                        <div class="package-diamonds">${pkg.diamonds} OLMOZ</div>
+                    <div class="package-name">
+                        💎 ${pkg.label}
+                        ${pkg.popular ? '<span style="color:#FFB800; font-size:12px; margin-left:8px;">🔥</span>' : ''}
                     </div>
                     <div class="package-price">
                         ${pkg.price.toLocaleString()} ${pkg.currency}
                     </div>
-                    ${pkg.popular ? `
-                        <div style="color: #FF9800; font-size: 12px; margin-top: 5px;">
-                            <i class="fas fa-fire"></i> Mashhur paket
-                        </div>
-                    ` : ''}
+                    <div style="color:var(--primary); font-size:14px; font-weight:600; margin-top:5px;">
+                        ${pkg.diamonds} OLMOZ
+                    </div>
                 </div>
             `).join('');
             
             // Enable/disable payment button
-            paymentBtn.disabled = !selectedPackage;
+            document.getElementById('paymentBtn').disabled = !selectedPackage;
             
-            donateModal.style.display = 'flex';
+            document.getElementById('donateModal').style.display = 'flex';
         }
         
         function closeDonateModal() {
-            donateModal.style.display = 'none';
+            document.getElementById('donateModal').style.display = 'none';
             selectedPackage = null;
         }
         
         function selectPackage(packageId) {
             selectedPackage = packageId;
-            paymentBtn.disabled = false;
+            document.getElementById('paymentBtn').disabled = false;
             openDonateModal(); // Refresh to show selection
         }
         
@@ -1508,6 +1197,9 @@
             const telegramUrl = `https://t.me/laz1z0v1ch?text=${message}`;
             window.open(telegramUrl, '_blank');
             
+            // Add to history
+            addToHistory('sotib_olish', `${pkg.label} paketi sotib olish so'rovi`, 0);
+            
             showNotification(`📤 ${pkg.label} paketi uchun so'rov @laz1z0v1ch ga yuborildi!`);
             
             closeDonateModal();
@@ -1515,28 +1207,30 @@
         
         // ============ EXCHANGE MODAL ============
         function setupExchangeSlider() {
+            const exchangeAmountEl = document.getElementById('exchangeAmount');
+            
             exchangeAmountEl.addEventListener('input', function() {
                 const amount = parseInt(this.value);
                 const rate = exchangeRates.find(r => r.balls === amount);
                 
                 if (rate) {
-                    exchangeValueEl.textContent = `${amount.toLocaleString()} Ball`;
-                    exchangeResultEl.textContent = `→ ${rate.diamonds} Olmoz`;
+                    document.getElementById('exchangeValue').textContent = `${amount.toLocaleString()} Ball`;
+                    document.getElementById('exchangeResult').textContent = `→ ${rate.diamonds} Olmos`;
                 }
             });
         }
         
         function openExchangeModal() {
-            currentBallsEl.textContent = balls.toLocaleString();
-            exchangeModal.style.display = 'flex';
+            document.getElementById('currentBalls').textContent = balls.toLocaleString();
+            document.getElementById('exchangeModal').style.display = 'flex';
         }
         
         function closeExchangeModal() {
-            exchangeModal.style.display = 'none';
+            document.getElementById('exchangeModal').style.display = 'none';
         }
         
         function requestExchange() {
-            const amount = parseInt(exchangeAmountEl.value);
+            const amount = parseInt(document.getElementById('exchangeAmount').value);
             const rate = exchangeRates.find(r => r.balls === amount);
             
             if (!rate) {
@@ -1560,207 +1254,292 @@
             const telegramUrl = `https://t.me/laz1z0v1ch?text=${message}`;
             window.open(telegramUrl, '_blank');
             
+            // Add to history
+            addToHistory('almashuv', `${amount} ball → ${rate.diamonds} olmos so'rovi`, 0);
+            
             showNotification(`📤 Almashuv so'rovi @laz1z0v1ch ga yuborildi!`);
             
             closeExchangeModal();
         }
         
-        // ============ LEADERBOARD FUNCTIONS ============
-        function openLeaderboardModal() {
-            loadLeaderboardModal();
-            leaderboardModal.style.display = 'flex';
-        }
-        
-        function closeLeaderboardModal() {
-            leaderboardModal.style.display = 'none';
-        }
-        
-        function switchLeaderboard(type) {
-            // Update tabs
-            document.querySelectorAll('.leaderboard-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
+        // ============ HISTORY MODAL ============
+        function openHistoryModal() {
+            const historyList = document.getElementById('historyList');
             
-            document.querySelectorAll('.leaderboard-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            if (type === 'points') {
-                document.querySelector('.leaderboard-tab:first-child').classList.add('active');
-                document.getElementById('pointsLeaderboardContent').classList.add('active');
-            } else {
-                document.querySelector('.leaderboard-tab:last-child').classList.add('active');
-                document.getElementById('timeLeaderboardContent').classList.add('active');
-            }
-        }
-        
-        function loadPointsLeaderboard() {
-            // Add current player to leaderboard data for display
-            const displayData = [...pointsLeaderboardData];
-            const currentPlayerIndex = displayData.findIndex(p => p.name === 'Siz');
-            
-            if (currentPlayerIndex !== -1) {
-                displayData[currentPlayerIndex].score = balls;
-            } else {
-                // Add current player if not in top 5
-                displayData.push({ name: 'Siz', score: balls });
-            }
-            
-            // Sort by score descending
-            displayData.sort((a, b) => b.score - a.score);
-            
-            // Take top 5 for display
-            const top5 = displayData.slice(0, 5);
-            
-            // Render points leaderboard
-            pointsLeaderboard.innerHTML = top5.map((player, index) => `
-                <div class="player-row">
-                    <div class="player-info">
-                        <div class="player-rank ${index < 3 ? 'top-3' : ''}">
-                            ${index + 1}
-                        </div>
-                        <div class="player-name">
-                            ${player.name}
-                        </div>
-                    </div>
-                    <div class="player-score">${player.score.toLocaleString()}</div>
-                </div>
-            `).join('');
-        }
-        
-        function loadLeaderboardModal() {
-            // Load points leaderboard for modal
-            const pointsDisplayData = [...pointsLeaderboardData];
-            const currentPlayerPointsIndex = pointsDisplayData.findIndex(p => p.name === 'Siz');
-            
-            if (currentPlayerPointsIndex !== -1) {
-                pointsDisplayData[currentPlayerPointsIndex].score = balls;
-            } else {
-                pointsDisplayData.push({ name: 'Siz', score: balls });
-            }
-            
-            pointsDisplayData.sort((a, b) => b.score - a.score);
-            const top5Points = pointsDisplayData.slice(0, 5);
-            
-            leaderboardPointsList.innerHTML = top5Points.map((player, index) => `
-                <div class="player-row">
-                    <div class="player-info">
-                        <div class="player-rank ${index < 3 ? 'top-3' : ''}">
-                            ${index + 1}
-                        </div>
-                        <div class="player-name">
-                            ${player.name}
-                        </div>
-                    </div>
-                    <div class="player-score">${player.score.toLocaleString()}</div>
-                </div>
-            `).join('');
-            
-            // Load time leaderboard for modal
-            const timeDisplayData = [...timeLeaderboardData];
-            const currentPlayerTimeIndex = timeDisplayData.findIndex(p => p.name === 'Siz');
-            
-            if (currentPlayerTimeIndex !== -1) {
-                timeDisplayData[currentPlayerTimeIndex].time = Math.floor(activeGameTime / 1000);
-            } else {
-                timeDisplayData.push({ name: 'Siz', time: Math.floor(activeGameTime / 1000) });
-            }
-            
-            timeDisplayData.sort((a, b) => b.time - a.time);
-            const top5Time = timeDisplayData.slice(0, 5);
-            
-            leaderboardTimeList.innerHTML = top5Time.map((player, index) => {
-                const hours = Math.floor(player.time / 3600);
-                const minutes = Math.floor((player.time % 3600) / 60);
-                const seconds = player.time % 60;
-                
-                let timeStr = '';
-                if (hours > 0) {
-                    timeStr = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                } else {
-                    timeStr = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-                }
-                
-                return `
-                    <div class="player-row">
-                        <div class="player-info">
-                            <div class="player-rank ${index < 3 ? 'top-3' : ''}">
-                                ${index + 1}
-                            </div>
-                            <div class="player-name">
-                                ${player.name}
-                            </div>
-                        </div>
-                        <div class="player-time">${timeStr}</div>
+            if (transactionHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: var(--gray);">
+                        <i class="fas fa-history" style="font-size: 50px; margin-bottom: 20px; opacity: 0.3;"></i>
+                        <p>Hozircha amallar yo'q</p>
                     </div>
                 `;
-            }).join('');
-        }
-        
-        function updatePointsLeaderboard() {
-            // Check if current player is in leaderboard
-            const playerIndex = pointsLeaderboardData.findIndex(p => p.name === 'Siz');
-            
-            if (playerIndex !== -1) {
-                // Update existing entry
-                pointsLeaderboardData[playerIndex].score = balls;
             } else {
-                // Check if current score beats the lowest score
-                const lowestScore = Math.min(...pointsLeaderboardData.map(p => p.score));
-                
-                if (balls > lowestScore) {
-                    // Replace lowest score
-                    const lowestIndex = pointsLeaderboardData.findIndex(p => p.score === lowestScore);
-                    pointsLeaderboardData[lowestIndex] = { name: 'Siz', score: balls };
-                }
+                historyList.innerHTML = transactionHistory.map(item => `
+                    <div class="history-item">
+                        <div class="history-type">
+                            ${getHistoryTypeIcon(item.type)} ${item.type}
+                        </div>
+                        <div class="history-details">
+                            ${item.details}
+                        </div>
+                        ${item.amount !== 0 ? `
+                            <div style="color: ${item.amount > 0 ? 'var(--accent)' : 'var(--danger)'}; font-weight: 600; margin-top: 5px;">
+                                ${item.amount > 0 ? '+' : ''}${item.amount} ball
+                            </div>
+                        ` : ''}
+                        <div class="history-date">
+                            ${new Date(item.date).toLocaleString('uz-UZ')}
+                        </div>
+                    </div>
+                `).join('');
             }
             
-            // Sort and keep top 5
-            pointsLeaderboardData.sort((a, b) => b.score - a.score);
-            
-            // Update display
-            loadPointsLeaderboard();
+            document.getElementById('historyModal').style.display = 'flex';
         }
         
-        function updateTimeLeaderboard() {
-            const currentTime = Math.floor(activeGameTime / 1000);
+        function closeHistoryModal() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+        
+        function getHistoryTypeIcon(type) {
+            const icons = {
+                'bosish': '👆',
+                'avtokliker': '🤖',
+                'sotib_olish': '🛒',
+                'almashuv': '🔄',
+                'vazifa': '✅',
+                'bonus': '🎁'
+            };
+            return icons[type] || '📝';
+        }
+        
+        function addToHistory(type, details, amount) {
+            transactionHistory.unshift({
+                type: type,
+                details: details,
+                amount: amount,
+                date: new Date().toISOString()
+            });
             
-            // Check if current player is in time leaderboard
-            const playerIndex = timeLeaderboardData.findIndex(p => p.name === 'Siz');
-            
-            if (playerIndex !== -1) {
-                // Update existing entry
-                timeLeaderboardData[playerIndex].time = currentTime;
-            } else {
-                // Check if current time beats the lowest time
-                const lowestTime = Math.min(...timeLeaderboardData.map(p => p.time));
-                
-                if (currentTime > lowestTime) {
-                    // Replace lowest time
-                    const lowestIndex = timeLeaderboardData.findIndex(p => p.time === lowestTime);
-                    timeLeaderboardData[lowestIndex] = { name: 'Siz', time: currentTime };
-                }
+            // Keep only last 50 transactions
+            if (transactionHistory.length > 50) {
+                transactionHistory.pop();
             }
             
-            // Sort and keep top 5
-            timeLeaderboardData.sort((a, b) => b.time - a.time);
+            autoSave();
+        }
+        
+        // ============ QUESTS ============
+        function loadQuests() {
+            const questsList = document.getElementById('questsList');
+            const allQuestsList = document.getElementById('allQuestsList');
+            
+            questsList.innerHTML = dailyQuests.slice(0, 3).map(quest => `
+                <div class="quest-item ${quest.completed ? 'completed' : ''}">
+                    <div class="quest-info">
+                        <h4>${quest.title}</h4>
+                        <p>${quest.description}</p>
+                        ${quest.progress !== undefined ? `
+                            <div style="margin-top: 8px;">
+                                <div style="height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px;">
+                                    <div style="height: 100%; width: ${(quest.progress / quest.target * 100)}%; 
+                                         background: var(--primary); border-radius: 2px;"></div>
+                                </div>
+                                <div style="font-size: 12px; color: var(--gray); margin-top: 4px;">
+                                    ${quest.progress} / ${quest.target}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="quest-reward">
+                        +${quest.reward}
+                    </div>
+                </div>
+            `).join('');
+            
+            allQuestsList.innerHTML = allQuests.map(quest => `
+                <div class="quest-item ${quest.completed ? 'completed' : ''}">
+                    <div class="quest-info">
+                        <h4>${quest.title}</h4>
+                        <p>${quest.description}</p>
+                        ${quest.progress !== undefined ? `
+                            <div style="margin-top: 8px;">
+                                <div style="height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px;">
+                                    <div style="height: 100%; width: ${(quest.progress / quest.target * 100)}%; 
+                                         background: var(--primary); border-radius: 2px;"></div>
+                                </div>
+                                <div style="font-size: 12px; color: var(--gray); margin-top: 4px;">
+                                    ${quest.progress} / ${quest.target}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="quest-reward">
+                        +${quest.reward}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function openQuestsModal() {
+            loadQuests();
+            document.getElementById('questsModal').style.display = 'flex';
+        }
+        
+        function closeQuestsModal() {
+            document.getElementById('questsModal').style.display = 'none';
+        }
+        
+        function updateQuestProgress(questId, progress) {
+            const quest = allQuests.find(q => q.id === questId);
+            if (quest && !quest.completed && quest.progress !== undefined) {
+                quest.progress += progress;
+                
+                if (quest.progress >= quest.target) {
+                    completeQuest(questId);
+                }
+                
+                autoSave();
+            }
+        }
+        
+        function completeQuest(questId) {
+            const quest = allQuests.find(q => q.id === questId);
+            if (quest && !quest.completed) {
+                quest.completed = true;
+                balls += quest.reward;
+                
+                // Add to history
+                addToHistory('vazifa', `${quest.title} - ${quest.reward} ball`, quest.reward);
+                
+                showNotification(`✅ "${quest.title}" vazifasi bajarildi! +${quest.reward} ball`);
+                
+                // Check if all daily quests completed
+                const allDailyCompleted = dailyQuests.every(q => q.completed);
+                if (allDailyCompleted) {
+                    completeQuest(10); // Complete "All quests" quest
+                }
+                
+                updateUI();
+                loadQuests();
+            }
+        }
+        
+        function updateQuestsProgress() {
+            // Update total balls quest
+            updateQuestProgress(6, 0);
+            dailyQuests[5].progress = balls; // Update progress display
+            
+            // Update consecutive days quest (simplified)
+            const lastPlayed = localStorage.getItem('lastPlayed');
+            const today = new Date().toDateString();
+            
+            if (lastPlayed !== today) {
+                localStorage.setItem('lastPlayed', today);
+                updateQuestProgress(9, 1);
+            }
+        }
+        
+        // ============ PLAYER RANK ============
+        function updatePlayerRank() {
+            let rank = '#1';
+            
+            if (balls >= 10000) rank = '#1';
+            else if (balls >= 5000) rank = '#2';
+            else if (balls >= 2500) rank = '#3';
+            else if (balls >= 1000) rank = '#4';
+            else rank = '#5';
+            
+            document.getElementById('playerRank').textContent = rank;
+        }
+        
+        // ============ LEADERBOARDS ============
+        function loadLeaderboards() {
+            // Points leaderboard (demo data)
+            const pointsLeaders = [
+                { name: 'Siz', score: balls, level: 'BOSS' },
+                { name: 'PRO_O\'YINCHI', score: 18500, level: 'LEGEND' },
+                { name: 'OLMOS_QIROL', score: 16200, level: 'MYTHIC' },
+                { name: 'BALL_TOPLOVCHI', score: 13400, level: 'EPIC' },
+                { name: 'MLBB_FAN', score: 11200, level: 'LEGEND' },
+                { name: 'NIGHT_WOLF', score: 9800, level: 'EPIC' },
+                { name: 'CLICK_MASTER', score: 7600, level: 'GRANDMASTER' },
+                { name: 'GOLDEN_HAND', score: 6500, level: 'MASTER' },
+                { name: 'FAST_FINGER', score: 5200, level: 'ELITE' },
+                { name: 'NEW_PLAYER', score: 3100, level: 'WARRIOR' }
+            ].sort((a, b) => b.score - a.score);
+            
+            // Time leaderboard (demo data)
+            const timeLeaders = [
+                { name: 'Siz', time: Math.floor(gameTime / 3600000), level: 'ACTIVE' },
+                { name: '24/7_ONLINE', time: 156, level: 'PRO' },
+                { name: 'NIGHT_GAMER', time: 128, level: 'EXPERT' },
+                { name: 'WEEKEND_WARRIOR', time: 95, level: 'ACTIVE' },
+                { name: 'DAY_PLAYER', time: 76, level: 'REGULAR' },
+                { name: 'MOBILE_LEGEND', time: 64, level: 'EXPERT' },
+                { name: 'GAME_ADDICT', time: 52, level: 'REGULAR' },
+                { name: 'CASUAL_PLAYER', time: 38, level: 'CASUAL' },
+                { name: 'EVENING_FUN', time: 25, level: 'CASUAL' },
+                { name: 'NEW_GAMER', time: 12, level: 'NEW' }
+            ].sort((a, b) => b.time - a.time);
+            
+            // Render points leaderboard
+            document.getElementById('pointsLeaderboard').innerHTML = pointsLeaders.map((leader, index) => `
+                <div class="player-row">
+                    <div class="player-rank">${index + 1}</div>
+                    <div class="player-info">
+                        <div class="player-name">${leader.name}</div>
+                        <div class="player-level">${leader.level}</div>
+                    </div>
+                    <div class="player-score">${leader.score.toLocaleString()}</div>
+                </div>
+            `).join('');
+            
+            // Render time leaderboard
+            document.getElementById('timeLeaderboard').innerHTML = timeLeaders.map((leader, index) => `
+                <div class="player-row">
+                    <div class="player-rank">${index + 1}</div>
+                    <div class="player-info">
+                        <div class="player-name">${leader.name}</div>
+                        <div class="player-level">${leader.level}</div>
+                    </div>
+                    <div class="player-score">${leader.time} soat</div>
+                </div>
+            `).join('');
         }
         
         // ============ SAVE GAME ============
         function autoSave() {
             const data = {
                 balls: balls,
-                clicks: clicks,
-                multiplier: multiplier,
-                activeGameTime: activeGameTime,
-                dailyTasks: dailyTasks,
+                totalClicks: totalClicks,
+                gameTime: gameTime,
                 transactionHistory: transactionHistory,
-                pointsLeaderboardData: pointsLeaderboardData,
-                timeLeaderboardData: timeLeaderboardData,
+                quests: dailyQuests,
                 saveTime: new Date().toISOString()
             };
             
             localStorage.setItem('mlbbBallCollector', JSON.stringify(data));
+        }
+        
+        // ============ SHARE GAME ============
+        function shareGame() {
+            const shareText = `Men MLBB Ball Collector o'yinida ${balls.toLocaleString()} ball to'pladim! Siz ham to'plang va bepul olmos oling: https://t.me/laz1z0v1ch`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'MLBB Ball Collector',
+                    text: shareText,
+                    url: 'https://t.me/laz1z0v1ch'
+                }).then(() => {
+                    completeQuest(5); // Complete share quest
+                });
+            } else {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showNotification('📋 Havola nusxalandi! Do\'stlaringizga ulashing.');
+                    completeQuest(5); // Complete share quest
+                });
+            }
         }
         
         // ============ NOTIFICATION ============
@@ -1768,26 +1547,28 @@
             const notification = document.createElement('div');
             notification.className = 'notification';
             notification.innerHTML = `
-                <i class="fas fa-info-circle"></i>
+                <i class="fas fa-bell" style="color: var(--primary);"></i>
                 <div>${message}</div>
             `;
             
             document.body.appendChild(notification);
             
             setTimeout(() => {
-                notification.style.animation = 'slideIn 0.3s ease-out reverse forwards';
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse forwards';
                 setTimeout(() => {
                     notification.remove();
                 }, 300);
             }, 3000);
         }
         
-        // ============ AUTO SAVE INTERVAL ============
-        setInterval(autoSave, 120000); // Every 2 minutes
-        
         // ============ INITIALIZE ON LOAD ============
         document.addEventListener('DOMContentLoaded', function() {
             initGame();
+            
+            // Add first click quest
+            setTimeout(() => {
+                completeQuest(1);
+            }, 1000);
             
             // Save on page close
             window.addEventListener('beforeunload', function() {
@@ -1795,41 +1576,11 @@
                     deactivateAutoClicker();
                 }
                 
+                // Update game time
+                const sessionTime = Date.now() - sessionStart;
+                gameTime += sessionTime;
+                
                 autoSave();
-            });
-            
-            // Task 5: Share game
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.task-reward') && !dailyTasks[4].claimed) {
-                    const taskDiv = e.target.closest('.task-item');
-                    if (taskDiv && taskDiv.querySelector('h4').textContent.includes('Do\'stni taklif qilish')) {
-                        // Mark task as completed
-                        dailyTasks[4].completed = true;
-                        
-                        // Create share message
-                        const shareMessage = `MLBB Ball Collector o'yini! Ball to'plang va haqiqiy MLBB olmoslarini oling! O'ynash uchun: [LINK]`;
-                        
-                        // Try to use Web Share API if available
-                        if (navigator.share) {
-                            navigator.share({
-                                title: 'MLBB Ball Collector',
-                                text: shareMessage,
-                                url: window.location.href
-                            }).then(() => {
-                                showNotification('✅ O\'yin muvaffaqiyatli ulashildi!');
-                                loadTasks();
-                            }).catch(err => {
-                                console.log('Ulashish bekor qilindi:', err);
-                            });
-                        } else {
-                            // Fallback: copy to clipboard
-                            navigator.clipboard.writeText(shareMessage + window.location.href).then(() => {
-                                showNotification('✅ Havola nusxalandi! Do'stingizga yuboring va 250 ball oling!');
-                                loadTasks();
-                            });
-                        }
-                    }
-                }
             });
         });
     </script>
