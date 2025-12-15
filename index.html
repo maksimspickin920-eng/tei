@@ -246,70 +246,61 @@
             background: linear-gradient(135deg, var(--warning) 0%, #E6A800 100%);
         }
 
-        .quests-btn {
-            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-        }
-
         .upgrade-btn {
             background: linear-gradient(135deg, #FF4081 0%, #C2185B 100%);
         }
 
-        /* Quests Panel */
-        .quests-container {
+        .invite-btn {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            font-size: 18px !important;
+            padding: 20px !important;
+            grid-column: span 2;
+        }
+
+        /* Invite Section */
+        .invite-section {
             background: var(--card-bg);
             border-radius: 20px;
             padding: 25px;
             margin: 25px 0;
             box-shadow: var(--shadow);
+            text-align: center;
         }
 
-        .section-title {
+        .invite-title {
             color: var(--primary);
             font-size: 22px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
         }
 
-        .quest-list {
+        .invite-stats {
             display: grid;
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
         }
 
-        .quest-item {
+        .invite-stat {
             background: rgba(138, 43, 226, 0.05);
             padding: 15px;
             border-radius: 12px;
             border-left: 4px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
         }
 
-        .quest-item:hover {
-            background: rgba(138, 43, 226, 0.1);
-        }
-
-        .quest-info h4 {
-            color: var(--dark);
+        .invite-stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
             margin-bottom: 5px;
-            font-size: 16px;
         }
 
-        .quest-info p {
-            color: var(--gray);
-            font-size: 13px;
-        }
-
-        .quest-reward {
-            background: var(--primary);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 600;
+        .invite-stat-label {
             font-size: 14px;
+            color: var(--gray);
         }
 
         /* Leaderboards */
@@ -582,11 +573,13 @@
         .coming-soon {
             background: linear-gradient(135deg, var(--warning) 0%, #E6A800 100%);
             color: white;
-            padding: 10px 15px;
+            padding: 20px;
             border-radius: 10px;
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             margin: 15px 0;
+            font-size: 22px;
+            box-shadow: 0 10px 20px rgba(255, 184, 0, 0.2);
         }
 
         .speed-info {
@@ -621,6 +614,11 @@
                 margin-top: 15px;
                 display: inline-block;
             }
+            
+            .invite-btn {
+                grid-column: span 1;
+                font-size: 16px !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -634,6 +632,10 @@
             }
             
             .leaderboards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .invite-stats {
                 grid-template-columns: 1fr;
             }
         }
@@ -670,10 +672,10 @@
             </div>
             <div class="stat-box">
                 <div class="stat-value">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span id="perClick">1</span>/bosish
+                    <i class="fas fa-gem"></i>
+                    <span id="diamondsCount">0</span>
                 </div>
-                <div class="stat-label">BIR BOSISHDA</div>
+                <div class="stat-label">JAMI OLMOSLAR</div>
             </div>
             <div class="stat-box">
                 <div class="stat-value">
@@ -737,27 +739,47 @@
                 <small>Barcha amallar</small>
             </button>
             
-            <button class="action-btn quests-btn" onclick="openQuestsModal()">
-                <i class="fas fa-tasks"></i>
-                <span>VAZIFALAR</span>
-                <small>Topshir • Ball o'zlashtir</small>
-            </button>
-            
-            <button class="action-btn" onclick="shareGame()">
-                <i class="fas fa-share-alt"></i>
-                <span>ULASHISH</span>
-                <small>Do'stlarni taklif qil</small>
+            <button class="action-btn invite-btn" onclick="inviteFriend()">
+                <i class="fas fa-user-plus"></i>
+                <span>DO'STLARNI CHAQIRISH</span>
+                <small>Har bir do'st uchun 3 olmos</small>
             </button>
         </div>
 
-        <!-- Quests Panel -->
-        <div class="quests-container">
-            <h2 class="section-title">
-                <i class="fas fa-tasks"></i> KUNLIK VAZIFALAR
+        <!-- Invite Friends Section -->
+        <div class="invite-section">
+            <h2 class="invite-title">
+                <i class="fas fa-user-friends"></i> DO'STLARNI CHAQIRISH
             </h2>
-            <div class="quest-list" id="questsList">
-                <!-- Quests will be loaded here -->
+            
+            <p style="color: var(--gray); margin-bottom: 20px; font-size: 15px;">
+                O'yinni do'stlaringizga ulashing va har bir taklif qilgan do'stingiz uchun <strong>3 ta olmos</strong> oling!
+            </p>
+            
+            <div class="invite-stats">
+                <div class="invite-stat">
+                    <div class="invite-stat-value" id="invitedFriends">0</div>
+                    <div class="invite-stat-label">TAKLIF QILINGAN DO'STLAR</div>
+                </div>
+                <div class="invite-stat">
+                    <div class="invite-stat-value" id="totalPlayers">1</div>
+                    <div class="invite-stat-label">JAMI O'YINCHILAR</div>
+                </div>
+                <div class="invite-stat">
+                    <div class="invite-stat-value" id="earnedDiamonds">0</div>
+                    <div class="invite-stat-label">OLINGAN OLMOSLAR</div>
+                </div>
+                <div class="invite-stat">
+                    <div class="invite-stat-value" id="referralCode">A1B2</div>
+                    <div class="invite-stat-label">TAKLIF KODI</div>
+                </div>
             </div>
+            
+            <button class="action-btn invite-btn" onclick="inviteFriend()" style="margin-top: 20px; font-size: 16px !important; padding: 18px !important;">
+                <i class="fas fa-share-alt"></i>
+                <span>DO'STLARNI CHAQIRISH</span>
+                <small>Har bir do'st uchun 3 olmos</small>
+            </button>
         </div>
 
         <!-- Leaderboards -->
@@ -771,7 +793,7 @@
                     <div style="text-align: center; padding: 30px 20px; color: var(--gray);">
                         <i class="fas fa-users" style="font-size: 40px; margin-bottom: 15px; opacity: 0.5;"></i>
                         <p>Har bir o'yinchi ball to'plaganda, bu erda paydo bo'ladi!</p>
-                        <p style="font-size: 13px; margin-top: 10px;">Hozircha faqat siz o'ynayapsiz</p>
+                        <p style="font-size: 13px; margin-top: 10px;">Hozircha <span id="totalPlayers2">1</span> o'yinchi</p>
                     </div>
                 </div>
             </div>
@@ -785,7 +807,7 @@
                         <div class="player-rank">#1</div>
                         <div class="player-info">
                             <div class="player-name" id="playerName">Siz</div>
-                            <div class="player-level">BALL: <span id="playerBallCount">0</span></div>
+                            <div class="player-level">Ball: <span id="playerBallCount">0</span> | Olmos: <span id="playerDiamonds">0</span></div>
                         </div>
                         <div class="player-score" id="playerScore">0</div>
                     </div>
@@ -846,33 +868,6 @@
                 <i class="fas fa-clock"></i> TEZ ORADA MAVJUD BO'LADI!
             </div>
             
-            <div class="exchange-rates">
-                <h3 style="color: var(--primary); margin-bottom: 15px; text-align: center;">
-                    Almashuv kurslari:
-                </h3>
-                
-                <div class="rate-item">
-                    <span style="font-weight: 600;">1000 Ball</span>
-                    <span style="color: var(--secondary); font-weight: 700;">→ 5 Olmos</span>
-                </div>
-                <div class="rate-item">
-                    <span style="font-weight: 600;">2500 Ball</span>
-                    <span style="color: var(--secondary); font-weight: 700;">→ 11 Olmos</span>
-                </div>
-                <div class="rate-item">
-                    <span style="font-weight: 600;">5000 Ball</span>
-                    <span style="color: var(--secondary); font-weight: 700;">→ 22 Olmos</span>
-                </div>
-                <div class="rate-item">
-                    <span style="font-weight: 600;">12000 Ball</span>
-                    <span style="color: var(--secondary); font-weight: 700;">→ 56 Olmos</span>
-                </div>
-                <div class="rate-item">
-                    <span style="font-weight: 600;">18000 Ball</span>
-                    <span style="color: var(--secondary); font-weight: 700;">→ 86 Olmos</span>
-                </div>
-            </div>
-            
             <div style="background: white; padding: 20px; border-radius: 15px; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 14px; color: var(--gray); margin-bottom: 5px;">
@@ -883,10 +878,10 @@
                     </div>
                 </div>
                 
-                <div style="text-align: center; color: var(--gray); font-size: 14px; padding: 15px;">
-                    <i class="fas fa-tools" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
-                    <p>Almashuv funktsiyasi hozir ishlab chiqilmoqda.</p>
-                    <p>Tez orada ballaringizni haqiqiy MLBB olmoslariga almashtira olasiz!</p>
+                <div style="text-align: center; color: var(--gray); font-size: 16px; padding: 15px;">
+                    <i class="fas fa-tools" style="font-size: 32px; margin-bottom: 15px; display: block; color: var(--warning);"></i>
+                    <p style="font-weight: 600; margin-bottom: 10px;">Funktsiya ishlab chiqilmoqda...</p>
+                    <p style="font-size: 14px;">Tez orada ballaringizni haqiqiy MLBB olmoslariga almashtira olasiz!</p>
                 </div>
             </div>
             
@@ -915,26 +910,10 @@
         </div>
     </div>
 
-    <!-- Quests Modal -->
-    <div class="modal-overlay" id="questsModal">
-        <div class="modal-content">
-            <h2 class="modal-title">
-                <i class="fas fa-tasks"></i> BARCHA VAZIFALAR
-            </h2>
-            
-            <div class="quest-list" id="allQuestsList">
-                <!-- All quests will be loaded here -->
-            </div>
-            
-            <button class="action-btn" onclick="closeQuestsModal()" style="width: 100%; margin-top: 20px;">
-                Yopish
-            </button>
-        </div>
-    </div>
-
     <script>
         // ============ GAME VARIABLES ============
         let balls = 0;
+        let diamonds = 0;
         let totalClicks = 0;
         let perClick = 1;
         
@@ -951,24 +930,10 @@
         let selectedPackage = null;
         let transactionHistory = [];
         
-        // ============ QUESTS ============
-        const dailyQuests = [
-            { id: 1, title: "Kun birinchi bosish", description: "Har kuni o'yin ochganingizda", reward: 50, completed: false },
-            { id: 2, title: "100 marta bosish", description: "100 marta asosiy rasmni bosing", reward: 100, completed: false, progress: 0, target: 100 },
-            { id: 3, title: "1 soat o'ynash", description: "O'yinda 1 soat vaqt o'tkazing", reward: 200, completed: false, progress: 0, target: 3600000 },
-            { id: 4, title: "Avtokliker ishlatish", description: "Avtoklikerni faollashtiring", reward: 150, completed: false },
-            { id: 5, title: "Do'stni taklif qilish", description: "O'yinni do'stingizga ulashing", reward: 300, completed: false },
-            { id: 6, title: "3 ta do'st taklif qilish", description: "3 ta do'stingizni o'yincha taklif qiling", reward: 900, completed: false, progress: 0, target: 3 }
-        ];
-        
-        const allQuests = [
-            ...dailyQuests,
-            { id: 7, title: "5000 ball to'plash", description: "Jami 5000 ball to'plang", reward: 500, completed: false, progress: 0, target: 5000 },
-            { id: 8, title: "Avtokliker 3 marta", description: "Avtoklikerni 3 marta ishlating", reward: 400, completed: false, progress: 0, target: 3 },
-            { id: 9, title: "Bir kunda 1000 bosish", description: "Bir kunda 1000 marta bosing", reward: 600, completed: false, progress: 0, target: 1000 },
-            { id: 10, title: "3 kun ketma-ket", description: "3 kun ketma-ket o'ynang", reward: 800, completed: false, progress: 0, target: 3 },
-            { id: 11, title: "Tezlikni oshirish", description: "Avtokliker tezligini oshiring", reward: 200, completed: false }
-        ];
+        // Invite system
+        let invitedFriends = 0;
+        let totalPlayers = 1;
+        let referralCode = generateReferralCode();
         
         // ============ PACKAGES ============
         const packages = [
@@ -1008,20 +973,15 @@
                 try {
                     const data = JSON.parse(saved);
                     balls = data.balls || 0;
+                    diamonds = data.diamonds || 0;
                     totalClicks = data.totalClicks || 0;
                     gameTime = data.gameTime || 0;
                     transactionHistory = data.transactionHistory || [];
                     speedMultiplier = data.speedMultiplier || 1;
                     upgradeLevel = data.upgradeLevel || 0;
-                    
-                    // Load quests progress
-                    if (data.quests) {
-                        dailyQuests.forEach((quest, index) => {
-                            if (data.quests[index]) {
-                                Object.assign(quest, data.quests[index]);
-                            }
-                        });
-                    }
+                    invitedFriends = data.invitedFriends || 0;
+                    totalPlayers = data.totalPlayers || 1;
+                    referralCode = data.referralCode || generateReferralCode();
                     
                     updateUI();
                 } catch (e) {
@@ -1035,12 +995,6 @@
             // Load leaderboards
             loadLeaderboards();
             
-            // Setup exchange slider
-            setupExchangeSlider();
-            
-            // Load quests
-            loadQuests();
-            
             // Update upgrade cost display
             updateUpgradeCost();
             
@@ -1053,7 +1007,7 @@
         // ============ UPDATE UI ============
         function updateUI() {
             document.getElementById('totalPoints').textContent = balls.toLocaleString();
-            document.getElementById('perClick').textContent = perClick;
+            document.getElementById('diamondsCount').textContent = diamonds.toLocaleString();
             document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
             document.getElementById('speedMultiplier').textContent = speedMultiplier.toFixed(1) + 'x';
             document.getElementById('currentSpeed').textContent = speedMultiplier.toFixed(1) + 'x';
@@ -1068,10 +1022,17 @@
             
             // Update player info in leaderboard
             document.getElementById('playerBallCount').textContent = balls.toLocaleString();
+            document.getElementById('playerDiamonds').textContent = diamonds.toLocaleString();
             document.getElementById('playerScore').textContent = balls.toLocaleString();
             
-            // Update quests progress
-            updateQuestsProgress();
+            // Update invite stats
+            document.getElementById('invitedFriends').textContent = invitedFriends;
+            document.getElementById('totalPlayers').textContent = totalPlayers;
+            document.getElementById('totalPlayers2').textContent = totalPlayers;
+            document.getElementById('earnedDiamonds').textContent = (invitedFriends * 3);
+            document.getElementById('referralCode').textContent = referralCode;
+            
+            autoSave();
         }
         
         // ============ CLICK HANDLER ============
@@ -1082,10 +1043,6 @@
             
             // Create click effect
             createClickEffect(e, `+${perClick}`);
-            
-            // Update quests
-            updateQuestProgress(2, 1); // 100 bosish vazifasi
-            updateQuestProgress(9, 1); // Kunlik 1000 bosish
             
             // Every 50 clicks check for achievements
             if (totalClicks % 50 === 0) {
@@ -1147,10 +1104,6 @@
                 
                 // Start auto clicking
                 startAutoClicker();
-                
-                // Complete quest
-                completeQuest(4);
-                updateQuestProgress(8, 1);
                 
                 // Stop after 15 minutes
                 setTimeout(() => {
@@ -1225,11 +1178,6 @@
                 
                 showNotification(`⚡ Avtokliker tezligi ${upgrade.multiplier}x ga oshirildi!`);
                 
-                // Complete quest
-                if (upgradeLevel === 1) {
-                    completeQuest(11);
-                }
-                
                 updateUI();
                 updateUpgradeCost();
                 autoSave();
@@ -1253,9 +1201,6 @@
             setInterval(() => {
                 gameTime += 60000; // Add 1 minute
                 updateUI();
-                
-                // Update time quest
-                updateQuestProgress(3, 60000);
                 
                 // Auto save every 5 minutes
                 if (Math.floor(gameTime / 300000) > Math.floor((gameTime - 60000) / 300000)) {
@@ -1314,7 +1259,8 @@
                           `Narxi: ${pkg.price.toLocaleString()} SO'M%0A` +
                           `Olmos: ${pkg.diamonds} ta%0A%0A` +
                           `Mening MLBB ID: _________________%0A` +
-                          `To'lov chek rasmi: _________________`;
+                          `To'lov chek rasmi: _________________%0A%0A` +
+                          `Referral kodi: ${referralCode}`;
             
             // Open Telegram with pre-filled message
             const telegramUrl = `https://t.me/laz1z0v1ch?text=${message}`;
@@ -1329,22 +1275,6 @@
         }
         
         // ============ EXCHANGE MODAL ============
-        function setupExchangeSlider() {
-            const exchangeAmountEl = document.getElementById('exchangeAmount');
-            
-            if (exchangeAmountEl) {
-                exchangeAmountEl.addEventListener('input', function() {
-                    const amount = parseInt(this.value);
-                    const rate = exchangeRates.find(r => r.balls === amount);
-                    
-                    if (rate) {
-                        document.getElementById('exchangeValue').textContent = `${amount.toLocaleString()} Ball`;
-                        document.getElementById('exchangeResult').textContent = `→ ${rate.diamonds} Olmos`;
-                    }
-                });
-            }
-        }
-        
         function openExchangeModal() {
             document.getElementById('currentBalls').textContent = balls.toLocaleString();
             document.getElementById('exchangeModal').style.display = 'flex';
@@ -1354,8 +1284,60 @@
             document.getElementById('exchangeModal').style.display = 'none';
         }
         
-        function requestExchange() {
-            showNotification('⏳ Almashuv funktsiyasi tez orada mavjud bo\'ladi. Iltimos, keyinroq urinib ko\'ring.');
+        // ============ INVITE FRIENDS ============
+        function inviteFriend() {
+            const shareText = `🎮 Men MLBB Ball Collector o'yinini topdim! Sen ham ball to'pla va haqiqiy MLBB olmoslarini oling!%0A%0A` +
+                            `⚡ Avtokliker bilan ball to'plash%0A` +
+                            `💎 Har bir taklif qilingan do'st uchun 3 olmos%0A` +
+                            `💰 Ballarni haqiqiy MLBB olmoslariga almashtirish%0A%0A` +
+                            `O'ynash uchun: ${window.location.href}%0A` +
+                            `Mening taklif kodi: ${referralCode}%0A%0A` +
+                            `Admin: @laz1z0v1ch`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'MLBB Ball Collector',
+                    text: shareText.replace(/%0A/g, '\n'),
+                    url: window.location.href
+                }).then(() => {
+                    processInvite();
+                }).catch(() => {
+                    copyInviteLink(shareText);
+                });
+            } else {
+                copyInviteLink(shareText);
+            }
+        }
+        
+        function copyInviteLink(shareText) {
+            const text = shareText.replace(/%0A/g, '\n');
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('📋 Taklif matni nusxalandi! Do\'stlaringizga ulashing.');
+                processInvite();
+            });
+        }
+        
+        function processInvite() {
+            // Simulate friend invitation
+            invitedFriends++;
+            diamonds += 3; // 3 diamonds per friend
+            totalPlayers++; // Increase total players
+            
+            // Add to history
+            addToHistory('taklif', `Do'st taklif qilindi (+3 olmos)`, 0);
+            
+            showNotification(`🎉 Do'stingiz taklif qilindi! +3 olmos qo'shildi.`);
+            
+            updateUI();
+        }
+        
+        function generateReferralCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 4; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
         }
         
         // ============ HISTORY MODAL ============
@@ -1403,7 +1385,7 @@
                 'avtokliker': '🤖',
                 'sotib_olish': '🛒',
                 'almashuv': '🔄',
-                'vazifa': '✅',
+                'taklif': '👥',
                 'bonus': '🎁',
                 'upgrade': '⚡'
             };
@@ -1426,135 +1408,6 @@
             autoSave();
         }
         
-        // ============ QUESTS ============
-        function loadQuests() {
-            const questsList = document.getElementById('questsList');
-            const allQuestsList = document.getElementById('allQuestsList');
-            
-            questsList.innerHTML = dailyQuests.slice(0, 4).map(quest => `
-                <div class="quest-item ${quest.completed ? 'completed' : ''}">
-                    <div class="quest-info">
-                        <h4>${quest.title}</h4>
-                        <p>${quest.description}</p>
-                        ${quest.progress !== undefined ? `
-                            <div style="margin-top: 8px;">
-                                <div style="height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px;">
-                                    <div style="height: 100%; width: ${Math.min(100, (quest.progress / quest.target * 100))}%; 
-                                         background: var(--primary); border-radius: 2px;"></div>
-                                </div>
-                                <div style="font-size: 12px; color: var(--gray); margin-top: 4px;">
-                                    ${quest.progress} / ${quest.target}
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div class="quest-reward">
-                        +${quest.reward}
-                    </div>
-                </div>
-            `).join('');
-            
-            allQuestsList.innerHTML = allQuests.map(quest => `
-                <div class="quest-item ${quest.completed ? 'completed' : ''}">
-                    <div class="quest-info">
-                        <h4>${quest.title}</h4>
-                        <p>${quest.description}</p>
-                        ${quest.progress !== undefined ? `
-                            <div style="margin-top: 8px;">
-                                <div style="height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px;">
-                                    <div style="height: 100%; width: ${Math.min(100, (quest.progress / quest.target * 100))}%; 
-                                         background: var(--primary); border-radius: 2px;"></div>
-                                </div>
-                                <div style="font-size: 12px; color: var(--gray); margin-top: 4px;">
-                                    ${quest.progress} / ${quest.target}
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div class="quest-reward">
-                        +${quest.reward}
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function openQuestsModal() {
-            loadQuests();
-            document.getElementById('questsModal').style.display = 'flex';
-        }
-        
-        function closeQuestsModal() {
-            document.getElementById('questsModal').style.display = 'none';
-        }
-        
-        function updateQuestProgress(questId, progress) {
-            const quest = allQuests.find(q => q.id === questId);
-            if (quest && !quest.completed && quest.progress !== undefined) {
-                quest.progress += progress;
-                
-                if (quest.progress >= quest.target) {
-                    completeQuest(questId);
-                }
-                
-                autoSave();
-                loadQuests();
-            }
-        }
-        
-        function completeQuest(questId) {
-            const quest = allQuests.find(q => q.id === questId);
-            if (quest && !quest.completed) {
-                quest.completed = true;
-                balls += quest.reward;
-                
-                // Add to history
-                addToHistory('vazifa', `${quest.title} - ${quest.reward} ball`, quest.reward);
-                
-                showNotification(`✅ "${quest.title}" vazifasi bajarildi! +${quest.reward} ball`);
-                
-                updateUI();
-                loadQuests();
-            }
-        }
-        
-        function updateQuestsProgress() {
-            // Update total balls quest
-            updateQuestProgress(7, 0);
-            if (allQuests[6]) allQuests[6].progress = balls;
-            
-            // Update consecutive days quest
-            const lastPlayed = localStorage.getItem('lastPlayed');
-            const today = new Date().toDateString();
-            
-            if (lastPlayed !== today) {
-                localStorage.setItem('lastPlayed', today);
-                if (allQuests[9]) allQuests[9].progress = (allQuests[9].progress || 0) + 1;
-            }
-        }
-        
-        // ============ SHARE GAME ============
-        function shareGame() {
-            const shareText = `Men MLBB Ball Collector o'yinida ${balls.toLocaleString()} ball to'pladim! Siz ham to'plang va bepul olmos oling: https://t.me/laz1z0v1ch`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'MLBB Ball Collector',
-                    text: shareText,
-                    url: window.location.href
-                }).then(() => {
-                    // Update referral quest progress
-                    updateQuestProgress(6, 1);
-                    showNotification('🎉 Rahmat! Do\'stingizni taklif qilganingiz uchun');
-                });
-            } else {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    showNotification('📋 Havola nusxalandi! Do\'stlaringizga ulashing.');
-                    // Update referral quest progress
-                    updateQuestProgress(6, 1);
-                });
-            }
-        }
-        
         // ============ LEADERBOARDS ============
         function loadLeaderboards() {
             // For now, only show current player
@@ -1565,12 +1418,15 @@
         function autoSave() {
             const data = {
                 balls: balls,
+                diamonds: diamonds,
                 totalClicks: totalClicks,
                 gameTime: gameTime,
                 transactionHistory: transactionHistory,
-                quests: dailyQuests,
                 speedMultiplier: speedMultiplier,
                 upgradeLevel: upgradeLevel,
+                invitedFriends: invitedFriends,
+                totalPlayers: totalPlayers,
+                referralCode: referralCode,
                 saveTime: new Date().toISOString()
             };
             
@@ -1599,11 +1455,6 @@
         // ============ INITIALIZE ON LOAD ============
         document.addEventListener('DOMContentLoaded', function() {
             initGame();
-            
-            // Add first click quest
-            setTimeout(() => {
-                completeQuest(1);
-            }, 1000);
             
             // Save on page close
             window.addEventListener('beforeunload', function() {
