@@ -250,6 +250,10 @@
             background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
         }
 
+        .upgrade-btn {
+            background: linear-gradient(135deg, #FF4081 0%, #C2185B 100%);
+        }
+
         /* Quests Panel */
         .quests-container {
             background: var(--card-bg);
@@ -575,6 +579,26 @@
             border-bottom: none;
         }
 
+        .coming-soon {
+            background: linear-gradient(135deg, var(--warning) 0%, #E6A800 100%);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            margin: 15px 0;
+        }
+
+        .speed-info {
+            background: rgba(255, 64, 129, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--dark);
+            border-left: 4px solid #FF4081;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .main-image-container {
@@ -660,10 +684,10 @@
             </div>
             <div class="stat-box">
                 <div class="stat-value">
-                    <i class="fas fa-ranking-star"></i>
-                    <span id="playerRank">#1</span>
+                    <i class="fas fa-rocket"></i>
+                    <span id="speedMultiplier">1x</span>
                 </div>
-                <div class="stat-label">REYTING</div>
+                <div class="stat-label">AVTOKLIKER TEZLIGI</div>
             </div>
         </div>
 
@@ -684,6 +708,15 @@
                 <i class="fas fa-robot"></i>
                 <span>AVTOKLIKER</span>
                 <small>100 ball • 15 daqiqa</small>
+                <div class="speed-info">
+                    Tezlik: <span id="currentSpeed">1x</span>
+                </div>
+            </button>
+            
+            <button class="action-btn upgrade-btn" onclick="upgradeAutoClicker()">
+                <i class="fas fa-bolt"></i>
+                <span>TEZLIKNI OSHIRISH</span>
+                <small id="upgradeCost">500 ball</small>
             </button>
             
             <button class="action-btn donate-btn" onclick="openDonateModal()">
@@ -731,19 +764,32 @@
         <div class="leaderboards-container">
             <div class="leaderboard">
                 <h3 class="leaderboard-title">
-                    <i class="fas fa-trophy"></i> BALL REYTINGI
+                    <i class="fas fa-trophy"></i> HAQIQIY REYTING
                 </h3>
                 <div id="pointsLeaderboard">
-                    <!-- Points leaderboard will be loaded here -->
+                    <!-- Real players will be shown here -->
+                    <div style="text-align: center; padding: 30px 20px; color: var(--gray);">
+                        <i class="fas fa-users" style="font-size: 40px; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>Har bir o'yinchi ball to'plaganda, bu erda paydo bo'ladi!</p>
+                        <p style="font-size: 13px; margin-top: 10px;">Hozircha faqat siz o'ynayapsiz</p>
+                    </div>
                 </div>
             </div>
             
             <div class="leaderboard">
                 <h3 class="leaderboard-title">
-                    <i class="fas fa-crown"></i> FAOL O'YINCHILAR
+                    <i class="fas fa-crown"></i> Mening Natijalarim
                 </h3>
                 <div id="timeLeaderboard">
-                    <!-- Time leaderboard will be loaded here -->
+                    <div class="player-row">
+                        <div class="player-rank">#1</div>
+                        <div class="player-info">
+                            <div class="player-name" id="playerName">Siz</div>
+                            <div class="player-level">BALL: <span id="playerBallCount">0</span></div>
+                        </div>
+                        <div class="player-score" id="playerScore">0</div>
+                    </div>
+                    <!-- Other real players will appear here -->
                 </div>
             </div>
         </div>
@@ -796,6 +842,10 @@
                 <i class="fas fa-exchange-alt"></i> BALL → OLMOS
             </h2>
             
+            <div class="coming-soon">
+                <i class="fas fa-clock"></i> TEZ ORADA MAVJUD BO'LADI!
+            </div>
+            
             <div class="exchange-rates">
                 <h3 style="color: var(--primary); margin-bottom: 15px; text-align: center;">
                     Almashuv kurslari:
@@ -833,27 +883,16 @@
                     </div>
                 </div>
                 
-                <div style="text-align: center;">
-                    <label for="exchangeAmount" style="color: var(--dark); display: block; margin-bottom: 10px; font-weight: 600;">
-                        Almashtirish miqdori:
-                    </label>
-                    <input type="range" id="exchangeAmount" min="1000" max="18000" step="1000" value="1000" 
-                           style="width: 100%; margin: 15px 0; height: 8px; border-radius: 4px; background: rgba(138, 43, 226, 0.1);">
-                    <div style="font-size: 24px; color: var(--primary); font-weight: 700; margin: 10px 0;" id="exchangeValue">
-                        1000 Ball
-                    </div>
-                    <div style="font-size: 20px; color: var(--secondary); font-weight: 700; margin-top: 5px;" id="exchangeResult">
-                        → 5 Olmos
-                    </div>
+                <div style="text-align: center; color: var(--gray); font-size: 14px; padding: 15px;">
+                    <i class="fas fa-tools" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+                    <p>Almashuv funktsiyasi hozir ishlab chiqilmoqda.</p>
+                    <p>Tez orada ballaringizni haqiqiy MLBB olmoslariga almashtira olasiz!</p>
                 </div>
             </div>
             
             <div style="display: flex; gap: 10px; margin-top: 25px;">
                 <button class="action-btn" onclick="closeExchangeModal()" style="flex: 1;">
                     Yopish
-                </button>
-                <button class="action-btn exchange-btn" onclick="requestExchange()" style="flex: 1;">
-                    <i class="fas fa-paper-plane"></i> So'rov yuborish
                 </button>
             </div>
         </div>
@@ -901,6 +940,9 @@
         
         let autoClickerActive = false;
         let autoClickerInterval;
+        let autoClickerSpeed = 1000; // ms between clicks
+        let speedMultiplier = 1;
+        let upgradeLevel = 0;
         const AUTO_CLICKER_DURATION = 15 * 60 * 1000;
         
         let gameTime = 0;
@@ -915,16 +957,17 @@
             { id: 2, title: "100 marta bosish", description: "100 marta asosiy rasmni bosing", reward: 100, completed: false, progress: 0, target: 100 },
             { id: 3, title: "1 soat o'ynash", description: "O'yinda 1 soat vaqt o'tkazing", reward: 200, completed: false, progress: 0, target: 3600000 },
             { id: 4, title: "Avtokliker ishlatish", description: "Avtoklikerni faollashtiring", reward: 150, completed: false },
-            { id: 5, title: "Do'stni taklif qilish", description: "O'yinni do'stingizga ulashing", reward: 300, completed: false }
+            { id: 5, title: "Do'stni taklif qilish", description: "O'yinni do'stingizga ulashing", reward: 300, completed: false },
+            { id: 6, title: "3 ta do'st taklif qilish", description: "3 ta do'stingizni o'yincha taklif qiling", reward: 900, completed: false, progress: 0, target: 3 }
         ];
         
         const allQuests = [
             ...dailyQuests,
-            { id: 6, title: "5000 ball to'plash", description: "Jami 5000 ball to'plang", reward: 500, completed: false, progress: 0, target: 5000 },
-            { id: 7, title: "Avtokliker 3 marta", description: "Avtoklikerni 3 marta ishlating", reward: 400, completed: false, progress: 0, target: 3 },
-            { id: 8, title: "Bir kunda 1000 bosish", description: "Bir kunda 1000 marta bosing", reward: 600, completed: false, progress: 0, target: 1000 },
-            { id: 9, title: "3 kun ketma-ket", description: "3 kun ketma-ket o'ynang", reward: 800, completed: false, progress: 0, target: 3 },
-            { id: 10, title: "Barcha vazifalar", description: "Barcha kunlik vazifalarni bajaring", reward: 1000, completed: false }
+            { id: 7, title: "5000 ball to'plash", description: "Jami 5000 ball to'plang", reward: 500, completed: false, progress: 0, target: 5000 },
+            { id: 8, title: "Avtokliker 3 marta", description: "Avtoklikerni 3 marta ishlating", reward: 400, completed: false, progress: 0, target: 3 },
+            { id: 9, title: "Bir kunda 1000 bosish", description: "Bir kunda 1000 marta bosing", reward: 600, completed: false, progress: 0, target: 1000 },
+            { id: 10, title: "3 kun ketma-ket", description: "3 kun ketma-ket o'ynang", reward: 800, completed: false, progress: 0, target: 3 },
+            { id: 11, title: "Tezlikni oshirish", description: "Avtokliker tezligini oshiring", reward: 200, completed: false }
         ];
         
         // ============ PACKAGES ============
@@ -947,13 +990,13 @@
             { id: 16, diamonds: 9343, price: 1690000, currency: 'UZS', label: '9343 OLMOZ', popular: true }
         ];
         
-        // ============ EXCHANGE RATES ============
-        const exchangeRates = [
-            { balls: 1000, diamonds: 5 },
-            { balls: 2500, diamonds: 11 },
-            { balls: 5000, diamonds: 22 },
-            { balls: 12000, diamonds: 56 },
-            { balls: 18000, diamonds: 86 }
+        // ============ UPGRADE COSTS ============
+        const upgradeCosts = [
+            { level: 1, cost: 500, multiplier: 1.5 },
+            { level: 2, cost: 1000, multiplier: 2 },
+            { level: 3, cost: 2000, multiplier: 2.5 },
+            { level: 4, cost: 4000, multiplier: 3 },
+            { level: 5, cost: 8000, multiplier: 3.5 }
         ];
         
         // ============ INITIALIZE GAME ============
@@ -968,6 +1011,8 @@
                     totalClicks = data.totalClicks || 0;
                     gameTime = data.gameTime || 0;
                     transactionHistory = data.transactionHistory || [];
+                    speedMultiplier = data.speedMultiplier || 1;
+                    upgradeLevel = data.upgradeLevel || 0;
                     
                     // Load quests progress
                     if (data.quests) {
@@ -996,6 +1041,9 @@
             // Load quests
             loadQuests();
             
+            // Update upgrade cost display
+            updateUpgradeCost();
+            
             // Show welcome message
             setTimeout(() => {
                 showNotification('🎮 MLBB Ball Collector ga xush kelibsiz! Ball to\'plang va olmos oling!');
@@ -1007,17 +1055,20 @@
             document.getElementById('totalPoints').textContent = balls.toLocaleString();
             document.getElementById('perClick').textContent = perClick;
             document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
+            document.getElementById('speedMultiplier').textContent = speedMultiplier.toFixed(1) + 'x';
+            document.getElementById('currentSpeed').textContent = speedMultiplier.toFixed(1) + 'x';
             
             // Update game time
             const hours = Math.floor(gameTime / 3600000);
             const minutes = Math.floor((gameTime % 3600000) / 60000);
             document.getElementById('gameTime').textContent = `${hours} soat ${minutes} daqiqa`;
             
-            // Update player rank
-            updatePlayerRank();
-            
             // Update current balls in exchange modal
             document.getElementById('currentBalls').textContent = balls.toLocaleString();
+            
+            // Update player info in leaderboard
+            document.getElementById('playerBallCount').textContent = balls.toLocaleString();
+            document.getElementById('playerScore').textContent = balls.toLocaleString();
             
             // Update quests progress
             updateQuestsProgress();
@@ -1034,7 +1085,7 @@
             
             // Update quests
             updateQuestProgress(2, 1); // 100 bosish vazifasi
-            updateQuestProgress(8, 1); // Kunlik 1000 bosish
+            updateQuestProgress(9, 1); // Kunlik 1000 bosish
             
             // Every 50 clicks check for achievements
             if (totalClicks % 50 === 0) {
@@ -1094,16 +1145,12 @@
                 showNotification('🤖 Avtokliker faollashtirildi! 15 daqiqa');
                 updateUI();
                 
-                // Auto click every second
-                autoClickerInterval = setInterval(() => {
-                    balls += perClick;
-                    totalClicks++;
-                    updateUI();
-                }, 1000);
+                // Start auto clicking
+                startAutoClicker();
                 
                 // Complete quest
                 completeQuest(4);
-                updateQuestProgress(7, 1);
+                updateQuestProgress(8, 1);
                 
                 // Stop after 15 minutes
                 setTimeout(() => {
@@ -1116,12 +1163,88 @@
             }
         }
         
-        function deactivateAutoClicker() {
+        function startAutoClicker() {
             if (autoClickerInterval) {
                 clearInterval(autoClickerInterval);
             }
+            
+            const interval = 1000 / speedMultiplier;
+            autoClickerInterval = setInterval(() => {
+                balls += perClick;
+                totalClicks++;
+                
+                // Create visual click effect
+                simulateClickEffect();
+                
+                updateUI();
+            }, interval);
+        }
+        
+        function simulateClickEffect() {
+            const image = document.getElementById('clickImage');
+            const rect = image.getBoundingClientRect();
+            
+            // Random position for effect
+            const x = Math.random() * rect.width;
+            const y = Math.random() * rect.height;
+            
+            createClickEffect({ clientX: rect.left + x, clientY: rect.top + y }, `+${perClick}`);
+        }
+        
+        function deactivateAutoClicker() {
+            if (autoClickerInterval) {
+                clearInterval(autoClickerInterval);
+                autoClickerInterval = null;
+            }
             autoClickerActive = false;
             showNotification('🛑 Avtokliker to\'xtatildi');
+        }
+        
+        // ============ UPGRADE AUTO CLICKER ============
+        function upgradeAutoClicker() {
+            if (upgradeLevel >= upgradeCosts.length) {
+                showNotification('🎉 Siz maksimal tezlikka erishdingiz!');
+                return;
+            }
+            
+            const upgrade = upgradeCosts[upgradeLevel];
+            const cost = upgrade.cost;
+            
+            if (balls >= cost) {
+                balls -= cost;
+                speedMultiplier = upgrade.multiplier;
+                upgradeLevel++;
+                
+                // Update auto clicker if active
+                if (autoClickerActive) {
+                    startAutoClicker();
+                }
+                
+                // Add to history
+                addToHistory('upgrade', `Avtokliker tezligi ${upgrade.multiplier}x ga oshirildi`, -cost);
+                
+                showNotification(`⚡ Avtokliker tezligi ${upgrade.multiplier}x ga oshirildi!`);
+                
+                // Complete quest
+                if (upgradeLevel === 1) {
+                    completeQuest(11);
+                }
+                
+                updateUI();
+                updateUpgradeCost();
+                autoSave();
+            } else {
+                showNotification(`❌ Yetarli ball mavjud emas! ${cost} ball kerak`);
+            }
+        }
+        
+        function updateUpgradeCost() {
+            if (upgradeLevel < upgradeCosts.length) {
+                const upgrade = upgradeCosts[upgradeLevel];
+                document.getElementById('upgradeCost').textContent = `${upgrade.cost} ball`;
+            } else {
+                document.getElementById('upgradeCost').textContent = 'MAKSIMAL';
+            }
         }
         
         // ============ GAME TIME ============
@@ -1209,15 +1332,17 @@
         function setupExchangeSlider() {
             const exchangeAmountEl = document.getElementById('exchangeAmount');
             
-            exchangeAmountEl.addEventListener('input', function() {
-                const amount = parseInt(this.value);
-                const rate = exchangeRates.find(r => r.balls === amount);
-                
-                if (rate) {
-                    document.getElementById('exchangeValue').textContent = `${amount.toLocaleString()} Ball`;
-                    document.getElementById('exchangeResult').textContent = `→ ${rate.diamonds} Olmos`;
-                }
-            });
+            if (exchangeAmountEl) {
+                exchangeAmountEl.addEventListener('input', function() {
+                    const amount = parseInt(this.value);
+                    const rate = exchangeRates.find(r => r.balls === amount);
+                    
+                    if (rate) {
+                        document.getElementById('exchangeValue').textContent = `${amount.toLocaleString()} Ball`;
+                        document.getElementById('exchangeResult').textContent = `→ ${rate.diamonds} Olmos`;
+                    }
+                });
+            }
         }
         
         function openExchangeModal() {
@@ -1230,36 +1355,7 @@
         }
         
         function requestExchange() {
-            const amount = parseInt(document.getElementById('exchangeAmount').value);
-            const rate = exchangeRates.find(r => r.balls === amount);
-            
-            if (!rate) {
-                showNotification('❌ Almashuv miqdori noto\'g\'ri!');
-                return;
-            }
-            
-            if (balls < amount) {
-                showNotification(`❌ Yetarli ball mavjud emas! Sizda ${balls} ball bor, ${amount} ball kerak.`);
-                return;
-            }
-            
-            // Create message for Telegram
-            const message = `Salom! Men MLBB Ball Collector o'yinidan ballarni olmoslarga almashtirmoqchiman.%0A%0A` +
-                          `Almashtirish: ${amount.toLocaleString()} Ball → ${rate.diamonds} Olmoz%0A` +
-                          `Mening ballarim: ${balls.toLocaleString()}%0A` +
-                          `Mening MLBB ID: _________________%0A` +
-                          `Olingan olmoslar: _________________`;
-            
-            // Open Telegram with pre-filled message
-            const telegramUrl = `https://t.me/laz1z0v1ch?text=${message}`;
-            window.open(telegramUrl, '_blank');
-            
-            // Add to history
-            addToHistory('almashuv', `${amount} ball → ${rate.diamonds} olmos so'rovi`, 0);
-            
-            showNotification(`📤 Almashuv so'rovi @laz1z0v1ch ga yuborildi!`);
-            
-            closeExchangeModal();
+            showNotification('⏳ Almashuv funktsiyasi tez orada mavjud bo\'ladi. Iltimos, keyinroq urinib ko\'ring.');
         }
         
         // ============ HISTORY MODAL ============
@@ -1308,7 +1404,8 @@
                 'sotib_olish': '🛒',
                 'almashuv': '🔄',
                 'vazifa': '✅',
-                'bonus': '🎁'
+                'bonus': '🎁',
+                'upgrade': '⚡'
             };
             return icons[type] || '📝';
         }
@@ -1334,7 +1431,7 @@
             const questsList = document.getElementById('questsList');
             const allQuestsList = document.getElementById('allQuestsList');
             
-            questsList.innerHTML = dailyQuests.slice(0, 3).map(quest => `
+            questsList.innerHTML = dailyQuests.slice(0, 4).map(quest => `
                 <div class="quest-item ${quest.completed ? 'completed' : ''}">
                     <div class="quest-info">
                         <h4>${quest.title}</h4>
@@ -1342,7 +1439,7 @@
                         ${quest.progress !== undefined ? `
                             <div style="margin-top: 8px;">
                                 <div style="height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px;">
-                                    <div style="height: 100%; width: ${(quest.progress / quest.target * 100)}%; 
+                                    <div style="height: 100%; width: ${Math.min(100, (quest.progress / quest.target * 100))}%; 
                                          background: var(--primary); border-radius: 2px;"></div>
                                 </div>
                                 <div style="font-size: 12px; color: var(--gray); margin-top: 4px;">
@@ -1365,7 +1462,7 @@
                         ${quest.progress !== undefined ? `
                             <div style="margin-top: 8px;">
                                 <div style="height: 4px; background: rgba(0,0,0,0.1); border-radius: 2px;">
-                                    <div style="height: 100%; width: ${(quest.progress / quest.target * 100)}%; 
+                                    <div style="height: 100%; width: ${Math.min(100, (quest.progress / quest.target * 100))}%; 
                                          background: var(--primary); border-radius: 2px;"></div>
                                 </div>
                                 <div style="font-size: 12px; color: var(--gray); margin-top: 4px;">
@@ -1400,6 +1497,7 @@
                 }
                 
                 autoSave();
+                loadQuests();
             }
         }
         
@@ -1414,12 +1512,6 @@
                 
                 showNotification(`✅ "${quest.title}" vazifasi bajarildi! +${quest.reward} ball`);
                 
-                // Check if all daily quests completed
-                const allDailyCompleted = dailyQuests.every(q => q.completed);
-                if (allDailyCompleted) {
-                    completeQuest(10); // Complete "All quests" quest
-                }
-                
                 updateUI();
                 loadQuests();
             }
@@ -1427,99 +1519,17 @@
         
         function updateQuestsProgress() {
             // Update total balls quest
-            updateQuestProgress(6, 0);
-            dailyQuests[5].progress = balls; // Update progress display
+            updateQuestProgress(7, 0);
+            if (allQuests[6]) allQuests[6].progress = balls;
             
-            // Update consecutive days quest (simplified)
+            // Update consecutive days quest
             const lastPlayed = localStorage.getItem('lastPlayed');
             const today = new Date().toDateString();
             
             if (lastPlayed !== today) {
                 localStorage.setItem('lastPlayed', today);
-                updateQuestProgress(9, 1);
+                if (allQuests[9]) allQuests[9].progress = (allQuests[9].progress || 0) + 1;
             }
-        }
-        
-        // ============ PLAYER RANK ============
-        function updatePlayerRank() {
-            let rank = '#1';
-            
-            if (balls >= 10000) rank = '#1';
-            else if (balls >= 5000) rank = '#2';
-            else if (balls >= 2500) rank = '#3';
-            else if (balls >= 1000) rank = '#4';
-            else rank = '#5';
-            
-            document.getElementById('playerRank').textContent = rank;
-        }
-        
-        // ============ LEADERBOARDS ============
-        function loadLeaderboards() {
-            // Points leaderboard (demo data)
-            const pointsLeaders = [
-                { name: 'Siz', score: balls, level: 'BOSS' },
-                { name: 'PRO_O\'YINCHI', score: 18500, level: 'LEGEND' },
-                { name: 'OLMOS_QIROL', score: 16200, level: 'MYTHIC' },
-                { name: 'BALL_TOPLOVCHI', score: 13400, level: 'EPIC' },
-                { name: 'MLBB_FAN', score: 11200, level: 'LEGEND' },
-                { name: 'NIGHT_WOLF', score: 9800, level: 'EPIC' },
-                { name: 'CLICK_MASTER', score: 7600, level: 'GRANDMASTER' },
-                { name: 'GOLDEN_HAND', score: 6500, level: 'MASTER' },
-                { name: 'FAST_FINGER', score: 5200, level: 'ELITE' },
-                { name: 'NEW_PLAYER', score: 3100, level: 'WARRIOR' }
-            ].sort((a, b) => b.score - a.score);
-            
-            // Time leaderboard (demo data)
-            const timeLeaders = [
-                { name: 'Siz', time: Math.floor(gameTime / 3600000), level: 'ACTIVE' },
-                { name: '24/7_ONLINE', time: 156, level: 'PRO' },
-                { name: 'NIGHT_GAMER', time: 128, level: 'EXPERT' },
-                { name: 'WEEKEND_WARRIOR', time: 95, level: 'ACTIVE' },
-                { name: 'DAY_PLAYER', time: 76, level: 'REGULAR' },
-                { name: 'MOBILE_LEGEND', time: 64, level: 'EXPERT' },
-                { name: 'GAME_ADDICT', time: 52, level: 'REGULAR' },
-                { name: 'CASUAL_PLAYER', time: 38, level: 'CASUAL' },
-                { name: 'EVENING_FUN', time: 25, level: 'CASUAL' },
-                { name: 'NEW_GAMER', time: 12, level: 'NEW' }
-            ].sort((a, b) => b.time - a.time);
-            
-            // Render points leaderboard
-            document.getElementById('pointsLeaderboard').innerHTML = pointsLeaders.map((leader, index) => `
-                <div class="player-row">
-                    <div class="player-rank">${index + 1}</div>
-                    <div class="player-info">
-                        <div class="player-name">${leader.name}</div>
-                        <div class="player-level">${leader.level}</div>
-                    </div>
-                    <div class="player-score">${leader.score.toLocaleString()}</div>
-                </div>
-            `).join('');
-            
-            // Render time leaderboard
-            document.getElementById('timeLeaderboard').innerHTML = timeLeaders.map((leader, index) => `
-                <div class="player-row">
-                    <div class="player-rank">${index + 1}</div>
-                    <div class="player-info">
-                        <div class="player-name">${leader.name}</div>
-                        <div class="player-level">${leader.level}</div>
-                    </div>
-                    <div class="player-score">${leader.time} soat</div>
-                </div>
-            `).join('');
-        }
-        
-        // ============ SAVE GAME ============
-        function autoSave() {
-            const data = {
-                balls: balls,
-                totalClicks: totalClicks,
-                gameTime: gameTime,
-                transactionHistory: transactionHistory,
-                quests: dailyQuests,
-                saveTime: new Date().toISOString()
-            };
-            
-            localStorage.setItem('mlbbBallCollector', JSON.stringify(data));
         }
         
         // ============ SHARE GAME ============
@@ -1530,16 +1540,41 @@
                 navigator.share({
                     title: 'MLBB Ball Collector',
                     text: shareText,
-                    url: 'https://t.me/laz1z0v1ch'
+                    url: window.location.href
                 }).then(() => {
-                    completeQuest(5); // Complete share quest
+                    // Update referral quest progress
+                    updateQuestProgress(6, 1);
+                    showNotification('🎉 Rahmat! Do\'stingizni taklif qilganingiz uchun');
                 });
             } else {
                 navigator.clipboard.writeText(shareText).then(() => {
                     showNotification('📋 Havola nusxalandi! Do\'stlaringizga ulashing.');
-                    completeQuest(5); // Complete share quest
+                    // Update referral quest progress
+                    updateQuestProgress(6, 1);
                 });
             }
+        }
+        
+        // ============ LEADERBOARDS ============
+        function loadLeaderboards() {
+            // For now, only show current player
+            // In future, this will show real players from database
+        }
+        
+        // ============ SAVE GAME ============
+        function autoSave() {
+            const data = {
+                balls: balls,
+                totalClicks: totalClicks,
+                gameTime: gameTime,
+                transactionHistory: transactionHistory,
+                quests: dailyQuests,
+                speedMultiplier: speedMultiplier,
+                upgradeLevel: upgradeLevel,
+                saveTime: new Date().toISOString()
+            };
+            
+            localStorage.setItem('mlbbBallCollector', JSON.stringify(data));
         }
         
         // ============ NOTIFICATION ============
