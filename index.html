@@ -22,7 +22,8 @@
             --warning: #FFB800;
             --danger: #FF4081;
             --light: #FFFFFF;
-            --light-bg: #F8F9FF;
+            --light-bg: #E3F2FD; /* Goluboy fon */
+            --button-bg: #4FC3F7; /* Golubiy knopki */
             --gray: #6C757D;
             --dark: #1A1A2E;
             --card-bg: rgba(255, 255, 255, 0.95);
@@ -121,7 +122,7 @@
             border-radius: 12px;
             text-align: center;
             box-shadow: var(--shadow);
-            border: 2px solid var(--primary);
+            border: 2px solid var(--button-bg); /* Golubiy chegara */
             transition: transform 0.2s;
             min-height: 90px;
             display: flex;
@@ -150,7 +151,7 @@
             font-weight: 600;
         }
 
-        /* Main Click Area - yangi rasm qo'shildi */
+        /* Main Click Area */
         .main-image-container {
             position: relative;
             width: 220px;
@@ -199,7 +200,7 @@
             color: var(--warning);
         }
 
-        /* Buttons - kvadrat shaklga o'zgardi */
+        /* Buttons - kvadrat shaklga o'zgardi, golubiy fon */
         .buttons-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -208,9 +209,9 @@
         }
 
         .action-btn {
-            background: var(--light);
-            border: 2px solid var(--primary);
-            color: var(--primary-dark);
+            background: var(--button-bg); /* Golubiy fon */
+            border: 2px solid white; /* Oq chegara */
+            color: var(--dark);
             padding: 12px 8px;
             border-radius: 10px;
             cursor: pointer;
@@ -228,14 +229,14 @@
 
         .action-btn:hover {
             transform: translateY(-2px);
-            background: var(--primary);
+            background: #29B6F6; /* To'qroq golubiy hover */
             color: white;
         }
 
         .action-btn i {
             font-size: 18px;
             margin-bottom: 6px;
-            color: var(--primary);
+            color: var(--dark);
         }
 
         .action-btn:hover i {
@@ -249,51 +250,52 @@
             margin-top: 3px;
         }
 
+        /* Har bir knopka uchun ranglar */
         .donate-btn {
-            border-color: var(--secondary);
+            background: var(--button-bg);
         }
         
         .donate-btn i {
-            color: var(--secondary);
+            color: var(--dark);
         }
 
         .auto-btn {
-            border-color: var(--accent);
+            background: var(--button-bg);
         }
         
         .auto-btn i {
-            color: var(--accent);
+            color: var(--dark);
         }
 
         .exchange-btn {
-            border-color: #9C27B0;
+            background: var(--button-bg);
         }
         
         .exchange-btn i {
-            color: #9C27B0;
+            color: var(--dark);
         }
 
         .history-btn {
-            border-color: var(--warning);
+            background: var(--button-bg);
         }
         
         .history-btn i {
-            color: var(--warning);
+            color: var(--dark);
         }
 
         .upgrade-btn {
-            border-color: var(--danger);
+            background: var(--button-bg);
         }
         
         .upgrade-btn i {
-            color: var(--danger);
+            color: var(--dark);
         }
 
         .invite-btn {
             grid-column: span 3;
             aspect-ratio: unset;
             min-height: 60px;
-            background: var(--primary);
+            background: var(--primary); /* Binafsha taklif knopkasi */
             color: white;
             padding: 12px !important;
         }
@@ -302,7 +304,7 @@
             color: white;
         }
 
-        /* Invite Section - soddalashtirildi */
+        /* Invite Section */
         .invite-section {
             background: var(--light);
             border-radius: 15px;
@@ -310,7 +312,7 @@
             margin: 15px 0;
             box-shadow: var(--shadow);
             text-align: center;
-            border: 2px solid var(--primary);
+            border: 2px solid var(--button-bg); /* Golubiy chegara */
         }
 
         .invite-title {
@@ -331,10 +333,10 @@
         }
 
         .invite-stat {
-            background: rgba(138, 43, 226, 0.1);
+            background: rgba(79, 195, 247, 0.2); /* Golubiy fon */
             padding: 12px;
             border-radius: 10px;
-            border: 1px solid var(--primary);
+            border: 1px solid var(--button-bg); /* Golubiy chegara */
         }
 
         .invite-stat-value {
@@ -349,7 +351,7 @@
             color: var(--gray);
         }
 
-        /* Player Stats - soddalashtirildi */
+        /* Player Stats */
         .player-stats {
             display: grid;
             grid-template-columns: 1fr;
@@ -363,7 +365,7 @@
             border-radius: 15px;
             box-shadow: var(--shadow);
             text-align: center;
-            border: 2px solid var(--primary);
+            border: 2px solid var(--button-bg); /* Golubiy chegara */
         }
 
         .player-stat-title {
@@ -400,7 +402,7 @@
             max-height: 85vh;
             overflow-y: auto;
             box-shadow: var(--shadow-lg);
-            border: 3px solid var(--primary);
+            border: 3px solid var(--button-bg); /* Golubiy chegara */
         }
 
         .modal-title {
@@ -426,7 +428,7 @@
             background: rgba(138, 43, 226, 0.05);
             border-radius: 8px;
             margin-bottom: 8px;
-            border-left: 3px solid var(--primary);
+            border-left: 3px solid var(--button-bg); /* Golubiy chegara */
             font-size: 13px;
         }
 
@@ -462,7 +464,7 @@
             z-index: 1001;
             animation: slideInRight 0.3s ease-out;
             max-width: 250px;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--button-bg); /* Golubiy chegara */
             display: flex;
             align-items: center;
             gap: 10px;
@@ -533,12 +535,12 @@
 
         .package-item:hover {
             transform: translateY(-2px);
-            border-color: var(--primary);
+            border-color: var(--button-bg); /* Golubiy chegara */
         }
 
         .package-item.selected {
-            background: rgba(138, 43, 226, 0.1);
-            border-color: var(--primary);
+            background: rgba(79, 195, 247, 0.1); /* Golubiy fon */
+            border-color: var(--button-bg);
         }
 
         .package-name {
@@ -636,6 +638,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
+            <!-- LOGO: Bu yerdagi src ni o'zgartiring -->
             <img src="https://i.imgur.com/photo_2025-12-10_18-48-10.jpg" 
                  alt="MLBB Ball Collector" 
                  class="game-logo"
@@ -686,7 +689,7 @@
         <!-- Main Click Area -->
         <div class="main-image-container">
             <div class="click-area" id="clickImage">
-                <!-- Rasmni shu joyga qo'yamiz -->
+                <!-- ASOSIY FOTO: Bu yerdagi src ni o'zgartiring -->
                 <img src="https://i.imgur.com/photo_2025-12-10_18-48-10.jpg" 
                      alt="Click to collect balls" 
                      class="click-background"
