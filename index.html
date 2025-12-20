@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLBB Ball Collector - Tekin ball va olmos o'yini!</title>
+    <title>MLBB Ball Collector - Бесплатные баллы и алмазы!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
             margin: 0;
@@ -530,6 +531,11 @@
             border-left: 4px solid #FF4081;
         }
 
+        /* Telegram WebApp Header Fix */
+        .tg-header-fix {
+            margin-top: 0;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .main-image-container {
@@ -580,17 +586,17 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container tg-header-fix">
         <!-- Header -->
         <div class="header">
             <h1 class="game-title">
                 <i class="fas fa-gem"></i> MLBB BALL COLLECTOR
             </h1>
-            <p class="game-subtitle">TEKIN BALL VA OLMOSLAR • TOPLA • ALMASHTIR • O'YNA</p>
+            <p class="game-subtitle">БЕСПЛАТНЫЕ БАЛЛЫ И АЛМАЗЫ • СОБИРАЙ • ОБМЕНИВАЙ • ИГРАЙ</p>
             
             <div class="time-display">
                 <i class="fas fa-clock"></i>
-                <span id="gameTime">0 soat 0 daqiqa</span>
+                <span id="gameTime">0 часов 0 минут</span>
             </div>
             
             <img src="https://i.imgur.com/photo_2025-12-10_18-48-10.jpg" 
@@ -606,28 +612,28 @@
                     <i class="fas fa-basketball"></i>
                     <span id="totalPoints">0</span>
                 </div>
-                <div class="stat-label">JAMI BALL</div>
+                <div class="stat-label">ВСЕГО БАЛЛОВ</div>
             </div>
             <div class="stat-box">
                 <div class="stat-value">
                     <i class="fas fa-gem"></i>
                     <span id="diamondsCount">0</span>
                 </div>
-                <div class="stat-label">JAMI OLMOSLAR</div>
+                <div class="stat-label">ВСЕГО АЛМАЗОВ</div>
             </div>
             <div class="stat-box">
                 <div class="stat-value">
                     <i class="fas fa-rocket"></i>
                     <span id="speedMultiplier">1x</span>
                 </div>
-                <div class="stat-label">AVTOKLIKER TEZLIGI</div>
+                <div class="stat-label">СКОРОСТЬ АВТОКЛИКЕРА</div>
             </div>
             <div class="stat-box">
                 <div class="stat-value">
                     <i class="fas fa-users"></i>
                     <span id="totalPlayers">1</span>
                 </div>
-                <div class="stat-label">O'YINCHILAR</div>
+                <div class="stat-label">ИГРОКОВ</div>
             </div>
         </div>
 
@@ -636,8 +642,8 @@
             <div class="click-image-placeholder" id="clickImage">
                 <div>
                     <i class="fas fa-basketball" style="font-size: 50px; margin-bottom: 15px;"></i>
-                    <p>BOSHLANG VA BALL TOPLANG!</p>
-                    <p style="font-size: 14px; margin-top: 10px;">Har bir bosish = 1 ball</p>
+                    <p>НАЧНИТЕ И СОБИРАЙТЕ БАЛЛЫ!</p>
+                    <p style="font-size: 14px; margin-top: 10px;">Каждый клик = 1 балл</p>
                 </div>
             </div>
         </div>
@@ -646,41 +652,41 @@
         <div class="buttons-container">
             <button class="action-btn auto-btn" onclick="activateAutoClicker()">
                 <i class="fas fa-robot"></i>
-                <span>AVTOKLIKER</span>
-                <small>100 ball • 15 daqiqa</small>
+                <span>АВТОКЛИКЕР</span>
+                <small>100 баллов • 15 минут</small>
                 <div class="speed-info">
-                    Tezlik: <span id="currentSpeed">1x</span>
+                    Скорость: <span id="currentSpeed">1x</span>
                 </div>
             </button>
             
             <button class="action-btn upgrade-btn" onclick="upgradeAutoClicker()">
                 <i class="fas fa-bolt"></i>
-                <span>TEZLIKNI OSHIRISH</span>
-                <small id="upgradeCost">500 ball</small>
+                <span>УСКОРЕНИЕ</span>
+                <small id="upgradeCost">500 баллов</small>
             </button>
             
             <button class="action-btn donate-btn" onclick="openDonateModal()">
                 <i class="fas fa-shopping-cart"></i>
-                <span>OLMOS SOTIB OLISH</span>
-                <small>Haqiqiy MLBB olmoslari</small>
+                <span>КУПИТЬ АЛМАЗЫ</span>
+                <small>Настоящие алмазы MLBB</small>
             </button>
             
             <button class="action-btn exchange-btn" onclick="openExchangeModal()">
                 <i class="fas fa-exchange-alt"></i>
-                <span>BALL → OLMOS</span>
-                <small>Almashtirish</small>
+                <span>БАЛЛЫ → АЛМАЗЫ</span>
+                <small>Обмен</small>
             </button>
             
             <button class="action-btn history-btn" onclick="openHistoryModal()">
                 <i class="fas fa-history"></i>
-                <span>ISTORIYA</span>
-                <small>Barcha amallar</small>
+                <span>ИСТОРИЯ</span>
+                <small>Все действия</small>
             </button>
             
             <button class="action-btn invite-btn" onclick="inviteFriend()">
                 <i class="fas fa-user-plus"></i>
-                <span>DO'STLARNI CHAQIRISH</span>
-                <small>Har bir do'st uchun 3 olmos</small>
+                <span>ПРИГЛАСИТЬ ДРУЗЕЙ</span>
+                <small>3 алмаза за каждого друга</small>
             </button>
         </div>
 
@@ -688,23 +694,23 @@
         <div class="player-stats">
             <div class="player-stat-card">
                 <h3 class="player-stat-title">
-                    <i class="fas fa-user-friends"></i> DO'STLAR STATISTIKASI
+                    <i class="fas fa-user-friends"></i> СТАТИСТИКА ДРУЗЕЙ
                 </h3>
                 <div style="text-align: center;">
                     <div style="font-size: 48px; color: var(--primary); font-weight: 800; margin: 15px 0;" id="invitedFriendsDisplay">0</div>
-                    <div style="color: var(--gray); margin-bottom: 10px;">TAKLIF QILINGAN DO'STLAR</div>
-                    <div style="font-size: 32px; color: var(--accent); font-weight: 700;" id="earnedDiamondsDisplay">+0 olmos</div>
+                    <div style="color: var(--gray); margin-bottom: 10px;">ПРИГЛАШЕННЫХ ДРУЗЕЙ</div>
+                    <div style="font-size: 32px; color: var(--accent); font-weight: 700;" id="earnedDiamondsDisplay">+0 алмазов</div>
                 </div>
             </div>
             
             <div class="player-stat-card">
                 <h3 class="player-stat-title">
-                    <i class="fas fa-chart-line"></i> REYTING STATISTIKASI
+                    <i class="fas fa-chart-line"></i> СТАТИСТИКА РЕЙТИНГА
                 </h3>
                 <div style="text-align: center;">
                     <div style="font-size: 48px; color: var(--primary); font-weight: 800; margin: 15px 0;" id="playerRank">#1</div>
-                    <div style="color: var(--gray); margin-bottom: 10px;">UMUMIY REYTING</div>
-                    <div style="font-size: 32px; color: var(--secondary); font-weight: 700;" id="totalPlayersDisplay">1 o'yinchi</div>
+                    <div style="color: var(--gray); margin-bottom: 10px;">ОБЩИЙ РЕЙТИНГ</div>
+                    <div style="font-size: 32px; color: var(--secondary); font-weight: 700;" id="totalPlayersDisplay">1 игрок</div>
                 </div>
             </div>
         </div>
@@ -712,44 +718,44 @@
         <!-- Invite Friends Section -->
         <div class="invite-section">
             <h2 class="invite-title">
-                <i class="fas fa-user-friends"></i> DO'STLARNI CHAQIRISH VA OLMOS OLISH
+                <i class="fas fa-user-friends"></i> ПРИГЛАСИТЬ ДРУЗЕЙ И ПОЛУЧИТЬ АЛМАЗЫ
             </h2>
             
             <p style="color: var(--gray); margin-bottom: 20px; font-size: 16px; line-height: 1.6;">
-                <strong>Har bir taklif qilgan do'stingiz uchun avtomatik ravishda 3 ta olmos olasiz!</strong><br>
-                Do'stingiz o'yinni boshlagach, sizning hisobingizga 3 olmos qo'shiladi.
+                <strong>За каждого приглашенного друга вы автоматически получаете 3 алмаза!</strong><br>
+                Как только ваш друг начнет играть, на ваш счет будет добавлено 3 алмаза.
             </p>
             
             <div class="invite-stats">
                 <div class="invite-stat">
                     <div class="invite-stat-value" id="invitedFriends">0</div>
-                    <div class="invite-stat-label">TAKLIF QILINGAN DO'STLAR</div>
+                    <div class="invite-stat-label">ПРИГЛАШЕННЫХ ДРУЗЕЙ</div>
                 </div>
                 <div class="invite-stat">
                     <div class="invite-stat-value" id="totalPlayers2">1</div>
-                    <div class="invite-stat-label">JAMI O'YINCHILAR</div>
+                    <div class="invite-stat-label">ВСЕГО ИГРОКОВ</div>
                 </div>
                 <div class="invite-stat">
                     <div class="invite-stat-value" id="referralCode">A1B2</div>
-                    <div class="invite-stat-label">TAKLIF KODI</div>
+                    <div class="invite-stat-label">РЕФЕРАЛЬНЫЙ КОД</div>
                 </div>
                 <div class="invite-stat">
                     <div class="invite-stat-value" id="playerDiamonds">0</div>
-                    <div class="invite-stat-label">SIZNING OLMOSLAR</div>
+                    <div class="invite-stat-label">ВАШИ АЛМАЗЫ</div>
                 </div>
             </div>
             
             <button class="action-btn invite-btn" onclick="inviteFriend()" style="margin-top: 20px; font-size: 16px !important; padding: 18px !important;">
                 <i class="fas fa-share-alt"></i>
-                <span>DO'STLARNI CHAQIRISH</span>
-                <small>Har bir do'st uchun 3 olmos</small>
+                <span>ПРИГЛАСИТЬ ДРУЗЕЙ</span>
+                <small>3 алмаза за каждого друга</small>
             </button>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p>© 2024 MLBB Ball Collector. Bu o'yin Mobile Legends: Bang Bang ning norasmiy loyihasidir.</p>
-            <p>Ballarni haqiqiy MLBB olmoslariga almashtirish mumkin. Admin: @laz1z0v1ch</p>
+            <p>© 2024 MLBB Ball Collector. Это неофициальный проект Mobile Legends: Bang Bang.</p>
+            <p>Баллы можно обменять на настоящие алмазы MLBB. Админ: @laz1z0v1ch</p>
         </div>
     </div>
 
@@ -757,7 +763,7 @@
     <div class="modal-overlay" id="donateModal">
         <div class="modal-content">
             <h2 class="modal-title">
-                <i class="fas fa-gem"></i> OLMOS PAKETLARI
+                <i class="fas fa-gem"></i> ПАКЕТЫ АЛМАЗОВ
             </h2>
             
             <div class="package-list" id="packageList">
@@ -766,22 +772,22 @@
             
             <div style="background: rgba(138, 43, 226, 0.05); padding: 20px; border-radius: 15px; margin: 20px 0;">
                 <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 16px;">
-                    <i class="fas fa-info-circle"></i> QAYD ETILISHI KERAK:
+                    <i class="fas fa-info-circle"></i> ВАЖНО ЗНАТЬ:
                 </h3>
                 <div style="font-size: 13px; color: var(--gray); line-height: 1.6;">
-                    <p>1. Paketni tanlang va "Sotib olish" tugmasini bosing</p>
-                    <p>2. Admin (@laz1z0v1ch) ga to'lov chekini va MLBB ID ni yuboring</p>
-                    <p>3. Olmoslar 5-30 daqiqa ichida hisobingizga tushadi</p>
-                    <p>4. Har qanday muammo bo'lsa, admin bilan bog'laning</p>
+                    <p>1. Выберите пакет и нажмите "Купить"</p>
+                    <p>2. Отправьте скриншот оплаты и ваш MLBB ID админу (@laz1z0v1ch)</p>
+                    <p>3. Алмазы будут зачислены в течение 5-30 минут</p>
+                    <p>4. При любых проблемах свяжитесь с админом</p>
                 </div>
             </div>
             
             <div style="display: flex; gap: 10px; margin-top: 25px;">
                 <button class="action-btn" onclick="closeDonateModal()" style="flex: 1;">
-                    Yopish
+                    Закрыть
                 </button>
                 <button class="action-btn donate-btn" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">
-                    <i class="fas fa-shopping-cart"></i> Sotib olish
+                    <i class="fas fa-shopping-cart"></i> Купить
                 </button>
             </div>
         </div>
@@ -791,17 +797,17 @@
     <div class="modal-overlay" id="exchangeModal">
         <div class="modal-content">
             <h2 class="modal-title">
-                <i class="fas fa-exchange-alt"></i> BALL → OLMOS
+                <i class="fas fa-exchange-alt"></i> БАЛЛЫ → АЛМАЗЫ
             </h2>
             
             <div class="coming-soon">
-                SKORO BUDET DOSTUPNO!
+                СКОРО БУДЕТ ДОСТУПНО!
             </div>
             
             <div style="background: white; padding: 20px; border-radius: 15px; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
                 <div style="text-align: center; margin-bottom: 20px;">
                     <div style="font-size: 14px; color: var(--gray); margin-bottom: 5px;">
-                        Sizning ballaringiz:
+                        Ваши баллы:
                     </div>
                     <div style="font-size: 42px; color: var(--primary); font-weight: 800; margin: 10px 0;" id="currentBalls">
                         0
@@ -810,14 +816,14 @@
                 
                 <div style="text-align: center; color: var(--gray); font-size: 16px; padding: 15px;">
                     <i class="fas fa-tools" style="font-size: 32px; margin-bottom: 15px; display: block; color: var(--warning);"></i>
-                    <p style="font-weight: 600; margin-bottom: 10px;">Funktsiya ishlab chiqilmoqda...</p>
-                    <p style="font-size: 14px;">Tez orada ballaringizni haqiqiy MLBB olmoslariga almashtira olasiz!</p>
+                    <p style="font-weight: 600; margin-bottom: 10px;">Функция в разработке...</p>
+                    <p style="font-size: 14px;">Скоро вы сможете обменять баллы на настоящие алмазы MLBB!</p>
                 </div>
             </div>
             
             <div style="display: flex; gap: 10px; margin-top: 25px;">
                 <button class="action-btn" onclick="closeExchangeModal()" style="flex: 1;">
-                    Yopish
+                    Закрыть
                 </button>
             </div>
         </div>
@@ -827,7 +833,7 @@
     <div class="modal-overlay" id="historyModal">
         <div class="modal-content">
             <h2 class="modal-title">
-                <i class="fas fa-history"></i> AMALLAR ISTORIYASI
+                <i class="fas fa-history"></i> ИСТОРИЯ ДЕЙСТВИЙ
             </h2>
             
             <div class="history-list" id="historyList">
@@ -835,12 +841,39 @@
             </div>
             
             <button class="action-btn" onclick="closeHistoryModal()" style="width: 100%; margin-top: 20px;">
-                Yopish
+                Закрыть
             </button>
         </div>
     </div>
 
     <script>
+        // ============ TELEGRAM WEBAPP INIT ============
+        let tg = window.Telegram.WebApp;
+        
+        // Инициализация Telegram WebApp
+        tg.expand();
+        tg.enableClosingConfirmation();
+        
+        // Устанавливаем цвет кнопки
+        tg.MainButton.setParams({
+            text: 'ВЕРНУТЬСЯ В БОТА',
+            color: '#8A2BE2'
+        });
+        
+        // Показываем кнопку, если пользователь в боте
+        if (tg.initDataUnsafe.user) {
+            tg.MainButton.show();
+            tg.MainButton.onClick(function() {
+                tg.close();
+            });
+        }
+        
+        // Получаем данные пользователя Telegram
+        const telegramUser = tg.initDataUnsafe.user || null;
+        let telegramUserId = telegramUser ? telegramUser.id : null;
+        let userName = telegramUser ? (telegramUser.first_name || 'Игрок') : 'Игрок';
+        let userUsername = telegramUser ? (telegramUser.username || '') : '';
+        
         // ============ GAME VARIABLES ============
         let balls = 0;
         let diamonds = 0;
@@ -873,22 +906,22 @@
 
         // ============ PACKAGES ============
         const packages = [
-            { id: 1, diamonds: 5, price: 1800, currency: 'UZS', label: '5 OLMOZ' },
-            { id: 2, diamonds: 11, price: 3000, currency: 'UZS', label: '11 OLMOZ', popular: true },
-            { id: 3, diamonds: 22, price: 5000, currency: 'UZS', label: '22 OLMOZ', popular: true },
-            { id: 4, diamonds: 56, price: 11500, currency: 'UZS', label: '56 OLMOZ', popular: true },
-            { id: 5, diamonds: 86, price: 16500, currency: 'UZS', label: '86 OLMOZ', popular: true },
-            { id: 6, diamonds: 112, price: 21500, currency: 'UZS', label: '112 OLMOZ', popular: true },
-            { id: 7, diamonds: 172, price: 34500, currency: 'UZS', label: '172 OLMOZ', popular: true },
-            { id: 8, diamonds: 257, price: 49000, currency: 'UZS', label: '257 OLMOZ', popular: true },
-            { id: 9, diamonds: 344, price: 63500, currency: 'UZS', label: '344 OLMOZ', popular: true },
-            { id: 10, diamonds: 429, price: 79500, currency: 'UZS', label: '429 OLMOZ' },
-            { id: 11, diamonds: 514, price: 96000, currency: 'UZS', label: '514 OLMOZ' },
-            { id: 12, diamonds: 706, price: 129000, currency: 'UZS', label: '706 OLMOZ', popular: true },
-            { id: 13, diamonds: 963, price: 179000, currency: 'UZS', label: '963 OLMOZ', popular: true },
-            { id: 14, diamonds: 2195, price: 387000, currency: 'UZS', label: '2195 OLMOZ', popular: true },
-            { id: 15, diamonds: 3688, price: 615000, currency: 'UZS', label: '3688 OLMOZ', popular: true },
-            { id: 16, diamonds: 9343, price: 1690000, currency: 'UZS', label: '9343 OLMOZ', popular: true }
+            { id: 1, diamonds: 5, price: 1800, currency: 'UZS', label: '5 АЛМАЗОВ' },
+            { id: 2, diamonds: 11, price: 3000, currency: 'UZS', label: '11 АЛМАЗОВ', popular: true },
+            { id: 3, diamonds: 22, price: 5000, currency: 'UZS', label: '22 АЛМАЗА', popular: true },
+            { id: 4, diamonds: 56, price: 11500, currency: 'UZS', label: '56 АЛМАЗОВ', popular: true },
+            { id: 5, diamonds: 86, price: 16500, currency: 'UZS', label: '86 АЛМАЗОВ', popular: true },
+            { id: 6, diamonds: 112, price: 21500, currency: 'UZS', label: '112 АЛМАЗОВ', popular: true },
+            { id: 7, diamonds: 172, price: 34500, currency: 'UZS', label: '172 АЛМАЗА', popular: true },
+            { id: 8, diamonds: 257, price: 49000, currency: 'UZS', label: '257 АЛМАЗОВ', popular: true },
+            { id: 9, diamonds: 344, price: 63500, currency: 'UZS', label: '344 АЛМАЗА', popular: true },
+            { id: 10, diamonds: 429, price: 79500, currency: 'UZS', label: '429 АЛМАЗОВ' },
+            { id: 11, diamonds: 514, price: 96000, currency: 'UZS', label: '514 АЛМАЗОВ' },
+            { id: 12, diamonds: 706, price: 129000, currency: 'UZS', label: '706 АЛМАЗОВ', popular: true },
+            { id: 13, diamonds: 963, price: 179000, currency: 'UZS', label: '963 АЛМАЗА', popular: true },
+            { id: 14, diamonds: 2195, price: 387000, currency: 'UZS', label: '2195 АЛМАЗОВ', popular: true },
+            { id: 15, diamonds: 3688, price: 615000, currency: 'UZS', label: '3688 АЛМАЗОВ', popular: true },
+            { id: 16, diamonds: 9343, price: 1690000, currency: 'UZS', label: '9343 АЛМАЗА', popular: true }
         ];
         
         // ============ UPGRADE COSTS ============
@@ -906,7 +939,7 @@
         // ============ INITIALIZE GAME ============
         function initGame() {
             // Load saved progress
-            const saved = localStorage.getItem('mlbbBallCollector');
+            const saved = localStorage.getItem('mlbbBallCollector_' + (telegramUserId || 'guest'));
             
             if (saved) {
                 try {
@@ -931,7 +964,14 @@
                     
                     updateUI();
                 } catch (e) {
-                    console.log('Yangi o\'yin boshlanmoqda...');
+                    console.log('Начинаем новую игру...');
+                }
+            } else {
+                // If it's a new Telegram user, add welcome diamonds
+                if (telegramUserId) {
+                    diamonds += 5; // 5 welcome diamonds for new users
+                    addToHistory('бонус', 'Добро пожаловать! Получено 5 алмазов', 0);
+                    showNotification('🎉 Добро пожаловать! Получите 5 алмазов в подарок!');
                 }
             }
             
@@ -941,9 +981,9 @@
             // Update upgrade cost display
             updateUpgradeCost();
             
-            // Show welcome message
+            // Show welcome message with user name
             setTimeout(() => {
-                showNotification('🎮 MLBB Ball Collector ga xush kelibsiz! Ball to\'plang va olmos oling!');
+                showNotification(`🎮 Добро пожаловать, ${userName}! Собирайте баллы и получайте алмазы!`);
             }, 500);
         }
         
@@ -958,7 +998,7 @@
             // Update game time
             const hours = Math.floor(gameTime / 3600000);
             const minutes = Math.floor((gameTime % 3600000) / 60000);
-            document.getElementById('gameTime').textContent = `${hours} soat ${minutes} daqiqa`;
+            document.getElementById('gameTime').textContent = `${hours} часов ${minutes} минут`;
             
             // Update current balls in exchange modal
             document.getElementById('currentBalls').textContent = balls.toLocaleString();
@@ -971,8 +1011,8 @@
             document.getElementById('invitedFriendsDisplay').textContent = invitedFriends;
             document.getElementById('totalPlayers').textContent = totalPlayers;
             document.getElementById('totalPlayers2').textContent = totalPlayers;
-            document.getElementById('totalPlayersDisplay').textContent = totalPlayers + ' o\'yinchi';
-            document.getElementById('earnedDiamondsDisplay').textContent = '+' + (invitedFriends * 3) + ' olmos';
+            document.getElementById('totalPlayersDisplay').textContent = totalPlayers + ' игроков';
+            document.getElementById('earnedDiamondsDisplay').textContent = '+' + (invitedFriends * 3) + ' алмазов';
             document.getElementById('referralCode').textContent = referralCode;
             
             // Update player rank
@@ -992,7 +1032,7 @@
             
             // Every 50 clicks check for achievements
             if (totalClicks % 50 === 0) {
-                showNotification(`🎯 ${totalClicks} ta bosish amalga oshirildi!`);
+                showNotification(`🎯 ${totalClicks} кликов выполнено!`);
             }
             
             // Every 100 clicks auto-save
@@ -1003,9 +1043,9 @@
             // Update UI
             updateUI();
             
-            // Vibrate on mobile
-            if (navigator.vibrate) {
-                navigator.vibrate(10);
+            // Haptic feedback on mobile
+            if (tg && tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('light');
             }
         });
         
@@ -1032,7 +1072,7 @@
         // ============ AUTO CLICKER ============
         function activateAutoClicker(duration = AUTO_CLICKER_DURATION) {
             if (autoClickerActive) {
-                showNotification('⚠️ Avtokliker allaqachon ishlamoqda!');
+                showNotification('⚠️ Автокликер уже работает!');
                 return;
             }
             
@@ -1044,9 +1084,9 @@
                 autoClickerEndTime = Date.now() + duration;
                 
                 // Add to history
-                addToHistory('avtokliker', 'Avtokliker sotib olindi', -cost);
+                addToHistory('автокликер', 'Автокликер куплен', -cost);
                 
-                showNotification('🤖 Avtokliker faollashtirildi! 15 daqiqa');
+                showNotification('🤖 Автокликер активирован! 15 минут');
                 updateUI();
                 
                 // Start auto clicking
@@ -1063,7 +1103,7 @@
                 
                 autoSave();
             } else {
-                showNotification('❌ Yetarli ball mavjud emas! 100 ball kerak');
+                showNotification('❌ Недостаточно баллов! Нужно 100 баллов');
             }
         }
         
@@ -1080,7 +1120,7 @@
             // Update button text if needed
             const autoBtn = document.querySelector('.auto-btn small');
             if (autoBtn) {
-                autoBtn.textContent = `${minutes}:${seconds.toString().padStart(2, '0')} qoldi`;
+                autoBtn.textContent = `${minutes}:${seconds.toString().padStart(2, '0')} осталось`;
             }
         }
         
@@ -1124,19 +1164,19 @@
                 autoClickerTimer = null;
             }
             autoClickerActive = false;
-            showNotification('🛑 Avtokliker to\'xtatildi');
+            showNotification('🛑 Автокликер остановлен');
             
             // Reset button text
             const autoBtn = document.querySelector('.auto-btn small');
             if (autoBtn) {
-                autoBtn.textContent = '100 ball • 15 daqiqa';
+                autoBtn.textContent = '100 баллов • 15 минут';
             }
         }
         
         // ============ UPGRADE AUTO CLICKER ============
         function upgradeAutoClicker() {
             if (upgradeLevel >= upgradeCosts.length) {
-                showNotification('🎉 Siz maksimal tezlikka erishdingiz!');
+                showNotification('🎉 Вы достигли максимальной скорости!');
                 return;
             }
             
@@ -1154,53 +1194,53 @@
                 }
                 
                 // Add to history
-                addToHistory('upgrade', `Avtokliker tezligi ${upgrade.multiplier}x ga oshirildi`, -cost);
+                addToHistory('улучшение', `Скорость автокликера увеличена до ${upgrade.multiplier}x`, -cost);
                 
-                showNotification(`⚡ Avtokliker tezligi ${upgrade.multiplier}x ga oshirildi!`);
+                showNotification(`⚡ Скорость автокликера увеличена до ${upgrade.multiplier}x!`);
                 
                 updateUI();
                 updateUpgradeCost();
                 autoSave();
             } else {
-                showNotification(`❌ Yetarli ball mavjud emas! ${cost} ball kerak`);
+                showNotification(`❌ Недостаточно баллов! Нужно ${cost} баллов`);
             }
         }
         
         function updateUpgradeCost() {
             if (upgradeLevel < upgradeCosts.length) {
                 const upgrade = upgradeCosts[upgradeLevel];
-                document.getElementById('upgradeCost').textContent = `${upgrade.cost} ball → ${upgrade.multiplier}x`;
+                document.getElementById('upgradeCost').textContent = `${upgrade.cost} баллов → ${upgrade.multiplier}x`;
             } else {
-                document.getElementById('upgradeCost').textContent = 'MAKSIMAL';
+                document.getElementById('upgradeCost').textContent = 'МАКСИМАЛЬНО';
             }
         }
         
         // ============ PLAYER RANK ============
         function updatePlayerRank() {
             let rank = '#1';
-            let level = 'BOSHLANG\'ICH';
+            let level = 'НАЧИНАЮЩИЙ';
             
             if (balls >= 100000) {
                 rank = '#1';
-                level = 'LEGEND';
+                level = 'ЛЕГЕНДА';
             } else if (balls >= 50000) {
                 rank = '#2';
-                level = 'MYTHIC';
+                level = 'МИФИЧЕСКИЙ';
             } else if (balls >= 25000) {
                 rank = '#3';
-                level = 'EPIC';
+                level = 'ЭПИЧЕСКИЙ';
             } else if (balls >= 10000) {
                 rank = '#4';
-                level = 'GRANDMASTER';
+                level = 'ГРАНДМАСТЕР';
             } else if (balls >= 5000) {
                 rank = '#5';
-                level = 'MASTER';
+                level = 'МАСТЕР';
             } else if (balls >= 1000) {
                 rank = '#6';
-                level = 'ELITE';
+                level = 'ЭЛИТНЫЙ';
             } else {
                 rank = '#7';
-                level = 'BOSHLANG\'ICH';
+                level = 'НАЧИНАЮЩИЙ';
             }
             
             document.getElementById('playerRank').textContent = rank;
@@ -1234,7 +1274,7 @@
                         ${pkg.price.toLocaleString()} ${pkg.currency}
                     </div>
                     <div style="color:var(--primary); font-size:14px; font-weight:600; margin-top:5px;">
-                        ${pkg.diamonds} OLMOZ
+                        ${pkg.diamonds} АЛМАЗОВ
                     </div>
                 </div>
             `).join('');
@@ -1258,29 +1298,39 @@
         
         function proceedToPayment() {
             if (!selectedPackage) {
-                showNotification('❌ Iltimos, paketni tanlang!');
+                showNotification('❌ Пожалуйста, выберите пакет!');
                 return;
             }
             
             const pkg = packages.find(p => p.id === selectedPackage);
             
             // Create message for Telegram
-            const message = `Salom! Men MLBB Ball Collector o'yinidan ${pkg.label} paketini sotib olmoqchiman.%0A%0A` +
-                          `Paket: ${pkg.label}%0A` +
-                          `Narxi: ${pkg.price.toLocaleString()} SO'M%0A` +
-                          `Olmos: ${pkg.diamonds} ta%0A%0A` +
-                          `Mening MLBB ID: _________________%0A` +
-                          `To'lov chek rasmi: _________________%0A%0A` +
-                          `Referral kodi: ${referralCode}`;
+            const userInfo = telegramUserId ? `ID пользователя: ${telegramUserId}%0A` : '';
+            const userNameInfo = userName ? `Имя: ${userName}%0A` : '';
+            
+            const message = `Здравствуйте! Я хочу купить ${pkg.label} пакет в MLBB Ball Collector.%0A%0A` +
+                          `Пакет: ${pkg.label}%0A` +
+                          `Цена: ${pkg.price.toLocaleString()} СОМ%0A` +
+                          `Алмазы: ${pkg.diamonds} шт%0A` +
+                          `${userInfo}${userNameInfo}` +
+                          `Мой MLBB ID: _________________%0A` +
+                          `Скриншот оплаты: _________________%0A%0A` +
+                          `Реферальный код: ${referralCode}`;
             
             // Open Telegram with pre-filled message
             const telegramUrl = `https://t.me/laz1z0v1ch?text=${message}`;
-            window.open(telegramUrl, '_blank');
+            
+            // Use Telegram WebApp to open link if available
+            if (tg && tg.openLink) {
+                tg.openLink(telegramUrl);
+            } else {
+                window.open(telegramUrl, '_blank');
+            }
             
             // Add to history
-            addToHistory('sotib_olish', `${pkg.label} paketi sotib olish so'rovi`, 0);
+            addToHistory('покупка', `Запрос на покупку ${pkg.label} пакета`, 0);
             
-            showNotification(`📤 ${pkg.label} paketi uchun so'rov @laz1z0v1ch ga yuborildi!`);
+            showNotification(`📤 Запрос на покупку ${pkg.label} пакета отправлен админу!`);
             
             closeDonateModal();
         }
@@ -1303,39 +1353,50 @@
             // Check cooldown
             if (timeSinceLastInvite < INVITE_COOLDOWN) {
                 const remainingMinutes = Math.ceil((INVITE_COOLDOWN - timeSinceLastInvite) / 60000);
-                showNotification(`⏰ Do'st taklif qilish uchun ${remainingMinutes} daqiqa kuting!`);
+                showNotification(`⏰ Подождите ${remainingMinutes} минут(ы) перед следующим приглашением!`);
                 return;
             }
             
-            const shareText = `🎮 *MLBB BALL COLLECTOR* - Tekin ball va olmoslar!%0A%0A` +
-                            `⚡ *Avtokliker* bilan ball to'plang%0A` +
-                            `💎 *Har bir taklif* uchun 3 olmos oling%0A` +
-                            `💰 *Ballarni* haqiqiy MLBB olmoslariga almashtiring%0A%0A` +
-                            `🎯 *Mening taklif kodi:* ${referralCode}%0A` +
-                            `🔗 *O'ynash uchun:* ${window.location.href}%0A%0A` +
-                            `📞 *Admin:* @laz1z0v1ch`;
+            const shareText = `🎮 *MLBB BALL COLLECTOR* - Бесплатные баллы и алмазы!%0A%0A` +
+                            `⚡ Собирайте баллы с *автокликером*%0A` +
+                            `💎 Получайте *3 алмаза* за каждого приглашенного друга%0A` +
+                            `💰 Обменивайте баллы на настоящие алмазы MLBB%0A%0A` +
+                            `🎯 *Мой реферальный код:* ${referralCode}%0A` +
+                            `🔗 *Ссылка для игры:* ${window.location.href}%0A%0A` +
+                            `📞 *Админ:* @laz1z0v1ch`;
             
-            if (navigator.share) {
-                navigator.share({
-                    title: 'MLBB Ball Collector',
-                    text: shareText.replace(/%0A/g, '\n').replace(/\*/g, ''),
-                    url: window.location.href
-                }).then(() => {
-                    processInvite();
-                }).catch(() => {
-                    copyInviteLink(shareText);
+            // Use Telegram sharing if available
+            if (tg && tg.showPopup) {
+                const shareUrl = window.location.href + '?ref=' + referralCode;
+                
+                tg.showPopup({
+                    title: 'Пригласить друзей',
+                    message: 'Поделитесь ссылкой с друзьями и получайте 3 алмаза за каждого!',
+                    buttons: [
+                        {id: 'copy', type: 'default', text: '📋 Копировать ссылку'},
+                        {id: 'share', type: 'default', text: '📤 Поделиться'},
+                        {type: 'cancel'}
+                    ]
+                }, function(buttonId) {
+                    if (buttonId === 'copy') {
+                        navigator.clipboard.writeText(shareUrl);
+                        showNotification('📋 Ссылка скопирована!');
+                        processInvite();
+                    } else if (buttonId === 'share') {
+                        if (tg.shareUrl) {
+                            tg.shareUrl(shareUrl, 'Присоединяйтесь к MLBB Ball Collector!');
+                            processInvite();
+                        }
+                    }
                 });
             } else {
-                copyInviteLink(shareText);
+                // Fallback for browser
+                const text = shareText.replace(/%0A/g, '\n').replace(/\*/g, '');
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('📋 Текст приглашения скопирован! Отправьте его друзьям.');
+                    processInvite();
+                });
             }
-        }
-        
-        function copyInviteLink(shareText) {
-            const text = shareText.replace(/%0A/g, '\n').replace(/\*/g, '');
-            navigator.clipboard.writeText(text).then(() => {
-                showNotification('📋 Taklif matni nusxalandi! Do\'stlaringizga ulashing.');
-                processInvite();
-            });
         }
         
         function processInvite() {
@@ -1350,9 +1411,9 @@
             totalPlayers++; // Increase total players
             
             // Add to history
-            addToHistory('taklif', `Do'st taklif qilindi (+3 olmos)`, 0);
+            addToHistory('приглашение', `Приглашен друг (+3 алмаза)`, 0);
             
-            showNotification(`🎉 Do'stingiz taklif qilindi! +3 olmos qo'shildi.`);
+            showNotification(`🎉 Друг приглашен! +3 алмаза добавлено.`);
             
             updateUI();
         }
@@ -1374,7 +1435,7 @@
                 historyList.innerHTML = `
                     <div style="text-align: center; padding: 40px 20px; color: var(--gray);">
                         <i class="fas fa-history" style="font-size: 50px; margin-bottom: 20px; opacity: 0.3;"></i>
-                        <p>Hozircha amallar yo'q</p>
+                        <p>Пока нет действий</p>
                     </div>
                 `;
             } else {
@@ -1388,11 +1449,11 @@
                         </div>
                         ${item.amount !== 0 ? `
                             <div style="color: ${item.amount > 0 ? 'var(--accent)' : 'var(--danger)'}; font-weight: 600; margin-top: 5px;">
-                                ${item.amount > 0 ? '+' : ''}${item.amount} ball
+                                ${item.amount > 0 ? '+' : ''}${item.amount} баллов
                             </div>
                         ` : ''}
                         <div class="history-date">
-                            ${new Date(item.date).toLocaleString('uz-UZ')}
+                            ${new Date(item.date).toLocaleString('ru-RU')}
                         </div>
                     </div>
                 `).join('');
@@ -1407,12 +1468,13 @@
         
         function getHistoryTypeIcon(type) {
             const icons = {
-                'bosish': '👆',
-                'avtokliker': '🤖',
-                'sotib_olish': '🛒',
-                'almashuv': '🔄',
-                'taklif': '👥',
-                'upgrade': '⚡'
+                'клик': '👆',
+                'автокликер': '🤖',
+                'покупка': '🛒',
+                'обмен': '🔄',
+                'приглашение': '👥',
+                'улучшение': '⚡',
+                'бонус': '🎁'
             };
             return icons[type] || '📝';
         }
@@ -1451,7 +1513,7 @@
                 saveTime: new Date().toISOString()
             };
             
-            localStorage.setItem('mlbbBallCollector', JSON.stringify(data));
+            localStorage.setItem('mlbbBallCollector_' + (telegramUserId || 'guest'), JSON.stringify(data));
         }
         
         // ============ NOTIFICATION ============
