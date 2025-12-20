@@ -14,21 +14,22 @@
         }
 
         :root {
-            --primary: #9C27B0;
-            --primary-dark: #7B1FA2;
-            --primary-light: #E1BEE7;
-            --secondary: #E91E63;
-            --accent: #00BCD4;
+            --primary: #2196F3;
+            --primary-dark: #1976D2;
+            --primary-light: #E3F2FD;
+            --secondary: #00BCD4;
+            --accent: #4CAF50;
             --warning: #FF9800;
             --danger: #F44336;
             --light: #FFFFFF;
             --dark: #1A1A2E;
             --gray: #757575;
             --light-gray: #F5F5F5;
-            --shadow: 0 4px 12px rgba(156, 39, 176, 0.15);
-            --shadow-lg: 0 8px 24px rgba(156, 39, 176, 0.25);
-            --gradient: linear-gradient(135deg, var(--primary) 0%, #BA68C8 100%);
+            --shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+            --shadow-lg: 0 8px 24px rgba(33, 150, 243, 0.25);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             --bg-gradient: linear-gradient(135deg, #6A1B9A 0%, #9C27B0 30%, #E1BEE7 100%);
+            --button-bg: #2196F3; /* Ko'k rang knopkalar uchun */
         }
 
         body {
@@ -101,7 +102,7 @@
             background: white;
         }
 
-        /* Total Time Display - Top position */
+        /* Total Time Display */
         .total-time-section {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 18px;
@@ -180,7 +181,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Game Area with photo upload capability */
+        /* Game Area */
         .game-area {
             position: relative;
             margin: 25px 0;
@@ -238,7 +239,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(156, 39, 176, 0.7);
+            background: rgba(33, 150, 243, 0.7);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -247,7 +248,7 @@
             text-align: center;
         }
 
-        /* Top Action Buttons - Small size */
+        /* Top Action Buttons */
         .top-actions {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -256,7 +257,7 @@
         }
 
         .top-btn {
-            background: var(--light);
+            background: var(--button-bg);
             border: none;
             padding: 14px 8px;
             border-radius: 12px;
@@ -269,7 +270,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--dark);
+            color: white;
             position: relative;
             overflow: hidden;
             min-height: 70px;
@@ -282,56 +283,43 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--gradient);
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .top-btn:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
+            background: var(--primary-dark);
         }
 
         .top-btn i {
             font-size: 20px;
             margin-bottom: 8px;
-            color: var(--primary);
-            transition: color 0.3s;
-        }
-
-        .top-btn:hover i {
-            color: var(--secondary);
+            color: white;
         }
 
         .top-btn small {
             font-size: 10px;
-            opacity: 0.8;
+            opacity: 0.9;
             margin-top: 4px;
             font-weight: 500;
         }
 
-        .top-btn.primary {
-            background: var(--gradient);
-            color: white;
-        }
-
-        .top-btn.primary i {
-            color: white;
-        }
-
-        /* Bottom Action Buttons - Same small size */
+        /* Bottom Action Buttons - Kichkina to'rtburchak */
         .bottom-actions {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
             margin: 20px 0;
         }
 
         .bottom-btn {
-            background: var(--light);
+            background: var(--button-bg);
             border: none;
-            padding: 14px 8px;
-            border-radius: 12px;
+            padding: 10px 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
@@ -339,51 +327,34 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--dark);
+            color: white;
             position: relative;
             overflow: hidden;
-            min-height: 70px;
-        }
-
-        .bottom-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient);
+            min-height: 60px;
+            border: 2px solid white;
         }
 
         .bottom-btn:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
+            background: var(--primary-dark);
         }
 
         .bottom-btn i {
-            font-size: 20px;
-            margin-bottom: 8px;
-            color: var(--primary);
-            transition: color 0.3s;
-        }
-
-        .bottom-btn:hover i {
-            color: var(--secondary);
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: white;
         }
 
         .bottom-btn small {
-            font-size: 10px;
-            opacity: 0.8;
-            margin-top: 4px;
+            font-size: 9px;
+            opacity: 0.9;
+            margin-top: 3px;
             font-weight: 500;
         }
 
         .bottom-btn.primary {
-            background: var(--gradient);
-            color: white;
-        }
-
-        .bottom-btn.primary i {
+            background: var(--button-bg);
             color: white;
         }
 
@@ -431,7 +402,7 @@
 
         .top-item:hover {
             transform: translateX(5px);
-            background: rgba(156, 39, 176, 0.15);
+            background: rgba(33, 150, 243, 0.15);
         }
 
         .top-item.current {
@@ -606,29 +577,6 @@
             100% { transform: translateY(-100px) scale(1.4); opacity: 0; }
         }
 
-        /* Photo Upload Button */
-        .photo-upload-btn {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--primary);
-            transition: all 0.3s;
-            z-index: 5;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .photo-upload-btn:hover {
-            background: white;
-            transform: scale(1.05);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .container { padding: 12px; }
@@ -653,10 +601,10 @@
         <!-- Header -->
         <div class="header">
             <div class="header-content">
-                <img src="https://i.imgur.com/photo_2025-12-10_18-48-10.jpg" 
+                <!-- TELEGRAMMINI LOGO: src ni o'zgartiring -->
+                <img src="https://i.imgur.com/abc123.jpg" 
                      alt="MLBB Ball Collector" 
-                     class="game-logo"
-                     onerror="this.src='https://via.placeholder.com/100/9C27B0/FFFFFF?text=MLBB'">
+                     class="game-logo">
                 <h1 class="game-title">
                     <i class="fas fa-gem"></i> MLBB BALL COLLECTOR
                 </h1>
@@ -664,7 +612,7 @@
             </div>
         </div>
 
-        <!-- Total Time Display - Moved to top -->
+        <!-- Total Time Display -->
         <div class="total-time-section">
             <div class="total-time-title">UMUMIY O'YIN VAQTI</div>
             <div class="total-time-value" id="totalGameTime">00:00:00</div>
@@ -705,28 +653,23 @@
             </div>
         </div>
 
-        <!-- Game Area with Photo Upload -->
+        <!-- Game Area -->
         <div class="game-area">
             <div class="click-container">
-                <div class="click-main" id="clickImage">
-                    <!-- Overlay with text -->
+                <!-- TAPALKA RASMI: background-image ni o'zgartiring -->
+                <div class="click-main" id="clickImage" style="background-image: url('https://i.imgur.com/xyz456.jpg');">
                     <div class="click-overlay">
                         <i class="fas fa-basketball"></i>
                         <div>BOSING VA BALL TOPLANG</div>
                         <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Har bir bosish = 1 ball</div>
                     </div>
                 </div>
-                <!-- Photo Upload Button -->
-                <button class="photo-upload-btn" onclick="document.getElementById('photoUpload').click()">
-                    <i class="fas fa-camera"></i> Rasm qo'yish
-                </button>
-                <input type="file" id="photoUpload" accept="image/*" style="display: none;" onchange="uploadPhoto(event)">
             </div>
         </div>
 
-        <!-- Top Action Buttons (Small) -->
+        <!-- Top Action Buttons -->
         <div class="top-actions">
-            <button class="top-btn primary" onclick="activateAutoClicker()">
+            <button class="top-btn" onclick="activateAutoClicker()">
                 <i class="fas fa-robot"></i>
                 <span>Avtokliker</span>
                 <small>100 ball • 15 daq</small>
@@ -738,14 +681,14 @@
                 <small id="upgradeCost">500 ball</small>
             </button>
             
-            <button class="top-btn primary" onclick="openDonateModal()">
+            <button class="top-btn" onclick="openDonateModal()">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Olmos sotib olish</span>
                 <small>Haqiqiy olmoslar</small>
             </button>
         </div>
 
-        <!-- Bottom Action Buttons (Small) -->
+        <!-- Bottom Action Buttons (Kichkina to'rtburchak) -->
         <div class="bottom-actions">
             <button class="bottom-btn" onclick="openExchangeModal()">
                 <i class="fas fa-exchange-alt"></i>
@@ -759,7 +702,7 @@
                 <small>Barcha amallar</small>
             </button>
             
-            <button class="bottom-btn primary" onclick="inviteFriend()">
+            <button class="bottom-btn" onclick="inviteFriend()">
                 <i class="fas fa-user-plus"></i>
                 <span>Do'stni taklif qilish</span>
                 <small>3 olmos bonus</small>
@@ -768,23 +711,21 @@
 
         <!-- Stats Sections -->
         <div class="stats-sections">
-            <!-- Top 5 by Time -->
             <div class="stats-card">
                 <h3 class="stats-card-title">
                     <i class="fas fa-clock"></i> Vaqt bo'yicha TOP-5
                 </h3>
                 <ul class="top-list" id="topByTime">
-                    <!-- Populated by JavaScript -->
+                    <!-- JavaScript tomonidan to'ldiriladi -->
                 </ul>
             </div>
             
-            <!-- Top 5 by Balls -->
             <div class="stats-card">
                 <h3 class="stats-card-title">
                     <i class="fas fa-basketball"></i> Ball bo'yicha TOP-5
                 </h3>
                 <ul class="top-list" id="topByBalls">
-                    <!-- Populated by JavaScript -->
+                    <!-- JavaScript tomonidan to'ldiriladi -->
                 </ul>
             </div>
         </div>
@@ -814,7 +755,7 @@
                 </div>
             </div>
             
-            <button class="top-btn primary" onclick="inviteFriend()" style="width: 100%; margin-top: 20px; padding: 16px;">
+            <button class="top-btn" onclick="inviteFriend()" style="width: 100%; margin-top: 20px; padding: 16px;">
                 <i class="fas fa-share-alt"></i>
                 <span>DO'STLARNI TAKLIF QILISH</span>
                 <small>Har bir do'st uchun 3 olmos bonus</small>
@@ -838,7 +779,7 @@
                 <button onclick="closeDonateModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             <div id="packageList"></div>
-            <div style="background: rgba(156, 39, 176, 0.05); padding: 20px; border-radius: 15px; margin: 20px 0; font-size: 14px;">
+            <div style="background: rgba(33, 150, 243, 0.05); padding: 20px; border-radius: 15px; margin: 20px 0; font-size: 14px;">
                 <h3 style="color: var(--primary); margin-bottom: 10px;">
                     <i class="fas fa-info-circle"></i> QAYD ETILISHI KERAK:
                 </h3>
@@ -850,7 +791,7 @@
             </div>
             <div style="display: flex; gap: 12px; margin-top: 25px;">
                 <button class="bottom-btn" onclick="closeDonateModal()" style="flex: 1;">Yopish</button>
-                <button class="bottom-btn primary" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">Sotib olish</button>
+                <button class="bottom-btn" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">Sotib olish</button>
             </div>
         </div>
     </div>
@@ -907,7 +848,6 @@
         let referralCode = generateReferralCode();
         let transactionHistory = [];
         let startTime = Date.now();
-        let backgroundImage = null;
 
         // Top players data
         let topPlayersByTime = [
@@ -959,12 +899,6 @@
                     invitedFriends = data.invitedFriends || 0;
                     totalPlayers = data.totalPlayers || 1;
                     referralCode = data.referralCode || generateReferralCode();
-                    backgroundImage = data.backgroundImage || null;
-                    
-                    // Load background image if exists
-                    if (backgroundImage) {
-                        document.getElementById('clickImage').style.backgroundImage = `url(${backgroundImage})`;
-                    }
                     
                     updateTopLists();
                     updateUI();
@@ -979,32 +913,6 @@
             setTimeout(() => {
                 showNotification('🎮 MLBB Ball Collector ga xush kelibsiz!');
             }, 500);
-        }
-
-        // Photo upload function
-        function uploadPhoto(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            if (!file.type.match('image.*')) {
-                showNotification('❌ Faqat rasm fayllari!');
-                return;
-            }
-            
-            if (file.size > 5 * 1024 * 1024) {
-                showNotification('❌ Rasm hajmi 5MB dan kichik bo\'lishi kerak!');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                backgroundImage = e.target.result;
-                document.getElementById('clickImage').style.backgroundImage = `url(${backgroundImage})`;
-                showNotification('✅ Rasm muvaffaqiyatli yuklandi!');
-                autoSave();
-            };
-            
-            reader.readAsDataURL(file);
         }
 
         // Update UI
@@ -1424,7 +1332,6 @@
                 invitedFriends: invitedFriends,
                 totalPlayers: totalPlayers,
                 referralCode: referralCode,
-                backgroundImage: backgroundImage,
                 saveTime: new Date().toISOString()
             };
             
