@@ -28,16 +28,17 @@
             --shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
             --shadow-lg: 0 8px 24px rgba(33, 150, 243, 0.2);
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-light: linear-gradient(135deg, #E3F2FD 0%, #E0F7FA 100%);
+            --bg-gradient: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 30%, #E0F7FA 100%);
         }
 
         body {
-            background: var(--gradient-light);
+            background: var(--bg-gradient);
             color: var(--dark);
             min-height: 100vh;
             padding: 0;
             line-height: 1.6;
             font-size: 15px;
+            background-attachment: fixed;
         }
 
         .container {
@@ -46,7 +47,7 @@
             padding: 15px;
         }
 
-        /* Header - Современный дизайн */
+        /* Header */
         .header {
             background: var(--gradient);
             border-radius: 20px;
@@ -100,23 +101,12 @@
             background: white;
         }
 
-        .time-display {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        /* Stats Grid - Улучшенный дизайн */
+        /* Stats Grid */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .stat-box {
@@ -165,16 +155,16 @@
             letter-spacing: 0.5px;
         }
 
-        /* Main Game Area */
+        /* Game Area */
         .game-area {
             position: relative;
-            margin: 30px 0;
+            margin: 25px 0;
             text-align: center;
         }
 
         .click-container {
-            width: 260px;
-            height: 260px;
+            width: 240px;
+            height: 240px;
             margin: 0 auto;
             position: relative;
             cursor: pointer;
@@ -214,34 +204,12 @@
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         }
 
-        .click-text {
-            font-size: 14px;
-            margin-top: 10px;
-            opacity: 0.9;
-        }
-
-        .click-effect {
-            position: absolute;
-            color: var(--warning);
-            font-weight: 800;
-            font-size: 24px;
-            pointer-events: none;
-            animation: floatUp 1s ease-out forwards;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            z-index: 10;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100px) scale(1.4); opacity: 0; }
-        }
-
-        /* Action Buttons - Современный дизайн */
+        /* Action Buttons */
         .actions-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin: 30px 0;
+            margin: 25px 0;
         }
 
         .action-btn {
@@ -305,31 +273,105 @@
             color: white;
         }
 
-        .action-btn.secondary {
-            background: var(--secondary);
+        /* New Stats Sections */
+        .stats-sections {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stats-card {
+            background: var(--light);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(33, 150, 243, 0.1);
+        }
+
+        .stats-card-title {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .top-list {
+            list-style: none;
+        }
+
+        .top-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            font-size: 13px;
+            transition: transform 0.2s;
+        }
+
+        .top-item:hover {
+            transform: translateX(5px);
+            background: rgba(33, 150, 243, 0.15);
+        }
+
+        .top-item.current {
+            background: var(--gradient);
+            color: white;
+            font-weight: 700;
+        }
+
+        .top-item .rank {
+            font-weight: 800;
+            color: var(--primary);
+            min-width: 30px;
+        }
+
+        .top-item.current .rank {
             color: white;
         }
 
-        .action-btn.secondary i {
+        .top-item .player-name {
+            flex-grow: 1;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        .top-item .value {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .top-item.current .value {
             color: white;
         }
 
-        .action-btn.accent {
-            background: var(--accent);
-            color: white;
+        /* Time Display */
+        .time-display-large {
+            text-align: center;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: var(--shadow);
         }
 
-        .action-btn.accent i {
-            color: white;
+        .time-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 10px 0;
         }
 
-        .action-btn.warning {
-            background: var(--warning);
-            color: white;
-        }
-
-        .action-btn.warning i {
-            color: white;
+        .time-label {
+            font-size: 14px;
+            color: var(--gray);
+            font-weight: 600;
         }
 
         /* Invite Section */
@@ -392,59 +434,14 @@
             font-weight: 600;
         }
 
-        /* Progress Bar */
-        .progress-container {
-            margin: 20px 0;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        .progress-bar {
-            height: 12px;
-            background: var(--light-gray);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient);
-            border-radius: 6px;
-            width: 0%;
-            transition: width 1s ease;
-        }
-
-        /* Player Cards */
-        .player-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .player-card {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 18px;
-            box-shadow: var(--shadow);
+        /* Footer */
+        .footer {
             text-align: center;
-            border: 1px solid rgba(33, 150, 243, 0.1);
-        }
-
-        .player-card-title {
-            font-size: 16px;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            margin-top: 30px;
+            padding: 25px 20px;
+            color: var(--gray);
+            font-size: 13px;
+            border-top: 1px solid rgba(33, 150, 243, 0.1);
         }
 
         /* Modals */
@@ -472,44 +469,8 @@
             max-height: 85vh;
             overflow-y: auto;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-            animation: modalSlideIn 0.3s ease-out;
         }
 
-        @keyframes modalSlideIn {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .modal-title {
-            color: var(--primary);
-            font-size: 22px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--gray);
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: var(--danger);
-        }
-
-        /* Notification */
         .notification {
             position: fixed;
             top: 25px;
@@ -534,70 +495,27 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 25px 20px;
-            color: var(--gray);
-            font-size: 13px;
-            border-top: 1px solid rgba(33, 150, 243, 0.1);
-        }
-
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 12px;
-            }
-            
-            .game-title {
-                font-size: 22px;
-            }
-            
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .actions-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .invite-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .player-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .click-container {
-                width: 220px;
-                height: 220px;
-            }
+            .container { padding: 12px; }
+            .game-title { font-size: 22px; }
+            .stats-container { grid-template-columns: repeat(2, 1fr); }
+            .actions-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-sections { grid-template-columns: 1fr; }
+            .click-container { width: 220px; height: 220px; }
         }
 
         @media (max-width: 480px) {
-            .actions-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .invite-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .header {
-                padding: 15px;
-            }
-            
-            .stat-value {
-                font-size: 24px;
-            }
+            .actions-grid { grid-template-columns: 1fr; }
+            .invite-stats { grid-template-columns: 1fr; }
+            .header { padding: 15px; }
+            .stat-value { font-size: 24px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Modern Header -->
+        <!-- Header -->
         <div class="header">
             <div class="header-content">
                 <img src="https://i.imgur.com/photo_2025-12-10_18-48-10.jpg" 
@@ -608,14 +526,10 @@
                     <i class="fas fa-gem"></i> MLBB BALL COLLECTOR
                 </h1>
                 <p class="game-subtitle">Tekin ball to'plang • Olmoslar oling • Raqobatlashing</p>
-                <div class="time-display">
-                    <i class="fas fa-clock"></i>
-                    <span id="gameTime">0 soat 0 daqiqa</span>
-                </div>
             </div>
         </div>
 
-        <!-- Stats Dashboard -->
+        <!-- Stats -->
         <div class="stats-container">
             <div class="stat-box">
                 <div class="stat-value">
@@ -647,24 +561,22 @@
             </div>
         </div>
 
-        <!-- Main Game Area -->
+        <!-- Time Display -->
+        <div class="time-display-large">
+            <div class="time-label">UMUMIY O'YIN VAQTI</div>
+            <div class="time-value" id="totalGameTime">00:00:00</div>
+            <div style="font-size: 13px; color: var(--gray); margin-top: 5px;">
+                <i class="fas fa-clock"></i> Sizning faolligingiz
+            </div>
+        </div>
+
+        <!-- Game Area -->
         <div class="game-area">
             <div class="click-container">
                 <div class="click-main" id="clickImage">
                     <i class="fas fa-basketball"></i>
                     <div>BOSING VA BALL TOPLANG</div>
-                    <div class="click-text">Har bir bosish = 1 ball</div>
-                </div>
-            </div>
-            
-            <!-- Progress Bar -->
-            <div class="progress-container">
-                <div class="progress-label">
-                    <span>Keyingi darajaga</span>
-                    <span id="progressText">0%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
+                    <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Har bir bosish = 1 ball</div>
                 </div>
             </div>
         </div>
@@ -677,19 +589,19 @@
                 <small>100 ball • 15 daq</small>
             </button>
             
-            <button class="action-btn secondary" onclick="upgradeAutoClicker()">
+            <button class="action-btn" onclick="upgradeAutoClicker()">
                 <i class="fas fa-bolt"></i>
                 <span>Tezlikni oshirish</span>
                 <small id="upgradeCost">500 ball</small>
             </button>
             
-            <button class="action-btn accent" onclick="openDonateModal()">
+            <button class="action-btn primary" onclick="openDonateModal()">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Olmos sotib olish</span>
                 <small>Haqiqiy MLBB olmoslari</small>
             </button>
             
-            <button class="action-btn warning" onclick="openExchangeModal()">
+            <button class="action-btn" onclick="openExchangeModal()">
                 <i class="fas fa-exchange-alt"></i>
                 <span>Almashtirish</span>
                 <small>Ball → Olmos</small>
@@ -708,41 +620,34 @@
             </button>
         </div>
 
-        <!-- Player Statistics -->
-        <div class="player-cards">
-            <div class="player-card">
-                <h3 class="player-card-title">
-                    <i class="fas fa-user-friends"></i> Do'stlar statistikasi
+        <!-- New Stats Sections -->
+        <div class="stats-sections">
+            <!-- Top 5 by Time -->
+            <div class="stats-card">
+                <h3 class="stats-card-title">
+                    <i class="fas fa-clock"></i> Vaqt bo'yicha TOP-5
                 </h3>
-                <div style="text-align: center;">
-                    <div style="font-size: 42px; color: var(--primary); font-weight: 800; margin: 10px 0;" id="invitedFriendsDisplay">0</div>
-                    <div style="color: var(--gray); margin-bottom: 8px; font-size: 13px;">TAKLIF QILINGAN DO'STLAR</div>
-                    <div style="font-size: 28px; color: var(--accent); font-weight: 700;" id="earnedDiamondsDisplay">+0 olmos</div>
-                </div>
+                <ul class="top-list" id="topByTime">
+                    <!-- Will be populated by JavaScript -->
+                </ul>
             </div>
             
-            <div class="player-card">
-                <h3 class="player-card-title">
-                    <i class="fas fa-chart-line"></i> O'yin statistikasi
+            <!-- Top 5 by Balls -->
+            <div class="stats-card">
+                <h3 class="stats-card-title">
+                    <i class="fas fa-basketball"></i> Ball bo'yicha TOP-5
                 </h3>
-                <div style="text-align: center;">
-                    <div style="font-size: 42px; color: var(--primary); font-weight: 800; margin: 10px 0;" id="totalClicks">0</div>
-                    <div style="color: var(--gray); margin-bottom: 8px; font-size: 13px;">JAMI BOSISHLAR</div>
-                    <div style="font-size: 22px; color: var(--secondary); font-weight: 600;" id="clicksPerMinute">0/min</div>
-                </div>
+                <ul class="top-list" id="topByBalls">
+                    <!-- Will be populated by JavaScript -->
+                </ul>
             </div>
         </div>
 
-        <!-- Invite Friends Section -->
+        <!-- Invite Section -->
         <div class="invite-section">
             <h2 class="section-title">
                 <i class="fas fa-user-friends"></i> DO'STLARNI TAKLIF QILING
             </h2>
-            
-            <p style="color: var(--gray); margin-bottom: 20px; font-size: 14px; text-align: center; line-height: 1.6;">
-                <strong>Har bir taklif qilgan do'stingiz uchun 3 ta olmos bonus oling!</strong><br>
-                Do'stingiz o'yinni boshlagach, sizning hisobingizga 3 olmos qo'shiladi.
-            </p>
             
             <div class="invite-stats">
                 <div class="invite-stat">
@@ -777,26 +682,40 @@
         </div>
     </div>
 
-    <!-- Modals (structure only, functionality remains same) -->
+    <!-- Modals -->
     <div class="modal-overlay" id="donateModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title"><i class="fas fa-gem"></i> OLMOS PAKETLARI</h2>
-                <button class="close-modal" onclick="closeDonateModal()">&times;</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-gem"></i> OLMOS PAKETLARI
+                </h2>
+                <button onclick="closeDonateModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             <div id="packageList"></div>
-            <div style="margin-top: 25px; display: flex; gap: 12px;">
+            <div style="background: rgba(33, 150, 243, 0.05); padding: 20px; border-radius: 15px; margin: 20px 0; font-size: 14px;">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">
+                    <i class="fas fa-info-circle"></i> QAYD ETILISHI KERAK:
+                </h3>
+                <div style="line-height: 1.6; color: var(--gray);">
+                    <p>1. Paketni tanlang va "Sotib olish" tugmasini bosing</p>
+                    <p>2. Admin (@laz1z0v1ch) ga to'lov chekini va MLBB ID ni yuboring</p>
+                    <p>3. Olmoslar 5-30 daqiqa ichida hisobingizga tushadi</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 25px;">
                 <button class="action-btn" onclick="closeDonateModal()" style="flex: 1;">Yopish</button>
-                <button class="action-btn accent" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">Sotib olish</button>
+                <button class="action-btn primary" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">Sotib olish</button>
             </div>
         </div>
     </div>
 
     <div class="modal-overlay" id="exchangeModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title"><i class="fas fa-exchange-alt"></i> BALL → OLMOS</h2>
-                <button class="close-modal" onclick="closeExchangeModal()">&times;</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-exchange-alt"></i> BALL → OLMOS
+                </h2>
+                <button onclick="closeExchangeModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             <div style="text-align: center; padding: 30px 20px;">
                 <div style="font-size: 60px; color: var(--warning); margin-bottom: 20px;">
@@ -814,9 +733,11 @@
 
     <div class="modal-overlay" id="historyModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title"><i class="fas fa-history"></i> AMALLAR TARIXI</h2>
-                <button class="close-modal" onclick="closeHistoryModal()">&times;</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-history"></i> AMALLAR TARIXI
+                </h2>
+                <button onclick="closeHistoryModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             <div class="history-list" id="historyList"></div>
             <button class="action-btn" onclick="closeHistoryModal()" style="width: 100%; margin-top: 20px;">Yopish</button>
@@ -839,17 +760,31 @@
         let totalPlayers = 1;
         let referralCode = generateReferralCode();
         let transactionHistory = [];
-        let clicksPerMinute = 0;
-        let clicksStartTime = Date.now();
+        let startTime = Date.now();
+
+        // Top players data (simulated)
+        let topPlayersByTime = [
+            { name: "ProGamer", time: 125600, isCurrent: false },
+            { name: "MLBB_King", time: 98200, isCurrent: false },
+            { name: "BallMaster", time: 75400, isCurrent: false },
+            { name: "Siz", time: 0, isCurrent: true },
+            { name: "Beginner", time: 1200, isCurrent: false }
+        ];
+
+        let topPlayersByBalls = [
+            { name: "RichPlayer", balls: 125000, isCurrent: false },
+            { name: "BallHunter", balls: 98000, isCurrent: false },
+            { name: "ClickMaster", balls: 75000, isCurrent: false },
+            { name: "Siz", balls: 0, isCurrent: true },
+            { name: "NewPlayer", balls: 500, isCurrent: false }
+        ];
 
         // Packages
         const packages = [
             { id: 1, diamonds: 5, price: 1800, currency: 'UZS', label: '5 OLMOZ' },
             { id: 2, diamonds: 11, price: 3000, currency: 'UZS', label: '11 OLMOZ', popular: true },
             { id: 3, diamonds: 22, price: 5000, currency: 'UZS', label: '22 OLMOZ', popular: true },
-            { id: 4, diamonds: 56, price: 11500, currency: 'UZS', label: '56 OLMOZ', popular: true },
-            { id: 5, diamonds: 86, price: 16500, currency: 'UZS', label: '86 OLMOZ', popular: true },
-            { id: 6, diamonds: 112, price: 21500, currency: 'UZS', label: '112 OLMOZ', popular: true }
+            { id: 4, diamonds: 56, price: 11500, currency: 'UZS', label: '56 OLMOZ', popular: true }
         ];
 
         // Upgrade costs
@@ -857,8 +792,7 @@
             { level: 1, cost: 500, multiplier: 1.5 },
             { level: 2, cost: 1000, multiplier: 2 },
             { level: 3, cost: 2000, multiplier: 2.5 },
-            { level: 4, cost: 4000, multiplier: 3 },
-            { level: 5, cost: 8000, multiplier: 3.5 }
+            { level: 4, cost: 4000, multiplier: 3 }
         ];
 
         // Initialize game
@@ -879,6 +813,9 @@
                     totalPlayers = data.totalPlayers || 1;
                     referralCode = data.referralCode || generateReferralCode();
                     
+                    // Update top lists with current player data
+                    updateTopLists();
+                    
                     updateUI();
                 } catch (e) {
                     console.log('Yangi o\'yin boshlanmoqda...');
@@ -889,7 +826,7 @@
             updateUpgradeCost();
             
             setTimeout(() => {
-                showNotification('🎮 MLBB Ball Collector ga xush kelibsiz! Ball to\'plang va olmos oling!');
+                showNotification('🎮 MLBB Ball Collector ga xush kelibsiz!');
             }, 500);
         }
 
@@ -898,23 +835,23 @@
             document.getElementById('totalPoints').textContent = formatNumber(balls);
             document.getElementById('diamondsCount').textContent = formatNumber(diamonds);
             document.getElementById('speedMultiplier').textContent = speedMultiplier.toFixed(1) + 'x';
-            document.getElementById('totalClicks').textContent = formatNumber(totalClicks);
             
-            const hours = Math.floor(gameTime / 3600000);
-            const minutes = Math.floor((gameTime % 3600000) / 60000);
-            document.getElementById('gameTime').textContent = `${hours} soat ${minutes} daqiqa`;
+            // Update total game time
+            const totalSeconds = Math.floor(gameTime / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            document.getElementById('totalGameTime').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
             document.getElementById('currentBalls').textContent = formatNumber(balls);
             document.getElementById('playerDiamonds').textContent = formatNumber(diamonds);
             document.getElementById('invitedFriends').textContent = invitedFriends;
-            document.getElementById('invitedFriendsDisplay').textContent = invitedFriends;
             document.getElementById('totalPlayers').textContent = totalPlayers;
-            document.getElementById('earnedDiamondsDisplay').textContent = '+' + (invitedFriends * 3) + ' olmos';
             document.getElementById('referralCode').textContent = referralCode;
             
-            updateProgressBar();
             updatePlayerRank();
-            calculateClicksPerMinute();
+            updateTopListsDisplay();
             
             autoSave();
         }
@@ -925,10 +862,11 @@
             return num.toString();
         }
 
-        function updateProgressBar() {
-            const progress = (balls % 1000) / 10;
-            document.getElementById('progressFill').style.width = progress + '%';
-            document.getElementById('progressText').textContent = progress.toFixed(0) + '%';
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
         }
 
         function updatePlayerRank() {
@@ -943,10 +881,46 @@
             document.getElementById('playerRank').textContent = rank;
         }
 
-        function calculateClicksPerMinute() {
-            const minutes = (Date.now() - clicksStartTime) / 60000;
-            clicksPerMinute = minutes > 0 ? Math.floor(totalClicks / minutes) : 0;
-            document.getElementById('clicksPerMinute').textContent = clicksPerMinute + '/min';
+        function updateTopLists() {
+            // Update current player in top lists
+            topPlayersByTime[3].time = gameTime;
+            topPlayersByBalls[3].balls = balls;
+            
+            // Sort lists
+            topPlayersByTime.sort((a, b) => b.time - a.time);
+            topPlayersByBalls.sort((a, b) => b.balls - a.balls);
+            
+            // Reassign current player flag
+            topPlayersByTime.forEach(p => p.isCurrent = false);
+            topPlayersByBalls.forEach(p => p.isCurrent = false);
+            
+            const currentTimePlayer = topPlayersByTime.find(p => p.name === "Siz");
+            const currentBallsPlayer = topPlayersByBalls.find(p => p.name === "Siz");
+            
+            if (currentTimePlayer) currentTimePlayer.isCurrent = true;
+            if (currentBallsPlayer) currentBallsPlayer.isCurrent = true;
+        }
+
+        function updateTopListsDisplay() {
+            // Update Top 5 by Time
+            const topTimeList = document.getElementById('topByTime');
+            topTimeList.innerHTML = topPlayersByTime.slice(0, 5).map((player, index) => `
+                <li class="top-item ${player.isCurrent ? 'current' : ''}">
+                    <span class="rank">${index + 1}</span>
+                    <span class="player-name">${player.name}</span>
+                    <span class="value">${formatTime(player.time)}</span>
+                </li>
+            `).join('');
+            
+            // Update Top 5 by Balls
+            const topBallsList = document.getElementById('topByBalls');
+            topBallsList.innerHTML = topPlayersByBalls.slice(0, 5).map((player, index) => `
+                <li class="top-item ${player.isCurrent ? 'current' : ''}">
+                    <span class="rank">${index + 1}</span>
+                    <span class="player-name">${player.name}</span>
+                    <span class="value">${formatNumber(player.balls)}</span>
+                </li>
+            `).join('');
         }
 
         // Click handler
@@ -957,7 +931,7 @@
             createClickEffect(e, `+${perClick}`);
             
             if (totalClicks % 50 === 0) {
-                showNotification(`🎯 ${totalClicks} ta bosish amalga oshirildi!`);
+                showNotification(`🎯 ${totalClicks} ta bosish!`);
             }
             
             updateUI();
@@ -971,6 +945,13 @@
             const effect = document.createElement('div');
             effect.className = 'click-effect';
             effect.textContent = text;
+            effect.style.position = 'absolute';
+            effect.style.color = '#FF9800';
+            effect.style.fontWeight = '800';
+            effect.style.fontSize = '24px';
+            effect.style.pointerEvents = 'none';
+            effect.style.zIndex = '10';
+            effect.style.animation = 'floatUp 1s ease-out forwards';
             
             const rect = document.getElementById('clickImage').getBoundingClientRect();
             const x = event.clientX - rect.left;
@@ -989,7 +970,7 @@
         // Auto clicker
         function activateAutoClicker() {
             if (autoClickerActive) {
-                showNotification('⚠️ Avtokliker allaqachon ishlamoqda!');
+                showNotification('⚠️ Avtokliker ishlamoqda!');
                 return;
             }
             
@@ -1000,7 +981,7 @@
                 autoClickerActive = true;
                 
                 addToHistory('avtokliker', 'Avtokliker sotib olindi', -cost);
-                showNotification('🤖 Avtokliker faollashtirildi! 15 daqiqa');
+                showNotification('🤖 Avtokliker faollashtirildi!');
                 updateUI();
                 
                 startAutoClicker();
@@ -1011,7 +992,7 @@
                 
                 autoSave();
             } else {
-                showNotification('❌ Yetarli ball mavjud emas! 100 ball kerak');
+                showNotification('❌ 100 ball kerak!');
             }
         }
 
@@ -1050,7 +1031,7 @@
         // Upgrade system
         function upgradeAutoClicker() {
             if (upgradeLevel >= upgradeCosts.length) {
-                showNotification('🎉 Siz maksimal tezlikka erishdingiz!');
+                showNotification('🎉 Maksimal tezlik!');
                 return;
             }
             
@@ -1066,14 +1047,14 @@
                     startAutoClicker();
                 }
                 
-                addToHistory('upgrade', `Avtokliker tezligi ${upgrade.multiplier}x ga oshirildi`, -cost);
-                showNotification(`⚡ Avtokliker tezligi ${upgrade.multiplier}x ga oshirildi!`);
+                addToHistory('upgrade', `Tezlik ${upgrade.multiplier}x ga oshdi`, -cost);
+                showNotification(`⚡ Tezlik ${upgrade.multiplier}x!`);
                 
                 updateUI();
                 updateUpgradeCost();
                 autoSave();
             } else {
-                showNotification(`❌ Yetarli ball mavjud emas! ${cost} ball kerak`);
+                showNotification(`❌ ${cost} ball kerak`);
             }
         }
 
@@ -1082,7 +1063,7 @@
                 const upgrade = upgradeCosts[upgradeLevel];
                 document.getElementById('upgradeCost').textContent = `${upgrade.cost} ball`;
             } else {
-                document.getElementById('upgradeCost').textContent = 'MAKSIMAL';
+                document.getElementById('upgradeCost').textContent = 'MAKS';
             }
         }
 
@@ -1090,6 +1071,7 @@
         function startGameTime() {
             setInterval(() => {
                 gameTime += 60000;
+                updateTopLists();
                 updateUI();
                 
                 if (Math.floor(gameTime / 300000) > Math.floor((gameTime - 60000) / 300000)) {
@@ -1101,15 +1083,15 @@
         // Modals
         function openDonateModal() {
             document.getElementById('packageList').innerHTML = packages.map(pkg => `
-                <div class="package-item" onclick="selectPackage(${pkg.id})">
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: ${pkg.popular ? 'var(--primary-light)' : 'white'}; border-radius: 12px; margin-bottom: 10px; border: 2px solid ${pkg.popular ? 'var(--primary)' : 'transparent'};">
+                <div onclick="selectPackage(${pkg.id})" style="padding: 15px; margin-bottom: 10px; background: ${pkg.popular ? 'var(--primary-light)' : 'white'}; border-radius: 12px; border: 2px solid ${pkg.popular ? 'var(--primary)' : 'transparent'}; cursor: pointer;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <div style="font-weight: 700; color: var(--primary); font-size: 16px;">💎 ${pkg.label}</div>
-                            <div style="font-size: 14px; color: var(--gray); margin-top: 5px;">${pkg.diamonds} ta olmos</div>
+                            <div style="font-size: 14px; color: var(--gray);">${pkg.diamonds} ta olmos</div>
                         </div>
                         <div style="text-align: right;">
                             <div style="font-weight: 800; color: var(--accent); font-size: 18px;">${pkg.price.toLocaleString()} ${pkg.currency}</div>
-                            ${pkg.popular ? '<div style="font-size: 11px; color: var(--warning); margin-top: 3px;">🔥 POPULAR</div>' : ''}
+                            ${pkg.popular ? '<div style="font-size: 11px; color: var(--warning);">🔥 POPULAR</div>' : ''}
                         </div>
                     </div>
                 </div>
@@ -1122,8 +1104,19 @@
             document.getElementById('donateModal').style.display = 'none';
         }
 
+        let selectedPackage = null;
         function selectPackage(packageId) {
-            const pkg = packages.find(p => p.id === packageId);
+            selectedPackage = packageId;
+            document.getElementById('paymentBtn').disabled = false;
+        }
+
+        function proceedToPayment() {
+            if (!selectedPackage) {
+                showNotification('❌ Paketni tanlang!');
+                return;
+            }
+            
+            const pkg = packages.find(p => p.id === selectedPackage);
             const message = `Salom! Men MLBB Ball Collector o'yinidan ${pkg.label} paketini sotib olmoqchiman.%0A%0A` +
                           `Paket: ${pkg.label}%0A` +
                           `Narxi: ${pkg.price.toLocaleString()} SO'M%0A` +
@@ -1133,8 +1126,8 @@
                           `Referral kodi: ${referralCode}`;
             
             window.open(`https://t.me/laz1z0v1ch?text=${message}`, '_blank');
-            addToHistory('sotib_olish', `${pkg.label} paketi sotib olish so'rovi`, 0);
-            showNotification(`📤 ${pkg.label} paketi uchun so'rov yuborildi!`);
+            addToHistory('sotib_olish', `${pkg.label} paketi sotib olish`, 0);
+            showNotification(`📤 So'rov yuborildi!`);
             closeDonateModal();
         }
 
@@ -1192,9 +1185,8 @@
             const shareText = `🎮 *MLBB BALL COLLECTOR* - Tekin ball va olmoslar!%0A%0A` +
                             `⚡ Avtokliker bilan ball to'plang%0A` +
                             `💎 Har bir taklif uchun 3 olmos oling%0A` +
-                            `💰 Ballarni haqiqiy MLBB olmoslariga almashtiring%0A%0A` +
+                            `🔗 O'ynash uchun: ${window.location.href}%0A` +
                             `🎯 Mening taklif kodi: ${referralCode}%0A` +
-                            `🔗 O'ynash uchun: ${window.location.href}%0A%0A` +
                             `📞 Admin: @laz1z0v1ch`;
             
             if (navigator.share) {
@@ -1207,7 +1199,7 @@
                 });
             } else {
                 navigator.clipboard.writeText(shareText.replace(/%0A/g, '\n').replace(/\*/g, '')).then(() => {
-                    showNotification('📋 Taklif matni nusxalandi! Do\'stlaringizga ulashing.');
+                    showNotification('📋 Taklif matni nusxalandi!');
                     processInvite();
                 });
             }
@@ -1218,7 +1210,7 @@
             diamonds += 3;
             totalPlayers++;
             addToHistory('taklif', `Do'st taklif qilindi (+3 olmos)`, 0);
-            showNotification(`🎉 Do'stingiz taklif qilindi! +3 olmos qo'shildi.`);
+            showNotification(`🎉 +3 olmos qo'shildi!`);
             updateUI();
         }
 
@@ -1294,7 +1286,7 @@
                     deactivateAutoClicker();
                 }
                 
-                const sessionTime = Date.now() - clicksStartTime;
+                const sessionTime = Date.now() - startTime;
                 gameTime += sessionTime;
                 autoSave();
             });
