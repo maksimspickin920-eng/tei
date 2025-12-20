@@ -21,6 +21,8 @@
             --accent: #4CAF50;
             --warning: #FF9800;
             --danger: #F44336;
+            --purple: #9C27B0;
+            --pink: #E91E63;
             --light: #FFFFFF;
             --dark: #1A1A2E;
             --gray: #757575;
@@ -29,7 +31,6 @@
             --shadow-lg: 0 8px 24px rgba(33, 150, 243, 0.25);
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             --bg-gradient: linear-gradient(135deg, #6A1B9A 0%, #9C27B0 30%, #E1BEE7 100%);
-            --button-bg: #2196F3; /* Ko'k rang knopkalar uchun */
         }
 
         body {
@@ -257,7 +258,7 @@
         }
 
         .top-btn {
-            background: var(--button-bg);
+            background: var(--primary);
             border: none;
             padding: 14px 8px;
             border-radius: 12px;
@@ -305,19 +306,18 @@
             font-weight: 500;
         }
 
-        /* Bottom Action Buttons - Kichkina to'rtburchak */
+        /* Bottom Action Buttons - Kichkina to'rtburchak, 2 ta qator */
         .bottom-actions {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
             margin: 20px 0;
         }
 
         .bottom-btn {
-            background: var(--button-bg);
             border: none;
-            padding: 10px 5px;
-            border-radius: 8px;
+            padding: 12px 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 11px;
             font-weight: 700;
@@ -330,19 +330,19 @@
             color: white;
             position: relative;
             overflow: hidden;
-            min-height: 60px;
+            min-height: 65px;
             border: 2px solid white;
         }
 
         .bottom-btn:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
-            background: var(--primary-dark);
+            filter: brightness(110%);
         }
 
         .bottom-btn i {
-            font-size: 16px;
-            margin-bottom: 5px;
+            font-size: 18px;
+            margin-bottom: 6px;
             color: white;
         }
 
@@ -353,9 +353,29 @@
             font-weight: 500;
         }
 
-        .bottom-btn.primary {
-            background: var(--button-bg);
-            color: white;
+        /* Turli rangdagi knopkalar */
+        .blue-btn {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+        }
+        
+        .green-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+        }
+        
+        .yellow-btn {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+        }
+        
+        .red-btn {
+            background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%);
+        }
+        
+        .purple-btn {
+            background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+        }
+        
+        .pink-btn {
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
         }
 
         /* Stats Sections */
@@ -582,7 +602,8 @@
             .container { padding: 12px; }
             .game-title { font-size: 22px; }
             .stats-container { grid-template-columns: repeat(2, 1fr); }
-            .top-actions, .bottom-actions { grid-template-columns: repeat(2, 1fr); }
+            .top-actions { grid-template-columns: repeat(2, 1fr); }
+            .bottom-actions { grid-template-columns: repeat(2, 1fr); }
             .stats-sections { grid-template-columns: 1fr; }
             .click-container { width: 220px; height: 220px; }
             .total-time-value { font-size: 30px; }
@@ -688,24 +709,30 @@
             </button>
         </div>
 
-        <!-- Bottom Action Buttons (Kichkina to'rtburchak) -->
+        <!-- Bottom Action Buttons (Har xil rangda, 2 tadan qatorda) -->
         <div class="bottom-actions">
-            <button class="bottom-btn" onclick="openExchangeModal()">
+            <button class="bottom-btn blue-btn" onclick="openExchangeModal()">
                 <i class="fas fa-exchange-alt"></i>
                 <span>Almashtirish</span>
                 <small>Ball → Olmos</small>
             </button>
             
-            <button class="bottom-btn" onclick="openHistoryModal()">
+            <button class="bottom-btn green-btn" onclick="openHistoryModal()">
                 <i class="fas fa-history"></i>
                 <span>Tarix</span>
                 <small>Barcha amallar</small>
             </button>
             
-            <button class="bottom-btn" onclick="inviteFriend()">
+            <button class="bottom-btn yellow-btn" onclick="inviteFriend()">
                 <i class="fas fa-user-plus"></i>
                 <span>Do'stni taklif qilish</span>
                 <small>3 olmos bonus</small>
+            </button>
+            
+            <button class="bottom-btn purple-btn" onclick="openSettings()">
+                <i class="fas fa-cog"></i>
+                <span>Sozlamalar</span>
+                <small>O'yin sozlamalari</small>
             </button>
         </div>
 
@@ -755,7 +782,7 @@
                 </div>
             </div>
             
-            <button class="top-btn" onclick="inviteFriend()" style="width: 100%; margin-top: 20px; padding: 16px;">
+            <button class="top-btn pink-btn" onclick="inviteFriend()" style="width: 100%; margin-top: 20px; padding: 16px;">
                 <i class="fas fa-share-alt"></i>
                 <span>DO'STLARNI TAKLIF QILISH</span>
                 <small>Har bir do'st uchun 3 olmos bonus</small>
@@ -790,8 +817,8 @@
                 </div>
             </div>
             <div style="display: flex; gap: 12px; margin-top: 25px;">
-                <button class="bottom-btn" onclick="closeDonateModal()" style="flex: 1;">Yopish</button>
-                <button class="bottom-btn" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">Sotib olish</button>
+                <button class="bottom-btn red-btn" onclick="closeDonateModal()" style="flex: 1;">Yopish</button>
+                <button class="bottom-btn green-btn" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">Sotib olish</button>
             </div>
         </div>
     </div>
@@ -814,7 +841,7 @@
                     <span id="currentBalls">0</span> ball
                 </div>
             </div>
-            <button class="bottom-btn" onclick="closeExchangeModal()" style="width: 100%;">Yopish</button>
+            <button class="bottom-btn blue-btn" onclick="closeExchangeModal()" style="width: 100%;">Yopish</button>
         </div>
     </div>
 
@@ -827,7 +854,26 @@
                 <button onclick="closeHistoryModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             <div class="history-list" id="historyList"></div>
-            <button class="bottom-btn" onclick="closeHistoryModal()" style="width: 100%; margin-top: 20px;">Yopish</button>
+            <button class="bottom-btn purple-btn" onclick="closeHistoryModal()" style="width: 100%; margin-top: 20px;">Yopish</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-cog"></i> SOZLAMALAR
+                </h2>
+                <button onclick="closeSettings()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
+            </div>
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 60px; color: var(--primary); margin-bottom: 20px;">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Tez kunda!</h3>
+                <p style="color: var(--gray);">Sozlamalar bo'limi hozir ishlab chiqilmoqda. Tez orada o'yin sozlamalarini o'zgartira olasiz!</p>
+            </div>
+            <button class="bottom-btn yellow-btn" onclick="closeSettings()" style="width: 100%;">Yopish</button>
         </div>
     </div>
 
@@ -913,6 +959,15 @@
             setTimeout(() => {
                 showNotification('🎮 MLBB Ball Collector ga xush kelibsiz!');
             }, 500);
+        }
+
+        // Settings modal functions
+        function openSettings() {
+            document.getElementById('settingsModal').style.display = 'flex';
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').style.display = 'none';
         }
 
         // Update UI
