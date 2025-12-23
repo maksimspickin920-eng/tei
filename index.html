@@ -27,10 +27,11 @@
             --dark: #1A1A2E;
             --gray: #757575;
             --light-gray: #F5F5F5;
-            --shadow: 0 3px 8px rgba(33, 150, 243, 0.15);
-            --shadow-lg: 0 6px 18px rgba(33, 150, 243, 0.25);
+            --shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+            --shadow-lg: 0 8px 24px rgba(33, 150, 243, 0.25);
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             --bg-gradient: linear-gradient(135deg, #6A1B9A 0%, #9C27B0 30%, #E1BEE7 100%);
+            --gold-glow: 0 0 20px rgba(255, 215, 0, 0.7);
         }
 
         body {
@@ -38,23 +39,23 @@
             color: var(--dark);
             min-height: 100vh;
             padding: 0;
-            line-height: 1.5;
-            font-size: 14px;
+            line-height: 1.6;
+            font-size: 15px;
             background-attachment: fixed;
         }
 
         .container {
-            max-width: 500px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 10px;
+            padding: 15px;
         }
 
         /* Header */
         .header {
             background: var(--gradient);
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
             color: white;
             text-align: center;
             position: relative;
@@ -68,7 +69,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.3);
         }
 
@@ -78,51 +79,51 @@
         }
 
         .game-title {
-            font-size: 20px;
+            font-size: 26px;
             font-weight: 800;
-            margin-bottom: 5px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            letter-spacing: 0.3px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
         }
 
         .game-subtitle {
-            font-size: 12px;
+            font-size: 14px;
             opacity: 0.95;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .game-logo {
-            width: 70px;
-            height: 70px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
-            border-radius: 15px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            margin: 0 auto 10px;
+            border-radius: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 15px;
             display: block;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             background: white;
         }
 
         /* Total Time Display */
         .total-time-section {
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 20px;
             text-align: center;
             box-shadow: var(--shadow);
-            border: 1px solid var(--primary-light);
+            border: 2px solid var(--primary-light);
         }
 
         .total-time-title {
-            font-size: 13px;
+            font-size: 16px;
             color: var(--primary-dark);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
         .total-time-value {
-            font-size: 28px;
+            font-size: 36px;
             font-weight: 800;
             color: var(--primary);
             font-family: 'Courier New', monospace;
@@ -132,24 +133,24 @@
         .stats-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .stat-box {
             background: var(--light);
-            padding: 15px;
-            border-radius: 12px;
+            padding: 20px;
+            border-radius: 16px;
             text-align: center;
             box-shadow: var(--shadow);
-            border: 1px solid var(--primary-light);
+            border: 2px solid var(--primary-light);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .stat-box:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
 
@@ -158,40 +159,40 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 5px;
             height: 100%;
             background: var(--gradient);
         }
 
         .stat-value {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 800;
             color: var(--primary);
             margin-bottom: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: 13px;
             color: var(--gray);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
         }
 
         /* Game Area */
         .game-area {
             position: relative;
-            margin: 15px 0;
+            margin: 25px 0;
             text-align: center;
         }
 
         .click-container {
-            width: 180px;
-            height: 180px;
+            width: 260px;
+            height: 260px;
             margin: 0 auto;
             position: relative;
             cursor: pointer;
@@ -200,17 +201,17 @@
         .click-main {
             width: 100%;
             height: 100%;
-            border-radius: 20px;
+            border-radius: 25px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
             font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 10px 25px rgba(156, 39, 176, 0.4);
+            font-size: 18px;
+            box-shadow: 0 15px 35px rgba(156, 39, 176, 0.4);
             transition: all 0.2s ease;
-            border: 4px solid white;
+            border: 5px solid white;
             position: relative;
             overflow: hidden;
             background-size: cover;
@@ -220,7 +221,7 @@
 
         .click-main:hover {
             transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(156, 39, 176, 0.5);
+            box-shadow: 0 20px 40px rgba(156, 39, 176, 0.5);
         }
 
         .click-main:active {
@@ -228,10 +229,10 @@
         }
 
         .click-main i {
-            font-size: 45px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            font-size: 60px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .click-overlay {
@@ -245,22 +246,80 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
         }
 
-        /* Top Action Buttons - 2x2 tartib */
+        /* Top Action Buttons - Gold Glow Effect */
         .top-actions {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin: 15px 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
         }
 
         .top-btn {
-            background: var(--primary);
+            background: linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%);
             border: none;
-            padding: 12px 6px;
+            padding: 14px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: var(--gold-glow), var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 70px;
+        }
+
+        .top-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+        }
+
+        .top-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9), var(--shadow-lg);
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+        }
+
+        .top-btn i {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .top-btn small {
+            font-size: 10px;
+            opacity: 0.9;
+            margin-top: 4px;
+            font-weight: 500;
+            color: white;
+        }
+
+        /* Bottom Action Buttons */
+        .bottom-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .bottom-btn {
+            border: none;
+            padding: 12px 8px;
             border-radius: 10px;
             cursor: pointer;
             font-size: 11px;
@@ -275,81 +334,25 @@
             position: relative;
             overflow: hidden;
             min-height: 65px;
-        }
-
-        .top-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .top-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            background: var(--primary-dark);
-        }
-
-        .top-btn i {
-            font-size: 18px;
-            margin-bottom: 6px;
-            color: white;
-        }
-
-        .top-btn small {
-            font-size: 9px;
-            opacity: 0.9;
-            margin-top: 3px;
-            font-weight: 500;
-        }
-
-        /* Bottom Action Buttons - 2x3 tartib */
-        .bottom-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin: 15px 0;
-        }
-
-        .bottom-btn {
-            border: none;
-            padding: 10px 6px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 10px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            min-height: 60px;
-            border: 1px solid white;
+            border: 2px solid white;
         }
 
         .bottom-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
             filter: brightness(110%);
         }
 
         .bottom-btn i {
-            font-size: 16px;
-            margin-bottom: 5px;
+            font-size: 18px;
+            margin-bottom: 6px;
             color: white;
         }
 
         .bottom-btn small {
-            font-size: 8px;
+            font-size: 9px;
             opacity: 0.9;
-            margin-top: 2px;
+            margin-top: 3px;
             font-weight: 500;
         }
 
@@ -381,26 +384,26 @@
         /* Stats Sections */
         .stats-sections {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin: 15px 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
         }
 
         .stats-card {
             background: var(--light);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 18px;
+            padding: 20px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--primary-light);
+            border: 2px solid var(--primary-light);
         }
 
         .stats-card-title {
-            font-size: 14px;
+            font-size: 16px;
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-weight: 700;
         }
 
@@ -412,16 +415,16 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 10px;
-            margin-bottom: 6px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
             background: var(--primary-light);
-            border-radius: 8px;
-            font-size: 11px;
+            border-radius: 10px;
+            font-size: 13px;
             transition: transform 0.2s;
         }
 
         .top-item:hover {
-            transform: translateX(3px);
+            transform: translateX(5px);
             background: rgba(33, 150, 243, 0.15);
         }
 
@@ -434,7 +437,7 @@
         .top-item .rank {
             font-weight: 800;
             color: var(--primary);
-            min-width: 25px;
+            min-width: 30px;
         }
 
         .top-item.current .rank {
@@ -444,7 +447,7 @@
         .top-item .player-name {
             flex-grow: 1;
             text-align: left;
-            margin-left: 8px;
+            margin-left: 10px;
         }
 
         .top-item .value {
@@ -459,13 +462,13 @@
         /* Invite Section */
         .invite-section {
             background: var(--light);
-            border-radius: 15px;
-            padding: 18px;
-            margin: 15px 0;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
             box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--primary-light);
+            border: 2px solid var(--primary-light);
         }
 
         .invite-section::before {
@@ -474,59 +477,84 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 5px;
             background: var(--gradient);
         }
 
         .section-title {
-            font-size: 16px;
+            font-size: 20px;
             color: var(--primary);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
         }
 
         .invite-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 15px 0;
+            gap: 15px;
+            margin: 20px 0;
         }
 
         .invite-stat {
             background: var(--primary-light);
-            padding: 12px;
-            border-radius: 10px;
+            padding: 18px;
+            border-radius: 15px;
             text-align: center;
-            border: 1px solid var(--primary);
+            border: 2px solid var(--primary);
         }
 
         .invite-stat-value {
-            font-size: 20px;
+            font-size: 28px;
             font-weight: 800;
             color: var(--primary-dark);
-            margin-bottom: 3px;
+            margin-bottom: 5px;
         }
 
         .invite-stat-label {
-            font-size: 10px;
+            font-size: 12px;
             color: var(--gray);
             font-weight: 600;
+        }
+
+        /* Cooldown Bar */
+        .cooldown-bar {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid var(--danger);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .cooldown-text {
+            color: var(--danger);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .cooldown-timer {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--danger);
+            font-family: 'Courier New', monospace;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            margin-top: 20px;
-            padding: 15px 10px;
+            margin-top: 30px;
+            padding: 25px 20px;
             color: var(--light);
-            font-size: 11px;
+            font-size: 13px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
+            border-radius: 15px;
         }
 
         /* Modals */
@@ -541,39 +569,38 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
             backdrop-filter: blur(5px);
         }
 
         .modal-content {
             background: var(--light);
-            padding: 20px;
-            border-radius: 20px;
-            max-width: 400px;
+            padding: 30px;
+            border-radius: 25px;
+            max-width: 500px;
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
         }
 
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 25px;
+            right: 25px;
             background: var(--light);
             color: var(--dark);
-            padding: 12px 15px;
-            border-radius: 12px;
+            padding: 18px 22px;
+            border-radius: 15px;
             box-shadow: var(--shadow-lg);
             z-index: 1001;
             animation: slideInRight 0.3s ease-out;
-            max-width: 250px;
-            border-left: 4px solid var(--primary);
+            max-width: 300px;
+            border-left: 5px solid var(--primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             font-weight: 600;
-            font-size: 13px;
         }
 
         @keyframes slideInRight {
@@ -586,58 +613,54 @@
             position: absolute;
             color: var(--warning);
             font-weight: 800;
-            font-size: 20px;
+            font-size: 24px;
             pointer-events: none;
             animation: floatUp 1s ease-out forwards;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
             z-index: 10;
         }
 
         @keyframes floatUp {
             0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-80px) scale(1.3); opacity: 0; }
+            100% { transform: translateY(-100px) scale(1.4); opacity: 0; }
         }
 
-        /* Avtokliker Status Bar */
-        .autoclicker-status {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 10px;
-            margin: 10px auto;
-            text-align: center;
-            font-size: 12px;
-            max-width: 200px;
-            display: none;
+        /* Referral Link */
+        .referral-link-container {
+            background: var(--primary-light);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px dashed var(--primary);
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            margin-top: 5px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--accent);
-            width: 0%;
-            transition: width 0.3s;
+        .referral-link {
+            word-break: break-all;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid var(--gray);
         }
 
         /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 12px; }
+            .game-title { font-size: 22px; }
+            .stats-container { grid-template-columns: repeat(2, 1fr); }
+            .top-actions { grid-template-columns: repeat(2, 1fr); }
+            .bottom-actions { grid-template-columns: repeat(2, 1fr); }
+            .stats-sections { grid-template-columns: 1fr; }
+            .click-container { width: 220px; height: 220px; }
+            .total-time-value { font-size: 30px; }
+        }
+
         @media (max-width: 480px) {
-            .container { padding: 8px; }
-            .game-title { font-size: 18px; }
-            .stats-container { gap: 8px; }
-            .top-actions, .bottom-actions { gap: 6px; }
-            .stats-sections { gap: 8px; }
-            .click-container { width: 160px; height: 160px; }
-            .total-time-value { font-size: 24px; }
-            .stat-value { font-size: 20px; }
-            .game-logo { width: 60px; height: 60px; }
+            .top-actions, .bottom-actions { grid-template-columns: 1fr; }
+            .invite-stats { grid-template-columns: 1fr; }
+            .header { padding: 15px; }
+            .stat-value { font-size: 24px; }
         }
     </style>
 </head>
@@ -646,14 +669,13 @@
         <!-- Header -->
         <div class="header">
             <div class="header-content">
-                <!-- TELEGRAMMINI LOGO -->
                 <img src="https://i.imgur.com/abc123.jpg" 
                      alt="MLBB Ball Collector" 
                      class="game-logo">
                 <h1 class="game-title">
-                    <i class="fas fa-gem"></i> MLBB BALL
+                    <i class="fas fa-gem"></i> MLBB BALL COLLECTOR
                 </h1>
-                <p class="game-subtitle">Tekin ball • Olmoslar • Raqobat</p>
+                <p class="game-subtitle">Tekin ball to'plang • Olmoslar oling • Raqobatlashing</p>
             </div>
         </div>
 
@@ -661,8 +683,8 @@
         <div class="total-time-section">
             <div class="total-time-title">UMUMIY O'YIN VAQTI</div>
             <div class="total-time-value" id="totalGameTime">00:00:00</div>
-            <div style="font-size: 11px; color: var(--gray); margin-top: 3px;">
-                <i class="fas fa-clock"></i> Faollik vaqti
+            <div style="font-size: 13px; color: var(--gray); margin-top: 5px;">
+                <i class="fas fa-clock"></i> Sizning faolligingiz
             </div>
         </div>
 
@@ -698,88 +720,72 @@
             </div>
         </div>
 
-        <!-- Avtokliker Status -->
-        <div class="autoclicker-status" id="autoclickerStatus">
-            <div>🤖 Avtokliker faol: <span id="autoclickerTime">00:00</span></div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="autoclickerProgress"></div>
+        <!-- Cooldown Bar -->
+        <div class="cooldown-bar" id="cooldownBar">
+            <div class="cooldown-text">
+                <i class="fas fa-hourglass-half"></i> QAYTA ZARYADLASH
+            </div>
+            <div class="cooldown-timer" id="cooldownTimer">10:00</div>
+            <div style="font-size: 12px; color: var(--gray); margin-top: 5px;">
+                1000 ball to'plaganingiz uchun 10 daqiqa kutishingiz kerak
             </div>
         </div>
 
         <!-- Game Area -->
         <div class="game-area">
             <div class="click-container">
-                <!-- TAPALKA RASMI -->
                 <div class="click-main" id="clickImage" style="background-image: url('https://i.imgur.com/xyz456.jpg');">
                     <div class="click-overlay">
                         <i class="fas fa-basketball"></i>
                         <div>BOSING VA BALL TOPLANG</div>
-                        <div style="font-size: 12px; margin-top: 8px; opacity: 0.9;">Har bir bosish = 1 ball</div>
+                        <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Har bir bosish = 1 ball</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Top Action Buttons - 2x2 -->
+        <!-- Top Action Buttons -->
         <div class="top-actions">
             <button class="top-btn" onclick="activateAutoClicker()">
                 <i class="fas fa-robot"></i>
                 <span>Avtokliker</span>
-                <small>100 ball • 5 min</small>
+                <small>100 ball • 15 daq</small>
             </button>
             
-            <button class="top-btn" onclick="upgradeMultiplier()">
+            <button class="top-btn" onclick="upgradeAutoClicker()">
                 <i class="fas fa-bolt"></i>
-                <span>Tezlik oshirish</span>
+                <span>Avtoklikerni oshirish</span>
                 <small id="upgradeCost">500 ball</small>
             </button>
             
             <button class="top-btn" onclick="openDonateModal()">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Olmos sotib olish</span>
-                <small>Haqiqiy olmos</small>
+                <small>Haqiqiy olmoslar</small>
             </button>
-            
-            <button class="top-btn" onclick="openExchangeModal()">
+        </div>
+
+        <!-- Bottom Action Buttons -->
+        <div class="bottom-actions">
+            <button class="bottom-btn blue-btn" onclick="openExchangeModal()">
                 <i class="fas fa-exchange-alt"></i>
                 <span>Almashtirish</span>
                 <small>Ball → Olmos</small>
             </button>
-        </div>
-
-        <!-- Bottom Action Buttons - 2x3 -->
-        <div class="bottom-actions">
+            
             <button class="bottom-btn green-btn" onclick="openHistoryModal()">
                 <i class="fas fa-history"></i>
                 <span>Tarix</span>
-                <small>Amallar tarixi</small>
+                <small>Barcha amallar</small>
             </button>
             
-            <button class="bottom-btn yellow-btn" onclick="inviteFriend()">
+            <button class="bottom-btn yellow-btn" onclick="openInviteModal()">
                 <i class="fas fa-user-plus"></i>
-                <span>Do'st taklif</span>
+                <span>Do'stni taklif qilish</span>
                 <small>3 olmos bonus</small>
             </button>
             
-            <button class="bottom-btn purple-btn" onclick="openUpgradesModal()">
-                <i class="fas fa-chart-line"></i>
-                <span>Upgrade</span>
-                <small>Avtokliker daraja</small>
-            </button>
-            
-            <button class="bottom-btn blue-btn" onclick="openGuideModal()">
-                <i class="fas fa-question-circle"></i>
-                <span>Qo'llanma</span>
-                <small>O'yin qoidalari</small>
-            </button>
-            
-            <button class="bottom-btn pink-btn" onclick="openStatsModal()">
-                <i class="fas fa-chart-bar"></i>
-                <span>Statistika</span>
-                <small>O'yin statistikasi</small>
-            </button>
-            
-            <button class="bottom-btn red-btn" onclick="openSettingsModal()">
+            <button class="bottom-btn purple-btn" onclick="openSettings()">
                 <i class="fas fa-cog"></i>
                 <span>Sozlamalar</span>
                 <small>O'yin sozlamalari</small>
@@ -793,6 +799,15 @@
                     <i class="fas fa-clock"></i> Vaqt bo'yicha TOP-5
                 </h3>
                 <ul class="top-list" id="topByTime">
+                    <!-- JavaScript tomonidan to'ldiriladi -->
+                </ul>
+            </div>
+            
+            <div class="stats-card">
+                <h3 class="stats-card-title">
+                    <i class="fas fa-basketball"></i> Ball bo'yicha TOP-5
+                </h3>
+                <ul class="top-list" id="topByBalls">
                     <!-- JavaScript tomonidan to'ldiriladi -->
                 </ul>
             </div>
@@ -823,41 +838,41 @@
                 </div>
             </div>
             
-            <button class="top-btn purple-btn" onclick="inviteFriend()" style="width: 100%; margin-top: 15px; padding: 12px;">
+            <button class="top-btn pink-btn" onclick="openInviteModal()" style="width: 100%; margin-top: 20px; padding: 16px;">
                 <i class="fas fa-share-alt"></i>
-                <span>DO'ST TAKLIF QILISH</span>
-                <small>Har bir do'st uchun 3 olmos</small>
+                <span>DO'STLARNI TAKLIF QILISH</span>
+                <small>Har bir do'st uchun 3 olmos bonus</small>
             </button>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            <p>© 2024 MLBB Ball Collector. Bu o'yin MLBB ning norasmiy loyihasidir.</p>
-            <p>Admin: @laz1z0v1ch • Ballarni haqiqiy olmoslarga almashtirish mumkin</p>
+            <p>© 2024 MLBB Ball Collector. Bu o'yin Mobile Legends: Bang Bang ning norasmiy loyihasidir.</p>
+            <p>Ballarni haqiqiy MLBB olmoslariga almashtirish mumkin. Admin: @laz1z0v1ch</p>
         </div>
     </div>
 
     <!-- Modals -->
     <div class="modal-overlay" id="donateModal">
         <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: var(--primary); font-size: 18px; display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-gem"></i> OLMOS PAKETLARI
                 </h2>
-                <button onclick="closeDonateModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+                <button onclick="closeDonateModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             <div id="packageList"></div>
-            <div style="background: rgba(33, 150, 243, 0.05); padding: 15px; border-radius: 12px; margin: 15px 0; font-size: 12px;">
-                <h3 style="color: var(--primary); margin-bottom: 8px; font-size: 14px;">
+            <div style="background: rgba(33, 150, 243, 0.05); padding: 20px; border-radius: 15px; margin: 20px 0; font-size: 14px;">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">
                     <i class="fas fa-info-circle"></i> QAYD ETILISHI KERAK:
                 </h3>
-                <div style="line-height: 1.5; color: var(--gray);">
+                <div style="line-height: 1.6; color: var(--gray);">
                     <p>1. Paketni tanlang va "Sotib olish" tugmasini bosing</p>
                     <p>2. Admin (@laz1z0v1ch) ga to'lov chekini va MLBB ID ni yuboring</p>
                     <p>3. Olmoslar 5-30 daqiqa ichida hisobingizga tushadi</p>
                 </div>
             </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <div style="display: flex; gap: 12px; margin-top: 25px;">
                 <button class="bottom-btn red-btn" onclick="closeDonateModal()" style="flex: 1;">Yopish</button>
                 <button class="bottom-btn green-btn" onclick="proceedToPayment()" id="paymentBtn" disabled style="flex: 1;">Sotib olish</button>
             </div>
@@ -866,23 +881,20 @@
 
     <div class="modal-overlay" id="exchangeModal">
         <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: var(--primary); font-size: 18px; display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-exchange-alt"></i> BALL → OLMOS
                 </h2>
-                <button onclick="closeExchangeModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+                <button onclick="closeExchangeModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
-            <div style="text-align: center; padding: 20px 15px;">
-                <div style="font-size: 50px; color: var(--warning); margin-bottom: 15px;">
+            <div style="text-align: center; padding: 30px 20px;">
+                <div style="font-size: 60px; color: var(--warning); margin-bottom: 20px;">
                     <i class="fas fa-tools"></i>
                 </div>
-                <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 16px;">Tez kunda!</h3>
-                <p style="color: var(--gray); font-size: 13px;">Bu funksiya hozir ishlab chiqilmoqda. Tez orada ballaringizni haqiqiy MLBB olmoslariga almashtira olasiz!</p>
-                <div style="margin-top: 20px; font-size: 24px; color: var(--primary); font-weight: 800;">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Tez kunda!</h3>
+                <p style="color: var(--gray);">Bu funksiya hozir ishlab chiqilmoqda. Tez orada ballaringizni haqiqiy MLBB olmoslariga almashtira olasiz!</p>
+                <div style="margin-top: 30px; font-size: 32px; color: var(--primary); font-weight: 800;">
                     <span id="currentBalls">0</span> ball
-                </div>
-                <div style="margin-top: 10px; color: var(--gray); font-size: 12px;">
-                    <i class="fas fa-info-circle"></i> 1000 ball = 1 olmos (kelajakda)
                 </div>
             </div>
             <button class="bottom-btn blue-btn" onclick="closeExchangeModal()" style="width: 100%;">Yopish</button>
@@ -891,116 +903,74 @@
 
     <div class="modal-overlay" id="historyModal">
         <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: var(--primary); font-size: 18px; display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-history"></i> AMALLAR TARIXI
                 </h2>
-                <button onclick="closeHistoryModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+                <button onclick="closeHistoryModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             <div class="history-list" id="historyList"></div>
-            <button class="bottom-btn purple-btn" onclick="closeHistoryModal()" style="width: 100%; margin-top: 15px;">Yopish</button>
+            <button class="bottom-btn purple-btn" onclick="closeHistoryModal()" style="width: 100%; margin-top: 20px;">Yopish</button>
         </div>
     </div>
 
-    <div class="modal-overlay" id="upgradesModal">
+    <div class="modal-overlay" id="inviteModal">
         <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: var(--primary); font-size: 18px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-chart-line"></i> UPGRADE SISTEMASI
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-user-plus"></i> DO'ST TAKLIF QILISH
                 </h2>
-                <button onclick="closeUpgradesModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+                <button onclick="closeInviteModal()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
-            <div style="margin-bottom: 20px;">
-                <div style="background: var(--primary-light); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <div>
-                            <div style="font-weight: 700; color: var(--primary);">Joriy tezlik</div>
-                            <div style="font-size: 12px; color: var(--gray);">Avtokliker tezligi</div>
-                        </div>
-                        <div style="font-weight: 800; font-size: 20px; color: var(--accent);" id="currentSpeed">1.0x</div>
+            <div style="text-align: center;">
+                <div style="font-size: 50px; color: var(--primary); margin-bottom: 20px;">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Telegram Bot orqali taklif qiling</h3>
+                <p style="color: var(--gray); margin-bottom: 20px;">Quyidagi havolani do'stlaringizga yuboring. Ular botga obuna bo'lishi va 5 kun davomida obunada qolishi kerak.</p>
+                
+                <div class="referral-link-container">
+                    <div style="font-weight: 600; color: var(--primary); margin-bottom: 10px;">Sizning taklif havolangiz:</div>
+                    <div class="referral-link" id="referralLink">
+                        https://t.me/mlbb_ball_bot?start=ref_A1B2C3
                     </div>
-                    <div style="font-size: 12px; color: var(--gray);">
-                        <i class="fas fa-info-circle"></i> Har 5 daqiqada: <span id="clicksPerMinute">60</span> ball
-                    </div>
+                    <button class="bottom-btn green-btn" onclick="copyReferralLink()" style="width: 100%; margin-top: 10px;">
+                        <i class="fas fa-copy"></i> Havolani nusxalash
+                    </button>
                 </div>
                 
-                <div id="upgradesList"></div>
+                <div style="background: rgba(255, 152, 0, 0.1); padding: 15px; border-radius: 12px; margin: 20px 0; border: 2px solid var(--warning);">
+                    <h4 style="color: var(--warning); margin-bottom: 10px;">
+                        <i class="fas fa-exclamation-triangle"></i> MUHIM:
+                    </h4>
+                    <div style="font-size: 13px; color: var(--gray); line-height: 1.5;">
+                        <p>1. Do'stingiz botga obuna bo'lishi kerak</p>
+                        <p>2. 5 kun davomida obunada qolishi kerak</p>
+                        <p>3. Agar 5 kun ichida obunadan chiqsa, olmoslar qaytarib olinadi</p>
+                        <p>4. Har bir taklif uchun: <strong>3 olmos</strong></p>
+                    </div>
+                </div>
             </div>
-            <button class="bottom-btn green-btn" onclick="closeUpgradesModal()" style="width: 100%;">Yopish</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="guideModal">
-        <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: var(--primary); font-size: 18px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-question-circle"></i> O'YIN QO'LLANMASI
-                </h2>
-                <button onclick="closeGuideModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
-            </div>
-            <div style="line-height: 1.6; font-size: 13px;">
-                <h3 style="color: var(--primary); margin-bottom: 8px; font-size: 15px;">🎮 O'yin qisqacha:</h3>
-                <p style="margin-bottom: 12px;">Ball to'plang, olmoslar sotib oling va do'stlaringizni taklif qiling.</p>
-                
-                <h3 style="color: var(--primary); margin-bottom: 8px; font-size: 15px;">🔄 Avtokliker:</h3>
-                <p style="margin-bottom: 12px;">100 ball evaziga 5 daqiqa davomida avtomatik ball to'plang.</p>
-                
-                <h3 style="color: var(--primary); margin-bottom: 8px; font-size: 15px;">⚡ Tezlikni oshirish:</h3>
-                <p style="margin-bottom: 12px;">Ball evaziga avtokliker tezligini oshiring (4 bosqich).</p>
-                
-                <h3 style="color: var(--primary); margin-bottom: 8px; font-size: 15px;">💎 Olmos sotib olish:</h3>
-                <p style="margin-bottom: 12px;">Haqiqiy olmoslarni sotib olish uchun paketlarni tanlang va admin bilan bog'laning.</p>
-                
-                <h3 style="color: var(--primary); margin-bottom: 8px; font-size: 15px;">👥 Do'stni taklif qilish:</h3>
-                <p style="margin-bottom: 12px;">Har bir taklif qilingan do'st uchun 3 olmos oling.</p>
-                
-                <h3 style="color: var(--primary); margin-bottom: 8px; font-size: 15px;">📞 Aloqa:</h3>
-                <p style="margin-bottom: 12px;">Savollar uchun: @laz1z0v1ch</p>
-            </div>
-            <button class="bottom-btn purple-btn" onclick="closeGuideModal()" style="width: 100%; margin-top: 15px;">Yopish</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="statsModal">
-        <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: var(--primary); font-size: 18px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-chart-bar"></i> O'YIN STATISTIKASI
-                </h2>
-                <button onclick="closeStatsModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
-            </div>
-            <div id="statsContent"></div>
-            <button class="bottom-btn blue-btn" onclick="closeStatsModal()" style="width: 100%; margin-top: 15px;">Yopish</button>
+            <button class="bottom-btn purple-btn" onclick="closeInviteModal()" style="width: 100%;">Yopish</button>
         </div>
     </div>
 
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: var(--primary); font-size: 18px; display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: var(--primary); font-size: 22px; display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-cog"></i> SOZLAMALAR
                 </h2>
-                <button onclick="closeSettingsModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+                <button onclick="closeSettings()" style="background: none; border: none; font-size: 24px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
-            <div style="text-align: center; padding: 15px;">
-                <div style="font-size: 50px; color: var(--primary); margin-bottom: 15px;">
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 60px; color: var(--primary); margin-bottom: 20px;">
                     <i class="fas fa-tools"></i>
                 </div>
-                <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 16px;">Tez kunda!</h3>
-                <p style="color: var(--gray); font-size: 13px;">Sozlamalar bo'limi hozir ishlab chiqilmoqda. Tez orada o'yin sozlamalarini o'zgartira olasiz!</p>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Tez kunda!</h3>
+                <p style="color: var(--gray);">Sozlamalar bo'limi hozir ishlab chiqilmoqda. Tez orada o'yin sozlamalarini o'zgartira olasiz!</p>
             </div>
-            <div style="margin-top: 20px; padding: 15px; background: var(--light-gray); border-radius: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <span style="font-weight: 600; color: var(--dark);">O'yinni tozalash:</span>
-                    <button class="bottom-btn red-btn" onclick="resetGame()" style="padding: 8px 12px; font-size: 12px;">
-                        <i class="fas fa-trash-alt"></i> O'yinni qayta boshlash
-                    </button>
-                </div>
-                <div style="font-size: 11px; color: var(--gray);">
-                    <i class="fas fa-exclamation-triangle"></i> Barcha ma'lumotlar o'chiriladi va qayta tiklanmaydi!
-                </div>
-            </div>
-            <button class="bottom-btn yellow-btn" onclick="closeSettingsModal()" style="width: 100%; margin-top: 15px;">Yopish</button>
+            <button class="bottom-btn yellow-btn" onclick="closeSettings()" style="width: 100%;">Yopish</button>
         </div>
     </div>
 
@@ -1012,17 +982,39 @@
         let perClick = 1;
         let autoClickerActive = false;
         let autoClickerInterval;
-        let autoClickerTimeLeft = 0;
-        let autoClickerDuration = 5 * 60 * 1000; // 5 minutes
         let speedMultiplier = 1;
-        let upgradeLevel = 0;
         let gameTime = 0;
         let invitedFriends = 0;
         let totalPlayers = 1;
         let referralCode = generateReferralCode();
         let transactionHistory = [];
         let startTime = Date.now();
-        let autoclickerUpgradeLevel = 0;
+        
+        // Автокликер улучшения
+        let autoclickerLevel = 0;
+        let autoclickerMultiplier = 1.0; // Скрытый множитель 1.1x за уровень
+        let autoclickerUpgrades = [
+            { level: 0, cost: 500, multiplier: 1.1, duration: 15 },
+            { level: 1, cost: 1500, multiplier: 1.2, duration: 15 },
+            { level: 2, cost: 3000, multiplier: 1.3, duration: 20 },
+            { level: 3, cost: 6000, multiplier: 1.4, duration: 25 },
+            { level: 4, cost: 12000, multiplier: 1.5, duration: 30 }
+        ];
+        
+        // Система перезарядки
+        let cooldownActive = false;
+        let cooldownTime = 0;
+        let cooldownInterval;
+        let sessionBalls = 0; // Баллы за текущую сессию кликов
+        
+        // Speed upgrades
+        const speedUpgrades = [
+            { level: 1, cost: 500, multiplier: 1.5 },
+            { level: 2, cost: 1000, multiplier: 2.0 },
+            { level: 3, cost: 2000, multiplier: 2.5 },
+            { level: 4, cost: 4000, multiplier: 3.0 }
+        ];
+        let upgradeLevel = 0;
 
         // Top players data
         let topPlayersByTime = [
@@ -1033,20 +1025,12 @@
             { name: "Beginner", time: 1200, isCurrent: false }
         ];
 
-        // Autoclicker upgrades
-        const autoclickerUpgrades = [
-            { level: 1, cost: 500, duration: 300000, label: "5 daqiqa", clicksPerSec: 1 },
-            { level: 2, cost: 1500, duration: 600000, label: "10 daqiqa", clicksPerSec: 2 },
-            { level: 3, cost: 4000, duration: 900000, label: "15 daqiqa", clicksPerSec: 3 },
-            { level: 4, cost: 10000, duration: 1200000, label: "20 daqiqa", clicksPerSec: 4 }
-        ];
-
-        // Speed upgrades
-        const speedUpgrades = [
-            { level: 1, cost: 500, multiplier: 1.5 },
-            { level: 2, cost: 1500, multiplier: 2.0 },
-            { level: 3, cost: 4000, multiplier: 2.5 },
-            { level: 4, cost: 10000, multiplier: 3.0 }
+        let topPlayersByBalls = [
+            { name: "RichPlayer", balls: 125000, isCurrent: false },
+            { name: "BallHunter", balls: 98000, isCurrent: false },
+            { name: "ClickMaster", balls: 75000, isCurrent: false },
+            { name: "Siz", balls: 0, isCurrent: true },
+            { name: "NewPlayer", balls: 500, isCurrent: false }
         ];
 
         // Packages
@@ -1074,13 +1058,13 @@
                     invitedFriends = data.invitedFriends || 0;
                     totalPlayers = data.totalPlayers || 1;
                     referralCode = data.referralCode || generateReferralCode();
-                    autoclickerUpgradeLevel = data.autoclickerUpgradeLevel || 0;
+                    autoclickerLevel = data.autoclickerLevel || 0;
+                    autoclickerMultiplier = data.autoclickerMultiplier || 1.0;
+                    sessionBalls = data.sessionBalls || 0;
                     
-                    if (data.autoClickerActive && data.autoClickerTimeLeft) {
-                        autoClickerActive = true;
-                        autoClickerTimeLeft = data.autoClickerTimeLeft;
-                        startAutoClicker();
-                        updateAutoclickerStatus();
+                    // Проверяем перезарядку
+                    if (sessionBalls >= 1000 && !cooldownActive) {
+                        startCooldown();
                     }
                     
                     updateTopLists();
@@ -1098,110 +1082,24 @@
             }, 500);
         }
 
-        // Modal functions
-        function openUpgradesModal() {
-            document.getElementById('currentSpeed').textContent = speedMultiplier.toFixed(1) + 'x';
-            document.getElementById('clicksPerMinute').textContent = Math.floor(60 * speedMultiplier);
-            
-            let upgradesHTML = '';
-            speedUpgrades.forEach((upgrade, index) => {
-                const isPurchased = upgradeLevel > index;
-                const isAvailable = upgradeLevel === index;
-                const isLocked = upgradeLevel < index;
-                
-                upgradesHTML += `
-                    <div style="padding: 12px; margin-bottom: 10px; background: ${isPurchased ? 'var(--primary-light)' : 'white'}; border-radius: 10px; border: 2px solid ${isPurchased ? 'var(--primary)' : (isAvailable ? 'var(--warning)' : 'var(--light-gray)')};">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <div style="font-weight: 700; color: var(--primary); font-size: 14px;">⚡ Tezlik ${upgrade.multiplier.toFixed(1)}x</div>
-                                <div style="font-size: 11px; color: var(--gray);">${isPurchased ? '✅ Sotib olindi' : (isAvailable ? '🟡 Mavjud' : '🔒 Qulflangan')}</div>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-weight: 800; color: ${isPurchased ? 'var(--accent)' : (isAvailable ? 'var(--warning)' : 'var(--gray)')}; font-size: 16px;">${upgrade.cost} ball</div>
-                                ${isAvailable ? '<div style="font-size: 10px; color: var(--warning);">Sotib olish mumkin</div>' : ''}
-                            </div>
-                        </div>
-                        ${isAvailable ? `
-                        <button onclick="buySpeedUpgrade(${index})" style="margin-top: 10px; width: 100%; padding: 8px; background: var(--warning); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
-                            Sotib olish
-                        </button>
-                        ` : ''}
-                    </div>
-                `;
-            });
-            
-            document.getElementById('upgradesList').innerHTML = upgradesHTML;
-            document.getElementById('upgradesModal').style.display = 'flex';
-        }
-
-        function closeUpgradesModal() {
-            document.getElementById('upgradesModal').style.display = 'none';
-        }
-
-        function openGuideModal() {
-            document.getElementById('guideModal').style.display = 'flex';
-        }
-
-        function closeGuideModal() {
-            document.getElementById('guideModal').style.display = 'none';
-        }
-
-        function openStatsModal() {
-            let statsHTML = `
-                <div style="background: var(--primary-light); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <div style="font-weight: 600; color: var(--primary);">Umumiy statistikalar</div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; font-weight: 800; color: var(--primary);">${totalClicks}</div>
-                            <div style="font-size: 11px; color: var(--gray);">Jami bosish</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 24px; font-weight: 800; color: var(--primary);">${Math.floor(gameTime / 3600000)}</div>
-                            <div style="font-size: 11px; color: var(--gray);">Oʻyin soati</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: var(--primary-light); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
-                    <div style="font-weight: 600; color: var(--primary); margin-bottom: 10px;">Darajalar</div>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 20px; font-weight: 800; color: var(--accent);">${upgradeLevel + 1}/4</div>
-                            <div style="font-size: 11px; color: var(--gray);">Tezlik darajasi</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 20px; font-weight: 800; color: var(--accent);">${autoclickerUpgradeLevel + 1}/4</div>
-                            <div style="font-size: 11px; color: var(--gray);">Avtokliker darajasi</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: var(--primary-light); padding: 15px; border-radius: 12px;">
-                    <div style="font-weight: 600; color: var(--primary); margin-bottom: 10px;">Faollik</div>
-                    <div style="font-size: 12px; color: var(--gray);">
-                        <div style="margin-bottom: 5px;">• Kunning eng yaxshi natijasi: <span style="font-weight: 700; color: var(--primary);">${Math.max(...transactionHistory.filter(h => h.type === 'bosish').map(h => h.amount) || [0])}</span> ball</div>
-                        <div style="margin-bottom: 5px;">• Oʻrtacha bosish tezligi: <span style="font-weight: 700; color: var(--primary);">${gameTime > 0 ? Math.floor(totalClicks / (gameTime / 3600000)) : 0}</span> ball/soat</div>
-                        <div>• Oxiri aktiv: <span style="font-weight: 700; color: var(--primary);">${new Date().toLocaleTimeString('uz-UZ', {hour: '2-digit', minute:'2-digit'})}</span></div>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('statsContent').innerHTML = statsHTML;
-            document.getElementById('statsModal').style.display = 'flex';
-        }
-
-        function closeStatsModal() {
-            document.getElementById('statsModal').style.display = 'none';
-        }
-
-        function openSettingsModal() {
+        // Settings modal functions
+        function openSettings() {
             document.getElementById('settingsModal').style.display = 'flex';
         }
 
-        function closeSettingsModal() {
+        function closeSettings() {
             document.getElementById('settingsModal').style.display = 'none';
+        }
+
+        // Invite modal functions
+        function openInviteModal() {
+            document.getElementById('referralLink').textContent = 
+                `https://t.me/mlbb_ball_bot?start=ref_${referralCode}`;
+            document.getElementById('inviteModal').style.display = 'flex';
+        }
+
+        function closeInviteModal() {
+            document.getElementById('inviteModal').style.display = 'none';
         }
 
         // Update UI
@@ -1257,10 +1155,19 @@
 
         function updateTopLists() {
             topPlayersByTime[3].time = gameTime;
+            topPlayersByBalls[3].balls = balls;
+            
             topPlayersByTime.sort((a, b) => b.time - a.time);
+            topPlayersByBalls.sort((a, b) => b.balls - a.balls);
+            
             topPlayersByTime.forEach(p => p.isCurrent = false);
+            topPlayersByBalls.forEach(p => p.isCurrent = false);
+            
             const currentTimePlayer = topPlayersByTime.find(p => p.name === "Siz");
+            const currentBallsPlayer = topPlayersByBalls.find(p => p.name === "Siz");
+            
             if (currentTimePlayer) currentTimePlayer.isCurrent = true;
+            if (currentBallsPlayer) currentBallsPlayer.isCurrent = true;
         }
 
         function updateTopListsDisplay() {
@@ -1272,21 +1179,42 @@
                     <span class="value">${formatTime(player.time)}</span>
                 </li>
             `).join('');
+            
+            const topBallsList = document.getElementById('topByBalls');
+            topBallsList.innerHTML = topPlayersByBalls.slice(0, 5).map((player, index) => `
+                <li class="top-item ${player.isCurrent ? 'current' : ''}">
+                    <span class="rank">${index + 1}</span>
+                    <span class="player-name">${player.name}</span>
+                    <span class="value">${formatNumber(player.balls)}</span>
+                </li>
+            `).join('');
         }
 
-        // Click handler
+        // Click handler with cooldown system
         document.getElementById('clickImage').addEventListener('click', function(e) {
-            balls += perClick;
+            if (cooldownActive) {
+                showNotification('⏳ Hozir qayta zaryadlanish jarayoni!');
+                return;
+            }
+            
+            const earned = perClick * autoclickerMultiplier;
+            balls += earned;
+            sessionBalls += earned;
             totalClicks++;
             
-            createClickEffect(e, `+${perClick}`);
+            createClickEffect(e, `+${earned}`);
+            
+            // Проверка на перезарядку (1000 баллов)
+            if (sessionBalls >= 1000 && !cooldownActive) {
+                startCooldown();
+            }
             
             if (totalClicks % 50 === 0) {
                 showNotification(`🎯 ${totalClicks} ta bosish!`);
             }
             
             updateUI();
-            addToHistory('bosish', 'Qoʻlda bosish', perClick);
+            addToHistory('bosish', 'Qo\'lda bosish', earned);
             
             if (navigator.vibrate) {
                 navigator.vibrate(10);
@@ -1297,6 +1225,13 @@
             const effect = document.createElement('div');
             effect.className = 'click-effect';
             effect.textContent = text;
+            effect.style.position = 'absolute';
+            effect.style.color = '#FF9800';
+            effect.style.fontWeight = '800';
+            effect.style.fontSize = '24px';
+            effect.style.pointerEvents = 'none';
+            effect.style.zIndex = '10';
+            effect.style.animation = 'floatUp 1s ease-out forwards';
             
             const rect = document.getElementById('clickImage').getBoundingClientRect();
             const x = event.clientX - rect.left;
@@ -1312,55 +1247,62 @@
             }, 1000);
         }
 
-        // Auto clicker functions
+        // Auto clicker - FIXED: теперь стоит 100 баллов
         function activateAutoClicker() {
+            if (cooldownActive) {
+                showNotification('⏳ Avtokliker hozir ishlamaydi!');
+                return;
+            }
+            
             if (autoClickerActive) {
                 showNotification('⚠️ Avtokliker ishlamoqda!');
                 return;
             }
             
-            const currentUpgrade = autoclickerUpgrades[autoclickerUpgradeLevel];
-            const cost = currentUpgrade.cost;
+            const cost = 100; // FIXED: 100 баллов
             
             if (balls >= cost) {
                 balls -= cost;
                 autoClickerActive = true;
-                autoClickerTimeLeft = currentUpgrade.duration;
-                autoClickerDuration = currentUpgrade.duration;
                 
-                addToHistory('avtokliker', `Avtokliker faollashtirildi (${currentUpgrade.label})`, -cost);
-                showNotification(`🤖 ${currentUpgrade.label} avtokliker faollashtirildi!`);
+                addToHistory('avtokliker', 'Avtokliker sotib olindi', -cost);
+                showNotification('🤖 Avtokliker faollashtirildi!');
                 updateUI();
                 
                 startAutoClicker();
-                updateAutoclickerStatus();
+                
+                // Автокликер работает 15 минут
+                setTimeout(() => {
+                    deactivateAutoClicker();
+                }, 15 * 60 * 1000);
                 
                 autoSave();
             } else {
-                showNotification(`❌ ${cost} ball kerak!`);
+                showNotification('❌ 100 ball kerak!'); // FIXED: сообщение о 100 баллах
             }
         }
 
         function startAutoClicker() {
             if (autoClickerInterval) clearInterval(autoClickerInterval);
             
-            const currentUpgrade = autoclickerUpgrades[autoclickerUpgradeLevel];
-            const clicksPerSecond = currentUpgrade.clicksPerSec * speedMultiplier;
+            const currentUpgrade = autoclickerUpgrades[autoclickerLevel];
+            const clicksPerSecond = 1 * speedMultiplier;
             const interval = 1000 / clicksPerSecond;
             
             autoClickerInterval = setInterval(() => {
-                if (!autoClickerActive) return;
+                if (!autoClickerActive || cooldownActive) return;
                 
-                balls += perClick;
+                const earned = 1 * autoclickerMultiplier;
+                balls += earned;
+                sessionBalls += earned;
                 totalClicks++;
                 simulateClickEffect();
                 updateUI();
                 
-                autoClickerTimeLeft -= interval;
-                updateAutoclickerStatus();
-                
-                if (autoClickerTimeLeft <= 0) {
+                // Проверка на перезарядку для автокликера тоже
+                if (sessionBalls >= 1000 && !cooldownActive) {
                     deactivateAutoClicker();
+                    startCooldown();
                 }
             }, interval);
         }
@@ -1371,22 +1313,7 @@
             const x = Math.random() * rect.width;
             const y = Math.random() * rect.height;
             
-            createClickEffect({ clientX: rect.left + x, clientY: rect.top + y }, `+${perClick}`);
-        }
-
-        function updateAutoclickerStatus() {
-            const statusElement = document.getElementById('autoclickerStatus');
-            const timeElement = document.getElementById('autoclickerTime');
-            const progressElement = document.getElementById('autoclickerProgress');
-            
-            if (autoClickerActive && autoClickerTimeLeft > 0) {
-                statusElement.style.display = 'block';
-                timeElement.textContent = formatTime(autoClickerTimeLeft);
-                const progress = ((autoClickerDuration - autoClickerTimeLeft) / autoClickerDuration) * 100;
-                progressElement.style.width = `${progress}%`;
-            } else {
-                statusElement.style.display = 'none';
-            }
+            createClickEffect({ clientX: rect.left + x, clientY: rect.top + y }, `+${1 * autoclickerMultiplier}`);
         }
 
         function deactivateAutoClicker() {
@@ -1395,33 +1322,62 @@
                 autoClickerInterval = null;
             }
             autoClickerActive = false;
-            autoClickerTimeLeft = 0;
-            updateAutoclickerStatus();
             showNotification('🛑 Avtokliker to\'xtatildi');
+        }
+
+        // Cooldown system
+        function startCooldown() {
+            cooldownActive = true;
+            cooldownTime = 10 * 60 * 1000; // 10 минут
+            
+            document.getElementById('cooldownBar').style.display = 'block';
+            updateCooldownTimer();
+            
+            cooldownInterval = setInterval(() => {
+                cooldownTime -= 1000;
+                updateCooldownTimer();
+                
+                if (cooldownTime <= 0) {
+                    endCooldown();
+                }
+            }, 1000);
+            
+            showNotification('⏳ 10 daqiqa qayta zaryadlanish!');
+        }
+
+        function updateCooldownTimer() {
+            const minutes = Math.floor(cooldownTime / 60000);
+            const seconds = Math.floor((cooldownTime % 60000) / 1000);
+            document.getElementById('cooldownTimer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function endCooldown() {
+            cooldownActive = false;
+            sessionBalls = 0;
+            clearInterval(cooldownInterval);
+            document.getElementById('cooldownBar').style.display = 'none';
+            showNotification('✅ Qayta zaryadlanish tugadi!');
             autoSave();
         }
 
-        // Upgrade system
-        function upgradeMultiplier() {
-            if (upgradeLevel >= speedUpgrades.length) {
-                showNotification('🎉 Maksimal tezlik!');
+        // Upgrade autoclicker - FIXED: улучшение на 1.2x
+        function upgradeAutoClicker() {
+            if (autoclickerLevel >= autoclickerUpgrades.length - 1) {
+                showNotification('🎉 Maksimal daraja!');
                 return;
             }
             
-            const upgrade = speedUpgrades[upgradeLevel];
-            const cost = upgrade.cost;
+            const nextUpgrade = autoclickerUpgrades[autoclickerLevel];
+            const cost = nextUpgrade.cost;
             
             if (balls >= cost) {
                 balls -= cost;
-                speedMultiplier = upgrade.multiplier;
-                upgradeLevel++;
+                autoclickerLevel++;
+                autoclickerMultiplier = autoclickerUpgrades[autoclickerLevel].multiplier;
                 
-                if (autoClickerActive) {
-                    startAutoClicker();
-                }
-                
-                addToHistory('upgrade', `Tezlik ${upgrade.multiplier}x ga oshdi`, -cost);
-                showNotification(`⚡ Tezlik ${upgrade.multiplier}x!`);
+                addToHistory('upgrade_autoclicker', `Avtokliker ${autoclickerLevel}-darajaga oshirildi`, -cost);
+                showNotification(`⚡ Avtokliker darajasi ${autoclickerLevel}! Daromad: x${autoclickerMultiplier.toFixed(1)}`);
                 
                 updateUI();
                 updateUpgradeCost();
@@ -1431,20 +1387,10 @@
             }
         }
 
-        function buySpeedUpgrade(index) {
-            if (index !== upgradeLevel) {
-                showNotification('❌ Avval oldingi darajani sotib oling!');
-                return;
-            }
-            
-            upgradeMultiplier();
-            closeUpgradesModal();
-        }
-
         function updateUpgradeCost() {
-            if (upgradeLevel < speedUpgrades.length) {
-                const upgrade = speedUpgrades[upgradeLevel];
-                document.getElementById('upgradeCost').textContent = `${upgrade.cost} ball`;
+            if (autoclickerLevel < autoclickerUpgrades.length - 1) {
+                const nextUpgrade = autoclickerUpgrades[autoclickerLevel];
+                document.getElementById('upgradeCost').textContent = `${nextUpgrade.cost} ball`;
             } else {
                 document.getElementById('upgradeCost').textContent = 'MAKS';
             }
@@ -1466,15 +1412,15 @@
         // Modals
         function openDonateModal() {
             document.getElementById('packageList').innerHTML = packages.map(pkg => `
-                <div onclick="selectPackage(${pkg.id})" style="padding: 12px; margin-bottom: 8px; background: ${pkg.popular ? 'var(--primary-light)' : 'white'}; border-radius: 10px; border: 2px solid ${pkg.popular ? 'var(--primary)' : 'transparent'}; cursor: pointer;">
+                <div onclick="selectPackage(${pkg.id})" style="padding: 15px; margin-bottom: 10px; background: ${pkg.popular ? 'var(--primary-light)' : 'white'}; border-radius: 12px; border: 2px solid ${pkg.popular ? 'var(--primary)' : 'transparent'}; cursor: pointer;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <div style="font-weight: 700; color: var(--primary); font-size: 14px;">💎 ${pkg.label}</div>
-                            <div style="font-size: 12px; color: var(--gray);">${pkg.diamonds} ta olmos</div>
+                            <div style="font-weight: 700; color: var(--primary); font-size: 16px;">💎 ${pkg.label}</div>
+                            <div style="font-size: 14px; color: var(--gray);">${pkg.diamonds} ta olmos</div>
                         </div>
                         <div style="text-align: right;">
-                            <div style="font-weight: 800; color: var(--accent); font-size: 16px;">${pkg.price.toLocaleString()} ${pkg.currency}</div>
-                            ${pkg.popular ? '<div style="font-size: 10px; color: var(--warning);">🔥 POPULAR</div>' : ''}
+                            <div style="font-weight: 800; color: var(--accent); font-size: 18px;">${pkg.price.toLocaleString()} ${pkg.currency}</div>
+                            ${pkg.popular ? '<div style="font-size: 11px; color: var(--warning);">🔥 POPULAR</div>' : ''}
                         </div>
                     </div>
                 </div>
@@ -1527,20 +1473,20 @@
             
             if (transactionHistory.length === 0) {
                 historyList.innerHTML = `
-                    <div style="text-align: center; padding: 30px 15px; color: var(--gray);">
-                        <i class="fas fa-history" style="font-size: 40px; margin-bottom: 15px; opacity: 0.3;"></i>
-                        <p style="font-size: 14px;">Hozircha amallar yo'q</p>
+                    <div style="text-align: center; padding: 40px 20px; color: var(--gray);">
+                        <i class="fas fa-history" style="font-size: 50px; margin-bottom: 20px; opacity: 0.3;"></i>
+                        <p>Hozircha amallar yo'q</p>
                     </div>
                 `;
             } else {
-                historyList.innerHTML = transactionHistory.slice(0, 10).map(item => `
-                    <div style="padding: 12px; background: var(--light-gray); border-radius: 10px; margin-bottom: 8px; border-left: 3px solid var(--primary);">
-                        <div style="font-weight: 600; color: var(--primary); margin-bottom: 4px; font-size: 13px;">
+                historyList.innerHTML = transactionHistory.map(item => `
+                    <div style="padding: 15px; background: var(--light-gray); border-radius: 12px; margin-bottom: 10px; border-left: 4px solid var(--primary);">
+                        <div style="font-weight: 600; color: var(--primary); margin-bottom: 5px; font-size: 14px;">
                             ${getHistoryIcon(item.type)} ${item.type}
                         </div>
-                        <div style="font-size: 12px; color: var(--dark); margin-bottom: 2px;">${item.details}</div>
-                        ${item.amount !== 0 ? `<div style="color: ${item.amount > 0 ? 'var(--accent)' : 'var(--danger)'}; font-weight: 700; font-size: 13px;">${item.amount > 0 ? '+' : ''}${item.amount} ball</div>` : ''}
-                        <div style="font-size: 10px; color: var(--gray); margin-top: 4px;">${new Date(item.date).toLocaleString('uz-UZ', {hour: '2-digit', minute:'2-digit'})}</div>
+                        <div style="font-size: 13px; color: var(--dark); margin-bottom: 3px;">${item.details}</div>
+                        ${item.amount !== 0 ? `<div style="color: ${item.amount > 0 ? 'var(--accent)' : 'var(--danger)'}; font-weight: 700; font-size: 14px;">${item.amount > 0 ? '+' : ''}${item.amount} ball</div>` : ''}
+                        <div style="font-size: 11px; color: var(--gray); margin-top: 5px;">${new Date(item.date).toLocaleString('uz-UZ')}</div>
                     </div>
                 `).join('');
             }
@@ -1558,43 +1504,22 @@
                 'avtokliker': '🤖',
                 'sotib_olish': '🛒',
                 'taklif': '👥',
-                'upgrade': '⚡'
+                'upgrade': '⚡',
+                'upgrade_autoclicker': '🚀'
             };
             return icons[type] || '📝';
         }
 
-        // Invite system
-        function inviteFriend() {
-            const shareText = `🎮 *MLBB BALL COLLECTOR* - Tekin ball va olmoslar!%0A%0A` +
-                            `⚡ Avtokliker bilan ball to'plang%0A` +
-                            `💎 Har bir taklif uchun 3 olmos oling%0A` +
-                            `🔗 O'ynash uchun: ${window.location.href}%0A` +
-                            `🎯 Mening taklif kodi: ${referralCode}%0A` +
-                            `📞 Admin: @laz1z0v1ch`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'MLBB Ball Collector',
-                    text: shareText.replace(/%0A/g, '\n').replace(/\*/g, ''),
-                    url: window.location.href
-                }).then(() => {
-                    processInvite();
-                });
-            } else {
-                navigator.clipboard.writeText(shareText.replace(/%0A/g, '\n').replace(/\*/g, '')).then(() => {
-                    showNotification('📋 Taklif matni nusxalandi!');
-                    processInvite();
-                });
-            }
+        // Referral system with Telegram bot
+        function copyReferralLink() {
+            const link = `https://t.me/mlbb_ball_bot?start=ref_${referralCode}`;
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('📋 Havola nusxalandi!');
+            });
         }
 
-        function processInvite() {
-            invitedFriends++;
-            diamonds += 3;
-            totalPlayers++;
-            addToHistory('taklif', `Do'st taklif qilindi (+3 olmos)`, 0);
-            showNotification(`🎉 +3 olmos qo'shildi!`);
-            updateUI();
+        function inviteFriend() {
+            openInviteModal();
         }
 
         function generateReferralCode() {
@@ -1635,21 +1560,13 @@
                 invitedFriends: invitedFriends,
                 totalPlayers: totalPlayers,
                 referralCode: referralCode,
-                autoclickerUpgradeLevel: autoclickerUpgradeLevel,
-                autoClickerActive: autoClickerActive,
-                autoClickerTimeLeft: autoClickerTimeLeft,
+                autoclickerLevel: autoclickerLevel,
+                autoclickerMultiplier: autoclickerMultiplier,
+                sessionBalls: sessionBalls,
                 saveTime: new Date().toISOString()
             };
             
             localStorage.setItem('mlbbBallCollector', JSON.stringify(data));
-        }
-
-        // Reset game
-        function resetGame() {
-            if (confirm('Haqiqatan ham o\'yinni qayta boshlashni istaysizmi? Barcha ma\'lumotlar o\'chiriladi!')) {
-                localStorage.removeItem('mlbbBallCollector');
-                location.reload();
-            }
         }
 
         // Notification
@@ -1683,6 +1600,24 @@
                 const sessionTime = Date.now() - startTime;
                 gameTime += sessionTime;
                 autoSave();
+            });
+            
+            // Расчет автокликера от минимального до максимального
+            console.log("=== AVTOKLIKER HISOBI ===");
+            console.log("Minimal (daraja 0):");
+            console.log("  - 1 клик/секунд");
+            console.log("  - 15 минут = 900 кликов");
+            console.log("  - 900 баллов");
+            
+            console.log("\nMaksimal (daraja 4, tezlik 3x):");
+            console.log("  - 3 клик/секунд");
+            console.log("  - 30 минут = 5400 кликов");
+            console.log("  - Множитель 1.5x");
+            console.log("  - 5400 * 1.5 = 8100 баллов");
+            
+            console.log("\nУлучшения автокликера:");
+            autoclickerUpgrades.forEach(upgrade => {
+                console.log(`Daraja ${upgrade.level}: ${upgrade.cost} ball, x${upgrade.multiplier} daromad`);
             });
         });
     </script>
