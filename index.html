@@ -197,10 +197,10 @@
             margin-top: 2px;
         }
 
-        /* Micro Buttons */
+        /* Micro Buttons - 5 в ряд */
         .micro-actions {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 5px;
             margin: 10px 0;
         }
@@ -235,6 +235,7 @@
         .purple-btn { background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%); }
         .pink-btn { background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%); }
         .orange-btn { background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%); }
+        .teal-btn { background: linear-gradient(135deg, #009688 0%, #00796B 100%); }
 
         /* Top Players Sections */
         .top-players {
@@ -431,6 +432,36 @@
             margin: 10px 0;
         }
 
+        /* Payment Methods */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .payment-method {
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            background: var(--light-gray);
+            font-size: 12px;
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .payment-method i {
+            font-size: 20px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
         /* Package Item */
         .package-item {
             padding: 10px;
@@ -453,9 +484,10 @@
             .game-title { font-size: 16px; }
             .click-container { width: 150px; height: 150px; }
             .small-actions { grid-template-columns: repeat(2, 1fr); }
-            .micro-actions { grid-template-columns: repeat(2, 1fr); }
+            .micro-actions { grid-template-columns: repeat(3, 1fr); }
             .top-players { grid-template-columns: 1fr; }
             .invite-grid { grid-template-columns: repeat(2, 1fr); }
+            .payment-methods { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -535,11 +567,16 @@
             </button>
         </div>
 
-        <!-- Micro Buttons -->
+        <!-- Micro Buttons (5 в ряд) -->
         <div class="micro-actions">
             <button class="micro-btn blue-btn" onclick="openExchangeModal()">
                 <i class="fas fa-exchange-alt"></i>
                 <span>Almashtirish</span>
+            </button>
+            
+            <button class="micro-btn teal-btn" onclick="openWithdrawBallsModal()">
+                <i class="fas fa-wallet"></i>
+                <span>Ball yechish</span>
             </button>
             
             <button class="micro-btn green-btn" onclick="openHistoryModal()">
@@ -552,7 +589,7 @@
                 <span>Taklif qilish</span>
             </button>
             
-            <button class="micro-btn purple-btn" onclick="openSettings()">
+            <button class="micro-btn purple-btn" onclick="openSettingsModal()">
                 <i class="fas fa-cog"></i>
                 <span>Sozlamalar</span>
             </button>
@@ -704,6 +741,88 @@
         </div>
     </div>
 
+    <!-- Ball Withdraw Modal (Yangi qo'shilgan) -->
+    <div class="modal-overlay" id="withdrawBallsModal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div style="font-size: 16px; color: var(--primary); font-weight: 700;">
+                    <i class="fas fa-wallet"></i> BALL YECHISH
+                </div>
+                <button onclick="closeWithdrawBallsModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+            </div>
+            
+            <div style="text-align: center; margin: 15px 0;">
+                <div style="font-size: 11px; color: var(--gray); margin-bottom: 5px;">Sizda mavjud:</div>
+                <div style="font-size: 28px; font-weight: 800; color: var(--primary);" id="availableBallsForWithdraw">0 ball</div>
+            </div>
+            
+            <div style="background: var(--primary-light); padding: 12px; border-radius: 8px; margin: 12px 0; text-align: center;">
+                <div style="font-size: 11px; color: var(--gray); margin-bottom: 5px;">Joriy kurs</div>
+                <div style="font-size: 20px; font-weight: 800; color: var(--primary);">
+                    1000 ball = 1000 UZS
+                </div>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">Yechish miqdorini kiriting (ball):</div>
+                <input type="number" id="withdrawBallsAmount" class="exchange-input" placeholder="Ball miqdori" min="5000" oninput="calculateWithdrawMoney()">
+                <div style="text-align: center; margin-top: 8px; font-size: 14px;">
+                    <span id="withdrawMoneyResult" style="font-weight: 700; color: var(--accent);">0 UZS</span>
+                </div>
+                <div style="text-align: center; margin-top: 5px; font-size: 10px; color: var(--gray);">
+                    Minimal yechish: <strong>5000 ball</strong>
+                </div>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <div style="font-size: 12px; color: var(--gray); margin-bottom: 8px;">To'lov usulini tanlang:</div>
+                <div class="payment-methods">
+                    <div class="payment-method" onclick="selectPaymentMethod('uzcard')" id="paymentUzcard">
+                        <i class="fas fa-credit-card" style="color: #0066CC;"></i>
+                        Uzcard
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod('humo')" id="paymentHumo">
+                        <i class="fas fa-credit-card" style="color: #FF6600;"></i>
+                        Humo
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod('click')" id="paymentClick">
+                        <i class="fas fa-mobile-alt" style="color: #00AA00;"></i>
+                        Click
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">Karta raqami yoki telefon raqami:</div>
+                <input type="text" id="paymentDetails" class="exchange-input" placeholder="Karta/telefon raqami">
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">MLBB ID (raqam):</div>
+                <input type="number" id="mlbbIdBalls" class="exchange-input" placeholder="MLBB ID raqami">
+            </div>
+            
+            <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--warning);">
+                <div style="font-size: 11px; color: var(--warning); font-weight: 700; margin-bottom: 8px;">
+                    <i class="fas fa-info-circle"></i> ESDA TUTING:
+                </div>
+                <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
+                    <p>1. Minimal yechish: 5000 ball</p>
+                    <p>2. 1000 ball = 1000 UZS (1 ball = 1 so'm)</p>
+                    <p>3. To'lov 1-24 soat ichida amalga oshiriladi</p>
+                    <p>4. To'lov Uzcard, Humo, Click orqali</p>
+                    <p>5. MLBB ID to'g'ri kiritilishi shart</p>
+                    <p>6. So'rov adminga yuboriladi</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 8px;">
+                <button class="micro-btn red-btn" onclick="closeWithdrawBallsModal()" style="flex: 1;">Bekor qilish</button>
+                <button class="micro-btn green-btn" onclick="submitWithdrawBallsRequest()" style="flex: 1;">So'rov yuborish</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Donate Modal -->
     <div class="modal-overlay" id="donateModal">
         <div class="modal-content">
@@ -776,18 +895,76 @@
                 <div style="font-size: 16px; color: var(--primary); font-weight: 700;">
                     <i class="fas fa-cog"></i> SOZLAMALAR
                 </div>
-                <button onclick="closeSettings()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+                <button onclick="closeSettingsModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             
-            <div style="text-align: center; padding: 20px;">
-                <div style="font-size: 40px; color: var(--primary); margin-bottom: 15px;">
-                    <i class="fas fa-tools"></i>
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 14px; color: var(--primary); margin-bottom: 10px; font-weight: 600;">
+                    <i class="fas fa-user"></i> AKKAUNT
                 </div>
-                <div style="font-size: 14px; color: var(--primary); margin-bottom: 10px;">Tez kunda!</div>
-                <div style="font-size: 12px; color: var(--gray);">Sozlamalar bo'limi tez orada ishga tushadi</div>
+                <div style="background: var(--primary-light); padding: 12px; border-radius: 8px; margin-bottom: 10px;">
+                    <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">Foydalanuvchi ID:</div>
+                    <div style="font-size: 14px; font-weight: 700; color: var(--primary);" id="userId">USER_${Math.floor(Math.random() * 10000)}</div>
+                </div>
             </div>
             
-            <button class="micro-btn yellow-btn" onclick="closeSettings()" style="width: 100%;">Yopish</button>
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 14px; color: var(--primary); margin-bottom: 10px; font-weight: 600;">
+                    <i class="fas fa-paint-brush"></i> KO'RINISH
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+                    <button class="micro-btn blue-btn" onclick="changeTheme('blue')">
+                        <i class="fas fa-palette"></i> Ko'k tema
+                    </button>
+                    <button class="micro-btn purple-btn" onclick="changeTheme('purple')">
+                        <i class="fas fa-palette"></i> Binafsha tema
+                    </button>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 14px; color: var(--primary); margin-bottom: 10px; font-weight: 600;">
+                    <i class="fas fa-volume-up"></i> OVOZ
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="font-size: 12px; color: var(--gray);">Ovoz efekti:</div>
+                    <label class="switch">
+                        <input type="checkbox" id="soundToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 14px; color: var(--primary); margin-bottom: 10px; font-weight: 600;">
+                    <i class="fas fa-database"></i> MA'LUMOT
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+                    <button class="micro-btn green-btn" onclick="exportData()">
+                        <i class="fas fa-download"></i> Eksport
+                    </button>
+                    <button class="micro-btn yellow-btn" onclick="importData()">
+                        <i class="fas fa-upload"></i> Import
+                    </button>
+                    <button class="micro-btn red-btn" onclick="resetProgress()" style="grid-column: span 2;">
+                        <i class="fas fa-trash"></i> Progressni o'chirish
+                    </button>
+                </div>
+            </div>
+            
+            <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--warning);">
+                <div style="font-size: 11px; color: var(--warning); font-weight: 700; margin-bottom: 8px;">
+                    <i class="fas fa-info-circle"></i> QO'LLANMA
+                </div>
+                <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
+                    <p>• Ball to'plash uchun markaziy to'pni bosing</p>
+                    <p>• Ballarni olmosga almashtiring</p>
+                    <p>• Do'stlarni taklif qilib bonus oling</p>
+                    <p>• Avtokliker yordamida tez ball to'plang</p>
+                </div>
+            </div>
+            
+            <button class="micro-btn purple-btn" onclick="closeSettingsModal()" style="width: 100%;">Yopish</button>
         </div>
     </div>
 
@@ -808,6 +985,7 @@
         let cooldownActive = false;
         let cooldownTime = 0;
         let cooldownInterval;
+        let selectedPaymentMethod = null;
         
         // AutoClicker timer variables
         let autoclickerTimeLeft = 0;
@@ -973,6 +1151,7 @@
             document.getElementById('playerDiamonds').textContent = formatNumber(diamonds);
             document.getElementById('availableBallsExchange').textContent = formatNumber(balls) + ' ball';
             document.getElementById('availableDiamonds').textContent = formatNumber(diamonds) + ' olmos';
+            document.getElementById('availableBallsForWithdraw').textContent = formatNumber(balls) + ' ball';
             
             autoSave();
         }
@@ -1198,7 +1377,7 @@
             showNotification('✅ Qayta zaryadlanish tugadi!');
         }
 
-        // Вывод алмазов (новая функция)
+        // Вывод алмазов
         function openWithdrawModal() {
             if (diamonds < 5) {
                 showNotification('❌ Minimal yechish miqdori: 5 olmos');
@@ -1254,6 +1433,110 @@
             showNotification(`✅ ${amount} olmos yechish so'rovi yuborildi! Admin siz bilan bog'lanadi.`);
             updateUI();
             closeWithdrawModal();
+        }
+
+        // Ball yechish modal (YANGI FUNKSIYA)
+        function openWithdrawBallsModal() {
+            if (balls < 5000) {
+                showNotification('❌ Minimal yechish miqdori: 5000 ball');
+                return;
+            }
+            
+            document.getElementById('withdrawBallsAmount').value = '';
+            document.getElementById('paymentDetails').value = '';
+            document.getElementById('mlbbIdBalls').value = '';
+            document.getElementById('availableBallsForWithdraw').textContent = formatNumber(balls) + ' ball';
+            document.getElementById('withdrawBallsModal').style.display = 'flex';
+            
+            // Reset payment method
+            selectedPaymentMethod = null;
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Установить максимальное значение как текущие ball
+            document.getElementById('withdrawBallsAmount').max = balls;
+        }
+
+        function closeWithdrawBallsModal() {
+            document.getElementById('withdrawBallsModal').style.display = 'none';
+        }
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // Remove selected class from all
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked
+            document.getElementById(`payment${method.charAt(0).toUpperCase() + method.slice(1)}`).classList.add('selected');
+        }
+
+        function calculateWithdrawMoney() {
+            const amount = parseInt(document.getElementById('withdrawBallsAmount').value) || 0;
+            const money = Math.floor(amount); // 1 ball = 1 UZS
+            document.getElementById('withdrawMoneyResult').textContent = money.toLocaleString() + ' UZS';
+        }
+
+        function submitWithdrawBallsRequest() {
+            const amount = parseInt(document.getElementById('withdrawBallsAmount').value) || 0;
+            const paymentDetails = document.getElementById('paymentDetails').value.trim();
+            const mlbbId = document.getElementById('mlbbIdBalls').value.trim();
+            
+            if (amount < 5000) {
+                showNotification('❌ Minimal yechish miqdor: 5000 ball');
+                return;
+            }
+            
+            if (amount > balls) {
+                showNotification('❌ Yetarli ball yo\'q');
+                return;
+            }
+            
+            if (!selectedPaymentMethod) {
+                showNotification('❌ To\'lov usulini tanlang');
+                return;
+            }
+            
+            if (!paymentDetails) {
+                showNotification('❌ Karta/telefon raqamini kiriting');
+                return;
+            }
+            
+            if (!mlbbId) {
+                showNotification('❌ MLBB ID ni kiriting');
+                return;
+            }
+            
+            // Отправка запроса администратору
+            const paymentMethodNames = {
+                'uzcard': 'Uzcard',
+                'humo': 'Humo',
+                'click': 'Click'
+            };
+            
+            const money = Math.floor(amount); // 1 ball = 1 UZS
+            const message = `Salom! Men MLBB Ball Collector o'yinidan ball yechmoqchiman.%0A%0A` +
+                          `Yechish miqdori: ${amount} ball%0A` +
+                          `Pul miqdori: ${money.toLocaleString()} UZS%0A` +
+                          `To'lov usuli: ${paymentMethodNames[selectedPaymentMethod]}%0A` +
+                          `Karta/telefon: ${paymentDetails}%0A` +
+                          `MLBB ID: ${mlbbId}%0A` +
+                          `Mening ballarim: ${balls} ta%0A` +
+                          `Mening referral kodi: ${referralCode}%0A%0A` +
+                          `Iltimos, pullimni yeching.`;
+            
+            window.open(`https://t.me/laz1z0v1ch?text=${message}`, '_blank');
+            
+            // Вычитаем ball
+            balls -= amount;
+            
+            addToHistory('ball_yechish', `${amount} ball yechish so'rovi (${money.toLocaleString()} UZS)`, -amount);
+            showNotification(`✅ ${amount} ball yechish so'rovi yuborildi! Admin siz bilan bog'lanadi.`);
+            updateUI();
+            closeWithdrawBallsModal();
         }
 
         // Exchange function
@@ -1403,7 +1686,8 @@
                 'almashtirish': '💎',
                 'upgrade': '⚡',
                 'taklif': '👥',
-                'yechish': '💰'
+                'yechish': '💰',
+                'ball_yechish': '💵'
             };
             return icons[type] || '📝';
         }
@@ -1427,12 +1711,109 @@
         }
 
         // Settings modal
-        function openSettings() {
+        function openSettingsModal() {
             document.getElementById('settingsModal').style.display = 'flex';
         }
 
-        function closeSettings() {
+        function closeSettingsModal() {
             document.getElementById('settingsModal').style.display = 'none';
+        }
+
+        function changeTheme(theme) {
+            if (theme === 'purple') {
+                document.documentElement.style.setProperty('--primary', '#9C27B0');
+                document.documentElement.style.setProperty('--primary-dark', '#7B1FA2');
+                document.documentElement.style.setProperty('--primary-light', '#F3E5F5');
+                showNotification('✅ Binafsha tema faollashtirildi');
+            } else {
+                document.documentElement.style.setProperty('--primary', '#2196F3');
+                document.documentElement.style.setProperty('--primary-dark', '#1976D2');
+                document.documentElement.style.setProperty('--primary-light', '#E3F2FD');
+                showNotification('✅ Ko\'k tema faollashtirildi');
+            }
+        }
+
+        function exportData() {
+            const data = {
+                balls: balls,
+                diamonds: diamonds,
+                totalClicks: totalClicks,
+                gameTime: gameTime,
+                transactionHistory: transactionHistory,
+                invitedFriends: invitedFriends,
+                referralCode: referralCode,
+                speedMultiplier: speedMultiplier,
+                sessionBalls: sessionBalls,
+                exportDate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'mlbb_ball_collector_backup.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showNotification('✅ Ma\'lumotlar yuklab olindi');
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        
+                        // Confirm before importing
+                        if (confirm('Haqiqatan ham ma\'lumotlarni qayta yuklamoqchimisiz? Bu joriy ma\'lumotlarni o\'chirib tashlaydi.')) {
+                            balls = data.balls || 0;
+                            diamonds = data.diamonds || 0;
+                            totalClicks = data.totalClicks || 0;
+                            gameTime = data.gameTime || 0;
+                            transactionHistory = data.transactionHistory || [];
+                            invitedFriends = data.invitedFriends || 0;
+                            referralCode = data.referralCode || generateReferralCode();
+                            speedMultiplier = data.speedMultiplier || 1.0;
+                            sessionBalls = data.sessionBalls || 0;
+                            
+                            updateUI();
+                            showNotification('✅ Ma\'lumotlar muvaffaqiyatli yuklandi');
+                        }
+                    } catch (error) {
+                        showNotification('❌ Xato: Noto\'g\'ri fayl formati');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+
+        function resetProgress() {
+            if (confirm('Haqiqatan ham barcha progressni o\'chirmoqchimisiz? Bu amalni qaytarib bo\'lmaydi!')) {
+                balls = 0;
+                diamonds = 0;
+                totalClicks = 0;
+                gameTime = 0;
+                transactionHistory = [];
+                invitedFriends = 0;
+                referralCode = generateReferralCode();
+                speedMultiplier = 1.0;
+                sessionBalls = 0;
+                
+                updateUI();
+                showNotification('✅ Barcha progress o\'chirildi');
+            }
         }
 
         // Generate referral code
@@ -1502,6 +1883,56 @@
         document.addEventListener('DOMContentLoaded', function() {
             initGame();
             updateUpgradeCost();
+            
+            // Add CSS for switch
+            const style = document.createElement('style');
+            style.textContent = `
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 40px;
+                    height: 20px;
+                }
+                
+                .switch input {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+                
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    transition: .4s;
+                    border-radius: 34px;
+                }
+                
+                .slider:before {
+                    position: absolute;
+                    content: "";
+                    height: 16px;
+                    width: 16px;
+                    left: 2px;
+                    bottom: 2px;
+                    background-color: white;
+                    transition: .4s;
+                    border-radius: 50%;
+                }
+                
+                input:checked + .slider {
+                    background-color: var(--primary);
+                }
+                
+                input:checked + .slider:before {
+                    transform: translateX(20px);
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
