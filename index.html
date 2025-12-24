@@ -432,6 +432,29 @@
             margin: 10px 0;
         }
 
+        /* Package Item */
+        .package-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            position: relative;
+        }
+
+        .package-item:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .package-item.selected {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--warning);
+        }
+
         /* Payment Methods */
         .payment-methods {
             display: grid;
@@ -462,20 +485,22 @@
             display: block;
         }
 
-        /* Package Item */
-        .package-item {
-            padding: 10px;
-            margin-bottom: 8px;
-            background: var(--primary-light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 12px;
+        /* Payment Status */
+        .payment-status {
+            text-align: center;
+            padding: 20px;
         }
 
-        .package-item:hover {
-            background: var(--primary);
-            color: white;
+        .payment-loader {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsive */
@@ -652,7 +677,7 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>© 2024 MLBB Ball Collector. Admin: @laz1z0v1ch</p>
+            <p>© 2024 MLBB Ball Collector. Admin: @laz1z0v1ch | Tel: +998882600726</p>
         </div>
     </div>
 
@@ -666,30 +691,22 @@
                 <button onclick="closeExchangeModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             
-            <div style="background: var(--primary-light); padding: 12px; border-radius: 8px; margin: 12px 0; text-align: center;">
-                <div style="font-size: 11px; color: var(--gray); margin-bottom: 5px;">Joriy kurs</div>
-                <div style="font-size: 20px; font-weight: 800; color: var(--primary);">
-                    1000 ball = 1 olmos
+            <!-- Asosiy kontent o'rniga "Tez kunda!" xabari -->
+            <div style="text-align: center; padding: 40px 20px;">
+                <div style="font-size: 60px; color: var(--primary); margin-bottom: 20px;">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div style="font-size: 20px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
+                    SKORO BUDET DOSTUPNO
+                </div>
+                <div style="font-size: 14px; color: var(--gray); line-height: 1.6;">
+                    Ballarni olmosga almashtirish funksiyasi hozircha ishlamaydi.<br>
+                    Ushbu funksiya tez orada ishga tushiriladi.<br>
+                    Yangiliklar uchun admin bilan bog'laning: @laz1z0v1ch
                 </div>
             </div>
             
-            <div style="text-align: center; margin: 15px 0;">
-                <div style="font-size: 11px; color: var(--gray); margin-bottom: 5px;">Sizda:</div>
-                <div style="font-size: 28px; font-weight: 800; color: var(--primary);" id="availableBallsExchange">0 ball</div>
-            </div>
-            
-            <div style="margin: 15px 0;">
-                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">Almashtirish miqdorini kiriting:</div>
-                <input type="number" id="exchangeAmount" class="exchange-input" placeholder="Ball miqdori" min="1000">
-                <div style="text-align: center; margin-top: 8px;">
-                    <span id="exchangeResult" style="font-size: 16px; font-weight: 700; color: var(--primary);">0 olmos</span>
-                </div>
-            </div>
-            
-            <div style="display: flex; gap: 8px;">
-                <button class="micro-btn red-btn" onclick="closeExchangeModal()" style="flex: 1;">Bekor qilish</button>
-                <button class="micro-btn green-btn" onclick="exchangeBalls()" style="flex: 1;">Almashtirish</button>
-            </div>
+            <button class="micro-btn yellow-btn" onclick="closeExchangeModal()" style="width: 100%; margin-top: 20px;">Yopish</button>
         </div>
     </div>
 
@@ -741,7 +758,7 @@
         </div>
     </div>
 
-    <!-- Ball Withdraw Modal (Yangi qo'shilgan) -->
+    <!-- Ball Withdraw Modal -->
     <div class="modal-overlay" id="withdrawBallsModal">
         <div class="modal-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -751,79 +768,26 @@
                 <button onclick="closeWithdrawBallsModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             
-            <div style="text-align: center; margin: 15px 0;">
-                <div style="font-size: 11px; color: var(--gray); margin-bottom: 5px;">Sizda mavjud:</div>
-                <div style="font-size: 28px; font-weight: 800; color: var(--primary);" id="availableBallsForWithdraw">0 ball</div>
-            </div>
-            
-            <div style="background: var(--primary-light); padding: 12px; border-radius: 8px; margin: 12px 0; text-align: center;">
-                <div style="font-size: 11px; color: var(--gray); margin-bottom: 5px;">Joriy kurs</div>
-                <div style="font-size: 20px; font-weight: 800; color: var(--primary);">
-                    1000 ball = 1000 UZS
+            <!-- Asosiy kontent o'rniga "Tez kunda!" xabari -->
+            <div style="text-align: center; padding: 40px 20px;">
+                <div style="font-size: 60px; color: var(--primary); margin-bottom: 20px;">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div style="font-size: 20px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
+                    TEZ KUNDA!
+                </div>
+                <div style="font-size: 14px; color: var(--gray); line-height: 1.6;">
+                    Ball yechish funksiyasi hozircha ishlamaydi.<br>
+                    Ushbu funksiya tez orada ishga tushiriladi.<br>
+                    Yangiliklar uchun admin bilan bog'laning: @laz1z0v1ch
                 </div>
             </div>
             
-            <div style="margin: 15px 0;">
-                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">Yechish miqdorini kiriting (ball):</div>
-                <input type="number" id="withdrawBallsAmount" class="exchange-input" placeholder="Ball miqdori" min="5000" oninput="calculateWithdrawMoney()">
-                <div style="text-align: center; margin-top: 8px; font-size: 14px;">
-                    <span id="withdrawMoneyResult" style="font-weight: 700; color: var(--accent);">0 UZS</span>
-                </div>
-                <div style="text-align: center; margin-top: 5px; font-size: 10px; color: var(--gray);">
-                    Minimal yechish: <strong>5000 ball</strong>
-                </div>
-            </div>
-            
-            <div style="margin: 15px 0;">
-                <div style="font-size: 12px; color: var(--gray); margin-bottom: 8px;">To'lov usulini tanlang:</div>
-                <div class="payment-methods">
-                    <div class="payment-method" onclick="selectPaymentMethod('uzcard')" id="paymentUzcard">
-                        <i class="fas fa-credit-card" style="color: #0066CC;"></i>
-                        Uzcard
-                    </div>
-                    <div class="payment-method" onclick="selectPaymentMethod('humo')" id="paymentHumo">
-                        <i class="fas fa-credit-card" style="color: #FF6600;"></i>
-                        Humo
-                    </div>
-                    <div class="payment-method" onclick="selectPaymentMethod('click')" id="paymentClick">
-                        <i class="fas fa-mobile-alt" style="color: #00AA00;"></i>
-                        Click
-                    </div>
-                </div>
-            </div>
-            
-            <div style="margin: 15px 0;">
-                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">Karta raqami yoki telefon raqami:</div>
-                <input type="text" id="paymentDetails" class="exchange-input" placeholder="Karta/telefon raqami">
-            </div>
-            
-            <div style="margin: 15px 0;">
-                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">MLBB ID (raqam):</div>
-                <input type="number" id="mlbbIdBalls" class="exchange-input" placeholder="MLBB ID raqami">
-            </div>
-            
-            <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--warning);">
-                <div style="font-size: 11px; color: var(--warning); font-weight: 700; margin-bottom: 8px;">
-                    <i class="fas fa-info-circle"></i> ESDA TUTING:
-                </div>
-                <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
-                    <p>1. Minimal yechish: 5000 ball</p>
-                    <p>2. 1000 ball = 1000 UZS (1 ball = 1 so'm)</p>
-                    <p>3. To'lov 1-24 soat ichida amalga oshiriladi</p>
-                    <p>4. To'lov Uzcard, Humo, Click orqali</p>
-                    <p>5. MLBB ID to'g'ri kiritilishi shart</p>
-                    <p>6. So'rov adminga yuboriladi</p>
-                </div>
-            </div>
-            
-            <div style="display: flex; gap: 8px;">
-                <button class="micro-btn red-btn" onclick="closeWithdrawBallsModal()" style="flex: 1;">Bekor qilish</button>
-                <button class="micro-btn green-btn" onclick="submitWithdrawBallsRequest()" style="flex: 1;">So'rov yuborish</button>
-            </div>
+            <button class="micro-btn yellow-btn" onclick="closeWithdrawBallsModal()" style="width: 100%; margin-top: 20px;">Yopish</button>
         </div>
     </div>
 
-    <!-- Donate Modal -->
+    <!-- Donate Modal (Yangilangan) -->
     <div class="modal-overlay" id="donateModal">
         <div class="modal-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -833,11 +797,164 @@
                 <button onclick="closeDonateModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             
-            <div id="packageList"></div>
+            <div style="background: var(--primary-light); padding: 12px; border-radius: 8px; margin: 12px 0; text-align: center;">
+                <div style="font-size: 11px; color: var(--gray); margin-bottom: 5px;">Eng Ishonchli Mlbb Almaz servis hizmati</div>
+                <div style="font-size: 12px; font-weight: 800; color: var(--primary);">
+                    Shaxsan Teo ozini Almaz servisi 💎
+                </div>
+            </div>
+            
+            <div id="packageList" style="max-height: 300px; overflow-y: auto; margin: 12px 0;"></div>
             
             <div style="margin-top: 15px;">
                 <button class="micro-btn red-btn" onclick="closeDonateModal()" style="width: 48%; margin-right: 4%;">Yopish</button>
                 <button class="micro-btn green-btn" onclick="proceedToPayment()" id="paymentBtn" disabled style="width: 48%;">Sotib olish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal (YANGI) -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div style="font-size: 16px; color: var(--primary); font-weight: 700;">
+                    <i class="fas fa-credit-card"></i> TO'LOV
+                </div>
+                <button onclick="closePaymentModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+            </div>
+            
+            <div style="text-align: center; margin: 15px 0;">
+                <div style="font-size: 14px; color: var(--primary); margin-bottom: 5px;">Sotib olish:</div>
+                <div style="font-size: 20px; font-weight: 800; color: var(--primary);" id="selectedPackageName">-</div>
+                <div style="font-size: 16px; color: var(--accent); font-weight: 700; margin-top: 5px;" id="selectedPackagePrice">0 SO'M</div>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <div style="font-size: 12px; color: var(--gray); margin-bottom: 8px;">To'lov usulini tanlang:</div>
+                <div class="payment-methods">
+                    <div class="payment-method" onclick="selectPaymentMethod('payme')" id="paymentPayme">
+                        <i class="fas fa-mobile-alt" style="color: #FF6B00;"></i>
+                        Payme
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod('click')" id="paymentClick">
+                        <i class="fas fa-mobile-alt" style="color: #00AA00;"></i>
+                        Click
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod('uzcard')" id="paymentUzcard">
+                        <i class="fas fa-credit-card" style="color: #0066CC;"></i>
+                        Uzcard
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin: 15px 0; display: none;" id="paymentDetailsSection">
+                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">MLBB ID (raqam):</div>
+                <input type="number" id="mlbbIdPayment" class="exchange-input" placeholder="MLBB ID raqami" min="100000" max="999999999">
+                <div style="font-size: 11px; color: var(--gray); margin-top: 5px;">
+                    To'lovni amalga oshirgandan so'ng, olmoslar 1-5 daqiqa ichida hisobingizga tushadi.
+                </div>
+            </div>
+            
+            <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--warning);">
+                <div style="font-size: 11px; color: var(--warning); font-weight: 700; margin-bottom: 8px;">
+                    <i class="fas fa-info-circle"></i> ESDA TUTING:
+                </div>
+                <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
+                    <p>1. To'lovni amalga oshirish uchun Payme, Click yoki Uzcard ishlatishingiz mumkin</p>
+                    <p>2. To'lov muvaffaqiyatli bo'lsa, olmoslar 1-5 daqiqa ichida hisobingizga tushadi</p>
+                    <p>3. Agar 15 daqiqa ichida olmoslar tushmasa, @laz1z0v1ch ga murojaat qiling</p>
+                    <p>4. Tel: +998882600726</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 8px;">
+                <button class="micro-btn red-btn" onclick="closePaymentModal()" style="flex: 1;">Bekor qilish</button>
+                <button class="micro-btn green-btn" onclick="processPayment()" id="processPaymentBtn" style="flex: 1;" disabled>To'lov qilish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Processing Modal (YANGI) -->
+    <div class="modal-overlay" id="paymentProcessingModal">
+        <div class="modal-content">
+            <div class="payment-status">
+                <div class="payment-loader">
+                    <i class="fas fa-spinner"></i>
+                </div>
+                <div style="font-size: 18px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
+                    TO'LOV AMALGA OSHIRILMOQDA...
+                </div>
+                <div style="font-size: 12px; color: var(--gray);">
+                    Iltimos, kuting. Bu 5-10 soniya davom etadi.<br>
+                    To'lov tizimi bilan bog'lanmoqda...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Success Modal (YANGI) -->
+    <div class="modal-overlay" id="paymentSuccessModal">
+        <div class="modal-content">
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 60px; color: var(--accent); margin-bottom: 20px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div style="font-size: 20px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
+                    TO'LOV MUVaffaqiyatLI!
+                </div>
+                <div style="font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 20px;">
+                    <div id="successMessage">Olmoslar hisobingizga qo'shildi!</div>
+                    <div style="margin-top: 10px; font-size: 16px; color: var(--accent); font-weight: 700;">
+                        +<span id="addedDiamonds">0</span> OLMOZ
+                    </div>
+                </div>
+                
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--accent);">
+                    <div style="font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 8px;">
+                        <i class="fas fa-info-circle"></i> MA'LUMOT:
+                    </div>
+                    <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
+                        <p>• Olmoslar 1-5 daqiqa ichida MLBB hisobingizga tushadi</p>
+                        <p>• Agar 15 daqiqa ichida olmoslar tushmasa, @laz1z0v1ch ga murojaat qiling</p>
+                        <p>• Tel: +998882600726</p>
+                    </div>
+                </div>
+                
+                <button class="micro-btn green-btn" onclick="closePaymentSuccessModal()" style="width: 100%; margin-top: 20px;">Tamom</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Failed Modal (YANGI) -->
+    <div class="modal-overlay" id="paymentFailedModal">
+        <div class="modal-content">
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 60px; color: var(--danger); margin-bottom: 20px;">
+                    <i class="fas fa-times-circle"></i>
+                </div>
+                <div style="font-size: 20px; color: var(--danger); margin-bottom: 10px; font-weight: 700;">
+                    TO'LOV MUVaffaqiyatSIZ!
+                </div>
+                <div style="font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 20px;" id="failedMessage">
+                    To'lov amalga oshirilmadi. Iltimos, qayta urinib ko'ring yoki boshqa to'lov usulidan foydalaning.
+                </div>
+                
+                <div style="background: rgba(244, 67, 54, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--danger);">
+                    <div style="font-size: 11px; color: var(--danger); font-weight: 700; margin-bottom: 8px;">
+                        <i class="fas fa-info-circle"></i> SABABLAR:
+                    </div>
+                    <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
+                        <p>• Karta mablag'i yetarli emas</p>
+                        <p>• To'lov tizimida muammo</p>
+                        <p>• Internet aloqasi uzildi</p>
+                        <p>• To'lov chegarasi oshib ketdi</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 8px; margin-top: 20px;">
+                    <button class="micro-btn red-btn" onclick="closePaymentFailedModal()" style="flex: 1;">Yopish</button>
+                    <button class="micro-btn yellow-btn" onclick="retryPayment()" style="flex: 1;">Qayta urinish</button>
+                </div>
             </div>
         </div>
     </div>
@@ -985,7 +1102,6 @@
         let cooldownActive = false;
         let cooldownTime = 0;
         let cooldownInterval;
-        let selectedPaymentMethod = null;
         
         // AutoClicker timer variables
         let autoclickerTimeLeft = 0;
@@ -995,12 +1111,30 @@
         let topPlayersByTime = [];
         let topPlayersByBalls = [];
         
-        // Packages
+        // Payment variables
+        let selectedPackage = null;
+        let selectedPaymentMethod = null;
+        
+        // Yangi paketlar ro'yxati (siz bergan ro'yxat)
         const packages = [
             { id: 1, diamonds: 5, price: 1800, currency: 'UZS', label: '5 OLMOZ' },
-            { id: 2, diamonds: 11, price: 3000, currency: 'UZS', label: '11 OLMOZ' },
-            { id: 3, diamonds: 22, price: 5000, currency: 'UZS', label: '22 OLMOZ' },
-            { id: 4, diamonds: 56, price: 11500, currency: 'UZS', label: '56 OLMOZ' }
+            { id: 2, diamonds: 11, price: 3000, currency: 'UZS', label: '11 OLMOZ', popular: true },
+            { id: 3, diamonds: 22, price: 5000, currency: 'UZS', label: '22 OLMOZ', popular: true },
+            { id: 4, diamonds: 56, price: 11500, currency: 'UZS', label: '56 OLMOZ', popular: true },
+            { id: 5, diamonds: 86, price: 16500, currency: 'UZS', label: '86 OLMOZ', popular: true },
+            { id: 6, diamonds: 112, price: 21500, currency: 'UZS', label: '112 OLMOZ', popular: true },
+            { id: 7, diamonds: 172, price: 34500, currency: 'UZS', label: '172 OLMOZ', popular: true },
+            { id: 8, diamonds: 257, price: 49000, currency: 'UZS', label: '257 OLMOZ', popular: true },
+            { id: 9, diamonds: 344, price: 63500, currency: 'UZS', label: '344 OLMOZ', popular: true },
+            { id: 10, diamonds: 429, price: 79500, currency: 'UZS', label: '429 OLMOZ', popular: true },
+            { id: 11, diamonds: 514, price: 96000, currency: 'UZS', label: '514 OLMOZ', popular: true },
+            { id: 12, diamonds: 706, price: 129000, currency: 'UZS', label: '706 OLMOZ', popular: true },
+            { id: 13, diamonds: 963, price: 179000, currency: 'UZS', label: '963 OLMOZ', popular: true },
+            { id: 14, diamonds: 2195, price: 387000, currency: 'UZS', label: '2195 OLMOZ', popular: true },
+            { id: 15, diamonds: 3688, price: 615000, currency: 'UZS', label: '3688 OLMOZ', popular: true },
+            { id: 16, diamonds: 9343, price: 1690000, currency: 'UZS', label: '9343 OLMOZ', popular: true },
+            { id: 17, diamonds: 220, price: 20500, currency: 'UZS', label: 'Haftalik propusk (220 OLMOZ + 70 AURORA)' },
+            { id: 18, diamonds: 0, price: 110000, currency: 'UZS', label: 'Skini (Сумеречный пропуск)', skin: true }
         ];
 
         // Initialize game
@@ -1149,9 +1283,6 @@
             document.getElementById('totalPlayers').textContent = totalPlayers;
             document.getElementById('referralCode').textContent = referralCode;
             document.getElementById('playerDiamonds').textContent = formatNumber(diamonds);
-            document.getElementById('availableBallsExchange').textContent = formatNumber(balls) + ' ball';
-            document.getElementById('availableDiamonds').textContent = formatNumber(diamonds) + ' olmos';
-            document.getElementById('availableBallsForWithdraw').textContent = formatNumber(balls) + ' ball';
             
             autoSave();
         }
@@ -1435,31 +1566,121 @@
             closeWithdrawModal();
         }
 
-        // Ball yechish modal (YANGI FUNKSIYA)
+        // Ball yechish modalini ochish
         function openWithdrawBallsModal() {
-            if (balls < 5000) {
-                showNotification('❌ Minimal yechish miqdori: 5000 ball');
+            document.getElementById('withdrawBallsModal').style.display = 'flex';
+        }
+
+        // Ball yechish modalini yopish
+        function closeWithdrawBallsModal() {
+            document.getElementById('withdrawBallsModal').style.display = 'none';
+        }
+
+        // Almashtirish modalini ochish
+        function openExchangeModal() {
+            document.getElementById('exchangeModal').style.display = 'flex';
+        }
+
+        // Almashtirish modalini yopish
+        function closeExchangeModal() {
+            document.getElementById('exchangeModal').style.display = 'none';
+        }
+
+        // Donate modal (YANGILANGAN)
+        function openDonateModal() {
+            document.getElementById('packageList').innerHTML = packages.map(pkg => `
+                <div class="package-item ${selectedPackage === pkg.id ? 'selected' : ''}" onclick="selectPackage(${pkg.id})" id="package-${pkg.id}">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 700; color: ${selectedPackage === pkg.id ? 'white' : 'var(--primary)'};">💎 ${pkg.label}</div>
+                            <div style="font-size: 11px; color: ${selectedPackage === pkg.id ? 'rgba(255,255,255,0.9)' : 'var(--gray)'};">
+                                ${pkg.diamonds > 0 ? pkg.diamonds + ' ta olmos' : 'Skini (Сумеречный пропуск)'}
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 800; color: ${selectedPackage === pkg.id ? 'white' : 'var(--accent)'};">${pkg.price.toLocaleString()} ${pkg.currency}</div>
+                            ${pkg.popular ? `<div style="font-size: 9px; color: ${selectedPackage === pkg.id ? 'yellow' : 'var(--warning)'};">🔥 POPULAR</div>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('donateModal').style.display = 'flex';
+            document.getElementById('paymentBtn').disabled = selectedPackage === null;
+        }
+
+        function closeDonateModal() {
+            document.getElementById('donateModal').style.display = 'none';
+        }
+
+        function selectPackage(packageId) {
+            selectedPackage = packageId;
+            
+            // Update all package items
+            packages.forEach(pkg => {
+                const elem = document.getElementById(`package-${pkg.id}`);
+                if (elem) {
+                    if (pkg.id === packageId) {
+                        elem.classList.add('selected');
+                        // Update text colors
+                        const primaryText = elem.querySelector('div > div:first-child > div:first-child');
+                        const secondaryText = elem.querySelector('div > div:first-child > div:last-child');
+                        const priceText = elem.querySelector('div > div:last-child > div:first-child');
+                        const popularText = elem.querySelector('div > div:last-child > div:last-child');
+                        
+                        if (primaryText) primaryText.style.color = 'white';
+                        if (secondaryText) secondaryText.style.color = 'rgba(255,255,255,0.9)';
+                        if (priceText) priceText.style.color = 'white';
+                        if (popularText) popularText.style.color = 'yellow';
+                    } else {
+                        elem.classList.remove('selected');
+                        // Reset text colors
+                        const primaryText = elem.querySelector('div > div:first-child > div:first-child');
+                        const secondaryText = elem.querySelector('div > div:first-child > div:last-child');
+                        const priceText = elem.querySelector('div > div:last-child > div:first-child');
+                        const popularText = elem.querySelector('div > div:last-child > div:last-child');
+                        
+                        if (primaryText) primaryText.style.color = 'var(--primary)';
+                        if (secondaryText) secondaryText.style.color = 'var(--gray)';
+                        if (priceText) priceText.style.color = 'var(--accent)';
+                        if (popularText) popularText.style.color = 'var(--warning)';
+                    }
+                }
+            });
+            
+            document.getElementById('paymentBtn').disabled = false;
+        }
+
+        // To'lov jarayoni (YANGI FUNKSIYALAR)
+        function proceedToPayment() {
+            if (!selectedPackage) {
+                showNotification('❌ Paketni tanlang!');
                 return;
             }
             
-            document.getElementById('withdrawBallsAmount').value = '';
-            document.getElementById('paymentDetails').value = '';
-            document.getElementById('mlbbIdBalls').value = '';
-            document.getElementById('availableBallsForWithdraw').textContent = formatNumber(balls) + ' ball';
-            document.getElementById('withdrawBallsModal').style.display = 'flex';
+            const pkg = packages.find(p => p.id === selectedPackage);
+            if (!pkg) return;
+            
+            // To'lov modalini sozlash
+            document.getElementById('selectedPackageName').textContent = pkg.label;
+            document.getElementById('selectedPackagePrice').textContent = pkg.price.toLocaleString() + ' ' + pkg.currency;
             
             // Reset payment method
             selectedPaymentMethod = null;
             document.querySelectorAll('.payment-method').forEach(el => {
                 el.classList.remove('selected');
             });
+            document.getElementById('processPaymentBtn').disabled = true;
+            document.getElementById('paymentDetailsSection').style.display = 'none';
+            document.getElementById('mlbbIdPayment').value = '';
             
-            // Установить максимальное значение как текущие ball
-            document.getElementById('withdrawBallsAmount').max = balls;
+            // Donate modalini yopish va payment modalini ochish
+            closeDonateModal();
+            document.getElementById('paymentModal').style.display = 'flex';
         }
 
-        function closeWithdrawBallsModal() {
-            document.getElementById('withdrawBallsModal').style.display = 'none';
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
         }
 
         function selectPaymentMethod(method) {
@@ -1471,175 +1692,115 @@
             });
             
             // Add selected class to clicked
-            document.getElementById(`payment${method.charAt(0).toUpperCase() + method.slice(1)}`).classList.add('selected');
+            const methodId = method === 'payme' ? 'Payme' : 
+                           method === 'click' ? 'Click' : 'Uzcard';
+            document.getElementById(`payment${methodId}`).classList.add('selected');
+            
+            // Enable payment button
+            document.getElementById('processPaymentBtn').disabled = false;
+            
+            // Show MLBB ID input
+            document.getElementById('paymentDetailsSection').style.display = 'block';
         }
 
-        function calculateWithdrawMoney() {
-            const amount = parseInt(document.getElementById('withdrawBallsAmount').value) || 0;
-            const money = Math.floor(amount); // 1 ball = 1 UZS
-            document.getElementById('withdrawMoneyResult').textContent = money.toLocaleString() + ' UZS';
-        }
-
-        function submitWithdrawBallsRequest() {
-            const amount = parseInt(document.getElementById('withdrawBallsAmount').value) || 0;
-            const paymentDetails = document.getElementById('paymentDetails').value.trim();
-            const mlbbId = document.getElementById('mlbbIdBalls').value.trim();
-            
-            if (amount < 5000) {
-                showNotification('❌ Minimal yechish miqdor: 5000 ball');
+        function processPayment() {
+            if (!selectedPackage || !selectedPaymentMethod) {
+                showNotification('❌ To\'lov usulini tanlang!');
                 return;
             }
             
-            if (amount > balls) {
-                showNotification('❌ Yetarli ball yo\'q');
-                return;
-            }
-            
-            if (!selectedPaymentMethod) {
-                showNotification('❌ To\'lov usulini tanlang');
-                return;
-            }
-            
-            if (!paymentDetails) {
-                showNotification('❌ Karta/telefon raqamini kiriting');
-                return;
-            }
-            
+            const mlbbId = document.getElementById('mlbbIdPayment').value.trim();
             if (!mlbbId) {
-                showNotification('❌ MLBB ID ni kiriting');
+                showNotification('❌ MLBB ID ni kiriting!');
                 return;
             }
             
-            // Отправка запроса администратору
-            const paymentMethodNames = {
-                'uzcard': 'Uzcard',
-                'humo': 'Humo',
-                'click': 'Click'
-            };
+            // Close payment modal and show processing modal
+            closePaymentModal();
+            document.getElementById('paymentProcessingModal').style.display = 'flex';
             
-            const money = Math.floor(amount); // 1 ball = 1 UZS
-            const message = `Salom! Men MLBB Ball Collector o'yinidan ball yechmoqchiman.%0A%0A` +
-                          `Yechish miqdori: ${amount} ball%0A` +
-                          `Pul miqdori: ${money.toLocaleString()} UZS%0A` +
-                          `To'lov usuli: ${paymentMethodNames[selectedPaymentMethod]}%0A` +
-                          `Karta/telefon: ${paymentDetails}%0A` +
-                          `MLBB ID: ${mlbbId}%0A` +
-                          `Mening ballarim: ${balls} ta%0A` +
-                          `Mening referral kodi: ${referralCode}%0A%0A` +
-                          `Iltimos, pullimni yeching.`;
-            
-            window.open(`https://t.me/laz1z0v1ch?text=${message}`, '_blank');
-            
-            // Вычитаем ball
-            balls -= amount;
-            
-            addToHistory('ball_yechish', `${amount} ball yechish so'rovi (${money.toLocaleString()} UZS)`, -amount);
-            showNotification(`✅ ${amount} ball yechish so'rovi yuborildi! Admin siz bilan bog'lanadi.`);
-            updateUI();
-            closeWithdrawBallsModal();
+            // Simulate payment processing (3-5 seconds)
+            setTimeout(() => {
+                // Close processing modal
+                document.getElementById('paymentProcessingModal').style.display = 'none';
+                
+                // 90% success rate simulation
+                const isSuccess = Math.random() < 0.9;
+                
+                if (isSuccess) {
+                    // Payment successful
+                    const pkg = packages.find(p => p.id === selectedPackage);
+                    
+                    if (pkg.skin) {
+                        // Skin purchase
+                        addToHistory('skin_sotib_olish', `Skini sotib olindi: ${pkg.label}`, 0);
+                        document.getElementById('successMessage').textContent = 'Skini muvaffaqiyatli sotib olindi!';
+                        document.getElementById('addedDiamonds').textContent = '0';
+                    } else {
+                        // Diamond purchase
+                        diamonds += pkg.diamonds;
+                        addToHistory('olmos_sotib_olish', `${pkg.diamonds} olmos sotib olindi: ${pkg.label}`, pkg.diamonds);
+                        document.getElementById('successMessage').textContent = 'Olmoslar hisobingizga qo\'shildi!';
+                        document.getElementById('addedDiamonds').textContent = pkg.diamonds;
+                        updateUI();
+                    }
+                    
+                    // Show success modal
+                    document.getElementById('paymentSuccessModal').style.display = 'flex';
+                    
+                    // Send notification to admin (simulated)
+                    simulateAdminNotification(pkg, mlbbId);
+                } else {
+                    // Payment failed
+                    const errorMessages = [
+                        "Kartada yetarli mablag' yo'q",
+                        "To'lov tizimida muammo",
+                        "Internet aloqasi uzildi",
+                        "To'lov chegarasi oshib ketdi",
+                        "Karta ma'lumotlari noto'g'ri"
+                    ];
+                    const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+                    
+                    document.getElementById('failedMessage').innerHTML = `
+                        To'lov amalga oshirilmadi.<br>
+                        <strong>Sabab:</strong> ${randomError}<br><br>
+                        Iltimos, qayta urinib ko'ring yoki boshqa to'lov usulidan foydalaning.
+                    `;
+                    
+                    // Show failed modal
+                    document.getElementById('paymentFailedModal').style.display = 'flex';
+                }
+            }, 3000 + Math.random() * 2000); // 3-5 seconds
         }
 
-        // Exchange function
-        function openExchangeModal() {
-            document.getElementById('exchangeAmount').value = '';
-            document.getElementById('exchangeResult').textContent = '0 olmos';
-            document.getElementById('availableBallsExchange').textContent = formatNumber(balls) + ' ball';
-            document.getElementById('exchangeModal').style.display = 'flex';
+        function simulateAdminNotification(pkg, mlbbId) {
+            // This simulates sending a notification to admin
+            console.log(`To'lov muvaffaqiyatli! Paket: ${pkg.label}, MLBB ID: ${mlbbId}, Summa: ${pkg.price} ${pkg.currency}`);
             
-            document.getElementById('exchangeAmount').addEventListener('input', function() {
-                const amount = parseInt(this.value) || 0;
-                const diamonds = Math.floor(amount / 1000);
-                document.getElementById('exchangeResult').textContent = diamonds + ' olmos';
-            });
+            // In a real implementation, you would send this to your backend
+            // or use Telegram Bot API to notify admin
         }
 
-        function closeExchangeModal() {
-            document.getElementById('exchangeModal').style.display = 'none';
-        }
-
-        function exchangeBalls() {
-            const amount = parseInt(document.getElementById('exchangeAmount').value) || 0;
-            
-            if (amount < 1000) {
-                showNotification('❌ Minimal miqdor: 1000 ball');
-                return;
-            }
-            
-            if (balls < amount) {
-                showNotification('❌ Yetarli ball yo\'q');
-                return;
-            }
-            
-            const diamondsToAdd = Math.floor(amount / 1000);
-            balls -= amount;
-            diamonds += diamondsToAdd;
-            
-            addToHistory('almashtirish', `${amount} ball → ${diamondsToAdd} olmos`, -amount);
-            showNotification(`✅ ${diamondsToAdd} olmos qo'shildi!`);
-            updateUI();
-            updateCurrentPlayerInTops();
-            updateTopDisplays();
-            closeExchangeModal();
-        }
-
-        // Donate modal
-        function openDonateModal() {
-            document.getElementById('packageList').innerHTML = packages.map(pkg => `
-                <div class="package-item" onclick="selectPackage(${pkg.id})" id="package-${pkg.id}">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <div style="font-weight: 700; color: var(--primary);">💎 ${pkg.label}</div>
-                            <div style="font-size: 11px; color: var(--gray);">${pkg.diamonds} ta olmos</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-weight: 800; color: var(--accent);">${pkg.price.toLocaleString()} ${pkg.currency}</div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            
-            document.getElementById('donateModal').style.display = 'flex';
+        function closePaymentSuccessModal() {
+            document.getElementById('paymentSuccessModal').style.display = 'none';
             selectedPackage = null;
-            document.getElementById('paymentBtn').disabled = true;
+            selectedPaymentMethod = null;
         }
 
-        function closeDonateModal() {
-            document.getElementById('donateModal').style.display = 'none';
+        function closePaymentFailedModal() {
+            document.getElementById('paymentFailedModal').style.display = 'none';
+            // Reopen payment modal
+            document.getElementById('paymentModal').style.display = 'flex';
         }
 
-        let selectedPackage = null;
-        function selectPackage(packageId) {
-            packages.forEach(pkg => {
-                const elem = document.getElementById(`package-${pkg.id}`);
-                if (elem) elem.style.background = '';
-            });
-            
-            const elem = document.getElementById(`package-${packageId}`);
-            elem.style.background = 'var(--primary)';
-            elem.style.color = 'white';
-            
-            selectedPackage = packageId;
-            document.getElementById('paymentBtn').disabled = false;
+        function retryPayment() {
+            closePaymentFailedModal();
+            // Process payment again
+            processPayment();
         }
 
-        function proceedToPayment() {
-            if (!selectedPackage) {
-                showNotification('❌ Paketni tanlang!');
-                return;
-            }
-            
-            const pkg = packages.find(p => p.id === selectedPackage);
-            const message = `Salom! Men MLBB Ball Collector o'yinidan ${pkg.label} paketini sotib olmoqchiman.%0A%0A` +
-                          `Paket: ${pkg.label}%0A` +
-                          `Narxi: ${pkg.price.toLocaleString()} SO'M%0A` +
-                          `Olmos: ${pkg.diamonds} ta%0A%0A` +
-                          `Mening MLBB ID: _________________%0A` +
-                          `To'lov chek rasmi: _________________`;
-            
-            window.open(`https://t.me/laz1z0v1ch?text=${message}`, '_blank');
-            addToHistory('sotib_olish', `${pkg.label} paketi sotib olish`, 0);
-            showNotification(`📤 So'rov adminga yuborildi!`);
-            closeDonateModal();
+        function closePaymentProcessingModal() {
+            document.getElementById('paymentProcessingModal').style.display = 'none';
         }
 
         // History modal
@@ -1682,7 +1843,8 @@
             const icons = {
                 'bosish': '👆',
                 'avtokliker': '🤖',
-                'sotib_olish': '🛒',
+                'olmos_sotib_olish': '💎',
+                'skin_sotib_olish': '🎮',
                 'almashtirish': '💎',
                 'upgrade': '⚡',
                 'taklif': '👥',
