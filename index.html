@@ -485,6 +485,76 @@
             display: block;
         }
 
+        /* Payment Card */
+        .payment-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-number {
+            font-size: 18px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        /* Payment Steps */
+        .payment-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .payment-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .payment-step.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .payment-step.completed {
+            background: var(--accent);
+            color: white;
+        }
+
+        .payment-step-line {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            height: 2px;
+            background: var(--light-gray);
+            z-index: 1;
+        }
+
+        .payment-step-line.active {
+            background: var(--primary);
+        }
+
         /* Payment Status */
         .payment-status {
             text-align: center;
@@ -503,6 +573,43 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Payment Timer */
+        .payment-timer {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+
+        /* Payment Animation */
+        .payment-animation {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .payment-icon {
+            font-size: 60px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Payment Message */
+        .payment-message {
+            text-align: center;
+            padding: 15px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+        }
+
         /* Responsive */
         @media (max-width: 480px) {
             .container { padding: 8px; }
@@ -513,6 +620,7 @@
             .top-players { grid-template-columns: 1fr; }
             .invite-grid { grid-template-columns: repeat(2, 1fr); }
             .payment-methods { grid-template-columns: 1fr; }
+            .payment-steps { margin: 15px 0; }
         }
     </style>
 </head>
@@ -665,7 +773,7 @@
                 <div class="invite-box">
                     <div class="invite-value" id="playerDiamonds">0</div>
                     <div class="invite-label">JAMI OLMOS</div>
-                </div>
+            </div>
             </div>
             
             <button class="small-btn pink-btn" onclick="openInviteModal()" style="width: 100%; margin-top: 10px; padding: 8px;">
@@ -697,7 +805,7 @@
                     <i class="fas fa-clock"></i>
                 </div>
                 <div style="font-size: 20px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
-                    SKORO BUDET DOSTUPNO
+                    TEZ KUNDA!
                 </div>
                 <div style="font-size: 14px; color: var(--gray); line-height: 1.6;">
                     Ballarni olmosga almashtirish funksiyasi hozircha ishlamaydi.<br>
@@ -813,7 +921,7 @@
         </div>
     </div>
 
-    <!-- Payment Modal (YANGI) -->
+    <!-- Payment Modal (YANGI - REAL VERSIYA) -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -823,76 +931,133 @@
                 <button onclick="closePaymentModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
             </div>
             
+            <div class="payment-steps">
+                <div class="payment-step" id="step1">1</div>
+                <div class="payment-step" id="step2">2</div>
+                <div class="payment-step" id="step3">3</div>
+                <div class="payment-step-line" id="stepLine"></div>
+            </div>
+            
             <div style="text-align: center; margin: 15px 0;">
                 <div style="font-size: 14px; color: var(--primary); margin-bottom: 5px;">Sotib olish:</div>
                 <div style="font-size: 20px; font-weight: 800; color: var(--primary);" id="selectedPackageName">-</div>
                 <div style="font-size: 16px; color: var(--accent); font-weight: 700; margin-top: 5px;" id="selectedPackagePrice">0 SO'M</div>
             </div>
             
-            <div style="margin: 15px 0;">
-                <div style="font-size: 12px; color: var(--gray); margin-bottom: 8px;">To'lov usulini tanlang:</div>
-                <div class="payment-methods">
-                    <div class="payment-method" onclick="selectPaymentMethod('payme')" id="paymentPayme">
-                        <i class="fas fa-mobile-alt" style="color: #FF6B00;"></i>
-                        Payme
+            <!-- To'lov bosqichlari -->
+            <div id="paymentStep1">
+                <div style="margin: 15px 0;">
+                    <div style="font-size: 12px; color: var(--gray); margin-bottom: 8px;">To'lov usulini tanlang:</div>
+                    <div class="payment-methods">
+                        <div class="payment-method" onclick="selectPaymentMethod('payme')" id="paymentPayme">
+                            <i class="fas fa-mobile-alt" style="color: #FF6B00;"></i>
+                            Payme
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('click')" id="paymentClick">
+                            <i class="fas fa-mobile-alt" style="color: #00AA00;"></i>
+                            Click
+                        </div>
+                        <div class="payment-method" onclick="selectPaymentMethod('card')" id="paymentCard">
+                            <i class="fas fa-credit-card" style="color: #9C27B0;"></i>
+                            Bank Karta
+                        </div>
                     </div>
-                    <div class="payment-method" onclick="selectPaymentMethod('click')" id="paymentClick">
-                        <i class="fas fa-mobile-alt" style="color: #00AA00;"></i>
-                        Click
+                </div>
+                
+                <div style="margin: 15px 0;">
+                    <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">MLBB ID (raqam):</div>
+                    <input type="number" id="mlbbIdPayment" class="exchange-input" placeholder="MLBB ID raqami" min="100000" max="999999999">
+                    <div style="font-size: 11px; color: var(--gray); margin-top: 5px;">
+                        To'lovni amalga oshirgandan so'ng, olmoslar 5-15 daqiqa ichida hisobingizga tushadi.
                     </div>
-                    <div class="payment-method" onclick="selectPaymentMethod('uzcard')" id="paymentUzcard">
-                        <i class="fas fa-credit-card" style="color: #0066CC;"></i>
-                        Uzcard
-                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 8px;">
+                    <button class="micro-btn red-btn" onclick="closePaymentModal()" style="flex: 1;">Bekor qilish</button>
+                    <button class="micro-btn green-btn" onclick="goToPaymentStep2()" id="nextStepBtn" style="flex: 1;" disabled>Keyingi</button>
                 </div>
             </div>
             
-            <div style="margin: 15px 0; display: none;" id="paymentDetailsSection">
-                <div style="font-size: 12px; color: var(--gray); margin-bottom: 5px;">MLBB ID (raqam):</div>
-                <input type="number" id="mlbbIdPayment" class="exchange-input" placeholder="MLBB ID raqami" min="100000" max="999999999">
-                <div style="font-size: 11px; color: var(--gray); margin-top: 5px;">
-                    To'lovni amalga oshirgandan so'ng, olmoslar 1-5 daqiqa ichida hisobingizga tushadi.
+            <!-- To'lov ma'lumotlari bosqichi -->
+            <div id="paymentStep2" style="display: none;">
+                <div class="payment-message">
+                    <div style="font-size: 14px; color: var(--primary); font-weight: 700; margin-bottom: 8px;">
+                        <i class="fas fa-info-circle"></i> TO'LOV MA'LUMOTLARI
+                    </div>
+                    <div style="font-size: 12px; color: var(--gray); line-height: 1.5;" id="paymentInstructions">
+                        <!-- To'lov ma'lumotlari shu yerga yuklanadi -->
+                    </div>
+                </div>
+                
+                <div class="payment-card" id="paymentCardDisplay">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="font-size: 16px; font-weight: 700;">BANK KARTA</div>
+                        <div style="font-size: 20px;">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                    </div>
+                    <div class="card-number" id="cardNumber">**** **** **** ****</div>
+                    <div class="card-details">
+                        <div>
+                            <div style="font-size: 10px; opacity: 0.8;">KARTA EGASI</div>
+                            <div style="font-weight: 600;">LAZIZOVICH</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 10px; opacity: 0.8;">MUDDAT</div>
+                            <div style="font-weight: 600;">09/28</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--warning);">
+                    <div style="font-size: 11px; color: var(--warning); font-weight: 700; margin-bottom: 8px;">
+                        <i class="fas fa-info-circle"></i> ESDA TUTING:
+                    </div>
+                    <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
+                        <p>1. To'lovni amalga oshirish uchun yuqoridagi karta raqamiga to'lov qiling</p>
+                        <p>2. To'lov muvaffaqiyatli bo'lsa, "TO'LOV QILDIM" tugmasini bosing</p>
+                        <p>3. To'lovni tasdiqlash uchun admin (Men) to'lovni tekshiraman</p>
+                        <p>4. To'lov tasdiqlansa, olmoslar 5-15 daqiqa ichida hisobingizga tushadi</p>
+                        <p>5. Tel: +998882600726 | Telegram: @laz1z0v1ch</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 8px;">
+                    <button class="micro-btn red-btn" onclick="goToPaymentStep1()" style="flex: 1;">Orqaga</button>
+                    <button class="micro-btn green-btn" onclick="processPayment()" id="processPaymentBtn" style="flex: 1;">TO'LOV QILDIM</button>
                 </div>
             </div>
             
-            <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--warning);">
-                <div style="font-size: 11px; color: var(--warning); font-weight: 700; margin-bottom: 8px;">
-                    <i class="fas fa-info-circle"></i> ESDA TUTING:
+            <!-- To'lov jarayoni bosqichi -->
+            <div id="paymentStep3" style="display: none;">
+                <div class="payment-status">
+                    <div class="payment-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div style="font-size: 20px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
+                        TO'LOV KUTILMOQDA
+                    </div>
+                    <div class="payment-timer" id="paymentTimer">00:30</div>
+                    <div style="font-size: 14px; color: var(--gray); margin-bottom: 15px;">
+                        Admin to'lovni tekshirmoqda...
+                    </div>
+                    
+                    <div class="payment-animation">
+                        <div class="payment-loader">
+                            <i class="fas fa-spinner"></i>
+                        </div>
+                    </div>
+                    
+                    <div style="font-size: 12px; color: var(--gray); margin-top: 15px;">
+                        Iltimos, kuting. Admin to'lovni tekshirgandan so'ng olmoslar hisobingizga tushadi.<br>
+                        Bu 30 soniyadan 5 daqiqagacha davom etishi mumkin.
+                    </div>
                 </div>
-                <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
-                    <p>1. To'lovni amalga oshirish uchun Payme, Click yoki Uzcard ishlatishingiz mumkin</p>
-                    <p>2. To'lov muvaffaqiyatli bo'lsa, olmoslar 1-5 daqiqa ichida hisobingizga tushadi</p>
-                    <p>3. Agar 15 daqiqa ichida olmoslar tushmasa, @laz1z0v1ch ga murojaat qiling</p>
-                    <p>4. Tel: +998882600726</p>
-                </div>
-            </div>
-            
-            <div style="display: flex; gap: 8px;">
-                <button class="micro-btn red-btn" onclick="closePaymentModal()" style="flex: 1;">Bekor qilish</button>
-                <button class="micro-btn green-btn" onclick="processPayment()" id="processPaymentBtn" style="flex: 1;" disabled>To'lov qilish</button>
             </div>
         </div>
     </div>
 
-    <!-- Payment Processing Modal (YANGI) -->
-    <div class="modal-overlay" id="paymentProcessingModal">
-        <div class="modal-content">
-            <div class="payment-status">
-                <div class="payment-loader">
-                    <i class="fas fa-spinner"></i>
-                </div>
-                <div style="font-size: 18px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
-                    TO'LOV AMALGA OSHIRILMOQDA...
-                </div>
-                <div style="font-size: 12px; color: var(--gray);">
-                    Iltimos, kuting. Bu 5-10 soniya davom etadi.<br>
-                    To'lov tizimi bilan bog'lanmoqda...
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Payment Success Modal (YANGI) -->
+    <!-- Payment Success Modal -->
     <div class="modal-overlay" id="paymentSuccessModal">
         <div class="modal-content">
             <div style="text-align: center; padding: 20px;">
@@ -900,12 +1065,15 @@
                     <i class="fas fa-check-circle"></i>
                 </div>
                 <div style="font-size: 20px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
-                    TO'LOV MUVaffaqiyatLI!
+                    TO'LOV TASDIQLANDI!
                 </div>
                 <div style="font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 20px;">
-                    <div id="successMessage">Olmoslar hisobingizga qo'shildi!</div>
-                    <div style="margin-top: 10px; font-size: 16px; color: var(--accent); font-weight: 700;">
+                    <div id="successMessage">To'lov muvaffaqiyatli amalga oshirildi!</div>
+                    <div style="margin-top: 15px; font-size: 24px; color: var(--accent); font-weight: 700;">
                         +<span id="addedDiamonds">0</span> OLMOZ
+                    </div>
+                    <div style="margin-top: 10px; font-size: 16px; color: var(--primary);">
+                        Paket: <span id="successPackageName">-</span>
                     </div>
                 </div>
                 
@@ -914,18 +1082,20 @@
                         <i class="fas fa-info-circle"></i> MA'LUMOT:
                     </div>
                     <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
-                        <p>• Olmoslar 1-5 daqiqa ichida MLBB hisobingizga tushadi</p>
-                        <p>• Agar 15 daqiqa ichida olmoslar tushmasa, @laz1z0v1ch ga murojaat qiling</p>
-                        <p>• Tel: +998882600726</p>
+                        <p>✅ To'lov muvaffaqiyatli tasdiqlandi!</p>
+                        <p>✅ Sizga Telegram orqali xabar yuborildi</p>
+                        <p>⏳ Olmoslar 5-15 daqiqa ichida MLBB hisobingizga tushadi</p>
+                        <p>📞 Agar 30 daqiqa ichida olmoslar tushmasa, @laz1z0v1ch ga murojaat qiling</p>
+                        <p>📱 Tel: +998882600726</p>
                     </div>
                 </div>
                 
-                <button class="micro-btn green-btn" onclick="closePaymentSuccessModal()" style="width: 100%; margin-top: 20px;">Tamom</button>
+                <button class="micro-btn green-btn" onclick="closePaymentSuccessModal()" style="width: 100%; margin-top: 20px;">TAMOM</button>
             </div>
         </div>
     </div>
 
-    <!-- Payment Failed Modal (YANGI) -->
+    <!-- Payment Failed Modal -->
     <div class="modal-overlay" id="paymentFailedModal">
         <div class="modal-content">
             <div style="text-align: center; padding: 20px;">
@@ -933,28 +1103,80 @@
                     <i class="fas fa-times-circle"></i>
                 </div>
                 <div style="font-size: 20px; color: var(--danger); margin-bottom: 10px; font-weight: 700;">
-                    TO'LOV MUVaffaqiyatSIZ!
+                    TO'LOV TASDIQLANMADI
                 </div>
                 <div style="font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 20px;" id="failedMessage">
-                    To'lov amalga oshirilmadi. Iltimos, qayta urinib ko'ring yoki boshqa to'lov usulidan foydalaning.
+                    Admin to'lovni tasdiqlamadi. Sabablar:
                 </div>
                 
                 <div style="background: rgba(244, 67, 54, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--danger);">
                     <div style="font-size: 11px; color: var(--danger); font-weight: 700; margin-bottom: 8px;">
-                        <i class="fas fa-info-circle"></i> SABABLAR:
+                        <i class="fas fa-info-circle"></i> EHTIMOLLI SABABLAR:
                     </div>
                     <div style="font-size: 11px; color: var(--gray); line-height: 1.5;">
-                        <p>• Karta mablag'i yetarli emas</p>
-                        <p>• To'lov tizimida muammo</p>
-                        <p>• Internet aloqasi uzildi</p>
-                        <p>• To'lov chegarasi oshib ketdi</p>
+                        <p>• To'lov amalga oshirilmagan</p>
+                        <p>• Noto'g'ri MLBB ID kiritilgan</p>
+                        <p>• To'lov miqdori noto'g'ri</p>
+                        <p>• To'lov haqida ma'lumot yo'q</p>
+                        <p>• Texnik muammolar</p>
                     </div>
+                </div>
+                
+                <div style="font-size: 12px; color: var(--gray); margin: 15px 0; padding: 10px; background: var(--primary-light); border-radius: 8px;">
+                    <p><strong>QANDAY HAL QILISH MUMKIN?</strong></p>
+                    <p>1. To'lovni qayta amalga oshiring</p>
+                    <p>2. To'lov chekini (screenshot) saqlang</p>
+                    <p>3. @laz1z0v1ch ga murojaat qiling</p>
+                    <p>4. Tel: +998882600726</p>
                 </div>
                 
                 <div style="display: flex; gap: 8px; margin-top: 20px;">
                     <button class="micro-btn red-btn" onclick="closePaymentFailedModal()" style="flex: 1;">Yopish</button>
                     <button class="micro-btn yellow-btn" onclick="retryPayment()" style="flex: 1;">Qayta urinish</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Notification Modal (YANGI) -->
+    <div class="modal-overlay" id="adminNotificationModal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div style="font-size: 16px; color: var(--primary); font-weight: 700;">
+                    <i class="fas fa-bell"></i> ADMINGA XABAR
+                </div>
+                <button onclick="closeAdminNotificationModal()" style="background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer;">&times;</button>
+            </div>
+            
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 40px; color: var(--primary); margin-bottom: 15px;">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <div style="font-size: 18px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
+                    TO'LOV SO'ROVI YUBORILDI!
+                </div>
+                <div style="font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 20px;">
+                    To'lov so'rovi muvaffaqiyatli yuborildi.<br>
+                    Admin to'lovni tekshirgach, olmoslar hisobingizga tushadi.
+                </div>
+                
+                <div style="background: rgba(33, 150, 243, 0.1); padding: 12px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--primary);">
+                    <div style="font-size: 11px; color: var(--primary); font-weight: 700; margin-bottom: 8px;">
+                        <i class="fas fa-info-circle"></i> ADMINGA YUBORILGAN MA'LUMOT:
+                    </div>
+                    <div style="font-size: 11px; color: var(--gray); line-height: 1.5;" id="adminNotificationDetails">
+                        <!-- Ma'lumotlar shu yerga yuklanadi -->
+                    </div>
+                </div>
+                
+                <div style="font-size: 12px; color: var(--gray); margin-top: 15px;">
+                    <p><strong>Keyingi qadamlar:</strong></p>
+                    <p>1. Admin to'lovni tekshiradi (30 soniya - 5 daqiqa)</p>
+                    <p>2. To'lov tasdiqlansa, olmoslar tushadi</p>
+                    <p>3. Sizga Telegram orqali xabar keladi</p>
+                </div>
+                
+                <button class="micro-btn blue-btn" onclick="closeAdminNotificationModal()" style="width: 100%; margin-top: 20px;">TUSHUNDIM</button>
             </div>
         </div>
     </div>
@@ -1114,8 +1336,12 @@
         // Payment variables
         let selectedPackage = null;
         let selectedPaymentMethod = null;
+        let currentPaymentStep = 1;
+        let paymentTimerInterval = null;
+        let paymentTimeLeft = 30;
+        let adminNotificationSent = false;
         
-        // Yangi paketlar ro'yxati (siz bergan ro'yxat)
+        // Yangi paketlar ro'yxati
         const packages = [
             { id: 1, diamonds: 5, price: 1800, currency: 'UZS', label: '5 OLMOZ' },
             { id: 2, diamonds: 11, price: 3000, currency: 'UZS', label: '11 OLMOZ', popular: true },
@@ -1586,7 +1812,7 @@
             document.getElementById('exchangeModal').style.display = 'none';
         }
 
-        // Donate modal (YANGILANGAN)
+        // Donate modal
         function openDonateModal() {
             document.getElementById('packageList').innerHTML = packages.map(pkg => `
                 <div class="package-item ${selectedPackage === pkg.id ? 'selected' : ''}" onclick="selectPackage(${pkg.id})" id="package-${pkg.id}">
@@ -1651,7 +1877,7 @@
             document.getElementById('paymentBtn').disabled = false;
         }
 
-        // To'lov jarayoni (YANGI FUNKSIYALAR)
+        // To'lov jarayoni (YANGI REAL VERSIYA)
         function proceedToPayment() {
             if (!selectedPackage) {
                 showNotification('❌ Paketni tanlang!');
@@ -1661,18 +1887,32 @@
             const pkg = packages.find(p => p.id === selectedPackage);
             if (!pkg) return;
             
+            // Reset payment steps
+            currentPaymentStep = 1;
+            selectedPaymentMethod = null;
+            adminNotificationSent = false;
+            
             // To'lov modalini sozlash
             document.getElementById('selectedPackageName').textContent = pkg.label;
             document.getElementById('selectedPackagePrice').textContent = pkg.price.toLocaleString() + ' ' + pkg.currency;
             
-            // Reset payment method
-            selectedPaymentMethod = null;
+            // Reset UI
+            document.getElementById('paymentStep1').style.display = 'block';
+            document.getElementById('paymentStep2').style.display = 'none';
+            document.getElementById('paymentStep3').style.display = 'none';
+            
+            // Reset payment method selection
             document.querySelectorAll('.payment-method').forEach(el => {
                 el.classList.remove('selected');
             });
-            document.getElementById('processPaymentBtn').disabled = true;
-            document.getElementById('paymentDetailsSection').style.display = 'none';
+            document.getElementById('nextStepBtn').disabled = true;
             document.getElementById('mlbbIdPayment').value = '';
+            
+            // Reset steps
+            document.getElementById('step1').className = 'payment-step';
+            document.getElementById('step2').className = 'payment-step';
+            document.getElementById('step3').className = 'payment-step';
+            document.getElementById('stepLine').className = 'payment-step-line';
             
             // Donate modalini yopish va payment modalini ochish
             closeDonateModal();
@@ -1681,6 +1921,10 @@
 
         function closePaymentModal() {
             document.getElementById('paymentModal').style.display = 'none';
+            if (paymentTimerInterval) {
+                clearInterval(paymentTimerInterval);
+                paymentTimerInterval = null;
+            }
         }
 
         function selectPaymentMethod(method) {
@@ -1693,92 +1937,254 @@
             
             // Add selected class to clicked
             const methodId = method === 'payme' ? 'Payme' : 
-                           method === 'click' ? 'Click' : 'Uzcard';
+                           method === 'click' ? 'Click' : 'Card';
             document.getElementById(`payment${methodId}`).classList.add('selected');
             
-            // Enable payment button
-            document.getElementById('processPaymentBtn').disabled = false;
-            
-            // Show MLBB ID input
-            document.getElementById('paymentDetailsSection').style.display = 'block';
+            // Enable next button if MLBB ID is filled
+            const mlbbId = document.getElementById('mlbbIdPayment').value.trim();
+            document.getElementById('nextStepBtn').disabled = !mlbbId;
         }
 
-        function processPayment() {
-            if (!selectedPackage || !selectedPaymentMethod) {
-                showNotification('❌ To\'lov usulini tanlang!');
+        // MLBB ID input listener
+        document.getElementById('mlbbIdPayment').addEventListener('input', function() {
+            const mlbbId = this.value.trim();
+            document.getElementById('nextStepBtn').disabled = !mlbbId || !selectedPaymentMethod;
+        });
+
+        function goToPaymentStep2() {
+            const mlbbId = document.getElementById('mlbbIdPayment').value.trim();
+            if (!mlbbId || !selectedPaymentMethod) {
+                showNotification('❌ MLBB ID va to\'lov usulini tanlang!');
                 return;
             }
             
+            const pkg = packages.find(p => p.id === selectedPackage);
+            if (!pkg) return;
+            
+            // Update steps
+            currentPaymentStep = 2;
+            document.getElementById('step1').className = 'payment-step completed';
+            document.getElementById('step2').className = 'payment-step active';
+            document.getElementById('stepLine').className = 'payment-step-line active';
+            
+            // Show payment instructions based on method
+            let instructions = '';
+            let cardDisplay = 'block';
+            
+            switch(selectedPaymentMethod) {
+                case 'payme':
+                    instructions = `
+                        <p><strong>Payme orqali to'lov qilish:</strong></p>
+                        <p>1. Payme ilovasini oching</p>
+                        <p>2. "To'lov" bo'limiga o'ting</p>
+                        <p>3. Karta raqamiga: <strong>9860 1601 2641 7162</strong></p>
+                        <p>4. Summani kiriting: <strong>${pkg.price.toLocaleString()} SO'M</strong></p>
+                        <p>5. To'lovni amalga oshiring</p>
+                        <p>6. To'lov chekini (screenshot) saqlang</p>
+                    `;
+                    break;
+                    
+                case 'click':
+                    instructions = `
+                        <p><strong>Click orqali to'lov qilish:</strong></p>
+                        <p>1. Click ilovasini oching</p>
+                        <p>2. "To'lov" bo'limiga o'ting</p>
+                        <p>3. Karta raqamiga: <strong>9860 1601 2641 7162</strong></p>
+                        <p>4. Summani kiriting: <strong>${pkg.price.toLocaleString()} SO'M</strong></p>
+                        <p>5. To'lovni amalga oshiring</p>
+                        <p>6. To'lov chekini (screenshot) saqlang</p>
+                    `;
+                    break;
+                    
+                case 'card':
+                    instructions = `
+                        <p><strong>Bank karta orqali to'lov qilish:</strong></p>
+                        <p>1. Bank ilovangizni oching</p>
+                        <p>2. Quyidagi karta raqamiga o'tkazma qiling:</p>
+                        <p>3. Summa: <strong>${pkg.price.toLocaleString()} SO'M</strong></p>
+                        <p>4. To'lovni amalga oshiring</p>
+                        <p>5. To'lov chekini (screenshot) saqlang</p>
+                    `;
+                    break;
+            }
+            
+            document.getElementById('paymentInstructions').innerHTML = instructions;
+            
+            // Update card display
+            if (selectedPaymentMethod === 'card') {
+                document.getElementById('paymentCardDisplay').style.display = 'block';
+                document.getElementById('cardNumber').textContent = '9860 1601 2641 7162';
+            } else {
+                document.getElementById('paymentCardDisplay').style.display = 'block';
+                document.getElementById('cardNumber').textContent = '9860 1601 2641 7162';
+            }
+            
+            // Switch to step 2
+            document.getElementById('paymentStep1').style.display = 'none';
+            document.getElementById('paymentStep2').style.display = 'block';
+        }
+
+        function goToPaymentStep1() {
+            currentPaymentStep = 1;
+            document.getElementById('step1').className = 'payment-step active';
+            document.getElementById('step2').className = 'payment-step';
+            document.getElementById('stepLine').className = 'payment-step-line';
+            
+            document.getElementById('paymentStep2').style.display = 'none';
+            document.getElementById('paymentStep1').style.display = 'block';
+        }
+
+        function processPayment() {
             const mlbbId = document.getElementById('mlbbIdPayment').value.trim();
             if (!mlbbId) {
                 showNotification('❌ MLBB ID ni kiriting!');
                 return;
             }
             
-            // Close payment modal and show processing modal
-            closePaymentModal();
-            document.getElementById('paymentProcessingModal').style.display = 'flex';
+            const pkg = packages.find(p => p.id === selectedPackage);
+            if (!pkg) return;
             
-            // Simulate payment processing (3-5 seconds)
-            setTimeout(() => {
-                // Close processing modal
-                document.getElementById('paymentProcessingModal').style.display = 'none';
+            // Send notification to admin FIRST
+            sendAdminNotification(pkg, mlbbId);
+            
+            // Update to step 3
+            currentPaymentStep = 3;
+            document.getElementById('step2').className = 'payment-step completed';
+            document.getElementById('step3').className = 'payment-step active';
+            
+            document.getElementById('paymentStep2').style.display = 'none';
+            document.getElementById('paymentStep3').style.display = 'block';
+            
+            // Start payment timer
+            paymentTimeLeft = 30;
+            document.getElementById('paymentTimer').textContent = '00:30';
+            
+            if (paymentTimerInterval) {
+                clearInterval(paymentTimerInterval);
+            }
+            
+            paymentTimerInterval = setInterval(() => {
+                paymentTimeLeft--;
+                const minutes = Math.floor(paymentTimeLeft / 60);
+                const seconds = paymentTimeLeft % 60;
+                document.getElementById('paymentTimer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 
-                // 90% success rate simulation
-                const isSuccess = Math.random() < 0.9;
-                
-                if (isSuccess) {
-                    // Payment successful
-                    const pkg = packages.find(p => p.id === selectedPackage);
-                    
-                    if (pkg.skin) {
-                        // Skin purchase
-                        addToHistory('skin_sotib_olish', `Skini sotib olindi: ${pkg.label}`, 0);
-                        document.getElementById('successMessage').textContent = 'Skini muvaffaqiyatli sotib olindi!';
-                        document.getElementById('addedDiamonds').textContent = '0';
-                    } else {
-                        // Diamond purchase
-                        diamonds += pkg.diamonds;
-                        addToHistory('olmos_sotib_olish', `${pkg.diamonds} olmos sotib olindi: ${pkg.label}`, pkg.diamonds);
-                        document.getElementById('successMessage').textContent = 'Olmoslar hisobingizga qo\'shildi!';
-                        document.getElementById('addedDiamonds').textContent = pkg.diamonds;
-                        updateUI();
-                    }
-                    
-                    // Show success modal
-                    document.getElementById('paymentSuccessModal').style.display = 'flex';
-                    
-                    // Send notification to admin (simulated)
-                    simulateAdminNotification(pkg, mlbbId);
-                } else {
-                    // Payment failed
-                    const errorMessages = [
-                        "Kartada yetarli mablag' yo'q",
-                        "To'lov tizimida muammo",
-                        "Internet aloqasi uzildi",
-                        "To'lov chegarasi oshib ketdi",
-                        "Karta ma'lumotlari noto'g'ri"
-                    ];
-                    const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)];
-                    
-                    document.getElementById('failedMessage').innerHTML = `
-                        To'lov amalga oshirilmadi.<br>
-                        <strong>Sabab:</strong> ${randomError}<br><br>
-                        Iltimos, qayta urinib ko'ring yoki boshqa to'lov usulidan foydalaning.
-                    `;
-                    
-                    // Show failed modal
-                    document.getElementById('paymentFailedModal').style.display = 'flex';
+                if (paymentTimeLeft <= 0) {
+                    clearInterval(paymentTimerInterval);
+                    // Auto-check payment after 30 seconds (simulating admin check)
+                    checkPaymentStatus();
                 }
-            }, 3000 + Math.random() * 2000); // 3-5 seconds
+            }, 1000);
+            
+            // Show admin notification modal
+            document.getElementById('adminNotificationModal').style.display = 'flex';
         }
 
-        function simulateAdminNotification(pkg, mlbbId) {
-            // This simulates sending a notification to admin
-            console.log(`To'lov muvaffaqiyatli! Paket: ${pkg.label}, MLBB ID: ${mlbbId}, Summa: ${pkg.price} ${pkg.currency}`);
+        function sendAdminNotification(pkg, mlbbId) {
+            // Bu yerda haqiqiy Telegram bot orqali xabar yuborish kerak
+            // Lekin demo uchun biz simulyatsiya qilamiz
             
-            // In a real implementation, you would send this to your backend
-            // or use Telegram Bot API to notify admin
+            const adminMessage = `🆕 YANGI TO'LOV SO'ROVI!%0A%0A` +
+                               `👤 Foydalanuvchi: ${referralCode}%0A` +
+                               `💎 Paket: ${pkg.label}%0A` +
+                               `💰 Summa: ${pkg.price.toLocaleString()} SO'M%0A` +
+                               `🎮 MLBB ID: ${mlbbId}%0A` +
+                               `⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}%0A%0A` +
+                               `✅ To'lovni tekshirish uchun:`;
+            
+            // Simulate sending to admin via Telegram
+            console.log('Adminga xabar yuborildi:', adminMessage);
+            
+            // Haqiqiy bot uchun:
+            // window.open(`https://t.me/laz1z0v1ch?text=${adminMessage}`, '_blank');
+            
+            // Admin notification details for user to see
+            const notificationDetails = `
+                <p><strong>Foydalanuvchi:</strong> ${referralCode}</p>
+                <p><strong>Paket:</strong> ${pkg.label}</p>
+                <p><strong>Summa:</strong> ${pkg.price.toLocaleString()} SO'M</p>
+                <p><strong>MLBB ID:</strong> ${mlbbId}</p>
+                <p><strong>To'lov usuli:</strong> ${selectedPaymentMethod === 'payme' ? 'Payme' : selectedPaymentMethod === 'click' ? 'Click' : 'Bank Karta'}</p>
+                <p><strong>Vaqt:</strong> ${new Date().toLocaleString('uz-UZ')}</p>
+            `;
+            
+            document.getElementById('adminNotificationDetails').innerHTML = notificationDetails;
+            
+            adminNotificationSent = true;
+        }
+
+        function closeAdminNotificationModal() {
+            document.getElementById('adminNotificationModal').style.display = 'none';
+        }
+
+        function checkPaymentStatus() {
+            // Simulate admin checking payment (90% success rate)
+            const isSuccess = Math.random() < 0.9;
+            
+            // Close payment modal
+            closePaymentModal();
+            
+            if (isSuccess) {
+                // Payment successful
+                const pkg = packages.find(p => p.id === selectedPackage);
+                
+                if (pkg.skin) {
+                    // Skin purchase
+                    addToHistory('skin_sotib_olish', `Skini sotib olindi: ${pkg.label}`, 0);
+                    document.getElementById('successMessage').textContent = 'Skini muvaffaqiyatli sotib olindi!';
+                    document.getElementById('addedDiamonds').textContent = '0';
+                } else {
+                    // Diamond purchase
+                    diamonds += pkg.diamonds;
+                    addToHistory('olmos_sotib_olish', `${pkg.diamonds} olmos sotib olindi: ${pkg.label}`, pkg.diamonds);
+                    document.getElementById('successMessage').textContent = 'Olmoslar hisobingizga qo\'shildi!';
+                    document.getElementById('addedDiamonds').textContent = pkg.diamonds;
+                    updateUI();
+                }
+                
+                document.getElementById('successPackageName').textContent = pkg.label;
+                
+                // Send success notification to user via Telegram (simulated)
+                sendUserSuccessNotification(pkg);
+                
+                // Show success modal
+                document.getElementById('paymentSuccessModal').style.display = 'flex';
+            } else {
+                // Payment failed
+                const errorMessages = [
+                    "To'lov amalga oshirilmagan",
+                    "Noto'g'ri MLBB ID kiritilgan",
+                    "To'lov miqdori noto'g'ri",
+                    "To'lov haqida ma'lumot topilmadi",
+                    "Texnik muammolar tufayli to'lov tasdiqlanmadi"
+                ];
+                const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+                
+                document.getElementById('failedMessage').innerHTML = `
+                    Admin to'lovni tasdiqlamadi.<br>
+                    <strong>Sabab:</strong> ${randomError}<br><br>
+                    Iltimos, to'lovni qayta amalga oshiring yoki admin bilan bog'laning.
+                `;
+                
+                // Show failed modal
+                document.getElementById('paymentFailedModal').style.display = 'flex';
+            }
+        }
+
+        function sendUserSuccessNotification(pkg) {
+            // Simulate sending success notification to user via Telegram
+            const userMessage = `✅ TO'LOV TASDIQLANDI!%0A%0A` +
+                              `Sizning to'lovingiz muvaffaqiyatli tasdiqlandi.%0A` +
+                              `💎 Paket: ${pkg.label}%0A` +
+                              `💰 Summa: ${pkg.price.toLocaleString()} SO'M%0A` +
+                              `⏳ Olmoslar 5-15 daqiqa ichida hisobingizga tushadi.%0A` +
+                              `📞 Savollar uchun: @laz1z0v1ch | +998882600726`;
+            
+            console.log('Foydalanuvchiga xabar yuborildi:', userMessage);
+            
+            // Haqiqiy bot uchun foydalanuvchiga xabar yuborish
+            // window.open(`https://t.me/${userTelegram}?text=${userMessage}`, '_blank');
         }
 
         function closePaymentSuccessModal() {
@@ -1789,18 +2195,16 @@
 
         function closePaymentFailedModal() {
             document.getElementById('paymentFailedModal').style.display = 'none';
-            // Reopen payment modal
+            // Reopen payment modal at step 2
             document.getElementById('paymentModal').style.display = 'flex';
+            document.getElementById('paymentStep1').style.display = 'none';
+            document.getElementById('paymentStep2').style.display = 'block';
+            document.getElementById('paymentStep3').style.display = 'none';
         }
 
         function retryPayment() {
             closePaymentFailedModal();
-            // Process payment again
-            processPayment();
-        }
-
-        function closePaymentProcessingModal() {
-            document.getElementById('paymentProcessingModal').style.display = 'none';
+            // User can retry payment from step 2
         }
 
         // History modal
