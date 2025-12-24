@@ -50,7 +50,7 @@
             padding: 10px;
         }
 
-        /* Header - Уменьшен */
+        /* Header */
         .header {
             background: var(--gradient);
             border-radius: 15px;
@@ -75,7 +75,7 @@
             opacity: 0.9;
         }
 
-        /* Stats Grid - Уменьшен */
+        /* Stats Grid */
         .stats-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -106,7 +106,7 @@
             text-transform: uppercase;
         }
 
-        /* Game Area - Уменьшен */
+        /* Game Area */
         .click-container {
             width: 180px;
             height: 180px;
@@ -138,10 +138,27 @@
             margin-bottom: 8px;
         }
 
-        /* Small Action Buttons - Очень маленькие */
+        /* AutoClicker Timer */
+        .autoclicker-timer {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #FF9800;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            display: none;
+            z-index: 5;
+            border: 1px solid #FF9800;
+        }
+
+        /* Small Action Buttons - 4 в ряд */
         .small-actions {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 6px;
             margin: 12px 0;
         }
@@ -180,7 +197,7 @@
             margin-top: 2px;
         }
 
-        /* Micro Buttons - Сверхмаленькие */
+        /* Micro Buttons */
         .micro-actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -217,8 +234,9 @@
         .red-btn { background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%); }
         .purple-btn { background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%); }
         .pink-btn { background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%); }
+        .orange-btn { background: linear-gradient(135deg, #FF5722 0%, #E64A19 100%); }
 
-        /* Top Players Sections - Компактные */
+        /* Top Players Sections */
         .top-players {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -290,7 +308,7 @@
             color: white;
         }
 
-        /* Invite Section - Компактная */
+        /* Invite Section */
         .invite-section {
             background: var(--light);
             border-radius: 15px;
@@ -327,7 +345,7 @@
             font-weight: 600;
         }
 
-        /* Cooldown Bar - Компактная */
+        /* Cooldown Bar */
         .cooldown-bar {
             background: rgba(255, 0, 0, 0.1);
             border: 1px solid var(--danger);
@@ -345,7 +363,7 @@
             font-family: 'Courier New', monospace;
         }
 
-        /* Footer - Компактный */
+        /* Footer */
         .footer {
             text-align: center;
             margin-top: 15px;
@@ -355,7 +373,7 @@
             opacity: 0.8;
         }
 
-        /* Modals - Компактные */
+        /* Modals */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -483,15 +501,19 @@
                 <i class="fas fa-basketball"></i>
                 <div>BOSING</div>
                 <div style="font-size: 11px; margin-top: 5px;">1 bosish = 1 ball</div>
+                <!-- AutoClicker Timer -->
+                <div class="autoclicker-timer" id="autoclickerTimer">
+                    <i class="fas fa-robot"></i> <span id="autoclickerTime">10:00</span>
+                </div>
             </div>
         </div>
 
-        <!-- Small Action Buttons -->
+        <!-- Small Action Buttons (4 в ряд) -->
         <div class="small-actions">
             <button class="small-btn yellow-btn" onclick="activateAutoClicker()">
                 <i class="fas fa-robot"></i>
                 <span>Avtokliker</span>
-                <small>100 ball • 15 daq</small>
+                <small>100 ball • 10 daq</small>
             </button>
             
             <button class="small-btn blue-btn" onclick="upgradeAutoClicker()">
@@ -504,6 +526,12 @@
                 <i class="fas fa-gem"></i>
                 <span>Olmos sotib olish</span>
                 <small>Haqiqiy olmoslar</small>
+            </button>
+            
+            <button class="small-btn red-btn" onclick="resetDiamonds()">
+                <i class="fas fa-trash-alt"></i>
+                <span>Almazlarni o'chirish</span>
+                <small>Test uchun</small>
             </button>
         </div>
 
@@ -733,7 +761,11 @@
         let cooldownTime = 0;
         let cooldownInterval;
         
-        // Top players data (все пользователи, включая текущего)
+        // AutoClicker timer variables
+        let autoclickerTimeLeft = 0;
+        let autoclickerTimerInterval;
+        
+        // Top players data
         let topPlayersByTime = [];
         let topPlayersByBalls = [];
         
@@ -762,7 +794,7 @@
                     speedMultiplier = data.speedMultiplier || 1.0;
                     sessionBalls = data.sessionBalls || 0;
                     
-                    // Загружаем топы из localStorage или создаем демо
+                    // Загружаем топы
                     topPlayersByTime = data.topPlayersByTime || generateDemoTimePlayers();
                     topPlayersByBalls = data.topPlayersByBalls || generateDemoBallPlayers();
                     
@@ -774,12 +806,10 @@
                     }
                 } catch (e) {
                     console.log('Yangi o\'yin boshlanmoqda...');
-                    // Создаем демо-данные при первом запуске
                     topPlayersByTime = generateDemoTimePlayers();
                     topPlayersByBalls = generateDemoBallPlayers();
                 }
             } else {
-                // Первый запуск - создаем демо-данные
                 topPlayersByTime = generateDemoTimePlayers();
                 topPlayersByBalls = generateDemoBallPlayers();
             }
@@ -789,18 +819,17 @@
             
             // Запускаем таймер игры
             setInterval(() => {
-                gameTime += 1000; // 1 секунда
+                gameTime += 1000;
                 updateCurrentPlayerInTops();
                 updateTopDisplays();
                 
-                // Автосохранение каждые 30 секунд
                 if (gameTime % 30000 === 0) {
                     autoSave();
                 }
             }, 1000);
         }
 
-        // Генерация демо-пользователей для времени
+        // Генерация демо-пользователей
         function generateDemoTimePlayers() {
             return [
                 { name: "ProGamer", value: 125600, isCurrent: false, id: "user1" },
@@ -811,7 +840,6 @@
             ];
         }
 
-        // Генерация демо-пользователей для баллов
         function generateDemoBallPlayers() {
             return [
                 { name: "RichPlayer", value: 125000, isCurrent: false, id: "user5" },
@@ -824,21 +852,18 @@
 
         // Обновление текущего пользователя в топах
         function updateCurrentPlayerInTops() {
-            // Находим текущего пользователя в топе времени
             const currentTimePlayer = topPlayersByTime.find(p => p.id === "current");
             if (currentTimePlayer) {
                 currentTimePlayer.value = gameTime;
                 currentTimePlayer.name = "Siz (" + formatTime(gameTime) + ")";
             }
             
-            // Находим текущего пользователя в топе баллов
             const currentBallPlayer = topPlayersByBalls.find(p => p.id === "current");
             if (currentBallPlayer) {
                 currentBallPlayer.value = balls;
                 currentBallPlayer.name = "Siz (" + formatNumber(balls) + ")";
             }
             
-            // Сортируем топы
             topPlayersByTime.sort((a, b) => b.value - a.value);
             topPlayersByBalls.sort((a, b) => b.value - a.value);
         }
@@ -848,7 +873,6 @@
             const topTimeList = document.getElementById('topByTime');
             const topBallsList = document.getElementById('topByBalls');
             
-            // Показываем топ-5 для времени
             topTimeList.innerHTML = topPlayersByTime.slice(0, 5).map((player, index) => `
                 <li class="player-item ${player.isCurrent ? 'current' : ''}">
                     <span class="player-rank">${index + 1}</span>
@@ -857,7 +881,6 @@
                 </li>
             `).join('');
             
-            // Показываем топ-5 для баллов
             topBallsList.innerHTML = topPlayersByBalls.slice(0, 5).map((player, index) => `
                 <li class="player-item ${player.isCurrent ? 'current' : ''}">
                     <span class="player-rank">${index + 1}</span>
@@ -967,7 +990,7 @@
             }, 1000);
         }
 
-        // Auto clicker
+        // Auto clicker с таймером
         function activateAutoClicker() {
             if (cooldownActive) {
                 showNotification('⏳ Avtokliker hozir ishlamaydi!');
@@ -984,19 +1007,41 @@
             if (balls >= cost) {
                 balls -= cost;
                 autoClickerActive = true;
+                autoclickerTimeLeft = 10 * 60; // 10 минут в секундах
+                
+                // Показываем таймер
+                document.getElementById('autoclickerTimer').style.display = 'block';
+                updateAutoclickerTimer();
+                
+                // Запускаем таймер
+                autoclickerTimerInterval = setInterval(() => {
+                    autoclickerTimeLeft--;
+                    updateAutoclickerTimer();
+                    
+                    if (autoclickerTimeLeft <= 0) {
+                        deactivateAutoClicker();
+                    }
+                }, 1000);
                 
                 addToHistory('avtokliker', 'Avtokliker sotib olindi', -cost);
-                showNotification('🤖 Avtokliker faollashtirildi!');
+                showNotification('🤖 Avtokliker faollashtirildi! (10 daqiqa)');
                 updateUI();
                 
                 startAutoClicker();
                 
                 setTimeout(() => {
                     deactivateAutoClicker();
-                }, 15 * 60 * 1000);
+                }, 10 * 60 * 1000); // 10 минут
             } else {
                 showNotification('❌ 100 ball kerak!');
             }
+        }
+
+        function updateAutoclickerTimer() {
+            const minutes = Math.floor(autoclickerTimeLeft / 60);
+            const seconds = autoclickerTimeLeft % 60;
+            document.getElementById('autoclickerTime').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
         function startAutoClicker() {
@@ -1035,7 +1080,14 @@
                 clearInterval(autoClickerInterval);
                 autoClickerInterval = null;
             }
+            
+            if (autoclickerTimerInterval) {
+                clearInterval(autoclickerTimerInterval);
+                autoclickerTimerInterval = null;
+            }
+            
             autoClickerActive = false;
+            document.getElementById('autoclickerTimer').style.display = 'none';
             showNotification('🛑 Avtokliker to\'xtatildi');
         }
 
@@ -1095,6 +1147,21 @@
             clearInterval(cooldownInterval);
             document.getElementById('cooldownBar').style.display = 'none';
             showNotification('✅ Qayta zaryadlanish tugadi!');
+        }
+
+        // Удаление алмазов (новая функция)
+        function resetDiamonds() {
+            if (diamonds === 0) {
+                showNotification('❌ Sizda olmos yo\'q!');
+                return;
+            }
+            
+            if (confirm(`Haqiqatan ham ${diamonds} ta olmosni o'chirib tashlamoqchimisiz?`)) {
+                addToHistory('almaz_ochirish', diamonds + ' ta olmos o\'chirildi', 0);
+                diamonds = 0;
+                showNotification('🗑️ Barcha olmoslar o\'chirildi!');
+                updateUI();
+            }
         }
 
         // Exchange function
@@ -1243,7 +1310,8 @@
                 'sotib_olish': '🛒',
                 'almashtirish': '💎',
                 'upgrade': '⚡',
-                'taklif': '👥'
+                'taklif': '👥',
+                'almaz_ochirish': '🗑️'
             };
             return icons[type] || '📝';
         }
