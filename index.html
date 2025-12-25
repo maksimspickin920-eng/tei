@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLBB Ball Collector | Professional Tapalka</title>
+    <title>MLBB Ball Collector | Professional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ====== RESET VA ASOSIY ====== */
+        /* ====== CSS O'ZGARUVCHILARI ====== */
+        :root {
+            /* Asosiy ranglar */
+            --primary: #FF6B00;
+            --primary-dark: #E65100;
+            --primary-light: rgba(255, 107, 0, 0.1);
+            --secondary: #2196F3;
+            --secondary-dark: #1976D2;
+            --accent: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --purple: #9C27B0;
+            --pink: #E91E63;
+            --gold: #FFC107;
+            
+            /* Fon va matn */
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-light: #FFFFFF;
+            --text-dark: #1A1A2E;
+            --text-gray: rgba(255, 255, 255, 0.7);
+            --text-gray-dark: rgba(0, 0, 0, 0.7);
+            
+            /* Effektlar */
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+            --shadow-primary: 0 4px 20px rgba(255, 107, 0, 0.3);
+            --glow-primary: 0 0 20px rgba(255, 107, 0, 0.5);
+            --glow-gold: 0 0 20px rgba(255, 193, 7, 0.5);
+            
+            /* O'lchamlar */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
+        /* ====== ASOSIY STILLAR ====== */
         * {
             margin: 0;
             padding: 0;
@@ -17,81 +55,102 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #fff;
+            background: var(--bg-gradient);
+            color: var(--text-light);
             min-height: 100vh;
             overflow-x: hidden;
             font-size: 13px;
             position: relative;
+            padding-bottom: 100px;
         }
 
         .container {
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
-            padding: 10px 15px 120px;
-            position: relative;
+            padding: 10px 15px;
         }
 
-        /* ====== ASOSIY STATISTIKA (FAQAT BOSH SAHIFADA) ====== */
-        #mainStats {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* ====== HEADER VA STATISTIKA ====== */
+        .header {
+            text-align: center;
+            padding: 15px 0;
+            margin-bottom: 10px;
+        }
+
+        .game-title {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(255, 107, 0, 0.3);
+        }
+
+        .game-subtitle {
+            font-size: 11px;
+            color: var(--text-gray);
+            opacity: 0.9;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            animation: slideDown 0.5s ease;
+            gap: 8px;
+            margin-bottom: 15px;
         }
 
-        @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .stat-item {
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 12px 8px;
             text-align: center;
-            padding: 8px 5px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
         .stat-icon {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 5px;
-            color: #FF6B00;
-            filter: drop-shadow(0 0 5px rgba(255, 107, 0, 0.5));
+            color: var(--primary);
         }
 
         .stat-value {
             font-size: 16px;
             font-weight: 800;
             margin-bottom: 3px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            color: var(--text-light);
         }
 
         .stat-label {
             font-size: 9px;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-gray);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         /* ====== ASOSIY O'YIN ZONASI ====== */
-        .game-section {
-            position: relative;
-            margin: 25px 0 30px;
+        .game-area {
+            margin: 20px 0;
             display: flex;
             justify-content: center;
         }
 
-        .tap-area {
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, rgba(255,107,0,1) 0%, rgba(230,81,0,1) 100%);
+        .tap-circle {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, 
+                var(--primary) 0%, 
+                var(--primary-dark) 100%);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
@@ -100,28 +159,28 @@
             cursor: pointer;
             position: relative;
             box-shadow: 
+                inset 0 0 50px rgba(0, 0, 0, 0.3),
                 0 0 60px rgba(255, 107, 0, 0.4),
-                inset 0 0 40px rgba(0, 0, 0, 0.4),
-                0 0 0 4px rgba(255, 255, 255, 0.1),
-                0 0 0 8px rgba(255, 107, 0, 0.2);
-            transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: pulseGlow 2s infinite alternate;
+                var(--glow-primary);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.1s ease;
+            animation: pulse 2s infinite alternate;
         }
 
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 60px rgba(255, 107, 0, 0.4), inset 0 0 40px rgba(0,0,0,0.4); }
-            100% { box-shadow: 0 0 80px rgba(255, 107, 0, 0.6), inset 0 0 40px rgba(0,0,0,0.4); }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 60px rgba(255, 107, 0, 0.4), var(--glow-primary); }
+            100% { box-shadow: 0 0 80px rgba(255, 107, 0, 0.6), var(--glow-primary); }
         }
 
-        .tap-area:active {
-            transform: scale(0.92);
+        .tap-circle:active {
+            transform: scale(0.95);
             box-shadow: 
-                0 0 40px rgba(255, 107, 0, 0.6),
-                inset 0 0 50px rgba(0, 0, 0, 0.6);
+                inset 0 0 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(255, 107, 0, 0.6);
         }
 
-        .tap-icon {
-            font-size: 50px;
+        .circle-icon {
+            font-size: 60px;
             color: white;
             margin-bottom: 10px;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
@@ -130,127 +189,33 @@
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-8px); }
         }
 
-        .tap-text {
-            font-size: 16px;
+        .circle-text {
+            font-size: 18px;
             font-weight: 800;
             color: white;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
         }
 
-        .tap-subtext {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.8);
+        .circle-subtext {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
             margin-top: 5px;
-        }
-
-        /* ====== EFFEKT QISMLARI ====== */
-        .particle {
-            position: absolute;
-            pointer-events: none;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #FFC107;
-            animation: particleFloat 1s ease-out forwards;
-            z-index: 100;
-        }
-
-        @keyframes particleFloat {
-            0% { opacity: 1; transform: translate(0, 0) scale(1); }
-            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
-        }
-
-        .tap-number {
-            position: absolute;
-            pointer-events: none;
-            font-size: 24px;
-            font-weight: 900;
-            color: #FFC107;
-            text-shadow: 
-                0 0 10px #FF9800,
-                0 0 20px #FF5722,
-                0 2px 8px rgba(0,0,0,0.5);
-            animation: numberFloat 1.2s ease-out forwards;
-            z-index: 101;
-        }
-
-        @keyframes numberFloat {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
-        }
-
-        /* ====== KICHIK KVADRAT TUGMALAR ====== */
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin: 20px 0 25px;
-        }
-
-        .action-btn {
-            aspect-ratio: 1;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 107, 0, 0.4);
-            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.2);
-        }
-
-        .action-btn:active {
-            transform: translateY(0);
-        }
-
-        .action-btn i {
-            font-size: 22px;
-            margin-bottom: 6px;
-            color: #FF6B00;
-        }
-
-        .action-btn span {
-            font-size: 9px;
-            font-weight: 700;
-            color: white;
-            text-align: center;
-            line-height: 1.2;
-        }
-
-        .action-btn small {
-            font-size: 7px;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 3px;
         }
 
         /* ====== AVTOKLIKER PANELI ====== */
         .autoclicker-panel {
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(33, 150, 243, 0.05) 100%);
+            background: linear-gradient(135deg, 
+                rgba(33, 150, 243, 0.15) 0%, 
+                rgba(33, 150, 243, 0.05) 100%);
             border: 1px solid rgba(33, 150, 243, 0.3);
-            border-radius: 15px;
+            border-radius: var(--radius-lg);
             padding: 15px;
             margin: 20px 0;
             display: none;
             animation: slideUp 0.4s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .autoclicker-header {
@@ -265,68 +230,167 @@
             align-items: center;
             gap: 8px;
             font-weight: 700;
-            font-size: 13px;
-            color: #4FC3F7;
+            font-size: 14px;
+            color: var(--secondary);
         }
 
         .autoclicker-timer {
             font-family: 'Courier New', monospace;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 900;
             color: white;
             background: rgba(0, 0, 0, 0.3);
             padding: 6px 12px;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
         }
 
         .progress-container {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+            border-radius: 4px;
             overflow: hidden;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #00E676, #00C853);
-            border-radius: 3px;
+            background: linear-gradient(90deg, 
+                var(--accent), 
+                #00C853);
+            border-radius: 4px;
             width: 0%;
             transition: width 0.5s ease;
         }
 
-        /* ====== REYTING SAHIFASI ====== */
-        .ranking-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 20px;
+        /* ====== ASOSIY TUGMALAR (4 TA) ====== */
+        .main-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .main-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 15px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .main-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+            background: rgba(255, 107, 0, 0.1);
+        }
+
+        .main-btn i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .main-btn .btn-text {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .main-btn .btn-subtext {
+            font-size: 9px;
+            color: var(--text-gray);
+        }
+
+        /* ====== KICHIK TUGMALAR (5 TA) ====== */
+        .mini-buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            margin: 15px 0;
+        }
+
+        .mini-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-sm);
+            padding: 10px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .mini-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .mini-btn i {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .mini-btn .btn-text {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        /* ====== SAHIFA SECTIONS ====== */
+        .page-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+            animation: fadeIn 0.4s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .page-section.active {
+            display: block;
         }
 
         .section-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 800;
-            color: white;
+            color: var(--text-light);
             margin-bottom: 15px;
             text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
+        .section-title i {
+            color: var(--primary);
+        }
+
+        /* ====== REYTING STILLARI ====== */
         .ranking-tabs {
             display: flex;
             background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             padding: 5px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .ranking-tab {
@@ -335,15 +399,15 @@
             padding: 10px;
             font-size: 11px;
             font-weight: 700;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-gray);
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             transition: all 0.3s ease;
         }
 
         .ranking-tab.active {
             background: rgba(255, 107, 0, 0.2);
-            color: #FF6B00;
+            color: var(--primary);
         }
 
         .ranking-list {
@@ -356,15 +420,15 @@
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             padding: 12px 15px;
-            border-left: 4px solid #FF6B00;
+            border-left: 4px solid var(--primary);
         }
 
-        .rank-position {
-            font-size: 16px;
+        .rank-pos {
+            font-size: 18px;
             font-weight: 900;
-            color: #FF6B00;
+            color: var(--primary);
             min-width: 40px;
         }
 
@@ -376,7 +440,7 @@
         .rank-name {
             font-weight: 700;
             font-size: 13px;
-            color: white;
+            color: var(--text-light);
             margin-bottom: 3px;
         }
 
@@ -384,39 +448,41 @@
             display: flex;
             gap: 15px;
             font-size: 10px;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-gray);
         }
 
         .rank-value {
             font-weight: 800;
             font-size: 14px;
-            color: white;
+            color: var(--text-light);
         }
 
-        /* ====== OLMOZLAR SAHIFASI ====== */
-        .diamond-grid {
+        /* ====== OLMOZLAR SOTIB OLISH ====== */
+        .diamonds-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            margin: 20px 0;
+            margin-top: 15px;
         }
 
         .diamond-card {
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 150, 243, 0.05) 100%);
+            background: linear-gradient(135deg, 
+                rgba(33, 150, 243, 0.1) 0%, 
+                rgba(33, 150, 243, 0.05) 100%);
             border: 1px solid rgba(33, 150, 243, 0.2);
-            border-radius: 15px;
+            border-radius: var(--radius-md);
             padding: 15px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .diamond-card:hover {
             transform: translateY(-5px);
-            border-color: #2196F3;
-            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.2);
         }
 
         .diamond-card.popular::before {
@@ -424,7 +490,7 @@
             position: absolute;
             top: 8px;
             right: 8px;
-            background: #FF6B00;
+            background: var(--primary);
             color: white;
             font-size: 8px;
             font-weight: 800;
@@ -435,42 +501,98 @@
         .diamond-amount {
             font-size: 24px;
             font-weight: 900;
-            color: #4FC3F7;
+            color: var(--secondary);
             margin-bottom: 8px;
-            text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+            text-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
         }
 
         .diamond-price {
             font-size: 16px;
             font-weight: 800;
-            color: #FFC107;
+            color: var(--gold);
             margin-bottom: 10px;
         }
 
         .diamond-label {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-gray);
         }
 
-        /* ====== TARIX SAHIFASI ====== */
-        .history-container {
-            max-height: 400px;
+        /* ====== ALMASHTIRISH ====== */
+        .exchange-section {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .exchange-icon {
+            font-size: 60px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .exchange-message {
+            font-size: 16px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* ====== BO'STERLAR ====== */
+        .boosts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .boost-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .boost-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.2);
+        }
+
+        .boost-icon {
+            font-size: 30px;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .boost-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .boost-details {
+            font-size: 11px;
+            color: var(--text-gray);
+        }
+
+        /* ====== TARIX ====== */
+        .history-list {
+            max-height: 300px;
             overflow-y: auto;
             padding-right: 5px;
         }
 
         .history-item {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             padding: 12px 15px;
             margin-bottom: 8px;
-            border-left: 3px solid #FF6B00;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-10px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            border-left: 3px solid var(--primary);
         }
 
         .history-header {
@@ -486,7 +608,7 @@
             gap: 8px;
             font-weight: 700;
             font-size: 12px;
-            color: white;
+            color: var(--text-light);
         }
 
         .history-amount {
@@ -494,9 +616,17 @@
             font-size: 16px;
         }
 
+        .history-amount.positive {
+            color: var(--accent);
+        }
+
+        .history-amount.negative {
+            color: var(--danger);
+        }
+
         .history-details {
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-gray);
             margin-bottom: 3px;
         }
 
@@ -505,18 +635,18 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
-        /* ====== SOZLAMALAR SAHIFASI ====== */
+        /* ====== SOZLAMALAR ====== */
         .settings-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin: 20px 0;
+            margin-top: 15px;
         }
 
         .setting-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
             padding: 15px 10px;
             text-align: center;
             cursor: pointer;
@@ -524,23 +654,24 @@
         }
 
         .setting-card:hover {
-            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-3px);
+            border-color: var(--primary);
+            background: rgba(255, 107, 0, 0.1);
         }
 
         .setting-icon {
             font-size: 24px;
             margin-bottom: 8px;
-            color: #FF6B00;
+            color: var(--primary);
         }
 
         .setting-name {
             font-weight: 700;
             font-size: 11px;
-            color: white;
+            color: var(--text-light);
         }
 
-        /* ====== KICHIK IKKI QATORLI PASTKI MENYU ====== */
+        /* ====== PASTKI MENYU (5 TUGMA) ====== */
         .bottom-menu {
             position: fixed;
             bottom: 0;
@@ -548,61 +679,57 @@
             right: 0;
             background: rgba(22, 33, 62, 0.95);
             backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 8px 10px;
+            border-top: 1px solid var(--card-border);
+            padding: 10px;
             z-index: 1000;
             box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.4);
         }
 
-        .menu-row {
+        .menu-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 5px;
-            margin-bottom: 5px;
         }
 
-        .menu-btn {
-            aspect-ratio: 1;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+        .menu-item {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            justify-content: center;
             padding: 8px;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
         }
 
-        .menu-btn:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: #FF6B00;
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-2px);
         }
 
-        .menu-btn.active {
+        .menu-item.active {
             background: rgba(255, 107, 0, 0.2);
-            border-color: #FF6B00;
-            box-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-primary);
         }
 
-        .menu-btn i {
-            font-size: 16px;
+        .menu-icon {
+            font-size: 18px;
             margin-bottom: 4px;
-            color: #FF6B00;
+            color: var(--primary);
         }
 
-        .menu-btn span {
-            font-size: 8px;
+        .menu-text {
+            font-size: 9px;
             font-weight: 700;
-            color: white;
+            color: var(--text-light);
             text-align: center;
-            line-height: 1.1;
         }
 
-        /* ====== OGOXLANTIRISH MODALI ====== */
-        .warning-overlay {
+        /* ====== MODALLAR ====== */
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -616,16 +743,54 @@
             padding: 20px;
         }
 
-        .warning-modal {
-            background: linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%);
-            width: 100%;
-            max-width: 320px;
-            border-radius: 20px;
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
             padding: 25px;
-            text-align: center;
-            border: 2px solid #FFC107;
-            box-shadow: 0 0 50px rgba(255, 193, 7, 0.3);
-            animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 400px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalPop 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-gray);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* ====== ANIMATSIYALAR ====== */
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes modalPop {
@@ -633,372 +798,415 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        .warning-icon {
-            font-size: 50px;
-            color: #FFC107;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
+        /* ====== EFFEKT QISMLARI ====== */
+        .click-effect {
+            position: absolute;
+            pointer-events: none;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 
+                0 0 10px rgba(255, 193, 7, 0.5),
+                0 0 20px rgba(255, 152, 0, 0.3),
+                0 2px 8px rgba(0,0,0,0.5);
+            animation: floatUp 1.2s ease-out forwards;
+            z-index: 100;
         }
 
-        .warning-text {
-            font-size: 15px;
-            margin-bottom: 25px;
-            color: white;
-            line-height: 1.4;
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
         }
 
-        .warning-buttons {
-            display: flex;
-            gap: 10px;
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: particleFloat 1s ease-out forwards;
+            z-index: 99;
         }
 
-        .warning-btn {
-            flex: 1;
-            padding: 12px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .warning-btn.continue {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-        }
-
-        .warning-btn.cancel {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .warning-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* ====== SAHIFA BOSHQARISHI ====== */
-        .page {
-            display: none;
-            animation: pageFade 0.4s ease;
-        }
-
-        @keyframes pageFade {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .page.active {
-            display: block;
+        @keyframes particleFloat {
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
         }
 
         /* ====== RESPONSIVE ====== */
         @media (max-width: 480px) {
-            .container { padding: 10px 10px 120px; }
-            .action-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-            .diamond-grid { grid-template-columns: 1fr; }
+            .container { padding: 10px; }
+            .tap-circle { width: 180px; height: 180px; }
+            .circle-icon { font-size: 50px; }
+            .main-buttons { grid-template-columns: repeat(2, 1fr); }
+            .mini-buttons { grid-template-columns: repeat(5, 1fr); }
+            .diamonds-grid { grid-template-columns: 1fr; }
+            .boosts-grid { grid-template-columns: 1fr; }
             .settings-grid { grid-template-columns: repeat(2, 1fr); }
-            .menu-row { grid-template-columns: repeat(5, 1fr); }
-            .tap-area { width: 160px; height: 160px; }
-            .tap-icon { font-size: 45px; }
         }
     </style>
 </head>
 <body>
     <!-- ASOSIY KONTEYNER -->
     <div class="container">
-        <!-- ASOSIY STATISTIKA (FAQAT BOSH SAHIFADA) -->
-        <div id="mainStats" class="page active" data-page="home">
-            <div class="stat-item">
+        <!-- HEADER -->
+        <div class="header">
+            <h1 class="game-title">MLBB BALL COLLECTOR</h1>
+            <p class="game-subtitle">Professional Tapalka | Real Olmoslar</p>
+        </div>
+
+        <!-- STATISTIKA -->
+        <div class="stats-grid">
+            <div class="stat-card">
                 <div class="stat-icon">🏀</div>
                 <div class="stat-value" id="statBalls">0</div>
                 <div class="stat-label">Ball</div>
             </div>
-            <div class="stat-item">
+            <div class="stat-card">
                 <div class="stat-icon">💎</div>
                 <div class="stat-value" id="statDiamonds">0</div>
                 <div class="stat-label">Olmos</div>
             </div>
-            <div class="stat-item">
+            <div class="stat-card">
                 <div class="stat-icon">⚡</div>
                 <div class="stat-value" id="statPower">1.0x</div>
                 <div class="stat-label">Kuch</div>
             </div>
-            <div class="stat-item">
+            <div class="stat-card">
                 <div class="stat-icon">🏆</div>
                 <div class="stat-value" id="statRank">#1</div>
                 <div class="stat-label">O'rin</div>
             </div>
         </div>
 
-        <!-- BOSH SAHIFA -->
-        <div class="page active" id="page-home">
-            <!-- O'YIN ZONASI -->
-            <div class="game-section">
-                <div class="tap-area" id="tapArea">
-                    <i class="fas fa-basketball tap-icon"></i>
-                    <div class="tap-text">BOSING</div>
-                    <div class="tap-subtext">1 bosish = 1 ball</div>
-                </div>
-            </div>
-
-            <!-- AVTOKLIKER PANELI -->
-            <div class="autoclicker-panel" id="autoclickerPanel">
-                <div class="autoclicker-header">
-                    <div class="autoclicker-title">
-                        <i class="fas fa-robot"></i>
-                        <span>AVTOKLIKER ISHLAMOQDA</span>
-                    </div>
-                    <div class="autoclicker-timer" id="autoclickerTimer">10:00</div>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar" id="autoclickerProgress"></div>
-                </div>
-            </div>
-
-            <!-- KICHIK KVADRAT TUGMALAR -->
-            <div class="action-grid">
-                <div class="action-btn" onclick="activateAutoClicker()">
-                    <i class="fas fa-robot"></i>
-                    <span>Avtokliker</span>
-                    <small>100 ball</small>
-                </div>
-                <div class="action-btn" onclick="upgradeClick()">
-                    <i class="fas fa-bolt"></i>
-                    <span>Kuchni oshirish</span>
-                    <small>500 ball</small>
-                </div>
-                <div class="action-btn" onclick="showPage('diamonds')">
-                    <i class="fas fa-gem"></i>
-                    <span>Olmos sotib olish</span>
-                    <small>Real pullar</small>
-                </div>
-                <div class="action-btn" onclick="showPage('exchange')">
-                    <i class="fas fa-exchange-alt"></i>
-                    <span>Almashtirish</span>
-                    <small>Ball → Olmos</small>
-                </div>
-                <div class="action-btn" onclick="buyMultiplier()">
-                    <i class="fas fa-fire"></i>
-                    <span>Ko'paytirgich</span>
-                    <small>2x 5 daqiqa</small>
-                </div>
-                <div class="action-btn" onclick="showPage('boosts')">
-                    <i class="fas fa-rocket"></i>
-                    <span>Bo'sterlar</span>
-                    <small>Maxsus kuch</small>
-                </div>
-                <div class="action-btn" onclick="inviteFriend()">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Do'st taklif</span>
-                    <small>Bonus olish</small>
-                </div>
-                <div class="action-btn" onclick="dailyReward()">
-                    <i class="fas fa-gift"></i>
-                    <span>Kunlik sovg'a</span>
-                    <small>Har 24 soatda</small>
-                </div>
+        <!-- O'YIN ZONASI -->
+        <div class="game-area">
+            <div class="tap-circle" id="tapCircle">
+                <i class="fas fa-basketball circle-icon"></i>
+                <div class="circle-text">BOSING</div>
+                <div class="circle-subtext">1 bosish = 1 ball</div>
             </div>
         </div>
 
+        <!-- AVTOKLIKER PANELI -->
+        <div class="autoclicker-panel" id="autoclickerPanel">
+            <div class="autoclicker-header">
+                <div class="autoclicker-title">
+                    <i class="fas fa-robot"></i>
+                    <span>AVTOKLIKER ISHLAMOQDA</span>
+                </div>
+                <div class="autoclicker-timer" id="autoclickerTimer">10:00</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="autoclickerProgress"></div>
+            </div>
+        </div>
+
+        <!-- ASOSIY TUGMALAR (4 TA) -->
+        <div class="main-buttons">
+            <div class="main-btn" onclick="activateAutoClicker()">
+                <i class="fas fa-robot"></i>
+                <div class="btn-text">Avtokliker</div>
+                <div class="btn-subtext">100 ball</div>
+            </div>
+            <div class="main-btn" onclick="upgradeClick()">
+                <i class="fas fa-bolt"></i>
+                <div class="btn-text">Kuch oshirish</div>
+                <div class="btn-subtext">500 ball</div>
+            </div>
+            <div class="main-btn" onclick="showPage('diamonds')">
+                <i class="fas fa-gem"></i>
+                <div class="btn-text">Olmos sotib olish</div>
+                <div class="btn-subtext">Real pullar</div>
+            </div>
+            <div class="main-btn" onclick="showPage('exchange')">
+                <i class="fas fa-exchange-alt"></i>
+                <div class="btn-text">Almashtirish</div>
+                <div class="btn-subtext">Ball → Olmos</div>
+            </div>
+        </div>
+
+        <!-- KICHIK TUGMALAR (5 TA) -->
+        <div class="mini-buttons">
+            <div class="mini-btn" onclick="showPage('boosts')">
+                <i class="fas fa-rocket"></i>
+                <div class="btn-text">Bo'sterlar</div>
+            </div>
+            <div class="mini-btn" onclick="inviteFriend()">
+                <i class="fas fa-user-plus"></i>
+                <div class="btn-text">Taklif</div>
+            </div>
+            <div class="mini-btn" onclick="dailyReward()">
+                <i class="fas fa-gift"></i>
+                <div class="btn-text">Sovg'a</div>
+            </div>
+            <div class="mini-btn" onclick="showPage('history')">
+                <i class="fas fa-history"></i>
+                <div class="btn-text">Tarix</div>
+            </div>
+            <div class="mini-btn" onclick="showPage('settings')">
+                <i class="fas fa-cog"></i>
+                <div class="btn-text">Sozlamalar</div>
+            </div>
+        </div>
+
+        <!-- SAHIFA SECTIONS -->
+        
         <!-- REYTING SAHIFASI -->
-        <div class="page" id="page-ranking">
-            <div class="ranking-section">
-                <div class="section-title">REYTING</div>
-                <div class="ranking-tabs">
-                    <div class="ranking-tab active" onclick="showRanking('time')">Vaqt bo'yicha</div>
-                    <div class="ranking-tab" onclick="showRanking('balls')">Ball bo'yicha</div>
-                </div>
-                <div class="ranking-list" id="rankingList">
-                    <!-- Reyting yuklanadi -->
-                </div>
+        <div class="page-section" id="page-ranking">
+            <div class="section-title">
+                <i class="fas fa-trophy"></i>
+                REYTING
+            </div>
+            
+            <div class="ranking-tabs">
+                <div class="ranking-tab active" onclick="showRanking('time')">Vaqt bo'yicha</div>
+                <div class="ranking-tab" onclick="showRanking('balls')">Ball bo'yicha</div>
+            </div>
+            
+            <div class="ranking-list" id="rankingList">
+                <!-- Reyting yuklanadi -->
             </div>
         </div>
 
         <!-- OLMOZLAR SAHIFASI -->
-        <div class="page" id="page-diamonds">
-            <div class="ranking-section">
-                <div class="section-title">OLMOS PAKETLARI</div>
-                <div class="diamond-grid" id="diamondGrid">
-                    <!-- Olmos paketlari yuklanadi -->
-                </div>
+        <div class="page-section" id="page-diamonds">
+            <div class="section-title">
+                <i class="fas fa-gem"></i>
+                OLMOS PAKETLARI
+            </div>
+            
+            <div class="diamonds-grid" id="diamondsGrid">
+                <!-- Olmos paketlari yuklanadi -->
             </div>
         </div>
 
         <!-- ALMASHTIRISH SAHIFASI -->
-        <div class="page" id="page-exchange">
-            <div class="ranking-section">
-                <div class="section-title">BALL → OLMOS</div>
-                <div style="text-align: center; padding: 30px 20px;">
-                    <div style="font-size: 50px; color: #FF6B00; margin-bottom: 20px;">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div style="font-size: 18px; color: #FF6B00; margin-bottom: 15px; font-weight: 800;">
-                        TEZ KUNDA!
-                    </div>
-                    <div style="font-size: 13px; color: rgba(255, 255, 255, 0.7); line-height: 1.6;">
-                        Ballarni olmosga almashtirish funksiyasi hozircha ishlamaydi.<br>
-                        Ushbu funksiya tez orada ishga tushiriladi.<br>
-                        Yangiliklar uchun admin bilan bog'laning: @laz1z0v1ch
-                    </div>
+        <div class="page-section" id="page-exchange">
+            <div class="section-title">
+                <i class="fas fa-exchange-alt"></i>
+                ALMASHTIRISH
+            </div>
+            
+            <div class="exchange-section">
+                <div class="exchange-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="exchange-message">
+                    <strong>TEZ KUNDA!</strong><br>
+                    Ballarni olmosga almashtirish funksiyasi<br>
+                    hozircha ishlamaydi.<br>
+                    Ushbu funksiya tez orada ishga tushiriladi.<br><br>
+                    Yangiliklar uchun admin bilan bog'laning:<br>
+                    @laz1z0v1ch | +998882600726
                 </div>
             </div>
         </div>
 
         <!-- BO'STERLAR SAHIFASI -->
-        <div class="page" id="page-boosts">
-            <div class="ranking-section">
-                <div class="section-title">BO'STERLAR</div>
-                <div class="action-grid">
-                    <div class="action-btn" onclick="buyBoost('2x', 2000)">
+        <div class="page-section" id="page-boosts">
+            <div class="section-title">
+                <i class="fas fa-rocket"></i>
+                BO'STERLAR
+            </div>
+            
+            <div class="boosts-grid">
+                <div class="boost-card" onclick="buyBoost('2x', 2000)">
+                    <div class="boost-icon">
                         <i class="fas fa-bolt"></i>
-                        <span>2x Ko'paytirgich</span>
-                        <small>5 daqiqa • 2000 ball</small>
                     </div>
-                    <div class="action-btn" onclick="buyBoost('3x', 5000)">
-                        <i class="fas fa-bolt"></i>
-                        <span>3x Ko'paytirgich</span>
-                        <small>3 daqiqa • 5000 ball</small>
+                    <div class="boost-name">2x Ko'paytirgich</div>
+                    <div class="boost-details">5 daqiqa • 2000 ball</div>
+                </div>
+                
+                <div class="boost-card" onclick="buyBoost('3x', 5000)">
+                    <div class="boost-icon">
+                        <i class="fas fa-fire"></i>
                     </div>
-                    <div class="action-btn" onclick="buyBoost('speed', 3000)">
+                    <div class="boost-name">3x Ko'paytirgich</div>
+                    <div class="boost-details">3 daqiqa • 5000 ball</div>
+                </div>
+                
+                <div class="boost-card" onclick="buyBoost('speed', 3000)">
+                    <div class="boost-icon">
                         <i class="fas fa-tachometer-alt"></i>
-                        <span>Tezlik bo'steri</span>
-                        <small>10 daqiqa • 3000 ball</small>
                     </div>
-                    <div class="action-btn" onclick="buyBoost('auto', 10000)">
+                    <div class="boost-name">Tezlik bo'steri</div>
+                    <div class="boost-details">10 daqiqa • 3000 ball</div>
+                </div>
+                
+                <div class="boost-card" onclick="buyBoost('auto', 10000)">
+                    <div class="boost-icon">
                         <i class="fas fa-robot"></i>
-                        <span>Kuchli avtokliker</span>
-                        <small>30 daqiqa • 10000 ball</small>
                     </div>
+                    <div class="boost-name">Kuchli avtokliker</div>
+                    <div class="boost-details">30 daqiqa • 10000 ball</div>
                 </div>
             </div>
         </div>
 
         <!-- TARIX SAHIFASI -->
-        <div class="page" id="page-history">
-            <div class="ranking-section">
-                <div class="section-title">AMALLAR TARIXI</div>
-                <div class="history-container" id="historyContainer">
-                    <!-- Tarix yuklanadi -->
-                </div>
+        <div class="page-section" id="page-history">
+            <div class="section-title">
+                <i class="fas fa-history"></i>
+                AMALLAR TARIXI
+            </div>
+            
+            <div class="history-list" id="historyList">
+                <!-- Tarix yuklanadi -->
             </div>
         </div>
 
         <!-- SOZLAMALAR SAHIFASI -->
-        <div class="page" id="page-settings">
-            <div class="ranking-section">
-                <div class="section-title">SOZLAMALAR VA QO'LLAB-QUVVATLASH</div>
-                <div class="settings-grid">
-                    <div class="setting-card" onclick="changeTheme('default')">
-                        <div class="setting-icon">
-                            <i class="fas fa-palette"></i>
-                        </div>
-                        <div class="setting-name">Mavzular</div>
+        <div class="page-section" id="page-settings">
+            <div class="section-title">
+                <i class="fas fa-cog"></i>
+                SOZLAMALAR
+            </div>
+            
+            <div class="settings-grid">
+                <div class="setting-card" onclick="changeTheme('default')">
+                    <div class="setting-icon">
+                        <i class="fas fa-palette"></i>
                     </div>
-                    <div class="setting-card" onclick="exportData()">
-                        <div class="setting-icon">
-                            <i class="fas fa-download"></i>
-                        </div>
-                        <div class="setting-name">Ma'lumotlarni saqlash</div>
+                    <div class="setting-name">Mavzular</div>
+                </div>
+                
+                <div class="setting-card" onclick="exportData()">
+                    <div class="setting-icon">
+                        <i class="fas fa-download"></i>
                     </div>
-                    <div class="setting-card" onclick="importData()">
-                        <div class="setting-icon">
-                            <i class="fas fa-upload"></i>
-                        </div>
-                        <div class="setting-name">Ma'lumotlarni yuklash</div>
+                    <div class="setting-name">Saqlash</div>
+                </div>
+                
+                <div class="setting-card" onclick="importData()">
+                    <div class="setting-icon">
+                        <i class="fas fa-upload"></i>
                     </div>
-                    <div class="setting-card" onclick="clearProgress()">
-                        <div class="setting-icon">
-                            <i class="fas fa-trash"></i>
-                        </div>
-                        <div class="setting-name">Progressni tozalash</div>
+                    <div class="setting-name">Yuklash</div>
+                </div>
+                
+                <div class="setting-card" onclick="contactSupport()">
+                    <div class="setting-icon">
+                        <i class="fas fa-headset"></i>
                     </div>
-                    <div class="setting-card" onclick="contactSupport()">
-                        <div class="setting-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="setting-name">Qo'llab-quvvatlash</div>
+                    <div class="setting-name">Yordam</div>
+                </div>
+                
+                <div class="setting-card" onclick="aboutGame()">
+                    <div class="setting-icon">
+                        <i class="fas fa-info-circle"></i>
                     </div>
-                    <div class="setting-card" onclick="aboutGame()">
-                        <div class="setting-icon">
-                            <i class="fas fa-info-circle"></i>
-                        </div>
-                        <div class="setting-name">O'yin haqida</div>
+                    <div class="setting-name">Ma'lumot</div>
+                </div>
+                
+                <div class="setting-card" onclick="clearProgress()">
+                    <div class="setting-icon">
+                        <i class="fas fa-trash"></i>
                     </div>
+                    <div class="setting-name">Tozalash</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- KICHIK IKKI QATORLI PASTKI MENYU -->
+    <!-- PASTKI MENYU (5 TUGMA) -->
     <div class="bottom-menu">
-        <div class="menu-row">
-            <div class="menu-btn active" onclick="showPage('home')">
-                <i class="fas fa-home"></i>
-                <span>Asosiy</span>
+        <div class="menu-grid">
+            <div class="menu-item active" onclick="showPage('home')">
+                <div class="menu-icon"><i class="fas fa-home"></i></div>
+                <div class="menu-text">Asosiy</div>
             </div>
-            <div class="menu-btn" onclick="showPage('ranking')">
-                <i class="fas fa-trophy"></i>
-                <span>Reyting</span>
+            
+            <div class="menu-item" onclick="showPage('ranking')">
+                <div class="menu-icon"><i class="fas fa-trophy"></i></div>
+                <div class="menu-text">Reyting</div>
             </div>
-            <div class="menu-btn" onclick="showPage('diamonds')">
-                <i class="fas fa-gem"></i>
-                <span>Olmoslar</span>
+            
+            <div class="menu-item" onclick="showPage('diamonds')">
+                <div class="menu-icon"><i class="fas fa-gem"></i></div>
+                <div class="menu-text">Olmoslar</div>
             </div>
-            <div class="menu-btn" onclick="showPage('boosts')">
-                <i class="fas fa-rocket"></i>
-                <span>Bo'sterlar</span>
+            
+            <div class="menu-item" onclick="showPage('boosts')">
+                <div class="menu-icon"><i class="fas fa-rocket"></i></div>
+                <div class="menu-text">Bo'sterlar</div>
             </div>
-            <div class="menu-btn" onclick="showPage('history')">
-                <i class="fas fa-history"></i>
-                <span>Tarix</span>
-            </div>
-        </div>
-        <div class="menu-row">
-            <div class="menu-btn" onclick="showPage('exchange')">
-                <i class="fas fa-exchange-alt"></i>
-                <span>Almashtirish</span>
-            </div>
-            <div class="menu-btn" onclick="dailyReward()">
-                <i class="fas fa-gift"></i>
-                <span>Sovg'a</span>
-            </div>
-            <div class="menu-btn" onclick="inviteFriend()">
-                <i class="fas fa-user-plus"></i>
-                <span>Taklif</span>
-            </div>
-            <div class="menu-btn" onclick="showPage('settings')">
-                <i class="fas fa-cog"></i>
-                <span>Sozlamalar</span>
-            </div>
-            <div class="menu-btn" onclick="showNotifications()">
-                <i class="fas fa-bell"></i>
-                <span>Bildirish</span>
+            
+            <div class="menu-item" onclick="showPage('settings')">
+                <div class="menu-icon"><i class="fas fa-cog"></i></div>
+                <div class="menu-text">Sozlamalar</div>
             </div>
         </div>
     </div>
 
-    <!-- OGOXLANTIRISH MODALI -->
-    <div class="warning-overlay" id="warningOverlay">
-        <div class="warning-modal">
-            <div class="warning-icon">
-                <i class="fas fa-exclamation-triangle"></i>
+    <!-- TO'LOV MODALI -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-credit-card"></i>
+                    TO'LOV
+                </div>
+                <button class="modal-close" onclick="closePaymentModal()">&times;</button>
             </div>
-            <div class="warning-text">
-                <strong>EHTIYOT BO'LING!</strong><br>
-                Avtokliker hozir ishlamoqda.<br>
-                Agar sahifadan chiqsangiz, avtokliker to'xtaydi.
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <div style="font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 10px;" id="selectedPackageTitle">
+                    Paket nomi
+                </div>
+                <div style="font-size: 20px; color: var(--gold); font-weight: 700;" id="selectedPackagePrice">
+                    0 SO'M
+                </div>
             </div>
-            <div class="warning-buttons">
-                <button class="warning-btn continue" onclick="continueAutoclicker()">
-                    <i class="fas fa-play"></i> DAVOM ETISH
+            
+            <div style="background: rgba(255, 107, 0, 0.1); padding: 15px; border-radius: var(--radius-md); margin: 20px 0;">
+                <div style="font-size: 12px; color: var(--text-light); font-weight: 700; margin-bottom: 10px;">
+                    <i class="fas fa-info-circle"></i> TO'LOV MA'LUMOTLARI
+                </div>
+                <div style="font-size: 11px; color: var(--text-gray); line-height: 1.6;">
+                    <p>• To'lov: <strong>9860 1601 2641 7162</strong></p>
+                    <p>• Karta egasi: <strong>LAZIZOVICH</strong></p>
+                    <p>• To'lovni amalga oshirgach, @laz1z0v1ch ga xabar bering</p>
+                    <p>• Olmoslar 5-15 daqiqa ichida hisobingizga tushadi</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button style="flex: 1; padding: 12px; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--card-border); border-radius: var(--radius-md); color: var(--text-light); cursor: pointer;" onclick="closePaymentModal()">
+                    Bekor qilish
                 </button>
-                <button class="warning-btn cancel" onclick="cancelAutoclicker()">
-                    <i class="fas fa-stop"></i> BEKOR QILISH
+                <button style="flex: 1; padding: 12px; background: var(--primary); border: none; border-radius: var(--radius-md); color: white; font-weight: 700; cursor: pointer;" onclick="confirmPayment()">
+                    To'lov qildim
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- BILDIRISHNOMA MODALI -->
+    <div class="modal-overlay" id="notificationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-bell"></i>
+                    BILDIRISHNOMA
+                </div>
+                <button class="modal-close" onclick="closeNotificationModal()">&times;</button>
+            </div>
+            
+            <div style="text-align: center; padding: 20px 0;">
+                <div style="font-size: 40px; color: var(--primary); margin-bottom: 20px;" id="notificationIcon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div style="font-size: 16px; color: var(--text-light); line-height: 1.6;" id="notificationMessage">
+                    Xabar matni
+                </div>
+            </div>
+            
+            <button style="width: 100%; padding: 12px; background: var(--primary); border: none; border-radius: var(--radius-md); color: white; font-weight: 700; cursor: pointer;" onclick="closeNotificationModal()">
+                Tushundim
+            </button>
         </div>
     </div>
 
@@ -1017,7 +1225,7 @@
         let history = [];
         let currentRank = '#1';
         let selectedPackage = null;
-        let warningShown = false;
+        let boostActive = false;
 
         // Olmos paketlari
         const diamondPackages = [
@@ -1031,44 +1239,42 @@
             { id: 8, diamonds: 257, price: 49000, label: '257 OLMOZ' }
         ];
 
+        // Bo'sterlar
+        const boosts = [
+            { id: '2x', name: '2x Ko\'paytirgich', duration: 300, cost: 2000, multiplier: 2 },
+            { id: '3x', name: '3x Ko\'paytirgich', duration: 180, cost: 5000, multiplier: 3 },
+            { id: 'speed', name: 'Tezlik bo\'steri', duration: 600, cost: 3000, multiplier: 1, speed: 2 },
+            { id: 'auto', name: 'Kuchli avtokliker', duration: 1800, cost: 10000, autoclicker: true }
+        ];
+
         // ====== SAHIFA BOSHQARISHI ======
         function showPage(pageId) {
             // Barcha sahifalarni yashirish
-            document.querySelectorAll('.page').forEach(page => {
+            document.querySelectorAll('.page-section').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Barcha menu tugmalarini yashirish
-            document.querySelectorAll('.menu-btn').forEach(btn => {
-                btn.classList.remove('active');
+            // Barcha menu tugmalarini yangilash
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
             });
             
-            // Asosiy statistika faqat bosh sahifada ko'rsatiladi
-            document.getElementById('mainStats').style.display = pageId === 'home' ? 'block' : 'none';
-            
             // Tanlangan sahifani ko'rsatish
-            document.getElementById(`page-${pageId}`).classList.add('active');
+            if (pageId !== 'home') {
+                document.getElementById(`page-${pageId}`).classList.add('active');
+            }
             
             // Menu tugmasini faollashtirish
-            const menuBtn = document.querySelector(`.menu-btn[onclick="showPage('${pageId}')"]`);
-            if (menuBtn) {
-                menuBtn.classList.add('active');
+            const menuItem = document.querySelector(`.menu-item[onclick="showPage('${pageId}')"]`);
+            if (menuItem) {
+                menuItem.classList.add('active');
             }
             
-            // Sahifaga o'tganda ma'lumotlarni yangilash
+            // Sahifa ma'lumotlarini yangilash
             updatePageData(pageId);
-            
-            // Agar avtokliker ishlayotgan bo'lsa, sahifa o'zgarishini tekshirish
-            if (autoclickerActive && !warningShown && pageId !== 'home') {
-                showWarning();
-                return false;
-            }
-            
-            return true;
         }
 
         function updatePageData(pageId) {
-            // Har bir sahifada ma'lumotlarni yangilash
             switch(pageId) {
                 case 'ranking':
                     loadRanking();
@@ -1079,21 +1285,17 @@
                 case 'history':
                     loadHistory();
                     break;
-                case 'boosts':
-                    // Bo'sterlar sahifasi uchun hech narsa qilish shart emas
-                    break;
             }
-            
-            // Statistika yangilash
-            updateStats();
         }
 
+        // ====== STATISTIKA YANGILASH ======
         function updateStats() {
-            // Asosiy statistika
             document.getElementById('statBalls').textContent = formatNumber(balls);
             document.getElementById('statDiamonds').textContent = formatNumber(diamonds);
             document.getElementById('statPower').textContent = clickPower.toFixed(1) + 'x';
             document.getElementById('statRank').textContent = currentRank;
+            
+            saveData();
         }
 
         function formatNumber(num) {
@@ -1103,58 +1305,51 @@
         }
 
         // ====== BOSISH FUNKSIYALARI ======
-        document.getElementById('tapArea').addEventListener('click', function(e) {
+        document.getElementById('tapCircle').addEventListener('click', function(e) {
             const earned = Math.floor(1 * clickPower * currentMultiplier);
             balls += earned;
             totalClicks++;
             
-            // Bosish effektlarini yaratish
-            createTapEffects(e, earned);
-            
-            // Statistika yangilash
+            createClickEffect(e, earned);
             updateStats();
-            
-            // Tarixga qo'shish
             addToHistory('tap', `${earned} ball to'plandi`, earned);
             
-            // Har 50 bosishda bildirishnoma
             if (totalClicks % 50 === 0) {
                 showNotification(`🎯 ${totalClicks} ta bosish! +${earned * 5} bonus ball`);
                 balls += earned * 5;
                 updateStats();
             }
             
-            // Reytingni yangilash
             updateRanking();
         });
 
-        function createTapEffects(event, amount) {
-            const rect = document.getElementById('tapArea').getBoundingClientRect();
+        function createClickEffect(event, amount) {
+            const rect = document.getElementById('tapCircle').getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
             
             // Raqam effekti
             const numberEffect = document.createElement('div');
-            numberEffect.className = 'tap-number';
+            numberEffect.className = 'click-effect';
             numberEffect.textContent = `+${amount}`;
             numberEffect.style.left = `${x}px`;
             numberEffect.style.top = `${y}px`;
-            document.querySelector('.game-section').appendChild(numberEffect);
+            document.querySelector('.game-area').appendChild(numberEffect);
             
             setTimeout(() => {
                 numberEffect.remove();
             }, 1200);
             
             // Qismchalar effekti
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 10; i++) {
                 createParticle(x, y);
             }
             
             // To'pni kichraytirish effekti
-            const tapArea = document.getElementById('tapArea');
-            tapArea.style.transform = 'scale(0.95)';
+            const tapCircle = document.getElementById('tapCircle');
+            tapCircle.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                tapArea.style.transform = 'scale(1)';
+                tapCircle.style.transform = 'scale(1)';
             }, 100);
         }
 
@@ -1162,9 +1357,8 @@
             const particle = document.createElement('div');
             particle.className = 'particle';
             
-            // Tasodifiy yo'nalish
             const angle = Math.random() * Math.PI * 2;
-            const speed = 50 + Math.random() * 100;
+            const speed = 30 + Math.random() * 70;
             const tx = Math.cos(angle) * speed;
             const ty = Math.sin(angle) * speed;
             
@@ -1173,16 +1367,14 @@
             particle.style.left = `${x}px`;
             particle.style.top = `${y}px`;
             
-            // Tasodifiy rang
-            const colors = ['#FF6B00', '#FFC107', '#4CAF50', '#2196F3', '#9C27B0'];
+            const colors = ['#FF6B00', '#FFC107', '#4CAF50', '#2196F3'];
             particle.style.background = colors[Math.floor(Math.random() * colors.length)];
             
-            // Tasodifiy o'lcham
-            const size = 4 + Math.random() * 8;
+            const size = 3 + Math.random() * 6;
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             
-            document.querySelector('.game-section').appendChild(particle);
+            document.querySelector('.game-area').appendChild(particle);
             
             setTimeout(() => {
                 particle.remove();
@@ -1201,22 +1393,14 @@
             if (balls >= cost) {
                 balls -= cost;
                 autoclickerActive = true;
-                autoclickerTime = 10 * 60; // 10 daqiqa
+                autoclickerTime = 10 * 60;
                 
-                // Avtokliker panelini ko'rsatish
                 document.getElementById('autoclickerPanel').style.display = 'block';
                 updateAutoclickerUI();
-                
-                // Avtokliker intervalini boshlash
                 startAutoclicker();
                 
-                // UI ni yangilash
                 updateStats();
-                
-                // Tarixga qo'shish
                 addToHistory('autoclicker', 'Avtokliker sotib olindi', -cost);
-                
-                // Bildirishnoma
                 showNotification('🤖 Avtokliker faollashtirildi! (10 daqiqa)');
             } else {
                 showNotification(`❌ ${cost} ball kerak!`);
@@ -1232,16 +1416,12 @@
                 autoclickerTime--;
                 updateAutoclickerUI();
                 
-                // Avtomatik ball qo'shish
                 const earned = Math.floor(1 * clickPower * currentMultiplier);
                 balls += earned;
                 totalClicks++;
                 updateStats();
-                
-                // Tasodifiy joyda effekt yaratish
                 createRandomEffect(earned);
                 
-                // Vaqt tugasa, avtoklikerni to'xtatish
                 if (autoclickerTime <= 0) {
                     deactivateAutoclicker();
                 }
@@ -1254,20 +1434,18 @@
             document.getElementById('autoclickerTimer').textContent = 
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            // Progress bari
             const progress = ((10 * 60 - autoclickerTime) / (10 * 60)) * 100;
             document.getElementById('autoclickerProgress').style.width = `${progress}%`;
         }
 
         function createRandomEffect(amount) {
-            const area = document.querySelector('.game-section');
+            const area = document.querySelector('.game-area');
             const rect = area.getBoundingClientRect();
             const x = Math.random() * rect.width;
             const y = Math.random() * rect.height;
             
-            // Mini effekt
             const effect = document.createElement('div');
-            effect.className = 'tap-number';
+            effect.className = 'click-effect';
             effect.textContent = `+${amount}`;
             effect.style.left = `${x}px`;
             effect.style.top = `${y}px`;
@@ -1290,27 +1468,6 @@
             showNotification('🛑 Avtokliker to\'xtatildi');
         }
 
-        // ====== OGOXLANTIRISH TIZIMI ======
-        function showWarning() {
-            if (autoclickerActive && !warningShown) {
-                document.getElementById('warningOverlay').style.display = 'flex';
-                warningShown = true;
-                return true;
-            }
-            return false;
-        }
-
-        function continueAutoclicker() {
-            document.getElementById('warningOverlay').style.display = 'none';
-            warningShown = false;
-        }
-
-        function cancelAutoclicker() {
-            deactivateAutoclicker();
-            document.getElementById('warningOverlay').style.display = 'none';
-            warningShown = false;
-        }
-
         // ====== KUCH OSHIRISH ======
         function upgradeClick() {
             const cost = 500;
@@ -1324,75 +1481,33 @@
                 addToHistory('upgrade', `Kuch oshirildi: ${clickPower.toFixed(1)}x`, -cost);
                 showNotification(`⚡ Kuch: ${clickPower.toFixed(1)}x`);
                 
-                // Effekt
-                document.getElementById('tapArea').style.boxShadow = '0 0 80px rgba(255, 107, 0, 0.8)';
+                document.getElementById('tapCircle').style.boxShadow = '0 0 80px rgba(255, 107, 0, 0.8)';
                 setTimeout(() => {
-                    document.getElementById('tapArea').style.boxShadow = '';
+                    document.getElementById('tapCircle').style.boxShadow = '';
                 }, 500);
             } else {
                 showNotification(`❌ ${cost} ball kerak!`);
             }
         }
 
-        // ====== KO'PAYTIRGICH ======
-        function buyMultiplier() {
-            const cost = 2000;
-            
-            if (balls >= cost) {
-                balls -= cost;
-                const oldMultiplier = currentMultiplier;
-                currentMultiplier = 2;
-                multiplierActive = true;
-                
-                addToHistory('multiplier', '2x koʻpaytirgich faollashtirildi', -cost);
-                showNotification('🔥 2x koʻpaytirgich faollashtirildi! (5 daqiqa)');
-                updateStats();
-                
-                // To'p rangini o'zgartirish
-                document.getElementById('tapArea').style.background = 
-                    'radial-gradient(circle, rgba(255,193,7,1) 0%, rgba(255,152,0,1) 100%)';
-                
-                // 5 daqiqadan keyin asl holatiga qaytarish
-                setTimeout(() => {
-                    currentMultiplier = oldMultiplier;
-                    multiplierActive = false;
-                    document.getElementById('tapArea').style.background = 
-                        'radial-gradient(circle, rgba(255,107,0,1) 0%, rgba(230,81,0,1) 100%)';
-                    showNotification('🔄 Koʻpaytirgich tugadi');
-                }, 5 * 60 * 1000);
-            } else {
-                showNotification(`❌ ${cost} ball kerak!`);
-            }
-        }
-
         // ====== BO'STERLAR ======
-        function buyBoost(type, cost) {
+        function buyBoost(boostId, cost) {
             if (balls >= cost) {
                 balls -= cost;
+                const boost = boosts.find(b => b.id === boostId);
                 
-                switch(type) {
-                    case '2x':
-                        activateMultiplierBoost(2, 300);
-                        addToHistory('boost', '2x koʻpaytirgich (5 daqiqa)', -cost);
-                        showNotification('🔥 2x koʻpaytirgich faollashtirildi!');
-                        break;
-                    case '3x':
-                        activateMultiplierBoost(3, 180);
-                        addToHistory('boost', '3x koʻpaytirgich (3 daqiqa)', -cost);
-                        showNotification('🔥 3x koʻpaytirgich faollashtirildi!');
-                        break;
-                    case 'speed':
-                        activateSpeedBoost(2, 600);
-                        addToHistory('boost', 'Tezlik boʻsteri (10 daqiqa)', -cost);
-                        showNotification('🚀 Tezlik boʻsteri faollashtirildi!');
-                        break;
-                    case 'auto':
-                        activateAutoBoost();
-                        addToHistory('boost', 'Kuchli avtokliker (30 daqiqa)', -cost);
-                        showNotification('🤖 Kuchli avtokliker faollashtirildi!');
-                        break;
+                if (!boost) return;
+                
+                if (boost.multiplier) {
+                    activateMultiplierBoost(boost.multiplier, boost.duration);
+                } else if (boost.speed) {
+                    activateSpeedBoost(boost.speed, boost.duration);
+                } else if (boost.autoclicker) {
+                    activateAutoBoost();
                 }
                 
+                addToHistory('boost', `${boost.name} sotib olindi`, -cost);
+                showNotification(`🚀 ${boost.name} faollashtirildi!`);
                 updateStats();
             } else {
                 showNotification(`❌ ${cost} ball kerak!`);
@@ -1403,21 +1518,19 @@
             const oldMultiplier = currentMultiplier;
             currentMultiplier = multiplier;
             
-            // To'p rangini o'zgartirish
             const colors = {
                 2: ['rgba(255,193,7,1)', 'rgba(255,152,0,1)'],
                 3: ['rgba(255,87,34,1)', 'rgba(244,67,54,1)']
             };
             
-            document.getElementById('tapArea').style.background = 
+            document.getElementById('tapCircle').style.background = 
                 `radial-gradient(circle, ${colors[multiplier][0]} 0%, ${colors[multiplier][1]} 100%)`;
             
-            // Vaqt tugashi
             setTimeout(() => {
                 currentMultiplier = oldMultiplier;
-                document.getElementById('tapArea').style.background = 
-                    'radial-gradient(circle, rgba(255,107,0,1) 0%, rgba(230,81,0,1) 100%)';
-                showNotification('🔄 Boʻster tugadi');
+                document.getElementById('tapCircle').style.background = 
+                    'radial-gradient(circle, var(--primary) 0%, var(--primary-dark) 100%)';
+                showNotification('🔄 Koʻpaytirgich tugadi');
             }, duration * 1000);
         }
 
@@ -1425,13 +1538,11 @@
             const oldSpeed = clickPower;
             clickPower *= speed;
             
-            // Animatsiya
-            document.getElementById('tapArea').style.animation = 'pulseGlow 0.5s infinite alternate';
+            document.getElementById('tapCircle').style.animation = 'pulse 0.5s infinite alternate';
             
-            // Vaqt tugashi
             setTimeout(() => {
                 clickPower = oldSpeed;
-                document.getElementById('tapArea').style.animation = '';
+                document.getElementById('tapCircle').style.animation = '';
                 updateStats();
                 showNotification('🔄 Tezlik boʻsteri tugadi');
             }, duration * 1000);
@@ -1442,30 +1553,24 @@
                 deactivateAutoclicker();
             }
             
-            balls += 10000; // Bonus beramiz
+            balls += 10000;
             activateAutoClicker();
-            
-            // 30 daqiqaga o'rnatamiz
             autoclickerTime = 30 * 60;
             updateAutoclickerUI();
         }
 
         // ====== REYTING FUNKSIYALARI ======
         function showRanking(type) {
-            // Tablarni yangilash
             document.querySelectorAll('.ranking-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             event.target.classList.add('active');
-            
-            // Reytingni yuklash
             loadRanking(type);
         }
 
         function loadRanking(type = 'time') {
             const rankingList = document.getElementById('rankingList');
             
-            // Demo foydalanuvchilar (faqat real)
             let users = [
                 {
                     name: 'Siz',
@@ -1475,28 +1580,25 @@
                 }
             ];
             
-            // Agar localStorageda do'stlar bo'lsa, ularni qo'shamiz
             const invitedUsers = JSON.parse(localStorage.getItem('invitedUsers') || '[]');
             invitedUsers.forEach((user, index) => {
                 users.push({
                     name: `Do'st ${index + 1}`,
-                    balls: Math.floor(balls * 0.7 * Math.random()), // Sizning ballingizdan kamroq
+                    balls: Math.floor(balls * 0.7 * Math.random()),
                     time: Math.floor(gameTime * 0.8 * Math.random()),
                     isCurrent: false
                 });
             });
             
-            // Saralash
             if (type === 'time') {
                 users.sort((a, b) => b.time - a.time);
             } else {
                 users.sort((a, b) => b.balls - a.balls);
             }
             
-            // HTML yaratish
             rankingList.innerHTML = users.map((user, index) => `
-                <div class="rank-item" style="border-left-color: ${user.isCurrent ? '#FF6B00' : '#2196F3'};">
-                    <div class="rank-position">${index + 1}</div>
+                <div class="rank-item">
+                    <div class="rank-pos">${index + 1}</div>
                     <div class="rank-info">
                         <div class="rank-name">${user.name}</div>
                         <div class="rank-stats">
@@ -1510,7 +1612,6 @@
         }
 
         function updateRanking() {
-            // Reytingni yangilash
             if (balls >= 100000) currentRank = '#1';
             else if (balls >= 50000) currentRank = '#2';
             else if (balls >= 25000) currentRank = '#3';
@@ -1536,8 +1637,8 @@
 
         // ====== OLMOZLAR FUNKSIYALARI ======
         function loadDiamondPackages() {
-            const diamondGrid = document.getElementById('diamondGrid');
-            diamondGrid.innerHTML = '';
+            const diamondsGrid = document.getElementById('diamondsGrid');
+            diamondsGrid.innerHTML = '';
             
             diamondPackages.forEach(pkg => {
                 const card = document.createElement('div');
@@ -1550,48 +1651,43 @@
                     <div class="diamond-label">${pkg.label}</div>
                 `;
                 
-                diamondGrid.appendChild(card);
+                diamondsGrid.appendChild(card);
             });
         }
 
         function selectDiamondPackage(packageId) {
-            selectedPackage = packageId;
+            const pkg = diamondPackages.find(p => p.id === packageId);
+            if (!pkg) return;
             
-            // Barcha kartalarni yangilash
-            document.querySelectorAll('.diamond-card').forEach(card => {
-                card.style.border = '1px solid rgba(33, 150, 243, 0.2)';
-                card.style.transform = 'translateY(0)';
-            });
+            selectedPackage = pkg;
             
-            // Tanlangan kartani belgilash
-            const selectedCard = document.querySelector(`.diamond-card:nth-child(${packageId})`);
-            if (selectedCard) {
-                selectedCard.style.border = '2px solid #2196F3';
-                selectedCard.style.transform = 'translateY(-5px)';
-                
-                // Demo: olmoslarni qo'shish
-                const pkg = diamondPackages.find(p => p.id === packageId);
-                setTimeout(() => {
-                    diamonds += pkg.diamonds;
-                    updateStats();
-                    addToHistory('purchase', `${pkg.diamonds} olmos sotib olindi`, pkg.diamonds);
-                    showNotification(`✅ ${pkg.diamonds} olmos hisobingizga qo'shildi!`);
-                    
-                    // Karta holatini tiklash
-                    selectedCard.style.border = '1px solid rgba(33, 150, 243, 0.2)';
-                    selectedCard.style.transform = 'translateY(0)';
-                    selectedPackage = null;
-                }, 1000);
-            }
+            document.getElementById('selectedPackageTitle').textContent = pkg.label;
+            document.getElementById('selectedPackagePrice').textContent = pkg.price.toLocaleString() + ' SO\'M';
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+            selectedPackage = null;
+        }
+
+        function confirmPayment() {
+            if (!selectedPackage) return;
+            
+            showNotification(`✅ To'lov so'rovi yuborildi! Admin siz bilan bog'lanadi.`);
+            closePaymentModal();
+            
+            // Bu yerda haqiqiy to'lov tizimi bo'lishi kerak
+            // Hozircha demo versiya
         }
 
         // ====== TARIX FUNKSIYALARI ======
         function loadHistory() {
-            const historyContainer = document.getElementById('historyContainer');
+            const historyList = document.getElementById('historyList');
             
             if (history.length === 0) {
-                historyContainer.innerHTML = `
-                    <div style="text-align: center; padding: 40px 20px; color: rgba(255, 255, 255, 0.4);">
+                historyList.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: var(--text-gray);">
                         <i class="fas fa-history" style="font-size: 40px; margin-bottom: 15px; opacity: 0.3;"></i>
                         <div style="font-size: 13px;">Hozircha amallar yo'q</div>
                     </div>
@@ -1599,13 +1695,13 @@
                 return;
             }
             
-            historyContainer.innerHTML = history.map(item => `
+            historyList.innerHTML = history.map(item => `
                 <div class="history-item">
                     <div class="history-header">
                         <div class="history-type">
                             ${getHistoryIcon(item.type)} ${item.description}
                         </div>
-                        <div class="history-amount" style="color: ${item.amount > 0 ? '#4CAF50' : '#F44336'}">
+                        <div class="history-amount ${item.amount > 0 ? 'positive' : 'negative'}">
                             ${item.amount > 0 ? '+' : ''}${item.amount}
                         </div>
                     </div>
@@ -1628,12 +1724,10 @@
             
             history.unshift(historyItem);
             
-            // Faqat oxirgi 50 ta elementni saqlash
             if (history.length > 50) {
                 history = history.slice(0, 50);
             }
             
-            // Ma'lumotlarni saqlash
             saveData();
         }
 
@@ -1642,9 +1736,7 @@
                 'tap': '👆',
                 'autoclicker': '🤖',
                 'upgrade': '⚡',
-                'multiplier': '🔥',
                 'boost': '🚀',
-                'purchase': '💎',
                 'reward': '🎁',
                 'invite': '👥'
             };
@@ -1657,7 +1749,7 @@
             const today = new Date().toDateString();
             
             if (lastReward === today) {
-                showNotification('⚠️ Kunlik sovgʻani allaqachon oldingiz! Ertaga qaytib keling.');
+                showNotification('⚠️ Kunlik sovgʻani allaqachon oldingiz!');
                 return;
             }
             
@@ -1673,42 +1765,27 @@
         function inviteFriend() {
             const link = 'https://t.me/mlbb_ball_bot?start=ref_' + Math.random().toString(36).substr(2, 8);
             navigator.clipboard.writeText(link);
-            showNotification('📋 Taklif havolasi nusxalandi! Do'stingizga yuboring.');
+            showNotification('📋 Taklif havolasi nusxalandi!');
             
-            // Bonus
             const bonus = 100;
             balls += bonus;
             updateStats();
             addToHistory('invite', 'Doʻst taklif qilish bonusi', bonus);
         }
 
-        function showNotifications() {
-            showNotification('🔔 Yangi xabarlar yoʻq. Tez orada yangilanishlar kutilmoqda!');
-        }
-
         // ====== SOZLAMALAR FUNKSIYALARI ======
         function changeTheme(theme) {
             const themes = {
-                'default': ['#FF6B00', '#E65100', 'radial-gradient(circle, rgba(255,107,0,1) 0%, rgba(230,81,0,1) 100%)'],
-                'blue': ['#2196F3', '#1976D2', 'radial-gradient(circle, rgba(33,150,243,1) 0%, rgba(21,101,192,1) 100%)'],
-                'green': ['#4CAF50', '#388E3C', 'radial-gradient(circle, rgba(76,175,80,1) 0%, rgba(56,142,60,1) 100%)'],
-                'purple': ['#9C27B0', '#7B1FA2', 'radial-gradient(circle, rgba(156,39,176,1) 0%, rgba(123,31,162,1) 100%)'],
-                'dark': ['#607D8B', '#455A64', 'radial-gradient(circle, rgba(96,125,139,1) 0%, rgba(69,90,100,1) 100%)']
+                'default': ['#FF6B00', '#E65100'],
+                'blue': ['#2196F3', '#1976D2'],
+                'green': ['#4CAF50', '#388E3C'],
+                'purple': ['#9C27B0', '#7B1FA2']
             };
             
-            const [primary, primaryDark, gradient] = themes[theme] || themes['default'];
+            const [primary, primaryDark] = themes[theme] || themes['default'];
             
-            // CSS o'zgaruvchilarini o'zgartirish
             document.documentElement.style.setProperty('--primary', primary);
             document.documentElement.style.setProperty('--primary-dark', primaryDark);
-            
-            // To'p rangini o'zgartirish
-            document.getElementById('tapArea').style.background = gradient;
-            
-            // Tugma ranglarini yangilash
-            document.querySelectorAll('.action-btn i, .menu-btn i, .stat-icon').forEach(icon => {
-                icon.style.color = primary;
-            });
             
             showNotification(`🎨 Mavzu "${theme}" ga o'zgartirildi!`);
             localStorage.setItem('mlbbTheme', theme);
@@ -1723,8 +1800,7 @@
                 gameTime: gameTime,
                 history: history,
                 autoclickerActive: autoclickerActive,
-                autoclickerTime: autoclickerTime,
-                exportDate: new Date().toISOString()
+                autoclickerTime: autoclickerTime
             };
             
             const dataStr = JSON.stringify(data, null, 2);
@@ -1752,7 +1828,7 @@
                     try {
                         const data = JSON.parse(e.target.result);
                         
-                        if (confirm('Haqiqatan ham ma\'lumotlarni qayta yuklamoqchimisiz? Bu joriy ma\'lumotlarni o\'chirib tashlaydi.')) {
+                        if (confirm('Ma\'lumotlarni qayta yuklamoqchimisiz?')) {
                             balls = data.balls || 0;
                             diamonds = data.diamonds || 0;
                             clickPower = data.clickPower || 1.0;
@@ -1769,7 +1845,7 @@
                             
                             updateStats();
                             updateRanking();
-                            showNotification('✅ Ma\'lumotlar muvaffaqiyatli yuklandi');
+                            showNotification('✅ Ma\'lumotlar yuklandi');
                         }
                     } catch (error) {
                         showNotification('❌ Xato: Noto\'g\'ri fayl formati');
@@ -1783,19 +1859,28 @@
         }
 
         function clearProgress() {
-            if (confirm('Haqiqatan ham barcha progressni o\'chirmoqchimisiz? Bu amalni qaytarib bo\'lmaydi!')) {
+            if (confirm('Haqiqatan ham barcha progressni o\'chirmoqchimisiz?')) {
                 localStorage.clear();
                 location.reload();
             }
         }
 
         function contactSupport() {
-            const message = 'Salom! MLBB Ball Collector o\'yini haqida yordam kerak.';
-            window.open('https://t.me/laz1z0v1ch?text=' + encodeURIComponent(message), '_blank');
+            window.open('https://t.me/laz1z0v1ch', '_blank');
         }
 
         function aboutGame() {
-            showNotification('🎮 MLBB Ball Collector\n\nBu o\'yinda siz ball to\'plab, ularni real MLBB olmoslariga almashtirishingiz mumkin!\n\nAdmin: @laz1z0v1ch\nTelefon: +998882600726');
+            showNotification('🎮 MLBB Ball Collector\n\nAdmin: @laz1z0v1ch\nTel: +998882600726');
+        }
+
+        // ====== BILDIRISHNOMA FUNKSIYALARI ======
+        function showNotification(message) {
+            document.getElementById('notificationMessage').textContent = message;
+            document.getElementById('notificationModal').style.display = 'flex';
+        }
+
+        function closeNotificationModal() {
+            document.getElementById('notificationModal').style.display = 'none';
         }
 
         // ====== MA'LUMOTLARNI SAQLASH ======
@@ -1809,14 +1894,13 @@
                 history: history,
                 autoclickerActive: autoclickerActive,
                 autoclickerTime: autoclickerTime,
-                lastRewardDate: localStorage.getItem('lastRewardDate'),
                 saveTime: new Date().toISOString()
             };
-            localStorage.setItem('mlbbProfessionalTapalka', JSON.stringify(data));
+            localStorage.setItem('mlbbGameData', JSON.stringify(data));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('mlbbProfessionalTapalka');
+            const saved = localStorage.getItem('mlbbGameData');
             if (saved) {
                 try {
                     const data = JSON.parse(saved);
@@ -1827,7 +1911,6 @@
                     gameTime = data.gameTime || 0;
                     history = data.history || [];
                     
-                    // Avtoklikerni qayta tiklash
                     if (data.autoclickerActive && data.autoclickerTime > 0) {
                         autoclickerActive = true;
                         autoclickerTime = data.autoclickerTime;
@@ -1839,39 +1922,23 @@
                 }
             }
             
-            // Mavzuni yuklash
             const savedTheme = localStorage.getItem('mlbbTheme') || 'default';
             changeTheme(savedTheme);
         }
 
-        // ====== BILDIRISHNOMA TIZIMI ======
-        function showNotification(message) {
-            // Vaqtinchalik oddiy alert
-            console.log('Notification:', message);
-            alert(message);
-        }
-
         // ====== DASTLABKI YUKLASH ======
         document.addEventListener('DOMContentLoaded', function() {
-            // Ma'lumotlarni yuklash
             loadData();
-            
-            // Statistika yangilash
             updateStats();
-            
-            // Reytingni yangilash
             updateRanking();
             
-            // O'yin vaqtini hisoblash
             setInterval(() => {
                 gameTime++;
-                // Har 30 soniyada ma'lumotlarni saqlash
                 if (gameTime % 30 === 0) {
                     saveData();
                 }
             }, 1000);
             
-            // Brauzer yopilganda ma'lumotlarni saqlash
             window.addEventListener('beforeunload', function() {
                 saveData();
             });
