@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLBB BALL COLLECTOR | Hamster Kombat Style</title>
+    <title>MLBB BALL COLLECTOR | Professional Edition</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ====== ASOSIY O'ZGARTIRISHLAR ====== */
+        /* ====== ASOSIY O'ZGARTIRISHLAR (KICHIK) ====== */
         :root {
             --primary: #FF6B00;
             --primary-dark: #E65100;
@@ -20,118 +20,111 @@
             --light: #FFFFFF;
             --gray: #757575;
             --light-gray: #F5F5F5;
-            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.05);
             --gradient: linear-gradient(135deg, #FF6B00 0%, #FF9800 100%);
             --bg-gradient: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
-            --gold-glow: 0 0 20px rgba(255, 215, 0, 0.5);
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --gold-glow: 0 0 15px rgba(255, 215, 0, 0.3);
+            --shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
         }
 
         body {
             background: var(--bg-gradient);
             color: var(--light);
             min-height: 100vh;
-            overflow-x: hidden;
-            font-size: 14px;
-            background-attachment: fixed;
+            font-size: 12px;
+            line-height: 1.4;
         }
 
         .container {
             max-width: 100%;
             margin: 0 auto;
-            padding: 10px 15px 70px;
-            position: relative;
+            padding: 8px 10px 60px;
         }
 
-        /* ====== HEADER ====== */
+        /* ====== HEADER (KICHIK) ====== */
         .game-header {
             background: linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%);
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 107, 0, 0.2);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(255, 107, 0, 0.15);
         }
 
         .game-title {
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 800;
             background: linear-gradient(45deg, #FF6B00, #FFC107);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 10px rgba(255, 107, 0, 0.3);
+            margin-bottom: 3px;
         }
 
         .game-subtitle {
             text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 12px;
-            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 9px;
         }
 
-        /* ====== ASOSIY STATISTIKA PANELI ====== */
+        /* ====== ASOSIY STATISTIKA (KICHIK) ====== */
         .main-stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
         }
 
         .stat-card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 15px;
+            backdrop-filter: blur(8px);
+            border-radius: 10px;
+            padding: 8px 6px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .stat-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-1px);
             border-color: var(--primary);
         }
 
         .stat-value {
-            font-size: 24px;
+            font-size: 14px;
             font-weight: 800;
             color: var(--light);
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            margin-bottom: 2px;
         }
 
         .stat-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 8px;
+            color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .stat-icon {
-            font-size: 20px;
-            margin-bottom: 8px;
+            font-size: 12px;
+            margin-bottom: 4px;
             color: var(--primary);
         }
 
-        /* ====== O'YIN ZONASI (YANGI DIZAYN) ====== */
+        /* ====== O'YIN ZONASI (KICHIK) ====== */
         .game-area {
             position: relative;
-            margin: 20px auto;
-            width: 200px;
-            height: 200px;
+            margin: 12px auto;
+            width: 130px;
+            height: 130px;
         }
 
         .click-circle {
@@ -144,126 +137,110 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            border: 5px solid rgba(255, 255, 255, 0.1);
+            border: 3px solid rgba(255, 255, 255, 0.08);
             box-shadow: 
-                0 0 50px rgba(255, 107, 0, 0.3),
-                inset 0 0 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.2s ease;
+                0 0 30px rgba(255, 107, 0, 0.2),
+                inset 0 0 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.15s ease;
             position: relative;
             overflow: hidden;
         }
 
         .click-circle:active {
-            transform: scale(0.95);
+            transform: scale(0.92);
             box-shadow: 
-                0 0 30px rgba(255, 107, 0, 0.5),
-                inset 0 0 20px rgba(0, 0, 0, 0.7);
+                0 0 20px rgba(255, 107, 0, 0.3),
+                inset 0 0 15px rgba(0, 0, 0, 0.6);
         }
 
         .click-circle i {
-            font-size: 60px;
+            font-size: 36px;
             color: white;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+            margin-bottom: 6px;
         }
 
         .click-text {
-            font-size: 16px;
+            font-size: 11px;
             font-weight: 700;
             color: white;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         .click-subtext {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 5px;
+            font-size: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 3px;
         }
 
-        /* ====== BOSISH EFFEKTI (YANGI) ====== */
+        /* ====== BOSISH EFFEKTI ====== */
         .click-effect {
             position: absolute;
             pointer-events: none;
-            font-size: 28px;
+            font-size: 18px;
             font-weight: 800;
             color: #FFC107;
-            text-shadow: 
-                0 0 10px #FF9800,
-                0 0 20px #FF5722;
-            animation: floatUp 1s ease-out forwards;
+            text-shadow: 0 0 5px #FF9800;
+            animation: floatUp 0.8s ease-out forwards;
             z-index: 100;
         }
 
         @keyframes floatUp {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100px) scale(1.5);
-            }
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-70px) scale(1.3); }
         }
 
-        /* ====== TEZKOR TUGMALAR ====== */
+        /* ====== TEZKOR TUGMALAR (KICHIK) ====== */
         .quick-actions {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 20px 0;
+            gap: 6px;
+            margin: 12px 0;
         }
 
         .quick-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             border: none;
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 8px;
+            padding: 8px 6px;
             color: white;
-            font-weight: 700;
-            font-size: 12px;
+            font-weight: 600;
+            font-size: 9px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 3px;
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            min-height: 50px;
         }
 
         .quick-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
         }
 
         .quick-btn i {
-            font-size: 20px;
+            font-size: 14px;
         }
 
         .quick-btn small {
-            font-size: 9px;
-            opacity: 0.9;
+            font-size: 7px;
+            opacity: 0.8;
         }
 
-        .btn-green {
-            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
-        }
-
-        .btn-blue {
-            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-        }
-
-        .btn-purple {
-            background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
-        }
+        .btn-green { background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%); }
+        .btn-blue { background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%); }
+        .btn-purple { background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%); }
+        .btn-red { background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%); }
+        .btn-teal { background: linear-gradient(135deg, #009688 0%, #00796B 100%); }
 
         /* ====== AVTOKLIKER QATORI ====== */
         .autoclicker-bar {
-            background: rgba(33, 150, 243, 0.1);
-            border: 2px solid var(--accent);
-            border-radius: 15px;
-            padding: 15px;
-            margin: 15px 0;
+            background: rgba(33, 150, 243, 0.08);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 8px 10px;
+            margin: 10px 0;
             position: relative;
             overflow: hidden;
         }
@@ -272,93 +249,94 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .autoclicker-title {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 14px;
+            gap: 5px;
+            font-weight: 600;
+            font-size: 10px;
             color: var(--accent);
         }
 
         .autoclicker-timer {
             font-family: 'Courier New', monospace;
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 12px;
+            font-weight: 700;
             color: white;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 5px 10px;
-            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 3px 6px;
+            border-radius: 5px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 6px;
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #4CAF50, #8BC34A);
-            border-radius: 4px;
+            border-radius: 2px;
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.3s ease;
         }
 
-        /* ====== PASTKI NAVIGATSIYA ====== */
+        /* ====== PASTKI NAVIGATSIYA (KICHIK) ====== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(26, 26, 26, 0.95);
+            background: rgba(20, 20, 20, 0.98);
             backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
             display: flex;
             justify-content: space-around;
-            padding: 10px 5px;
+            padding: 6px 3px;
             z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 8px 12px;
-            color: rgba(255, 255, 255, 0.5);
+            padding: 5px 8px;
+            color: rgba(255, 255, 255, 0.4);
             text-decoration: none;
-            font-size: 10px;
-            transition: all 0.3s ease;
-            border-radius: 10px;
-            min-width: 60px;
+            font-size: 8px;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            min-width: 45px;
         }
 
         .nav-item.active {
             color: var(--primary);
-            background: rgba(255, 107, 0, 0.1);
-            transform: translateY(-5px);
+            background: rgba(255, 107, 0, 0.08);
+            transform: translateY(-3px);
         }
 
         .nav-item i {
-            font-size: 20px;
-            margin-bottom: 5px;
+            font-size: 14px;
+            margin-bottom: 3px;
         }
 
         .nav-item span {
-            font-size: 9px;
+            font-size: 7px;
             font-weight: 600;
         }
 
         /* ====== SAHIFALAR ====== */
         .page {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.2s ease;
         }
 
         .page.active {
@@ -366,65 +344,143 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ====== DO'STLAR SAHIFASI ====== */
-        .friends-grid {
+        /* ====== OLMOZLAR SAHIFASI ====== */
+        .packages-container {
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .package-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .package-item:hover {
+            background: rgba(255, 107, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .package-item.selected {
+            background: rgba(255, 107, 0, 0.15);
+            border: 2px solid var(--primary);
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .package-name {
+            font-weight: 700;
+            font-size: 11px;
+            color: white;
+        }
+
+        .package-price {
+            font-weight: 800;
+            font-size: 12px;
+            color: #FFC107;
+        }
+
+        .package-details {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ====== BO'LIMLAR SAHIFASI ====== */
+        .upgrades-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 15px;
+            gap: 6px;
+            margin-top: 10px;
         }
 
-        .friend-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        /* ====== BOZOR SAHIFASI ====== */
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .package-card {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(33, 150, 243, 0.1) 100%);
-            border: 2px solid rgba(76, 175, 80, 0.3);
-            border-radius: 12px;
-            padding: 15px;
+        .upgrade-card {
+            background: rgba(33, 150, 243, 0.05);
+            border: 1px solid rgba(33, 150, 243, 0.1);
+            border-radius: 8px;
+            padding: 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
-        .package-card:hover {
-            transform: translateY(-3px);
+        .upgrade-card:hover {
+            background: rgba(33, 150, 243, 0.1);
             border-color: var(--accent);
         }
 
-        /* ====== REYTING SAHIFASI ====== */
-        .leaderboard {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 15px;
-            margin-top: 15px;
+        /* ====== TARIX SAHIFASI ====== */
+        .history-container {
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            margin: 5px 0;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+        .history-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--primary);
+            border-radius: 6px;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            font-size: 10px;
+        }
+
+        .history-time {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 8px;
+            margin-top: 2px;
+        }
+
+        /* ====== MAVZULAR SAHIFASI ====== */
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .theme-card {
+            border-radius: 10px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .theme-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .theme-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .theme-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .theme-name {
+            font-weight: 600;
+            font-size: 10px;
+            margin-top: 4px;
         }
 
         /* ====== OGOXLANTIRISH MODALI ====== */
@@ -435,56 +491,58 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            padding: 15px;
         }
 
         .warning-modal {
             background: linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%);
-            width: 90%;
-            max-width: 400px;
-            border-radius: 20px;
-            padding: 25px;
+            width: 100%;
+            max-width: 320px;
+            border-radius: 15px;
+            padding: 20px;
             text-align: center;
             border: 2px solid var(--warning);
-            box-shadow: 0 0 50px rgba(255, 193, 7, 0.3);
+            box-shadow: 0 0 40px rgba(255, 193, 7, 0.2);
         }
 
         .warning-icon {
-            font-size: 60px;
+            font-size: 40px;
             color: var(--warning);
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.05); }
         }
 
         .warning-text {
-            font-size: 16px;
-            margin-bottom: 20px;
+            font-size: 13px;
+            margin-bottom: 15px;
             color: white;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .warning-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 15px;
         }
 
         .warning-btn {
             flex: 1;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 8px;
             border: none;
-            font-weight: 700;
+            font-weight: 600;
+            font-size: 11px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .warning-btn.continue {
@@ -493,43 +551,101 @@
         }
 
         .warning-btn.cancel {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .warning-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ====== TO'LOV MODALLARI ====== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            padding: 15px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            box-shadow: 0 0 50px rgba(255, 107, 0, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* ====== RESPONSIVE ====== */
         @media (max-width: 480px) {
             .game-area {
-                width: 180px;
-                height: 180px;
+                width: 120px;
+                height: 120px;
             }
             
             .main-stats {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .quick-actions {
                 grid-template-columns: 1fr;
             }
             
-            .packages-grid,
-            .friends-grid {
+            .themes-grid {
                 grid-template-columns: 1fr;
             }
             
             .nav-item {
-                min-width: 50px;
-                padding: 6px 8px;
+                min-width: 40px;
+                padding: 4px 6px;
             }
             
             .nav-item i {
-                font-size: 18px;
+                font-size: 12px;
             }
         }
     </style>
@@ -540,7 +656,7 @@
         <!-- HEADER -->
         <div class="game-header">
             <h1 class="game-title">MLBB BALL COLLECTOR</h1>
-            <p class="game-subtitle">Har bir bosish - 1 ball • Toplang va g'alaba qozoning!</p>
+            <p class="game-subtitle">Professional Edition • Admin: @laz1z0v1ch</p>
             
             <!-- ASOSIY STATISTIKA -->
             <div class="main-stats">
@@ -557,7 +673,7 @@
                 <div class="stat-card">
                     <div class="stat-icon">⚡</div>
                     <div class="stat-value" id="clickPower">1.0x</div>
-                    <div class="stat-label">Kuch</div>
+                    <div class="stat-label">Tezlik</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">🏆</div>
@@ -590,15 +706,15 @@
                     <span>Kuchni oshirish</span>
                     <small>500 ball • +0.2x</small>
                 </button>
-                <button class="quick-btn btn-blue" onclick="openShop()">
-                    <i class="fas fa-store"></i>
+                <button class="quick-btn btn-blue" onclick="openDiamondShop()">
+                    <i class="fas fa-gem"></i>
                     <span>Olmos sotib olish</span>
-                    <small>Paketlar</small>
+                    <small>Real olmoslar</small>
                 </button>
-                <button class="quick-btn btn-purple" onclick="openFriends()">
-                    <i class="fas fa-user-friends"></i>
-                    <span>Do'st taklif qilish</span>
-                    <small>Bonus olish</small>
+                <button class="quick-btn btn-purple" onclick="showPage('diamonds')">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Almashtirish</span>
+                    <small>Ball → Olmos</small>
                 </button>
             </div>
 
@@ -615,132 +731,173 @@
                     <div class="progress-fill" id="autoclickerProgress"></div>
                 </div>
             </div>
-        </div>
 
-        <!-- DO'STLAR SAHIFASI -->
-        <div class="page" id="page-friends">
-            <div class="game-header">
-                <h2 class="game-title">DO'STLAR</h2>
-                <p class="game-subtitle">Taklif qiling va bonus oling</p>
-            </div>
-
-            <div class="friends-grid">
-                <div class="friend-card">
+            <!-- QO'SHIMCHA STATISTIKA -->
+            <div class="main-stats" style="margin-top: 15px;">
+                <div class="stat-card">
+                    <div class="stat-icon">👆</div>
+                    <div class="stat-value" id="totalClicks">0</div>
+                    <div class="stat-label">Bosishlar</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value" id="gameTime">0m</div>
+                    <div class="stat-label">O'yin vaqti</div>
+                </div>
+                <div class="stat-card">
                     <div class="stat-icon">👥</div>
                     <div class="stat-value" id="invitedCount">0</div>
-                    <div class="stat-label">Taklif qilingan</div>
+                    <div class="stat-label">Takliflar</div>
                 </div>
-                <div class="friend-card">
-                    <div class="stat-icon">💎</div>
-                    <div class="stat-value" id="referralBonus">0</div>
-                    <div class="stat-label">Bonus olmos</div>
-                </div>
-            </div>
-
-            <div class="quick-actions" style="margin-top: 20px;">
-                <button class="quick-btn btn-blue" onclick="copyReferralLink()">
-                    <i class="fas fa-link"></i>
-                    <span>Havolani nusxalash</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- BOZOR SAHIFASI -->
-        <div class="page" id="page-shop">
-            <div class="game-header">
-                <h2 class="game-title">BOZOR</h2>
-                <p class="game-subtitle">Olmos paketlarini sotib oling</p>
-            </div>
-
-            <div class="packages-grid">
-                <div class="package-card" onclick="selectPackage(1)">
-                    <div class="stat-icon">💎</div>
-                    <div class="stat-value">5</div>
-                    <div class="stat-label">5 olmos</div>
-                    <div style="margin-top: 5px; font-size: 12px; color: #FFC107;">1,800 so'm</div>
-                </div>
-                <div class="package-card" onclick="selectPackage(2)">
-                    <div class="stat-icon">💎</div>
-                    <div class="stat-value">11</div>
-                    <div class="stat-label">11 olmos</div>
-                    <div style="margin-top: 5px; font-size: 12px; color: #FFC107;">3,000 so'm</div>
-                </div>
-                <div class="package-card" onclick="selectPackage(3)">
-                    <div class="stat-icon">💎</div>
-                    <div class="stat-value">22</div>
-                    <div class="stat-label">22 olmos</div>
-                    <div style="margin-top: 5px; font-size: 12px; color: #FFC107;">5,000 so'm</div>
-                </div>
-                <div class="package-card" onclick="selectPackage(4)">
-                    <div class="stat-icon">💎</div>
-                    <div class="stat-value">56</div>
-                    <div class="stat-label">56 olmos</div>
-                    <div style="margin-top: 5px; font-size: 12px; color: #FFC107;">11,500 so'm</div>
-                </div>
-            </div>
-
-            <button class="quick-btn btn-green" style="width: 100%; margin-top: 20px;" onclick="processPayment()">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Sotib olish</span>
-            </button>
-        </div>
-
-        <!-- REYTING SAHIFASI -->
-        <div class="page" id="page-leaderboard">
-            <div class="game-header">
-                <h2 class="game-title">REYTING</h2>
-                <p class="game-subtitle">Eng yaxshi o'yinchilar</p>
-            </div>
-
-            <div class="leaderboard">
-                <div class="leaderboard-item">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-weight: 800; color: #FFC107;">1</span>
-                        <span>ProGamer</span>
-                    </div>
-                    <span style="font-weight: 800;">125,600</span>
-                </div>
-                <div class="leaderboard-item">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-weight: 800; color: #E0E0E0;">2</span>
-                        <span>MLBB_King</span>
-                    </div>
-                    <span style="font-weight: 800;">98,200</span>
-                </div>
-                <div class="leaderboard-item">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-weight: 800; color: #CD7F32;">3</span>
-                        <span>BallMaster</span>
-                    </div>
-                    <span style="font-weight: 800;">75,400</span>
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-value" id="sessionBalls">0</div>
+                    <div class="stat-label">Sessiya</div>
                 </div>
             </div>
         </div>
 
-        <!-- SOZLAMALAR SAHIFASI -->
-        <div class="page" id="page-settings">
+        <!-- OLMOZLAR SAHIFASI -->
+        <div class="page" id="page-diamonds">
             <div class="game-header">
-                <h2 class="game-title">SOZLAMALAR</h2>
-                <p class="game-subtitle">O'yin sozlamalari</p>
+                <h2 class="game-title">OLMOZLAR</h2>
+                <p class="game-subtitle">Sotib olish va almashtirish</p>
             </div>
 
             <div class="quick-actions">
-                <button class="quick-btn" onclick="changeTheme('default')">
-                    <i class="fas fa-palette"></i>
-                    <span>Mavzu</span>
+                <button class="quick-btn btn-green" onclick="openDiamondShop()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Olmos sotib olish</span>
                 </button>
-                <button class="quick-btn btn-blue" onclick="exportData()">
-                    <i class="fas fa-download"></i>
-                    <span>Saqlash</span>
+                <button class="quick-btn btn-blue" onclick="openExchangeModal()">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Ball → Olmos</span>
                 </button>
-                <button class="quick-btn btn-purple" onclick="clearData()">
-                    <i class="fas fa-trash"></i>
-                    <span>Tozalash</span>
+                <button class="quick-btn btn-purple" onclick="openWithdrawModal()">
+                    <i class="fas fa-wallet"></i>
+                    <span>Olmos yechish</span>
                 </button>
-                <button class="quick-btn btn-green" onclick="contactAdmin()">
-                    <i class="fas fa-headset"></i>
-                    <span>Yordam</span>
-                </button>
+            </div>
+
+            <div class="main-stats" style="margin-top: 15px;">
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-value" id="availableDiamonds">0</div>
+                    <div class="stat-label">Mavjud olmos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏦</div>
+                    <div class="stat-value" id="totalEarned">0</div>
+                    <div class="stat-label">Jami topilgan</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BO'LIMLAR SAHIFASI -->
+        <div class="page" id="page-upgrades">
+            <div class="game-header">
+                <h2 class="game-title">BO'LIMLAR</h2>
+                <p class="game-subtitle">Kuch va imkoniyatlarni oshiring</p>
+            </div>
+
+            <div class="upgrades-grid">
+                <div class="upgrade-card" onclick="upgradeClick()">
+                    <div style="font-size: 20px; color: var(--primary); margin-bottom: 5px;">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div style="font-weight: 700; font-size: 11px; margin-bottom: 3px;">Kuchni oshirish</div>
+                    <div style="font-size: 9px; color: rgba(255, 255, 255, 0.6); margin-bottom: 5px;">Tezlik: +0.2x</div>
+                    <div style="font-size: 10px; color: #FFC107; font-weight: 600;">500 ball</div>
+                </div>
+                <div class="upgrade-card" onclick="upgradeAutoClicker()">
+                    <div style="font-size: 20px; color: var(--accent); margin-bottom: 5px;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div style="font-weight: 700; font-size: 11px; margin-bottom: 3px;">Avtokliker</div>
+                    <div style="font-size: 9px; color: rgba(255, 255, 255, 0.6); margin-bottom: 5px;">10 daqiqa</div>
+                    <div style="font-size: 10px; color: #FFC107; font-weight: 600;">100 ball</div>
+                </div>
+                <div class="upgrade-card" onclick="upgradeClickSpeed()">
+                    <div style="font-size: 20px; color: var(--secondary); margin-bottom: 5px;">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div style="font-weight: 700; font-size: 11px; margin-bottom: 3px;">Tezlikni oshirish</div>
+                    <div style="font-size: 9px; color: rgba(255, 255, 255, 0.6); margin-bottom: 5px;">-10% vaqt</div>
+                    <div style="font-size: 10px; color: #FFC107; font-weight: 600;">1,000 ball</div>
+                </div>
+                <div class="upgrade-card" onclick="buyMultiplier()">
+                    <div style="font-size: 20px; color: var(--warning); margin-bottom: 5px;">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div style="font-weight: 700; font-size: 11px; margin-bottom: 3px;">Ko'paytirgich</div>
+                    <div style="font-size: 9px; color: rgba(255, 255, 255, 0.6); margin-bottom: 5px;">2x ball 5 daqiqa</div>
+                    <div style="font-size: 10px; color: #FFC107; font-weight: 600;">2,000 ball</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TARIX SAHIFASI -->
+        <div class="page" id="page-history">
+            <div class="game-header">
+                <h2 class="game-title">TARIX</h2>
+                <p class="game-subtitle">Barcha amallar va tranzaksiyalar</p>
+            </div>
+
+            <div class="history-container" id="historyList">
+                <!-- Tarix yuklanadi -->
+            </div>
+        </div>
+
+        <!-- MAVZULAR SAHIFASI -->
+        <div class="page" id="page-themes">
+            <div class="game-header">
+                <h2 class="game-title">MAVZULAR</h2>
+                <p class="game-subtitle">O'yin ko'rinishini o'zgartiring</p>
+            </div>
+
+            <div class="themes-grid">
+                <div class="theme-card active" onclick="changeTheme('default')" id="theme-default">
+                    <div class="theme-icon" style="color: #FF6B00;">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="theme-name">Standart</div>
+                    <div style="font-size: 8px; color: rgba(255, 255, 255, 0.5); margin-top: 2px;">Orange Gradient</div>
+                </div>
+                <div class="theme-card" onclick="changeTheme('blue')" id="theme-blue">
+                    <div class="theme-icon" style="color: #2196F3;">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="theme-name">Ko'k</div>
+                    <div style="font-size: 8px; color: rgba(255, 255, 255, 0.5); margin-top: 2px;">Blue Ocean</div>
+                </div>
+                <div class="theme-card" onclick="changeTheme('green')" id="theme-green">
+                    <div class="theme-icon" style="color: #4CAF50;">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="theme-name">Yashil</div>
+                    <div style="font-size: 8px; color: rgba(255, 255, 255, 0.5); margin-top: 2px;">Green Forest</div>
+                </div>
+                <div class="theme-card" onclick="changeTheme('red')" id="theme-red">
+                    <div class="theme-icon" style="color: #F44336;">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="theme-name">Qizil</div>
+                    <div style="font-size: 8px; color: rgba(255, 255, 255, 0.5); margin-top: 2px;">Red Passion</div>
+                </div>
+                <div class="theme-card" onclick="changeTheme('purple')" id="theme-purple">
+                    <div class="theme-icon" style="color: #9C27B0;">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="theme-name">Binafsha</div>
+                    <div style="font-size: 8px; color: rgba(255, 255, 255, 0.5); margin-top: 2px;">Purple Galaxy</div>
+                </div>
+                <div class="theme-card" onclick="changeTheme('dark')" id="theme-dark">
+                    <div class="theme-icon" style="color: #607D8B;">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="theme-name">Tun</div>
+                    <div style="font-size: 8px; color: rgba(255, 255, 255, 0.5); margin-top: 2px;">Dark Mode</div>
+                </div>
             </div>
         </div>
     </div>
@@ -752,9 +909,9 @@
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="warning-text">
-                <strong>AVTOKLIKER ISHLAMOQDA!</strong><br>
-                Agar ilovadan chiqsangiz, avtokliker to'xtaydi.<br>
-                Avtoklikerni saqlab qolmoqchimisiz?
+                <strong>EHTIYOT BO'LING!</strong><br>
+                Avtokliker hozir ishlamoqda.<br>
+                Agar sahifadan chiqsangiz, avtokliker to'xtaydi.
             </div>
             <div class="warning-actions">
                 <button class="warning-btn continue" onclick="continueAutoclicker()">
@@ -767,45 +924,202 @@
         </div>
     </div>
 
+    <!-- OLMOZLAR DO'KONI MODALI -->
+    <div class="modal-overlay" id="diamondShopModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-gem"></i> OLMOS PAKETLARI
+                </div>
+                <button class="close-modal" onclick="closeDiamondShop()">&times;</button>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 10px;">
+                <div style="font-size: 11px; color: rgba(255, 255, 255, 0.6);">
+                    Eng ishonchli MLBB olmos servis hizmati
+                </div>
+                <div style="font-size: 12px; font-weight: 700; color: var(--primary); margin-top: 3px;">
+                    Shaxsan Teo ozini Almaz servisi 💎
+                </div>
+            </div>
+            
+            <div class="packages-container" id="packagesList">
+                <!-- Paketlar JavaScript orqali yuklanadi -->
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <button class="quick-btn btn-red" onclick="closeDiamondShop()" style="width: 48%; margin-right: 4%;">
+                    Yopish
+                </button>
+                <button class="quick-btn btn-green" onclick="proceedToPayment()" id="paymentBtn" disabled style="width: 48%;">
+                    Sotib olish
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TO'LOV MODALI -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-credit-card"></i> TO'LOV JARAYONI
+                </div>
+                <button class="close-modal" onclick="closePaymentModal()">&times;</button>
+            </div>
+            
+            <!-- To'lov bosqichlari bu yerda -->
+            <div id="paymentContent">
+                <!-- JavaScript orqali yuklanadi -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ALMASHTIRISH MODALI -->
+    <div class="modal-overlay" id="exchangeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-exchange-alt"></i> BALL → OLMOS
+                </div>
+                <button class="close-modal" onclick="closeExchangeModal()">&times;</button>
+            </div>
+            
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 40px; color: var(--primary); margin-bottom: 15px;">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div style="font-size: 16px; color: var(--primary); margin-bottom: 10px; font-weight: 700;">
+                    TEZ KUNDA!
+                </div>
+                <div style="font-size: 11px; color: rgba(255, 255, 255, 0.7); line-height: 1.5;">
+                    Ballarni olmosga almashtirish funksiyasi hozircha ishlamaydi.<br>
+                    Ushbu funksiya tez orada ishga tushiriladi.<br>
+                    Yangiliklar uchun admin bilan bog'laning: @laz1z0v1ch
+                </div>
+            </div>
+            
+            <button class="quick-btn btn-blue" onclick="closeExchangeModal()" style="width: 100%;">
+                Yopish
+            </button>
+        </div>
+    </div>
+
+    <!-- YECHISH MODALI -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-wallet"></i> OLMOS YECHISH
+                </div>
+                <button class="close-modal" onclick="closeWithdrawModal()">&times;</button>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <div style="font-size: 10px; color: rgba(255, 255, 255, 0.6);">Sizda mavjud:</div>
+                    <div style="font-size: 24px; font-weight: 800; color: var(--primary);" id="withdrawAvailable">0 olmos</div>
+                </div>
+                
+                <div style="margin: 15px 0;">
+                    <div style="font-size: 10px; color: rgba(255, 255, 255, 0.6); margin-bottom: 5px;">Yechish miqdori:</div>
+                    <input type="number" id="withdrawAmount" style="width: 100%; padding: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); color: white; text-align: center;" placeholder="Olmos miqdori" min="5">
+                    <div style="font-size: 9px; color: rgba(255, 255, 255, 0.5); margin-top: 5px; text-align: center;">
+                        Minimal: <strong>5 olmos</strong>
+                    </div>
+                </div>
+                
+                <div style="margin: 15px 0;">
+                    <div style="font-size: 10px; color: rgba(255, 255, 255, 0.6); margin-bottom: 5px;">MLBB ID (raqam):</div>
+                    <input type="number" id="mlbbId" style="width: 100%; padding: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); color: white; text-align: center;" placeholder="MLBB ID raqami">
+                </div>
+                
+                <div style="background: rgba(255, 152, 0, 0.1); padding: 10px; border-radius: 8px; margin: 15px 0; border: 1px solid rgba(255, 152, 0, 0.3);">
+                    <div style="font-size: 10px; color: var(--warning); font-weight: 700; margin-bottom: 5px;">
+                        <i class="fas fa-info-circle"></i> ESDA TUTING:
+                    </div>
+                    <div style="font-size: 9px; color: rgba(255, 255, 255, 0.6); line-height: 1.4;">
+                        <p>1. Minimal yechish: 5 olmos</p>
+                        <p>2. To'lov 1-24 soat ichida</p>
+                        <p>3. To'lov Uzcard, Humo, Click orqali</p>
+                        <p>4. MLBB ID to'g'ri kiritilishi shart</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 8px;">
+                    <button class="quick-btn btn-red" onclick="closeWithdrawModal()" style="flex: 1;">
+                        Bekor qilish
+                    </button>
+                    <button class="quick-btn btn-green" onclick="submitWithdrawRequest()" style="flex: 1;">
+                        So'rov yuborish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- PASTKI NAVIGATSIYA -->
     <div class="bottom-nav">
         <a href="#" class="nav-item active" onclick="showPage('home')">
             <i class="fas fa-home"></i>
             <span>Asosiy</span>
         </a>
-        <a href="#" class="nav-item" onclick="showPage('friends')">
-            <i class="fas fa-user-friends"></i>
-            <span>Do'stlar</span>
+        <a href="#" class="nav-item" onclick="showPage('diamonds')">
+            <i class="fas fa-gem"></i>
+            <span>Olmoslar</span>
         </a>
-        <a href="#" class="nav-item" onclick="showPage('shop')">
-            <i class="fas fa-store"></i>
-            <span>Bozor</span>
+        <a href="#" class="nav-item" onclick="showPage('upgrades')">
+            <i class="fas fa-cube"></i>
+            <span>Bo'limlar</span>
         </a>
-        <a href="#" class="nav-item" onclick="showPage('leaderboard')">
-            <i class="fas fa-trophy"></i>
-            <span>Reyting</span>
+        <a href="#" class="nav-item" onclick="showPage('history')">
+            <i class="fas fa-history"></i>
+            <span>Tarix</span>
         </a>
-        <a href="#" class="nav-item" onclick="showPage('settings')">
-            <i class="fas fa-cog"></i>
-            <span>Sozlamalar</span>
+        <a href="#" class="nav-item" onclick="showPage('themes')">
+            <i class="fas fa-palette"></i>
+            <span>Mavzular</span>
         </a>
     </div>
 
     <script>
-        // ====== GAME VARIABLES ======
+        // ====== ASOSIY O'ZGARUVCHILAR ======
         let balls = 0;
         let diamonds = 0;
         let clickPower = 1.0;
+        let totalClicks = 0;
+        let gameTime = 0;
+        let sessionBalls = 0;
+        let invitedFriends = 0;
+        let playerRank = '#1';
         let autoclickerActive = false;
         let autoclickerTime = 0;
         let autoclickerInterval = null;
-        let totalClicks = 0;
-        let invitedFriends = 0;
-        let playerRank = '#1';
-        let selectedPackage = null;
         let warningShown = false;
+        let selectedPackage = null;
+        let history = [];
+        
+        // Asl koddagi paketlar ro'yxati
+        const packages = [
+            { id: 1, diamonds: 5, price: 1800, currency: 'UZS', label: '5 OLMOZ' },
+            { id: 2, diamonds: 11, price: 3000, currency: 'UZS', label: '11 OLMOZ', popular: true },
+            { id: 3, diamonds: 22, price: 5000, currency: 'UZS', label: '22 OLMOZ', popular: true },
+            { id: 4, diamonds: 56, price: 11500, currency: 'UZS', label: '56 OLMOZ', popular: true },
+            { id: 5, diamonds: 86, price: 16500, currency: 'UZS', label: '86 OLMOZ', popular: true },
+            { id: 6, diamonds: 112, price: 21500, currency: 'UZS', label: '112 OLMOZ', popular: true },
+            { id: 7, diamonds: 172, price: 34500, currency: 'UZS', label: '172 OLMOZ', popular: true },
+            { id: 8, diamonds: 257, price: 49000, currency: 'UZS', label: '257 OLMOZ', popular: true },
+            { id: 9, diamonds: 344, price: 63500, currency: 'UZS', label: '344 OLMOZ', popular: true },
+            { id: 10, diamonds: 429, price: 79500, currency: 'UZS', label: '429 OLMOZ', popular: true },
+            { id: 11, diamonds: 514, price: 96000, currency: 'UZS', label: '514 OLMOZ', popular: true },
+            { id: 12, diamonds: 706, price: 129000, currency: 'UZS', label: '706 OLMOZ', popular: true },
+            { id: 13, diamonds: 963, price: 179000, currency: 'UZS', label: '963 OLMOZ', popular: true },
+            { id: 14, diamonds: 2195, price: 387000, currency: 'UZS', label: '2195 OLMOZ', popular: true },
+            { id: 15, diamonds: 3688, price: 615000, currency: 'UZS', label: '3688 OLMOZ', popular: true },
+            { id: 16, diamonds: 9343, price: 1690000, currency: 'UZS', label: '9343 OLMOZ', popular: true }
+        ];
 
-        // ====== PAGE MANAGEMENT ======
+        // ====== SAHIFA BOSHQARISHI ======
         function showPage(pageId) {
             // Barcha sahifalarni yashirish
             document.querySelectorAll('.page').forEach(page => {
@@ -821,14 +1135,23 @@
             document.getElementById(`page-${pageId}`).classList.add('active');
             
             // Nav itemni faollashtirish
-            document.querySelector(`[onclick="showPage('${pageId}')"]`).classList.add('active');
+            const navItem = document.querySelector(`[onclick="showPage('${pageId}')"]`);
+            if (navItem) {
+                navItem.classList.add('active');
+            }
+            
+            // Agar tarix sahifasi bo'lsa, tarixni yangilash
+            if (pageId === 'history') {
+                updateHistory();
+            }
         }
 
-        // ====== CLICK HANDLER ======
+        // ====== BOSISH HANDLERI ======
         document.getElementById('clickCircle').addEventListener('click', function(e) {
             const earned = Math.floor(1 * clickPower);
             balls += earned;
             totalClicks++;
+            sessionBalls++;
             
             // Bosish effektini yaratish
             createClickEffect(e, `+${earned}`);
@@ -836,10 +1159,8 @@
             // UI ni yangilash
             updateUI();
             
-            // Har 50 bosishda bildirishnoma
-            if (totalClicks % 50 === 0) {
-                showNotification(`🎯 ${totalClicks} ta bosish!`);
-            }
+            // Tarixga qo'shish
+            addToHistory('click', `Ball to'plandi: +${earned}`, earned);
         });
 
         function createClickEffect(event, text) {
@@ -847,7 +1168,6 @@
             effect.className = 'click-effect';
             effect.textContent = text;
             
-            // Effectning pozitsiyasini aniqlash
             const rect = document.getElementById('clickCircle').getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
@@ -857,13 +1177,12 @@
             
             document.querySelector('.game-area').appendChild(effect);
             
-            // Effectni 1 sekunddan keyin o'chirish
             setTimeout(() => {
                 effect.remove();
-            }, 1000);
+            }, 800);
         }
 
-        // ====== AVTOKLIKER ======
+        // ====== AVTOKLIKER FUNKSIYALARI ======
         function activateAutoClicker() {
             if (autoclickerActive) {
                 showNotification('⚠️ Avtokliker allaqachon ishlayapti!');
@@ -887,6 +1206,9 @@
                 // UI ni yangilash
                 updateUI();
                 
+                // Tarixga qo'shish
+                addToHistory('autoclicker', 'Avtokliker sotib olindi', -cost);
+                
                 // Bildirishnoma
                 showNotification('🤖 Avtokliker faollashtirildi! (10 daqiqa)');
             } else {
@@ -906,6 +1228,7 @@
                 // Avtomatik ball qo'shish
                 const earned = Math.floor(1 * clickPower);
                 balls += earned;
+                sessionBalls++;
                 updateUI();
                 
                 // Tasodifiy joyda effekt yaratish
@@ -934,7 +1257,6 @@
             effect.className = 'click-effect';
             effect.textContent = text;
             
-            // Tasodifiy pozitsiya
             const area = document.querySelector('.game-area');
             const rect = area.getBoundingClientRect();
             const x = Math.random() * rect.width;
@@ -947,7 +1269,7 @@
             
             setTimeout(() => {
                 effect.remove();
-            }, 1000);
+            }, 800);
         }
 
         function deactivateAutoclicker() {
@@ -992,7 +1314,7 @@
             }
         });
 
-        // ====== CLICK KUCHINI OSHIRISH ======
+        // ====== KUCH OSHIRISH ======
         function upgradeClick() {
             const cost = 500;
             
@@ -1002,46 +1324,329 @@
                 clickPower = Math.round(clickPower * 10) / 10;
                 
                 updateUI();
+                addToHistory('upgrade', `Kuch oshirildi: ${clickPower.toFixed(1)}x`, -cost);
                 showNotification(`⚡ Kuch: ${clickPower.toFixed(1)}x`);
             } else {
                 showNotification(`❌ ${cost} ball kerak!`);
             }
         }
 
-        // ====== BOZOR FUNKSIYALARI ======
-        function selectPackage(pkgId) {
-            selectedPackage = pkgId;
-            showNotification(`✅ Paket tanlandi!`);
+        function upgradeAutoClicker() {
+            activateAutoClicker();
         }
 
-        function processPayment() {
+        function upgradeClickSpeed() {
+            const cost = 1000;
+            
+            if (balls >= cost) {
+                balls -= cost;
+                addToHistory('upgrade', 'Tezlik oshirildi', -cost);
+                showNotification('🚀 Tezlik oshirildi!');
+                updateUI();
+            } else {
+                showNotification(`❌ ${cost} ball kerak!`);
+            }
+        }
+
+        function buyMultiplier() {
+            const cost = 2000;
+            
+            if (balls >= cost) {
+                balls -= cost;
+                const oldPower = clickPower;
+                clickPower *= 2;
+                
+                addToHistory('multiplier', '2x koʻpaytirgich', -cost);
+                showNotification('🔥 2x koʻpaytirgich faollashtirildi! (5 daqiqa)');
+                updateUI();
+                
+                // 5 daqiqadan keyin asl holatiga qaytarish
+                setTimeout(() => {
+                    clickPower = oldPower;
+                    updateUI();
+                    showNotification('🔄 Koʻpaytirgich tugadi');
+                }, 5 * 60 * 1000);
+            } else {
+                showNotification(`❌ ${cost} ball kerak!`);
+            }
+        }
+
+        // ====== OLMOZLAR DO'KONI ======
+        function openDiamondShop() {
+            const packagesList = document.getElementById('packagesList');
+            packagesList.innerHTML = '';
+            
+            packages.forEach(pkg => {
+                const packageItem = document.createElement('div');
+                packageItem.className = 'package-item';
+                if (selectedPackage === pkg.id) {
+                    packageItem.classList.add('selected');
+                }
+                packageItem.onclick = () => selectShopPackage(pkg.id);
+                
+                packageItem.innerHTML = `
+                    <div class="package-header">
+                        <div class="package-name">${pkg.label}</div>
+                        <div class="package-price">${pkg.price.toLocaleString()} ${pkg.currency}</div>
+                    </div>
+                    <div class="package-details">
+                        ${pkg.diamonds} ta olmos • ${pkg.popular ? '🔥 POPULAR' : ''}
+                    </div>
+                `;
+                
+                packagesList.appendChild(packageItem);
+            });
+            
+            document.getElementById('diamondShopModal').style.display = 'flex';
+        }
+
+        function closeDiamondShop() {
+            document.getElementById('diamondShopModal').style.display = 'none';
+        }
+
+        function selectShopPackage(packageId) {
+            selectedPackage = packageId;
+            
+            // Barcha paketlarni yangilash
+            document.querySelectorAll('.package-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Tanlangan paketni belgilash
+            const selectedItem = document.querySelector(`[onclick="selectShopPackage(${packageId})"]`);
+            if (selectedItem) {
+                selectedItem.classList.add('selected');
+            }
+            
+            // Tugmani faollashtirish
+            document.getElementById('paymentBtn').disabled = false;
+        }
+
+        function proceedToPayment() {
             if (!selectedPackage) {
-                showNotification('❌ Iltimos, paket tanlang!');
+                showNotification('❌ Paketni tanlang!');
                 return;
             }
             
-            // Bu yerda to'lov tizimi bo'lishi kerak
-            showNotification('💰 To\'lov tizimiga yo\'naltirilmoqda...');
+            const pkg = packages.find(p => p.id === selectedPackage);
+            if (!pkg) return;
+            
+            // Bu yerda to'lov tizimini ishga tushirish
+            showNotification(`💰 ${pkg.label} paketi uchun to'lov tizimiga yo'naltirilmoqda...`);
+            
+            // Demo: to'lovni amalga oshirish
+            setTimeout(() => {
+                diamonds += pkg.diamonds;
+                updateUI();
+                addToHistory('purchase', `${pkg.diamonds} olmos sotib olindi`, pkg.diamonds);
+                showNotification(`✅ ${pkg.diamonds} olmos hisobingizga qo'shildi!`);
+                closeDiamondShop();
+            }, 1500);
         }
 
-        // ====== DO'STLAR FUNKSIYALARI ======
-        function openFriends() {
-            showPage('friends');
+        // ====== MODALLAR ======
+        function openExchangeModal() {
+            document.getElementById('exchangeModal').style.display = 'flex';
         }
 
-        function copyReferralLink() {
-            const link = 'https://t.me/mlbb_ball_bot?start=ref_' + Math.random().toString(36).substr(2, 8);
-            navigator.clipboard.writeText(link);
-            showNotification('📋 Havola nusxalandi!');
+        function closeExchangeModal() {
+            document.getElementById('exchangeModal').style.display = 'none';
         }
 
-        // ====== UI YANGILASH ======
+        function openWithdrawModal() {
+            document.getElementById('withdrawAvailable').textContent = diamonds + ' olmos';
+            document.getElementById('withdrawAmount').value = '';
+            document.getElementById('mlbbId').value = '';
+            document.getElementById('withdrawModal').style.display = 'flex';
+        }
+
+        function closeWithdrawModal() {
+            document.getElementById('withdrawModal').style.display = 'none';
+        }
+
+        function submitWithdrawRequest() {
+            const amount = parseInt(document.getElementById('withdrawAmount').value) || 0;
+            const mlbbId = document.getElementById('mlbbId').value.trim();
+            
+            if (amount < 5) {
+                showNotification('❌ Minimal yechish miqdori: 5 olmos');
+                return;
+            }
+            
+            if (amount > diamonds) {
+                showNotification('❌ Yetarli olmos yo\'q');
+                return;
+            }
+            
+            if (!mlbbId || mlbbId.length < 6) {
+                showNotification('❌ To\'g\'ri MLBB ID kiriting');
+                return;
+            }
+            
+            // Olmoslarni yechish
+            diamonds -= amount;
+            
+            // Tarixga qo'shish
+            addToHistory('withdraw', `${amount} olmos yechish so'rovi`, -amount);
+            
+            // Admin ga xabar
+            const message = `Yangi yechish so'rovi!\nMiqdor: ${amount} olmos\nMLBB ID: ${mlbbId}\nVaqt: ${new Date().toLocaleString()}`;
+            console.log('Adminga yuborildi:', message);
+            
+            // UI ni yangilash
+            updateUI();
+            
+            // Modalni yopish
+            closeWithdrawModal();
+            
+            // Bildirishnoma
+            showNotification(`✅ ${amount} olmos yechish so'rovi yuborildi!`);
+        }
+
+        // ====== TARIX FUNKSIYALARI ======
+        function addToHistory(type, description, amount) {
+            const historyItem = {
+                id: Date.now(),
+                type: type,
+                description: description,
+                amount: amount,
+                timestamp: new Date().toISOString(),
+                time: new Date().toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' })
+            };
+            
+            history.unshift(historyItem);
+            
+            // Faqat oxirgi 50 ta elementni saqlash
+            if (history.length > 50) {
+                history = history.slice(0, 50);
+            }
+            
+            // Agar tarix sahifasi ochiq bo'lsa, yangilash
+            if (document.getElementById('page-history').classList.contains('active')) {
+                updateHistory();
+            }
+            
+            // Ma'lumotlarni saqlash
+            saveData();
+        }
+
+        function updateHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (history.length === 0) {
+                historyList.innerHTML = `
+                    <div style="text-align: center; padding: 30px 15px; color: rgba(255, 255, 255, 0.4);">
+                        <i class="fas fa-history" style="font-size: 30px; margin-bottom: 10px; opacity: 0.3;"></i>
+                        <div style="font-size: 11px;">Hozircha amallar yo'q</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            historyList.innerHTML = history.map(item => `
+                <div class="history-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="font-weight: 600; font-size: 10px;">
+                            ${getHistoryIcon(item.type)} ${item.description}
+                        </div>
+                        ${item.amount !== 0 ? `
+                            <div style="color: ${item.amount > 0 ? '#4CAF50' : '#F44336'}; font-weight: 700; font-size: 11px;">
+                                ${item.amount > 0 ? '+' : ''}${item.amount}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="history-time">${item.time}</div>
+                </div>
+            `).join('');
+        }
+
+        function getHistoryIcon(type) {
+            const icons = {
+                'click': '👆',
+                'autoclicker': '🤖',
+                'purchase': '💎',
+                'withdraw': '💰',
+                'upgrade': '⚡',
+                'multiplier': '🔥',
+                'exchange': '🔄'
+            };
+            return icons[type] || '📝';
+        }
+
+        // ====== MAVZULAR FUNKSIYALARI ======
+        function changeTheme(themeName) {
+            // Barcha mavzulardan active klassini olib tashlash
+            document.querySelectorAll('.theme-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Tanlangan mavzuni faollashtirish
+            document.getElementById(`theme-${themeName}`).classList.add('active');
+            
+            // Rang sxemasini o'zgartirish
+            switch(themeName) {
+                case 'blue':
+                    document.documentElement.style.setProperty('--primary', '#2196F3');
+                    document.documentElement.style.setProperty('--primary-dark', '#1976D2');
+                    document.documentElement.style.setProperty('--primary-light', '#E3F2FD');
+                    document.documentElement.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #1a237e 0%, #283593 100%)');
+                    break;
+                    
+                case 'green':
+                    document.documentElement.style.setProperty('--primary', '#4CAF50');
+                    document.documentElement.style.setProperty('--primary-dark', '#388E3C');
+                    document.documentElement.style.setProperty('--primary-light', '#E8F5E9');
+                    document.documentElement.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%)');
+                    break;
+                    
+                case 'red':
+                    document.documentElement.style.setProperty('--primary', '#F44336');
+                    document.documentElement.style.setProperty('--primary-dark', '#D32F2F');
+                    document.documentElement.style.setProperty('--primary-light', '#FFEBEE');
+                    document.documentElement.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #b71c1c 0%, #d32f2f 100%)');
+                    break;
+                    
+                case 'purple':
+                    document.documentElement.style.setProperty('--primary', '#9C27B0');
+                    document.documentElement.style.setProperty('--primary-dark', '#7B1FA2');
+                    document.documentElement.style.setProperty('--primary-light', '#F3E5F5');
+                    document.documentElement.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%)');
+                    break;
+                    
+                case 'dark':
+                    document.documentElement.style.setProperty('--primary', '#607D8B');
+                    document.documentElement.style.setProperty('--primary-dark', #455A64');
+                    document.documentElement.style.setProperty('--primary-light', '#ECEFF1');
+                    document.documentElement.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #000000 0%, #263238 100%)');
+                    break;
+                    
+                default: // standart
+                    document.documentElement.style.setProperty('--primary', '#FF6B00');
+                    document.documentElement.style.setProperty('--primary-dark', '#E65100');
+                    document.documentElement.style.setProperty('--primary-light', '#FFE0B2');
+                    document.documentElement.style.setProperty('--bg-gradient', 'linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%)');
+                    break;
+            }
+            
+            // Mavzuni saqlash
+            localStorage.setItem('mlbbTheme', themeName);
+            
+            // Bildirishnoma
+            showNotification('🎨 Mavzu o\'zgartirildi!');
+        }
+
+        // ====== UI YANGILASH FUNKSIYASI ======
         function updateUI() {
+            // Asosiy ko'rsatkichlar
             document.getElementById('totalBalls').textContent = formatNumber(balls);
             document.getElementById('totalDiamonds').textContent = formatNumber(diamonds);
             document.getElementById('clickPower').textContent = clickPower.toFixed(1) + 'x';
+            document.getElementById('totalClicks').textContent = formatNumber(totalClicks);
+            document.getElementById('gameTime').textContent = formatTime(gameTime);
             document.getElementById('invitedCount').textContent = invitedFriends;
-            document.getElementById('referralBonus').textContent = invitedFriends * 3;
+            document.getElementById('sessionBalls').textContent = formatNumber(sessionBalls);
+            document.getElementById('availableDiamonds').textContent = formatNumber(diamonds);
+            document.getElementById('totalEarned').textContent = formatNumber(diamonds + (balls / 100)); // Taxminiy
             
             // Reytingni hisoblash
             if (balls >= 100000) playerRank = '#1';
@@ -1049,7 +1654,7 @@
             else if (balls >= 25000) playerRank = '#3';
             else if (balls >= 10000) playerRank = '#4';
             else if (balls >= 5000) playerRank = '#5';
-            else playerRank = '#6';
+            else playerRank = '#6+';
             
             document.getElementById('playerRank').textContent = playerRank;
             
@@ -1063,6 +1668,15 @@
             return num.toString();
         }
 
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            if (minutes >= 60) {
+                const hours = Math.floor(minutes / 60);
+                return hours + 'h';
+            }
+            return minutes + 'm';
+        }
+
         // ====== MA'LUMOTLARNI SAQLASH ======
         function saveData() {
             const data = {
@@ -1070,77 +1684,82 @@
                 diamonds: diamonds,
                 clickPower: clickPower,
                 totalClicks: totalClicks,
+                gameTime: gameTime,
+                sessionBalls: sessionBalls,
                 invitedFriends: invitedFriends,
+                history: history,
                 autoclickerActive: autoclickerActive,
-                autoclickerTime: autoclickerTime
+                autoclickerTime: autoclickerTime,
+                saveTime: new Date().toISOString()
             };
-            localStorage.setItem('mlbbGameData', JSON.stringify(data));
+            localStorage.setItem('mlbbProfessionalData', JSON.stringify(data));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('mlbbGameData');
+            const saved = localStorage.getItem('mlbbProfessionalData');
             if (saved) {
-                const data = JSON.parse(saved);
-                balls = data.balls || 0;
-                diamonds = data.diamonds || 0;
-                clickPower = data.clickPower || 1.0;
-                totalClicks = data.totalClicks || 0;
-                invitedFriends = data.invitedFriends || 0;
-                
-                // Avtoklikerni qayta tiklash
-                if (data.autoclickerActive && data.autoclickerTime > 0) {
-                    autoclickerActive = true;
-                    autoclickerTime = data.autoclickerTime;
-                    document.getElementById('autoclickerBar').style.display = 'block';
-                    startAutoclicker();
+                try {
+                    const data = JSON.parse(saved);
+                    balls = data.balls || 0;
+                    diamonds = data.diamonds || 0;
+                    clickPower = data.clickPower || 1.0;
+                    totalClicks = data.totalClicks || 0;
+                    gameTime = data.gameTime || 0;
+                    sessionBalls = data.sessionBalls || 0;
+                    invitedFriends = data.invitedFriends || 0;
+                    history = data.history || [];
+                    
+                    // Avtoklikerni qayta tiklash
+                    if (data.autoclickerActive && data.autoclickerTime > 0) {
+                        autoclickerActive = true;
+                        autoclickerTime = data.autoclickerTime;
+                        document.getElementById('autoclickerBar').style.display = 'block';
+                        startAutoclicker();
+                    }
+                } catch (e) {
+                    console.log('Yangi o\'yin boshlanmoqda...');
                 }
             }
+            
+            // Mavzuni yuklash
+            const savedTheme = localStorage.getItem('mlbbTheme') || 'default';
+            changeTheme(savedTheme);
         }
 
-        // ====== YORDAMCHI FUNKSIYALAR ======
+        // ====== BILDIRISHNOMA TIZIMI ======
         function showNotification(message) {
             // Oddiy alert o'rniga chiroyli bildirishnoma
             console.log('Notification:', message);
-            alert(message); // Hozircha oddiy alert, keyin chiroyli qilamiz
-        }
-
-        function changeTheme(theme) {
-            if (theme === 'dark') {
-                document.documentElement.style.setProperty('--primary', '#9C27B0');
-                showNotification('✅ Mavzu o\'zgartirildi');
-            } else {
-                document.documentElement.style.setProperty('--primary', '#FF6B00');
-                showNotification('✅ Standart mavzu');
+            
+            // Vaqinchalik oddiy alert
+            if (message.length < 50) { // Faqat qisqa xabarlar uchun
+                alert(message);
             }
         }
 
-        function exportData() {
-            const data = localStorage.getItem('mlbbGameData');
-            const blob = new Blob([data], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'mlbb_backup.json';
-            a.click();
-            showNotification('✅ Ma\'lumotlar saqlandi');
-        }
-
-        function clearData() {
-            if (confirm('Haqiqatan ham barcha ma\'lumotlarni o\'chirmoqchimisiz?')) {
-                localStorage.removeItem('mlbbGameData');
-                location.reload();
-            }
-        }
-
-        function contactAdmin() {
-            const message = 'Salom! MLBB Ball Collector o\'yini haqida ma\'lumot kerak.';
-            window.open('https://t.me/laz1z0v1ch?text=' + encodeURIComponent(message), '_blank');
+        // ====== VAQT HISOBLOVCHI ======
+        function startGameTimer() {
+            setInterval(() => {
+                gameTime += 1;
+                if (gameTime % 60 === 0) { // Har minutda
+                    updateUI();
+                }
+            }, 1000);
         }
 
         // ====== DASTLABKI YUKLASH ======
         document.addEventListener('DOMContentLoaded', function() {
+            // Ma'lumotlarni yuklash
             loadData();
+            
+            // UI ni yangilash
             updateUI();
+            
+            // Tarixni yangilash
+            updateHistory();
+            
+            // O'yin vaqtini boshlash
+            startGameTimer();
             
             // Sahifalar o'rtasida o'tishda ogohlantirish
             document.querySelectorAll('.nav-item').forEach(item => {
@@ -1151,6 +1770,18 @@
                     }
                 });
             });
+            
+            // Brauzer yopilganda ma'lumotlarni saqlash
+            window.addEventListener('beforeunload', function() {
+                if (autoclickerActive) {
+                    saveData();
+                }
+            });
+            
+            // Har 30 soniyada avtosaqlash
+            setInterval(() => {
+                saveData();
+            }, 30000);
         });
     </script>
 </body>
